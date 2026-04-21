@@ -1,3 +1,4 @@
+import { BlurFade } from "@/components/ui/blur-fade";
 import { AboutSection } from "./_components/AboutSection";
 import { ContactForm } from "./_components/ContactForm";
 import { EducationSection } from "./_components/EducationSection";
@@ -9,11 +10,15 @@ const HomePage = () => {
   return (
     <main className="flex flex-col space-y-12">
       <HeroSection />
-      <AboutSection />
-      <ValuesSection />
-      <ExperienceSection />
-      <EducationSection />
-      <ContactForm />
+      <BlurFade delay={0.6}>
+        <div className="flex flex-col space-y-12">
+          <AboutSection />
+          <ValuesSection />
+          <ExperienceSection />
+          <EducationSection />
+          <ContactForm />
+        </div>
+      </BlurFade>
     </main>
   );
 };
