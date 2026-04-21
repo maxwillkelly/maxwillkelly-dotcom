@@ -26,9 +26,8 @@ const RootLayout = ({
       <body className="min-h-full flex flex-col bg-background">
         <ThemeProvider
           attribute={["class", "data-theme"]}
-          defaultTheme="light"
+          defaultTheme="dark"
           storage="cookie"
-          disableTransitionOnChange
         >
           {children}
         </ThemeProvider>

@@ -1,7 +1,11 @@
+import { ThemeToggle } from "@/components/ui/theme-toggle";
+
 const HomePage = () => {
   return (
     <div>
-      <main></main>
+      <main className="p-4">
+        <ThemeToggle />
+      </main>
     </div>
   );
 };
