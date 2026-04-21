@@ -30,7 +30,12 @@ const RootLayout = ({
       data-theme="dark"
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        {children}
+        <div
+          id="container"
+          className="relative z-10 max-w-2xl mx-auto py-12 pb-24 sm:py-24 px-6"
+        >
+          {children}
+        </div>
       </body>
     </html>
   );
