@@ -3,7 +3,7 @@ import { DiaTextReveal } from "@/components/ui/dia-text-reveal";
 export const HeroSection = () => {
   return (
     <section id="hero">
-      <DiaTextReveal as="h1" className="text-4xl font-bold" text="Max Kelly" />
+      <DiaTextReveal as="h1" className="text-5xl font-bold" text="Max Kelly" />
       <DiaTextReveal
         as="h2"
         className="text-2xl mt-2"
