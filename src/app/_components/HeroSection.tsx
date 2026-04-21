@@ -6,7 +6,7 @@ export const HeroSection = () => {
       <DiaTextReveal as="h1" className="text-5xl font-bold" text="Max Kelly" />
       <DiaTextReveal
         as="h2"
-        className="text-2xl mt-2"
+        className="text-2xl mt-2 font-semibold"
         text="Software Engineer"
       />
       <DiaTextReveal
