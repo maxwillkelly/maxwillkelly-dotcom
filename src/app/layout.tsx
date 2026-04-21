@@ -1,4 +1,3 @@
-import { ThemeProvider } from "@wrksz/themes/next";
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 import "./globals.css";
@@ -21,16 +20,17 @@ const RootLayout = ({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("h-full", "antialiased", "font-sans", figtree.variable)}
+      className={cn(
+        "dark",
+        "h-full",
+        "antialiased",
+        "font-sans",
+        figtree.variable,
+      )}
+      data-theme="dark"
     >
-      <body className="min-h-full flex flex-col bg-background">
-        <ThemeProvider
-          attribute={["class", "data-theme"]}
-          defaultTheme="dark"
-          storage="cookie"
-        >
-          {children}
-        </ThemeProvider>
+      <body className="min-h-full flex flex-col bg-background text-foreground">
+        {children}
       </body>
     </html>
   );
