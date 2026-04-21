@@ -1,3 +1,4 @@
+import { ThemeProvider } from "@wrksz/themes/next";
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 import "./globals.css";
@@ -19,9 +20,19 @@ const RootLayout = ({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={cn("h-full", "antialiased", "font-sans", figtree.variable)}
     >
-      <body className="min-h-full flex flex-col bg-background">{children}</body>
+      <body className="min-h-full flex flex-col bg-background">
+        <ThemeProvider
+          attribute={["class", "data-theme"]}
+          defaultTheme="light"
+          storage="cookie"
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 };
