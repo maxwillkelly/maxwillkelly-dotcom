@@ -22,13 +22,13 @@ const RootLayout = ({
       lang="en"
       suppressHydrationWarning
       className={cn(
-        "dark",
+        // "dark",
         "h-full",
         "antialiased",
         "font-sans",
         figtree.variable,
       )}
-      data-theme="dark"
+      // data-theme="dark"
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <div className="fixed inset-0 z-0 pointer-events-none">
