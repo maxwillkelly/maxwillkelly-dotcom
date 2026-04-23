@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 import "./globals.css";
-import { DottedGlowBackground } from "@/components/ui/dotted-glow-background";
+// import { DottedGlowBackground } from "@/components/ui/dotted-glow-background";
 import { cn } from "@/lib/utils";
 
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree" });
@@ -31,9 +31,9 @@ const RootLayout = ({
       // data-theme="dark"
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <div className="fixed inset-0 z-0 pointer-events-none">
+        {/* <div className="fixed inset-0 z-0 pointer-events-none">
           <DottedGlowBackground
-            className="mask-radial-to-90% mask-radial-at-center"
+            className="mask-radial-to-20% mask-radial-at-left"
             opacity={0.3}
             gap={10}
             radius={1.6}
@@ -44,7 +44,7 @@ const RootLayout = ({
             backgroundOpacity={0}
             speedScale={0.3}
           />
-        </div>
+        </div> */}
         <div
           id="container"
           className="relative z-10 max-w-2xl mx-auto py-12 pb-24 sm:py-24 px-6"
