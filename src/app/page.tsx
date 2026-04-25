@@ -1,6 +1,6 @@
 import { BlurFade } from "@/components/ui/blur-fade";
 import { AboutSection } from "./_components/AboutSection";
-import { ContactForm } from "./_components/ContactForm";
+import { ContactSection } from "./_components/ContactSection";
 import { EducationSection } from "./_components/EducationSection";
 import { ExperienceSection } from "./_components/ExperienceSection";
 import { HeroSection } from "./_components/HeroSection";
@@ -16,7 +16,7 @@ const HomePage = () => {
           <ValuesSection />
           <ExperienceSection />
           <EducationSection />
-          <ContactForm />
+          <ContactSection />
         </div>
       </BlurFade>
     </main>

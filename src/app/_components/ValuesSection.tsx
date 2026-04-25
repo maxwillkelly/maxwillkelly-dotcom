@@ -6,7 +6,9 @@ export const ValuesSection = () => {
       <h2 className="text-xl">Values</h2>
       <div className="flex flex-col gap-4">
         <div className="flex flex-col py-2 gap-2">
-          <h3 className="text-lg text-foreground">Clean maintainable code</h3>
+          <h3 className="text-lg text-foreground">
+            Write clean maintainable code
+          </h3>
           <p className="text-base">
             I write code that is clean and maintainable so that any developer
             can pick up, read and understand it. I am obsessed with naming
@@ -25,9 +27,7 @@ export const ValuesSection = () => {
           </p>
         </div>
         <div className="flex flex-col py-2 gap-2">
-          <h3 className="text-lg text-foreground">
-            It's good to experiment and try new things
-          </h3>
+          <h3 className="text-lg text-foreground">It's good to experiment</h3>
           <p className="text-base">
             Today's new exciting thing is tomorrow's tech debt. I don't believe
             in the adage "if it ain't broke, don't fix it", I believe that
