@@ -22,7 +22,7 @@ export const sendContactEmail = async (variables: ContactMessage) => {
   const { firstName, lastName } = contactMessage;
 
   const response = await resend.emails.send({
-    from: "Max Next <onboarding@resend.dev>",
+    from: "maxwillkelly-dotcom <onboarding@resend.dev>",
     to: [env.SEND_EMAIL],
     subject: `You have received a message from ${firstName} ${lastName}`,
     react: (
