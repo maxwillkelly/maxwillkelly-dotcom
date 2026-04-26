@@ -5,12 +5,14 @@ import {
   FieldError,
   Input,
   Label,
+  Spinner,
   TextArea,
   TextField,
 } from "@heroui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Check, SendHorizontal } from "lucide-react";
 import { Ripple } from "m3-ripple";
+import { startTransition, useActionState } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 
 import "m3-ripple/ripple.css";
@@ -20,12 +22,12 @@ import {
 } from "@/schemas/contact-message";
 import { sendContactEmail } from "@/app/actions/sendContactEmail";
 
-export const ContactForm = () => {
-  const isIdle = true;
-  const isPending = false;
-  const isError = false;
-  const isSuccess = false;
+type ContactFormState =
+  | { status: "idle" }
+  | { status: "success" }
+  | { status: "error"; message: string };
 
+export const ContactForm = () => {
   const { control, handleSubmit, reset } = useForm<ContactMessage>({
     defaultValues: {
       firstName: "",
@@ -37,10 +39,30 @@ export const ContactForm = () => {
     resolver: zodResolver(contactMessageSchema),
   });
 
-  const onSubmit: SubmitHandler<ContactMessage> = async (data) => {
-    await sendContactEmail(data);
-    reset();
+  const [state, action, isPending] = useActionState<
+    ContactFormState,
+    ContactMessage
+  >(
+    async (_prev, data) => {
+      const result = await sendContactEmail(data);
+
+      if (result.success) {
+        reset();
+        return { status: "success" };
+      }
+
+      return { status: "error", message: result.message };
+    },
+    { status: "idle" },
+  );
+
+  const onSubmit: SubmitHandler<ContactMessage> = (data) => {
+    startTransition(() => action(data));
   };
+
+  const isIdle = state.status === "idle" && !isPending;
+  const isError = state.status === "error" && !isPending;
+  const isSuccess = state.status === "success" && !isPending;
 
   return (
     <div>
@@ -177,9 +199,15 @@ export const ContactForm = () => {
             <Ripple />
             {isIdle && "Send message"}
             {isPending && "Sending..."}
-            {isError && "Failed to send message, click to retry"}
+            {isError && state.message}
             {isSuccess && "Sent"}
-            {isSuccess ? <Check /> : <SendHorizontal />}
+            {isPending ? (
+              <Spinner color="current" size="sm" />
+            ) : isSuccess ? (
+              <Check />
+            ) : (
+              <SendHorizontal />
+            )}
           </Button>
         </div>
       </form>

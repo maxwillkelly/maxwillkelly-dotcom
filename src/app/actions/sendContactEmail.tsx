@@ -11,12 +11,18 @@ import {
 
 const resend = new Resend(env.RESEND_API_KEY);
 
-export const sendContactEmail = async (variables: ContactMessage) => {
+export type SendContactEmailResult =
+  | { success: true }
+  | { success: false; message: string };
+
+export const sendContactEmail = async (
+  variables: ContactMessage,
+): Promise<SendContactEmailResult> => {
   const { data: contactMessage, success } =
     contactMessageSchema.safeParse(variables);
 
   if (!success) {
-    return false;
+    return { success: false, message: "Invalid form data" };
   }
 
   const { firstName, lastName } = contactMessage;
@@ -33,5 +39,12 @@ export const sendContactEmail = async (variables: ContactMessage) => {
     ),
   });
 
-  return Boolean(response.data?.id);
+  if (response.error) {
+    return {
+      success: false,
+      message: "Failed to send message, click to retry",
+    };
+  }
+
+  return { success: true };
 };
