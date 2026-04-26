@@ -33,5 +33,5 @@ export const sendContactEmail = async (variables: ContactMessage) => {
     ),
   });
 
-  return true;
+  return Boolean(response.data?.id);
 };
