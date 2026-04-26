@@ -18,6 +18,7 @@ import {
   ContactMessage,
   contactMessageSchema,
 } from "@/schemas/contact-message";
+import { sendContactEmail } from "@/app/actions/sendContactEmail";
 
 export const ContactForm = () => {
   const isIdle = true;
@@ -37,8 +38,7 @@ export const ContactForm = () => {
   });
 
   const onSubmit: SubmitHandler<ContactMessage> = async (data) => {
-    // await mutateAsync({ contactMessage: data });
-    console.log("Do something with contact message:", data);
+    await sendContactEmail(data);
     reset();
   };
 
