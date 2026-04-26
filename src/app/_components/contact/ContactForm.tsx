@@ -12,19 +12,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Check, SendHorizontal } from "lucide-react";
 import { Ripple } from "m3-ripple";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
-import { z } from "zod";
 
 import "m3-ripple/ripple.css";
-
-export const contactMessageSchema = z.object({
-  firstName: z.string().min(1, "First name is required"),
-  lastName: z.string().min(1, "Last name is required"),
-  email: z.email({ error: "Invalid email address" }),
-  subtitle: z.string().min(1, "Subtitle is required"),
-  message: z.string().min(1, "Message is required"),
-});
-
-export type ContactMessage = z.infer<typeof contactMessageSchema>;
+import {
+  ContactMessage,
+  contactMessageSchema,
+} from "@/schemas/contact-message";
 
 export const ContactForm = () => {
   const isIdle = true;
