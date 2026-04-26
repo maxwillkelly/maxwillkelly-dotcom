@@ -44,151 +44,145 @@ export const ContactForm = () => {
 
   return (
     <div>
-      {isSuccess ? (
-        <div className="flex flex-col gap-4">
-          <div className=""></div>
-        </div>
-      ) : (
-        <form
-          className="flex flex-col flex-wrap"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <div className="mb-6 md:flex">
-            <Controller
-              name="firstName"
-              control={control}
-              render={({ field, fieldState }) => (
-                <>
-                  <TextField
-                    className="px-3 md:mb-0 md:w-1/2"
-                    name="firstName"
-                    isInvalid={Boolean(fieldState.error)}
-                  >
-                    <Label htmlFor="firstName">First Name</Label>
-                    <Input
-                      {...field}
-                      aria-label="First Name"
-                      id="firstName"
-                      type="text"
-                      placeholder="John"
-                    />
-                    <FieldError>{fieldState.error?.message}</FieldError>
-                  </TextField>
-                </>
-              )}
-            />
-            <Controller
-              name="lastName"
-              control={control}
-              render={({ field, fieldState }) => (
-                <>
-                  <TextField
-                    className="px-3 md:mb-0 md:w-1/2"
-                    name="lastName"
-                    isInvalid={Boolean(fieldState.error)}
-                  >
-                    <Label htmlFor="lastName">Last Name</Label>
-                    <Input
-                      {...field}
-                      aria-label="Last Name"
-                      id="lastName"
-                      type="text"
-                      placeholder="Smith"
-                    />
-                    <FieldError>{fieldState.error?.message}</FieldError>
-                  </TextField>
-                </>
-              )}
-            />
-          </div>
-          <div className="mb-6 md:flex">
-            <Controller
-              name="email"
-              control={control}
-              render={({ field, fieldState }) => (
-                <>
-                  <TextField
-                    className="px-3 md:mb-0 md:w-1/2"
-                    name="email"
-                    isInvalid={Boolean(fieldState.error)}
-                  >
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      {...field}
-                      aria-label="Email"
-                      id="email"
-                      type="email"
-                      placeholder="john.smith@email.com"
-                    />
-                    <FieldError>{fieldState.error?.message}</FieldError>
-                  </TextField>
-                </>
-              )}
-            />
-            <Controller
-              name="subtitle"
-              control={control}
-              render={({ field, fieldState }) => (
-                <>
-                  <TextField
-                    className="px-3 md:w-1/2"
-                    name="subtitle"
-                    isInvalid={Boolean(fieldState.error)}
-                  >
-                    <Label htmlFor="subtitle">Subtitle</Label>
-                    <Input
-                      {...field}
-                      aria-label="Subtitle"
-                      id="subtitle"
-                      type="text"
-                      placeholder="Hello"
-                    />
-                    <FieldError>{fieldState.error?.message}</FieldError>
-                  </TextField>
-                </>
-              )}
-            />
-          </div>
+      <form
+        className="flex flex-col flex-wrap"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className="mb-6 md:flex">
           <Controller
-            name="message"
+            name="firstName"
             control={control}
             render={({ field, fieldState }) => (
-              <TextField
-                className="mb-6 px-3"
-                name="message"
-                isInvalid={Boolean(fieldState.error)}
-              >
-                <Label htmlFor="message">Message</Label>
-                <TextArea
-                  {...field}
-                  className="resize-none"
-                  aria-label="Message"
-                  id="message"
-                  placeholder="Let's rock 'n' roll"
-                  rows={6}
-                />
-                <FieldError>{fieldState.error?.message}</FieldError>
-              </TextField>
+              <>
+                <TextField
+                  className="px-3 md:mb-0 md:w-1/2"
+                  name="firstName"
+                  isInvalid={Boolean(fieldState.error)}
+                >
+                  <Label htmlFor="firstName">First Name</Label>
+                  <Input
+                    {...field}
+                    aria-label="First Name"
+                    id="firstName"
+                    type="text"
+                    placeholder="John"
+                  />
+                  <FieldError>{fieldState.error?.message}</FieldError>
+                </TextField>
+              </>
             )}
           />
-          <div className="flex flex-row-reverse">
-            <Button
-              className="w-full"
-              type="submit"
-              variant="danger"
-              isPending={isPending}
-              isDisabled={isPending || isSuccess}
+          <Controller
+            name="lastName"
+            control={control}
+            render={({ field, fieldState }) => (
+              <>
+                <TextField
+                  className="px-3 md:mb-0 md:w-1/2"
+                  name="lastName"
+                  isInvalid={Boolean(fieldState.error)}
+                >
+                  <Label htmlFor="lastName">Last Name</Label>
+                  <Input
+                    {...field}
+                    aria-label="Last Name"
+                    id="lastName"
+                    type="text"
+                    placeholder="Smith"
+                  />
+                  <FieldError>{fieldState.error?.message}</FieldError>
+                </TextField>
+              </>
+            )}
+          />
+        </div>
+        <div className="mb-6 md:flex">
+          <Controller
+            name="email"
+            control={control}
+            render={({ field, fieldState }) => (
+              <>
+                <TextField
+                  className="px-3 md:mb-0 md:w-1/2"
+                  name="email"
+                  isInvalid={Boolean(fieldState.error)}
+                >
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    {...field}
+                    aria-label="Email"
+                    id="email"
+                    type="email"
+                    placeholder="john.smith@email.com"
+                  />
+                  <FieldError>{fieldState.error?.message}</FieldError>
+                </TextField>
+              </>
+            )}
+          />
+          <Controller
+            name="subtitle"
+            control={control}
+            render={({ field, fieldState }) => (
+              <>
+                <TextField
+                  className="px-3 md:w-1/2"
+                  name="subtitle"
+                  isInvalid={Boolean(fieldState.error)}
+                >
+                  <Label htmlFor="subtitle">Subtitle</Label>
+                  <Input
+                    {...field}
+                    aria-label="Subtitle"
+                    id="subtitle"
+                    type="text"
+                    placeholder="Hello"
+                  />
+                  <FieldError>{fieldState.error?.message}</FieldError>
+                </TextField>
+              </>
+            )}
+          />
+        </div>
+        <Controller
+          name="message"
+          control={control}
+          render={({ field, fieldState }) => (
+            <TextField
+              className="mb-6 px-3"
+              name="message"
+              isInvalid={Boolean(fieldState.error)}
             >
-              <Ripple />
-              {isIdle && "Send message"}
-              {isPending && "Sending..."}
-              {isError && "Failed to send message, click to retry"}
-              {isSuccess && "Sent"}
-              {isSuccess ? <Check /> : <SendHorizontal />}
-            </Button>
-          </div>
-        </form>
-      )}
+              <Label htmlFor="message">Message</Label>
+              <TextArea
+                {...field}
+                className="resize-none"
+                aria-label="Message"
+                id="message"
+                placeholder="Let's rock 'n' roll"
+                rows={6}
+              />
+              <FieldError>{fieldState.error?.message}</FieldError>
+            </TextField>
+          )}
+        />
+        <div className="flex flex-row-reverse">
+          <Button
+            className="w-full"
+            type="submit"
+            variant="danger"
+            isPending={isPending}
+            isDisabled={isPending || isSuccess}
+          >
+            <Ripple />
+            {isIdle && "Send message"}
+            {isPending && "Sending..."}
+            {isError && "Failed to send message, click to retry"}
+            {isSuccess && "Sent"}
+            {isSuccess ? <Check /> : <SendHorizontal />}
+          </Button>
+        </div>
+      </form>
     </div>
   );
 };
