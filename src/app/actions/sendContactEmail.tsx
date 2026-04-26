@@ -15,7 +15,9 @@ export const sendContactEmail = async (variables: ContactMessage) => {
   const { data: contactMessage, success } =
     contactMessageSchema.safeParse(variables);
 
-  if (!success) throw new Error("Invalid data");
+  if (!success) {
+    return false;
+  }
 
   const { firstName, lastName } = contactMessage;
 
@@ -31,5 +33,5 @@ export const sendContactEmail = async (variables: ContactMessage) => {
     ),
   });
 
-  return response;
+  return true;
 };
