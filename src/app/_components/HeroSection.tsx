@@ -1,9 +1,10 @@
+import { DownloadCloud } from "lucide-react";
 import Image from "next/image";
 
 import { DiaTextReveal } from "@/components/ui/dia-text-reveal";
 import { GithubIcon } from "./contact/GithubIcon";
-import { SocialIcon } from "./hero/SocialIcon";
 import { LinkedInIcon } from "./contact/LinkedInIcon";
+import { SocialIcon } from "./hero/SocialIcon";
 
 export const HeroSection = () => {
   return (
@@ -30,6 +31,13 @@ export const HeroSection = () => {
           width={400}
         />
         <div className="flex gap-2">
+          <SocialIcon
+            ariaLabel="Download CV"
+            download="Max Kelly - CV.pdf"
+            href="/cv-october-2023.pdf"
+            icon={<DownloadCloud />}
+            tooltipContent="Download CV"
+          />
           <SocialIcon
             ariaLabel="GitHub"
             href="https://github.com/maxwillkelly"

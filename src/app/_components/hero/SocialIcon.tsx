@@ -8,6 +8,7 @@ type Props = {
   ariaLabel: string;
   icon: React.ReactNode;
   tooltipContent: string;
+  download?: string;
 };
 
 export const SocialIcon = ({
@@ -15,6 +16,7 @@ export const SocialIcon = ({
   ariaLabel,
   icon,
   tooltipContent,
+  download,
 }: Props) => {
   return (
     <Tooltip delay={0}>
@@ -24,9 +26,10 @@ export const SocialIcon = ({
           isIconOnly: true,
           variant: "tertiary",
         })}
+        download={download}
         href={href}
-        rel="noopener noreferrer"
-        target="_blank"
+        rel={download ? undefined : "noopener noreferrer"}
+        target={download ? undefined : "_blank"}
       >
         <Ripple />
         {icon}
