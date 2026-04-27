@@ -45,7 +45,7 @@ export const ValuesSection = () => {
               </Accordion.Trigger>
             </Accordion.Heading>
             <Accordion.Panel>
-              <Accordion.Body className="text-base">
+              <Accordion.Body className="text-base text-foreground">
                 {value.content}
               </Accordion.Body>
             </Accordion.Panel>
