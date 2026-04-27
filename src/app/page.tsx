@@ -4,6 +4,7 @@ import { ContactSection } from "./_components/ContactSection";
 import { EducationSection } from "./_components/EducationSection";
 import { ExperienceSection } from "./_components/ExperienceSection";
 import { HeroSection } from "./_components/HeroSection";
+import { ProjectsSection } from "./_components/ProjectsSection";
 import { ValuesSection } from "./_components/ValuesSection";
 
 const HomePage = () => {
@@ -16,6 +17,7 @@ const HomePage = () => {
           <ValuesSection />
           <ExperienceSection />
           <EducationSection />
+          <ProjectsSection />
           <ContactSection />
         </div>
       </BlurFade>

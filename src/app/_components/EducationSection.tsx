@@ -1,6 +1,4 @@
-import type { TimelineEntry } from "@/lib/timeline";
-
-import { Timeline } from "./Timeline";
+import { Timeline, type TimelineEntry } from "./Timeline";
 
 const education: TimelineEntry[] = [
   {
