@@ -10,7 +10,7 @@ export const ExperienceSection = () => {
           <p>
             I work as a Software Engineer on{" "}
             <Link
-              className="text-inherit no-underline hover:underline"
+              className="text-base no-underline hover:underline"
               href="https://governorhub.com/"
               rel="noopener noreferrer"
               target="_blank"

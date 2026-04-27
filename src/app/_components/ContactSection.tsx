@@ -14,7 +14,7 @@ export const ContactSection = () => {
           free to send me an email at{" "}
           <NextLink
             className={linkSlots.base({
-              className: "text-inherit no-underline hover:underline",
+              className: "text-base no-underline hover:underline",
             })}
             href="mailto:maxwill.kelly@gmail.com"
           >
