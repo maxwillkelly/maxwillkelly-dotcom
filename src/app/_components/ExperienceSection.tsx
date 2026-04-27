@@ -45,6 +45,7 @@ export const ExperienceSection = () => {
       <div className="flex flex-col gap-4">
         <div className="flex flex-col py-2 gap-4">
           <h3 className="text-lg text-foreground">The Key Support Services</h3>
+          <h4 className="text-base text-foreground">June 2022 - Present</h4>
           <p>
             I work as a Software Engineer on{" "}
             <Link
@@ -76,6 +77,9 @@ export const ExperienceSection = () => {
         </div>
         <div className="flex flex-col py-2 gap-4">
           <h3 className="text-lg text-foreground">Udrafter</h3>
+          <h4 className="text-base text-foreground">
+            September 2020 - September 2021
+          </h4>
           <p>
             Initially, I worked as a React developer in tandem with a .NET
             developer on Udrafter's platform.

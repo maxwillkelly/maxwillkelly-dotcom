@@ -5,6 +5,9 @@ export const EducationSection = () => {
       <div className="flex flex-col gap-4">
         <div className="flex flex-col py-2 gap-2">
           <h3 className="text-lg text-foreground">University of Dundee</h3>
+          <h4 className="text-base text-foreground">
+            September 2018 - September 2022
+          </h4>
           <p>
             I attended the University of Dundee from 2018 to 2022 and graduated
             with a First Class Honours degree in Computing Science.
