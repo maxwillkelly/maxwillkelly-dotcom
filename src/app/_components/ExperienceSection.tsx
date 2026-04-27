@@ -1,3 +1,5 @@
+import { Link } from "@heroui/react";
+
 export const ExperienceSection = () => {
   return (
     <section id="experience">
@@ -6,8 +8,17 @@ export const ExperienceSection = () => {
         <div className="flex flex-col py-2 gap-2">
           <h3 className="text-lg text-foreground">The Key Support Services</h3>
           <p>
-            I work as a Software Engineer on GovernorHub, the leading online
-            service for school governors and trustees.
+            I work as a Software Engineer on{" "}
+            <Link
+              className="text-inherit no-underline hover:underline"
+              href="https://governorhub.com/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              GovernorHub
+              <Link.Icon />
+            </Link>
+            , the leading online service for school governors and trustees.
             <br />
             <br />I am responsible for reimplementing a number of features from
             a monolithic AngularJS codebase into React and gRPC microservices.
