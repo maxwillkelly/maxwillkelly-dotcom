@@ -1,7 +1,7 @@
 export const EducationSection = () => {
   return (
     <section id="education">
-      <h2 className="text-xl">Education</h2>
+      <h2 className="text-xl font-bold">Education</h2>
       <div className="flex flex-col gap-4">
         <div className="flex flex-col py-2 gap-2">
           <h3 className="text-lg text-foreground">University of Dundee</h3>

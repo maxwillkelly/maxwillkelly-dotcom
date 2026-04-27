@@ -8,7 +8,7 @@ export const ContactSection = () => {
   return (
     <section className="flex flex-col gap-4" id="contact">
       <div>
-        <h2 className="text-xl">Contact</h2>
+        <h2 className="text-xl font-bold">Contact</h2>
         <p className="text-base">
           If you have any questions or would like to get in touch, please feel
           free to send me an email at{" "}

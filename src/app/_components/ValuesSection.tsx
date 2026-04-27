@@ -3,7 +3,7 @@
 export const ValuesSection = () => {
   return (
     <section id="values">
-      <h2 className="text-xl">Values</h2>
+      <h2 className="text-xl font-bold">Values</h2>
       <div className="flex flex-col gap-4">
         <div className="flex flex-col py-2 gap-2">
           <h3 className="text-lg text-foreground">

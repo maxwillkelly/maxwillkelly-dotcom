@@ -3,7 +3,7 @@ import { Link } from "@heroui/react";
 export const ExperienceSection = () => {
   return (
     <section id="experience">
-      <h2 className="text-xl">Experience</h2>
+      <h2 className="text-xl font-bold">Experience</h2>
       <div className="flex flex-col gap-4">
         <div className="flex flex-col py-2 gap-2">
           <h3 className="text-lg text-foreground">The Key Support Services</h3>

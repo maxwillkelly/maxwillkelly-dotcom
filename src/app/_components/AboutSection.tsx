@@ -3,7 +3,7 @@ import { Link } from "@heroui/react";
 export const AboutSection = () => {
   return (
     <section id="about">
-      <h2 className="text-xl">About</h2>
+      <h2 className="text-xl font-bold">About</h2>
       <p className="mt-4">
         Currently I work at{" "}
         <Link
