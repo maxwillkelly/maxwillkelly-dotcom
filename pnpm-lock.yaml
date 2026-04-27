@@ -20,6 +20,9 @@ importers:
       '@t3-oss/env-nextjs':
         specifier: ^0.13.11
         version: 0.13.11(typescript@5.9.3)(zod@4.3.6)
+      '@thesvg/react':
+        specifier: ^2.1.5
+        version: 2.1.5(react@19.2.4)
       '@wrksz/themes':
         specifier: ^0.8.3
         version: 0.8.3(next@16.2.4(@babel/core@7.29.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
@@ -1215,6 +1218,12 @@ packages:
 
   '@tailwindcss/postcss@4.2.4':
     resolution: {integrity: sha512-wgAVj6nUWAolAu8YFvzT2cTBIElWHkjZwFYovF+xsqKsW2ADxM/X2opxj5NsF/qVccAOjRNe8X2IdPzMsWyHTg==}
+
+  '@thesvg/react@2.1.5':
+    resolution: {integrity: sha512-rUgm3P9JSTRjGEdbnlGctknSOfyoR2piqMSIPSeKbLMM1Q9WWHJNPdQgb42BNcD2KZxZmDvaZIF5MxGHRm437w==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      react: '>=18'
 
   '@ts-morph/common@0.27.0':
     resolution: {integrity: sha512-Wf29UqxWDpc+i61k3oIOzcUfQt79PIT9y/MWfAGlrkjg6lBC1hwDECLXPVJAhWjiGbfBCxZd65F/LIZF3+jeJQ==}
@@ -3914,6 +3923,10 @@ snapshots:
       '@tailwindcss/oxide': 4.2.4
       postcss: 8.5.10
       tailwindcss: 4.2.4
+
+  '@thesvg/react@2.1.5(react@19.2.4)':
+    dependencies:
+      react: 19.2.4
 
   '@ts-morph/common@0.27.0':
     dependencies:

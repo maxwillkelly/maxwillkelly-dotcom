@@ -15,6 +15,7 @@
     "@heroui/styles": "^3.0.3",
     "@hookform/resolvers": "^5.2.2",
     "@t3-oss/env-nextjs": "^0.13.11",
+    "@thesvg/react": "^2.1.5",
     "@wrksz/themes": "^0.8.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

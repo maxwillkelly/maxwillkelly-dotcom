@@ -1,4 +1,42 @@
-import { Link } from "@heroui/react";
+import { Chip, Link } from "@heroui/react";
+import {
+  Csharp,
+  Docker,
+  Dotnet,
+  Firebase,
+  Graphql,
+  Javascript,
+  MicrosoftSqlServer,
+  Mongodb,
+  Nodedotjs,
+  React,
+  Typescript,
+  Vuedotjs,
+} from "@thesvg/react";
+
+type ChipProps = { label: string; icon?: React.ReactNode };
+
+const theKeySupportChips: ChipProps[] = [
+  { label: "React", icon: <React width={12} /> },
+  { label: "Next.js" },
+  { label: "JavaScript", icon: <Javascript width={12} /> },
+  { label: "TypeScript", icon: <Typescript width={12} /> },
+  { label: "Node.js", icon: <Nodedotjs width={12} /> },
+  { label: "gRPC" },
+  { label: "GraphQL", icon: <Graphql width={12} /> },
+  { label: "MongoDB", icon: <Mongodb height={12} /> },
+  { label: "Firebase", icon: <Firebase width={12} /> },
+  { label: "Docker", icon: <Docker width={12} /> },
+];
+
+const udrafterChips: ChipProps[] = [
+  { label: "JavaScript", icon: <Javascript width={12} /> },
+  { label: "Vue.js", icon: <Vuedotjs width={12} /> },
+  { label: ".NET Core", icon: <Dotnet width={12} /> },
+  { label: "C#", icon: <Csharp width={12} /> },
+  { label: "SQL Server", icon: <MicrosoftSqlServer width={12} /> },
+  { label: "Docker", icon: <Docker width={12} /> },
+];
 
 export const ExperienceSection = () => {
   return (
@@ -27,6 +65,14 @@ export const ExperienceSection = () => {
             I've also had the opportunity to onboard new developers into an
             expanding team and write developer specifications for new features.
           </p>
+          <div className="flex flex-wrap gap-2">
+            {theKeySupportChips.map(({ label, icon }) => (
+              <Chip variant="primary" key={label}>
+                {icon}
+                <Chip.Label>{label}</Chip.Label>
+              </Chip>
+            ))}
+          </div>
         </div>
         <div className="flex flex-col py-2 gap-2">
           <h3 className="text-lg text-foreground">Udrafter</h3>
@@ -43,6 +89,14 @@ export const ExperienceSection = () => {
             microservice. I then led the team that integrated this service into
             the main platform.
           </p>
+          <div className="flex flex-wrap gap-2">
+            {udrafterChips.map(({ label, icon }) => (
+              <Chip variant="primary" key={label}>
+                {icon}
+                <Chip.Label>{label}</Chip.Label>
+              </Chip>
+            ))}
+          </div>
         </div>
       </div>
     </section>
