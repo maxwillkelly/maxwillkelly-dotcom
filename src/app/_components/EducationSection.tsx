@@ -1,3 +1,27 @@
+import {
+  C,
+  Cplusplus,
+  Csharp,
+  Docker,
+  Dotnet,
+  Electron,
+  Expo,
+  Express,
+  Graphql,
+  Java,
+  Javascript,
+  Mui,
+  Mysql,
+  Nestjs,
+  Nodedotjs,
+  Postgresql,
+  Python,
+  React,
+  Scala,
+  TailwindCss,
+  Typescript,
+} from "@thesvg/react";
+
 import { Timeline, type TimelineEntry } from "./Timeline";
 
 const education: TimelineEntry[] = [
@@ -28,6 +52,24 @@ const education: TimelineEntry[] = [
         Unity) and a Ceildh.
       </>
     ),
+    chips: [
+      { label: "JavaScript", icon: <Javascript width={12} /> },
+      { label: "TypeScript", icon: <Typescript width={12} /> },
+      { label: "React", icon: <React width={12} /> },
+      { label: "C#", icon: <Csharp width={12} /> },
+      { label: ".NET", icon: <Dotnet width={12} /> },
+      { label: "Node.js", icon: <Nodedotjs width={12} /> },
+      { label: "Express", icon: <Express width={12} /> },
+      { label: "NestJS", icon: <Nestjs width={12} /> },
+      { label: "GraphQL", icon: <Graphql width={12} /> },
+      { label: "Docker", icon: <Docker width={12} /> },
+      { label: "React Native", icon: <React width={12} /> },
+      { label: "Expo", icon: <Expo width={12} /> },
+      { label: "Electron", icon: <Electron width={12} /> },
+      { label: "C", icon: <C width={12} /> },
+      { label: "C++", icon: <Cplusplus width={12} /> },
+      { label: "Java", icon: <Java width={12} /> },
+    ],
   },
 ];
 
