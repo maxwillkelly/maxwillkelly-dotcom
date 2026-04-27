@@ -1,3 +1,4 @@
+import { ScrollShadow } from "@heroui/react";
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 import "./globals.css";
@@ -30,7 +31,7 @@ const RootLayout = ({
       )}
       // data-theme="dark"
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <body className="h-full flex flex-col bg-background text-foreground overflow-hidden">
         {/* <div className="fixed inset-0 z-0 pointer-events-none">
           <DottedGlowBackground
             className="mask-radial-to-20% mask-radial-at-left"
@@ -45,12 +46,14 @@ const RootLayout = ({
             speedScale={0.3}
           />
         </div> */}
-        <div
-          id="container"
-          className="relative z-10 max-w-2xl mx-auto py-12 pb-24 sm:py-24 px-6"
-        >
-          {children}
-        </div>
+        <ScrollShadow className="flex-1" hideScrollBar size={60}>
+          <div
+            id="container"
+            className="relative z-10 max-w-2xl mx-auto py-12 pb-24 sm:py-24 px-6"
+          >
+            {children}
+          </div>
+        </ScrollShadow>
       </body>
     </html>
   );
