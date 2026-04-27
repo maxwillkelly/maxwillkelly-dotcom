@@ -9,5 +9,6 @@ export type TimelineEntry = {
   title: string;
   start: Date;
   end?: Date;
+  content: ReactNode;
   chips?: TimelineChip[];
 };
