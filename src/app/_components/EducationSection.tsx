@@ -2,8 +2,10 @@ import {
   formatDateRangeinYearsAndMonths,
   formatDurationinYearsAndMonths,
 } from "@/lib/duration";
+import type { TimelineEntry } from "@/lib/timeline";
 
-const universityOfDundee = {
+const universityOfDundee: TimelineEntry = {
+  title: "University of Dundee",
   start: new Date(2018, 8, 1),
   end: new Date(2022, 8, 1),
 };
@@ -14,7 +16,9 @@ export const EducationSection = () => {
       <h2 className="text-xl font-bold">Education</h2>
       <div className="flex flex-col gap-4">
         <div className="flex flex-col py-2 gap-2">
-          <h3 className="text-lg text-foreground">University of Dundee</h3>
+          <h3 className="text-lg text-foreground">
+            {universityOfDundee.title}
+          </h3>
           <h4 className="text-base text-foreground">
             {formatDateRangeinYearsAndMonths(
               universityOfDundee.start,
