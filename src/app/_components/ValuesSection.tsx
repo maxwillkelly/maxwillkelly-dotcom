@@ -36,7 +36,7 @@ export const ValuesSection = () => {
             className="first:**:data-[slot=accordion-trigger]:rounded-t-3xl last:[&:not(:has([data-slot=accordion-trigger][aria-expanded='true']))_[data-slot=accordion-trigger]]:rounded-b-3xl"
           >
             <Accordion.Heading>
-              <Accordion.Trigger className="text-lg text-foreground">
+              <Accordion.Trigger className="text-base text-foreground">
                 {value.icon}
                 {value.title}
                 <Accordion.Indicator>

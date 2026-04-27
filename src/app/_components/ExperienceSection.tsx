@@ -43,7 +43,7 @@ export const ExperienceSection = () => {
     <section id="experience">
       <h2 className="text-xl font-bold">Experience</h2>
       <div className="flex flex-col gap-4">
-        <div className="flex flex-col py-2 gap-2">
+        <div className="flex flex-col py-2 gap-4">
           <h3 className="text-lg text-foreground">The Key Support Services</h3>
           <p>
             I work as a Software Engineer on{" "}
@@ -74,7 +74,7 @@ export const ExperienceSection = () => {
             ))}
           </div>
         </div>
-        <div className="flex flex-col py-2 gap-2">
+        <div className="flex flex-col py-2 gap-4">
           <h3 className="text-lg text-foreground">Udrafter</h3>
           <p>
             Initially, I worked as a React developer in tandem with a .NET
