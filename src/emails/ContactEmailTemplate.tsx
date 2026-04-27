@@ -1,4 +1,4 @@
-import { type ContactMessage } from "@/shared/contactMessage";
+import { type ContactMessage } from "@/schemas/contact-message";
 import {
   Body,
   Button,
