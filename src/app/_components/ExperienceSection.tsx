@@ -14,7 +14,18 @@ import {
   Vuedotjs,
 } from "@thesvg/react";
 
+import {
+  formatDateRangeinYearsAndMonths,
+  formatDurationinYearsAndMonths,
+} from "@/lib/duration";
+
 type ChipProps = { label: string; icon?: React.ReactNode };
+
+const theKeySupport = { start: new Date(2022, 5, 28) };
+const udrafter = {
+  start: new Date(2020, 8, 1),
+  end: new Date(2021, 8, 1),
+};
 
 const theKeySupportChips: ChipProps[] = [
   { label: "React", icon: <React width={12} /> },
@@ -45,7 +56,13 @@ export const ExperienceSection = () => {
       <div className="flex flex-col gap-4">
         <div className="flex flex-col py-2 gap-4">
           <h3 className="text-lg text-foreground">The Key Support Services</h3>
-          <h4 className="text-base text-foreground">June 2022 - Present</h4>
+          <h4 className="text-base text-foreground">
+            {formatDateRangeinYearsAndMonths(theKeySupport.start)}
+            <span className="text-muted">
+              {" · "}
+              {formatDurationinYearsAndMonths(theKeySupport.start)}
+            </span>
+          </h4>
           <p>
             I work as a Software Engineer on{" "}
             <Link
@@ -78,7 +95,11 @@ export const ExperienceSection = () => {
         <div className="flex flex-col py-2 gap-4">
           <h3 className="text-lg text-foreground">Udrafter</h3>
           <h4 className="text-base text-foreground">
-            September 2020 - September 2021
+            {formatDateRangeinYearsAndMonths(udrafter.start, udrafter.end)}
+            <span className="text-muted">
+              {" · "}
+              {formatDurationinYearsAndMonths(udrafter.start, udrafter.end)}
+            </span>
           </h4>
           <p>
             Initially, I worked as a React developer in tandem with a .NET
