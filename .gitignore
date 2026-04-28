@@ -45,3 +45,6 @@ next-env.d.ts
 
 # React email
 .react-email
+
+# Fallow
+.fallow
