@@ -1,5 +1,4 @@
-import { Chip } from "@heroui/react";
-import { Expo, Nextdotjs, React, Typescript } from "@thesvg/react";
+import { Expo, React, Typescript } from "@thesvg/react";
 
 import { Timeline, type TimelineEntry } from "./Timeline";
 
@@ -10,7 +9,7 @@ const projects: TimelineEntry[] = [
       { label: "TypeScript", icon: <Typescript width={12} /> },
       { label: "React Native", icon: <React width={12} /> },
       { label: "Expo", icon: <Expo width={12} /> },
-      { label: "Next.js", icon: <Nextdotjs width={12} /> },
+      { label: "Next.js" },
     ],
     content: (
       <>
