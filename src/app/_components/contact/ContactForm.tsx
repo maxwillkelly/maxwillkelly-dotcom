@@ -188,7 +188,7 @@ export const ContactForm = () => {
         <Button
           className="w-full"
           type="submit"
-          variant="secondary"
+          variant="primary"
           isPending={isPending}
           isDisabled={isPending || isSuccess}
         >
