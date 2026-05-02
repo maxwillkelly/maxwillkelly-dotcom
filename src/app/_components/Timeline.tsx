@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
 import { Chip } from "@heroui/react";
+import type { ReactNode } from "react";
 
 import {
   formatDateRangeinYearsAndMonths,

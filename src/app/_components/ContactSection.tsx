@@ -7,24 +7,27 @@ export const ContactSection = () => {
 
   return (
     <section className="flex flex-col gap-4" id="contact">
-      <div>
-        <h2 className="text-xl font-bold">Contact</h2>
-        <p className="text-base">
-          If you have any questions or would like to get in touch, please feel
-          free to send me an email at{" "}
-          <NextLink
-            className={linkSlots.base({
-              className: "text-base no-underline hover:underline",
-            })}
-            href="mailto:maxwill.kelly@gmail.com"
-          >
-            maxwill.kelly@gmail.com
-            <Link.Icon className={linkSlots.icon()} />
-          </NextLink>{" "}
-          or use this form below to send me a message.
-        </p>
-      </div>
-      <Surface className="rounded-3xl p-6" variant="default">
+      <Surface
+        className="flex flex-col gap-6 rounded-3xl p-6 bg-background outline outline-border"
+        variant="default"
+      >
+        <div>
+          <h2 className="text-xl font-bold">Contact</h2>
+          <p className="text-base">
+            If you have any questions or would like to get in touch, please feel
+            free to send me an email at{" "}
+            <NextLink
+              className={linkSlots.base({
+                className: "text-base no-underline hover:underline",
+              })}
+              href="mailto:maxwill.kelly@gmail.com"
+            >
+              maxwill.kelly@gmail.com
+              <Link.Icon className={linkSlots.icon()} />
+            </NextLink>{" "}
+            or use this form below to send me a message.
+          </p>
+        </div>
         <ContactForm />
       </Surface>
     </section>
