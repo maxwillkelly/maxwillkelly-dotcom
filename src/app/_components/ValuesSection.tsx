@@ -1,5 +1,11 @@
 import { Accordion } from "@heroui/react";
-import { ChevronDown, CodeXml, FlaskConical, RefreshCw } from "lucide-react";
+import {
+  Brain,
+  ChevronDown,
+  CodeXml,
+  FlaskConical,
+  RefreshCw,
+} from "lucide-react";
 
 const iconClassName = "mr-3 size-4 shrink-0 text-muted";
 
@@ -20,7 +26,13 @@ const values = [
     title: "It's good to experiment",
     icon: <FlaskConical className={iconClassName} />,
     content:
-      "Today's new exciting thing is tomorrow's tech debt. I don't believe in the adage \"if it ain't broke, don't fix it\", I believe that everything can always be improved and that we should always strive towards a more perfect solution.",
+      "Today's new exciting thing is tomorrow's tech debt. I don't believe in the adage \"if it ain't broke, don't fix it\", I believe that everything can always be improved and that we should always strive towards perfection.",
+  },
+  {
+    title: "Use AI Agents to augment human thinking not to replace it",
+    icon: <Brain className={iconClassName} />,
+    content:
+      "No one doubts that Large Language Models have revolutionised the way we write code from simple autocompletion in IDEs to creating fully functional solutions with tools like Claude Code. When you've worked with an agent, you should always evaluate its work, take what's good and discard everything else. For everything going into a critical system you should read and understand every line.",
   },
 ];
 
