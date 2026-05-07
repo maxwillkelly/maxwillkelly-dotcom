@@ -70,7 +70,7 @@ const experiences: TimelineEntry[] = [
         >
           Get Information About Schools (GIAS)
           <Link.Icon />
-        </Link>{" "}
+        </Link>
         .
         <br />
         <br />
