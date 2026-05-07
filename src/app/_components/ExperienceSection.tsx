@@ -34,8 +34,13 @@ const experiences: TimelineEntry[] = [
         </Link>
         , the leading online service for school governors and trustees.
         <br />
-        <br />I am responsible for reimplementing a number of features from a
-        monolithic AngularJS codebase into React and gRPC microservices.
+        <br />
+        My colleagues and I were responsible for a complete ground up rewrite of
+        GovernorHub's front-end. At the time I joined, GovernorHub was a legacy
+        AngularJS codebase with React injected into it for specific components.
+        We completely rearchitected it using the Next.js App router which
+        produced a much better user experience. I was responsible for
+        reimplementing many significant features in React.
         <br />
         <br />
         I've also had the opportunity to onboard new developers into an
