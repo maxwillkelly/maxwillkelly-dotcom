@@ -31,7 +31,7 @@ export const AboutSection = () => {
         volunteer workforce in the UK.
         <br />
         <br />
-        I have some involement in every part of the process, from gathering
+        I have some involvement in every part of the process, from gathering
         requirements and designing solutions to writing code and testing.
         <br />
         <br />I have a passion for building high-quality software that automates

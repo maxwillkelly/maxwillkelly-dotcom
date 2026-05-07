@@ -40,8 +40,8 @@ const education: TimelineEntry[] = [
         centered around learning practical skills for the workplace.
         <br />
         <br />
-        Most of our course was spend doing projects which were completed in
-        teams, and we were encouraged to collabrate and learn a variety of
+        Most of our course was spent doing projects which were completed in
+        teams, and we were encouraged to collaborate and learn a variety of
         different programming languages and skills.
         <br />
         <br />I was also active in the Dundee University Computing Society
@@ -49,7 +49,7 @@ const education: TimelineEntry[] = [
         in-person society events, shortly after the UK had just emerged from the
         final Coronavirus lockdown. During my time on the committee, we held
         many successful events such as a Hackathon (sponsored by BlackRock and
-        Unity) and a Ceildh.
+        Unity) and a Ceilidh.
       </>
     ),
     chips: [

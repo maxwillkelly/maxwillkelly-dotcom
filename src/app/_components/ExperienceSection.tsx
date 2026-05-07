@@ -50,7 +50,7 @@ const experiences: TimelineEntry[] = [
         <br />
         <br />I built processes to triage bugs from customer feedback in
         Intercom and convert them into issues in Linear. I've worked on
-        integrations with products build by other teams internally and
+        integrations with products maintained by other teams internally and
         externally such as{" "}
         <Link
           className="text-base no-underline hover:underline"
