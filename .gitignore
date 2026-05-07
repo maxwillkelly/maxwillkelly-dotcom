@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# HeroUI Docs for Agents
+.heroui-docs
+
+# Checks code quality
+.fallow
