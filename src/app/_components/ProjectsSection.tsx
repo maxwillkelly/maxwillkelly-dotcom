@@ -26,7 +26,7 @@ const projects: TimelineEntry[] = [
         application ev-charging-analyser which uses React Native to compile
         binaries for iOS and Android (Android was the main development platform)
         and the back-end API ev-charging-analyser-api which uses NestJS. Each
-        project has their own Github repository, deployment mechanisms, CI/CD
+        project has their own GitHub repository, deployment mechanisms, CI/CD
         tools and documentation.
         <br />
         <br />
