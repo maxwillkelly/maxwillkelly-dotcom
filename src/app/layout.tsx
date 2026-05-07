@@ -1,4 +1,5 @@
 import { ScrollShadow } from "@heroui/react";
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 import "./globals.css";
@@ -54,7 +55,7 @@ const RootLayout = ({
             {children}
           </div>
         </ScrollShadow>
-      </body>
+        <Analytics />
     </html>
   );
 };

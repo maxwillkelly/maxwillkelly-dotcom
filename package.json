@@ -16,6 +16,7 @@
     "@hookform/resolvers": "^5.2.2",
     "@t3-oss/env-nextjs": "^0.13.11",
     "@thesvg/react": "^2.1.8",
+    "@vercel/analytics": "^2.0.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "lucide-react": "^1.14.0",

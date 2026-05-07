@@ -46,5 +46,8 @@ next-env.d.ts
 # React email
 .react-email
 
-# Fallow
+# Checks code quality
 .fallow
+
+# HeroUI Docs for Agents
+.heroui-docs
