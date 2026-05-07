@@ -56,6 +56,7 @@ const RootLayout = ({
           </div>
         </ScrollShadow>
         <Analytics />
+      </body>
     </html>
   );
 };
