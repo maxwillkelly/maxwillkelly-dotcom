@@ -21,7 +21,7 @@ const experiences: TimelineEntry[] = [
     title: "The Key Support Services",
     start: new Date(2022, 5, 28),
     content: (
-      <>
+      <p>
         I work as a Software Engineer on{" "}
         <Link
           className="text-base no-underline hover:underline"
@@ -76,7 +76,7 @@ const experiences: TimelineEntry[] = [
         <br />
         I've also had the opportunity to onboard new developers into an
         expanding team and write developer specifications for new features.
-      </>
+      </p>
     ),
     chips: [
       { label: "React", icon: <React width={12} /> },
@@ -96,7 +96,7 @@ const experiences: TimelineEntry[] = [
     start: new Date(2020, 8, 1),
     end: new Date(2021, 8, 1),
     content: (
-      <>
+      <p>
         Initially, I worked as a React developer in tandem with a .NET developer
         on Udrafter's platform.
         <br />
@@ -108,7 +108,7 @@ const experiences: TimelineEntry[] = [
         This involved creating a Vue.js front-end and a .NET Core messaging
         microservice. I then led the team that integrated this service into the
         main platform.
-      </>
+      </p>
     ),
     chips: [
       { label: "JavaScript", icon: <Javascript width={12} /> },

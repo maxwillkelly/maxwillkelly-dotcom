@@ -38,7 +38,7 @@ export const Timeline = ({ entries }: TimelineProps) => {
               </span>
             </h4>
           )}
-          <p>{content}</p>
+          <div>{content}</div>
           {chips && chips.length > 0 && (
             <div className="flex flex-wrap gap-2">
               {chips.map(({ label, icon }) => (

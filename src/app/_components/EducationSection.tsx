@@ -30,7 +30,7 @@ const education: TimelineEntry[] = [
     start: new Date(2018, 8, 1),
     end: new Date(2022, 8, 1),
     content: (
-      <>
+      <p>
         I attended the University of Dundee from 2018 to 2022 and graduated with
         a First Class Honours degree in Computing Science.
         <br />
@@ -50,7 +50,7 @@ const education: TimelineEntry[] = [
         final Coronavirus lockdown. During my time on the committee, we held
         many successful events such as a Hackathon (sponsored by BlackRock and
         Unity) and a Ceilidh.
-      </>
+      </p>
     ),
     chips: [
       { label: "JavaScript", icon: <Javascript width={12} /> },
