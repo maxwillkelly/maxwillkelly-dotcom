@@ -36,3 +36,4 @@ next-env.d.ts
 
 # HeroUI Docs for Agents
 .heroui-docs
+.env*.local

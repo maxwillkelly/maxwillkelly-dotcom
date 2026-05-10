@@ -15,7 +15,7 @@ import {
 
 interface Props {
   contactMessage?: ContactMessage;
-  nodeEnv?: "development" | "production";
+  nodeEnv?: "development" | "test" | "production";
 }
 
 const ContactEmailTemplate = ({
