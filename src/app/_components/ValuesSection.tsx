@@ -9,6 +9,13 @@ import {
 
 const iconClassName = "mr-3 size-4 shrink-0 text-muted";
 
+const slugify = (title: string): string => {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+};
+
 const values = [
   {
     title: "Write clean maintainable code",
@@ -44,7 +51,7 @@ export const ValuesSection = () => {
         {values.map((value) => (
           <Accordion.Item
             key={value.title}
-            id={value.title}
+            id={slugify(value.title)}
             className="first:**:data-[slot=accordion-trigger]:rounded-t-3xl last:[&:not(:has([data-slot=accordion-trigger][aria-expanded='true']))_[data-slot=accordion-trigger]]:rounded-b-3xl"
           >
             <Accordion.Heading>
