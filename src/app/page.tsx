@@ -1,8 +1,27 @@
+import { BlurFade } from "@/components/ui/blur-fade";
+import { AboutSection } from "./_components/AboutSection";
+import { ContactSection } from "./_components/ContactSection";
+import { EducationSection } from "./_components/EducationSection";
+import { ExperienceSection } from "./_components/ExperienceSection";
+import { HeroSection } from "./_components/HeroSection";
+import { ProjectsSection } from "./_components/ProjectsSection";
+import { ValuesSection } from "./_components/ValuesSection";
+
 const HomePage = () => {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start"></main>
-    </div>
+    <main className="flex flex-col space-y-12">
+      <HeroSection />
+      <BlurFade delay={0.6}>
+        <div className="flex flex-col space-y-12">
+          <AboutSection />
+          <ValuesSection />
+          <ExperienceSection />
+          <EducationSection />
+          <ProjectsSection />
+          <ContactSection />
+        </div>
+      </BlurFade>
+    </main>
   );
 };
 

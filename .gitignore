@@ -1,14 +1,5 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
 
 # testing
 /coverage
@@ -25,9 +16,6 @@
 *.pem
 
 # debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
@@ -40,8 +28,12 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# HeroUI Docs for Agents
-.heroui-docs
+# React email
+.react-email
 
 # Checks code quality
 .fallow
+
+# HeroUI Docs for Agents
+.heroui-docs
+.env*.local
