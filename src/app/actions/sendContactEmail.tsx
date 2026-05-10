@@ -1,15 +1,31 @@
 "use server";
 
 import { Resend } from "resend";
+import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
 
 import ContactEmailTemplate from "@/emails/ContactEmailTemplate";
 import { env } from "@/lib/env";
+import { getIpAddress } from "@/lib/headers";
+
 import {
   ContactMessage,
   contactMessageSchema,
 } from "@/schemas/contact-message";
 
 const resend = new Resend(env.RESEND_API_KEY);
+
+const redis = new Redis({
+  url: env.UPSTASH_REDIS_REST_URL,
+  token: env.UPSTASH_REDIS_REST_TOKEN,
+});
+
+const ratelimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(3, "1 d"),
+  analytics: true,
+  enableProtection: true,
+});
 
 export type SendContactEmailResult =
   | { success: true }
@@ -18,6 +34,17 @@ export type SendContactEmailResult =
 export const sendContactEmail = async (
   variables: ContactMessage,
 ): Promise<SendContactEmailResult> => {
+  const ipAddress = await getIpAddress();
+
+  const { success: ratelimitSuccess } = await ratelimit.limit(ipAddress);
+
+  if (!ratelimitSuccess) {
+    return {
+      success: false,
+      message: "Rate limit exceeded. Please try again later.",
+    };
+  }
+
   const { data: contactMessage, success } =
     contactMessageSchema.safeParse(variables);
 

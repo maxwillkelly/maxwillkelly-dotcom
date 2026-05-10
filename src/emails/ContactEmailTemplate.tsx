@@ -35,7 +35,8 @@ const ContactEmailTemplate = ({
     subtitle,
     message: messageBody,
   } = contactMessage;
-  const isDevelopment = nodeEnv === "development";
+  const isDevelopment = nodeEnv === "development" || nodeEnv === "test";
+
   const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(`Re: ${subtitle}`)}`;
 
   return (
