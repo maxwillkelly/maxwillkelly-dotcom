@@ -7,10 +7,22 @@ const projects: TimelineEntry[] = [
   {
     title: "EV Charging Analyser",
     chips: [
-      { label: "TypeScript", icon: <Typescript width={12} /> },
-      { label: "React Native", icon: <React width={12} /> },
-      { label: "Expo", icon: <Expo width={12} /> },
-      { label: "Next.js" },
+      {
+        label: "TypeScript",
+        icon: <Typescript width={12} />,
+        href: "https://www.typescriptlang.org/",
+      },
+      {
+        label: "React Native",
+        icon: <React width={12} />,
+        href: "https://reactnative.dev/",
+      },
+      {
+        label: "Expo",
+        icon: <Expo width={12} />,
+        href: "https://expo.dev/",
+      },
+      { label: "Next.js", href: "https://nextjs.org/" },
     ],
     content: (
       <>

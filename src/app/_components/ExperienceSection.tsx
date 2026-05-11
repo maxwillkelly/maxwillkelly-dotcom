@@ -125,16 +125,44 @@ const experiences: TimelineEntry[] = [
       </p>
     ),
     chips: [
-      { label: "React", icon: <React width={12} /> },
-      { label: "Next.js" },
+      {
+        label: "React",
+        icon: <React width={12} />,
+        href: "https://react.dev/",
+      },
+      { label: "Next.js", href: "https://nextjs.org/" },
       { label: "JavaScript", icon: <Javascript width={12} /> },
-      { label: "TypeScript", icon: <Typescript width={12} /> },
-      { label: "Node.js", icon: <Nodedotjs width={12} /> },
-      { label: "gRPC" },
-      { label: "GraphQL", icon: <Graphql width={12} /> },
-      { label: "MongoDB", icon: <Mongodb height={12} /> },
-      { label: "Firebase", icon: <Firebase width={12} /> },
-      { label: "Docker", icon: <Docker width={12} /> },
+      {
+        label: "TypeScript",
+        icon: <Typescript width={12} />,
+        href: "https://www.typescriptlang.org/",
+      },
+      {
+        label: "Node.js",
+        icon: <Nodedotjs width={12} />,
+        href: "https://nodejs.org/",
+      },
+      { label: "gRPC", href: "https://grpc.io/" },
+      {
+        label: "GraphQL",
+        icon: <Graphql width={12} />,
+        href: "https://graphql.org/",
+      },
+      {
+        label: "MongoDB",
+        icon: <Mongodb height={12} />,
+        href: "https://www.mongodb.com/",
+      },
+      {
+        label: "Firebase",
+        icon: <Firebase width={12} />,
+        href: "https://firebase.google.com/",
+      },
+      {
+        label: "Docker",
+        icon: <Docker width={12} />,
+        href: "https://www.docker.com/",
+      },
     ],
   },
   {
@@ -167,11 +195,31 @@ const experiences: TimelineEntry[] = [
     ),
     chips: [
       { label: "JavaScript", icon: <Javascript width={12} /> },
-      { label: "Vue.js", icon: <Vuedotjs width={12} /> },
-      { label: ".NET Core", icon: <Dotnet width={12} /> },
-      { label: "C#", icon: <Csharp width={12} /> },
-      { label: "SQL Server", icon: <MicrosoftSqlServer width={12} /> },
-      { label: "Docker", icon: <Docker width={12} /> },
+      {
+        label: "Vue.js",
+        icon: <Vuedotjs width={12} />,
+        href: "https://vuejs.org/",
+      },
+      {
+        label: ".NET Core",
+        icon: <Dotnet width={12} />,
+        href: "https://dotnet.microsoft.com/",
+      },
+      {
+        label: "C#",
+        icon: <Csharp width={12} />,
+        href: "https://learn.microsoft.com/en-us/dotnet/csharp/",
+      },
+      {
+        label: "SQL Server",
+        icon: <MicrosoftSqlServer width={12} />,
+        href: "https://www.microsoft.com/en-us/sql-server",
+      },
+      {
+        label: "Docker",
+        icon: <Docker width={12} />,
+        href: "https://www.docker.com/",
+      },
     ],
   },
 ];
