@@ -18,7 +18,7 @@ Live at [maxwillkelly.com](https://maxwillkelly.com)
 
 ## Project Structure
 
-```
+```text
 src/
 ├── app/
 │   ├── _components/          # Page sections
@@ -71,7 +71,7 @@ Copy `.env.example` to `.env.local` and fill in the required values:
 | Variable | Description |
 |----------|-------------|
 | `RESEND_API_KEY` | Resend API key for sending contact emails |
-| `RESEND_FROM_EMAIL` | Verified sender email address |
+| `SEND_EMAIL` | Verified sender email address |
 | `UPSTASH_REDIS_REST_URL` | Upstash Redis REST URL for rate limiting |
 | `UPSTASH_REDIS_REST_TOKEN` | Upstash Redis REST token |
 
