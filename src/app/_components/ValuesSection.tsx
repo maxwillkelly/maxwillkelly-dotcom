@@ -30,16 +30,16 @@ const values = [
       "I hold my opinions loosely and I am not afraid to change my mind if the evidence points to another conclusion. I am not afraid to admit when I have been proven wrong and I am always open to feedback and suggestions.",
   },
   {
-    title: "It's good to experiment",
+    title: "Strive for perfection",
     icon: <FlaskConical className={iconClassName} />,
     content:
       "Today's new exciting thing is tomorrow's tech debt. I don't believe in the adage \"if it ain't broke, don't fix it\", I believe that everything can always be improved and that we should always strive towards perfection.",
   },
   {
-    title: "Use AI Agents to augment human thinking not to replace it",
+    title: "AI Agents should augment human thinking",
     icon: <Brain className={iconClassName} />,
     content:
-      "No one doubts that Large Language Models have revolutionised the way we write code from simple autocompletion in IDEs to creating fully functional solutions with tools like Claude Code. When you've worked with an agent, you should always evaluate its work, take what's good and discard everything else. For everything going into a critical system you should read and understand every line.",
+      "No one doubts that Large Language Models (LLMs) have revolutionised the way we write code from simple autocompletion in IDEs to creating fully functional solutions with tools like Claude Code. When you work with an agent you should always evaluate its work, take what's good and discard everything else. For everything going into a critical system it's important to read and understand every line.",
   },
 ];
 
