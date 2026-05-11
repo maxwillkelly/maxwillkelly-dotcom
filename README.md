@@ -56,7 +56,7 @@ Requires [pnpm](https://pnpm.io) (managed via `corepack`).
 
 ```bash
 # Enable corepack (if not enabled already)
-+corepack enable
+corepack enable
 
 # Install dependencies
 pnpm install
