@@ -1,37 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# maxwillkelly.com
+
+Personal portfolio website for Max Kelly, a software engineer based in Bristol.
+
+Live at [maxwillkelly.com](https://maxwillkelly.com)
+
+## Tech Stack
+
+- **Framework**: [Next.js 16](https://nextjs.org) (App Router, React Compiler)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com)
+- **Components**: [HeroUI React v3](https://www.heroui.com)
+- **Animations**: [Motion](https://motion.dev)
+- **Icons**: [Lucide React](https://lucide.dev) + [thesvg/react](https://thesvg.co)
+- **Email**: [Resend](https://resend.com) + React Email
+- **Rate Limiting**: Upstash Redis
+- **Analytics**: Vercel Analytics
+- **Linting/Formatting**: Biome
+
+## Project Structure
+
+```text
+src/
+├── app/
+│   ├── _components/          # Page sections
+│   │   ├── AboutSection.tsx
+│   │   ├── ContactSection.tsx
+│   │   ├── EducationSection.tsx
+│   │   ├── ExperienceSection.tsx
+│   │   ├── HeroSection.tsx
+│   │   ├── ProjectsSection.tsx
+│   │   ├── Timeline.tsx
+│   │   ├── ValuesSection.tsx
+│   │   └── contact/
+│   │       └── ContactForm.tsx
+│   ├── actions/
+│   │   └── sendContactEmail.tsx  # Server action for contact form
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/ui/            # Reusable UI components
+│   ├── blur-fade.tsx
+│   └── dia-text-reveal.tsx
+├── emails/
+│   └── ContactEmailTemplate.tsx
+├── lib/
+│   ├── duration.ts           # Date formatting utilities
+│   ├── env.ts                # Environment validation (t3-env)
+│   └── utils.ts              # cn() helper
+└── schemas/
+    └── contact-message.tsx   # Zod schema for contact form
+```
 
 ## Getting Started
 
-First, run the development server:
+Requires [pnpm](https://pnpm.io) (managed via `corepack`).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# Enable corepack (if not enabled already)
+corepack enable
+
+# Install dependencies
+pnpm install
+
+# Run development server
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `.env.example` to `.env.local` and fill in the required values:
 
-## Learn More
+| Variable | Description |
+|----------|-------------|
+| `RESEND_API_KEY` | Resend API key for sending contact emails |
+| `SEND_EMAIL` | Verified sender email address |
+| `UPSTASH_REDIS_REST_URL` | Upstash Redis REST URL for rate limiting |
+| `UPSTASH_REDIS_REST_TOKEN` | Upstash Redis REST token |
 
-To learn more about Next.js, take a look at the following resources:
+## Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Start development server |
+| `pnpm build` | Build for production |
+| `pnpm start` | Start production server |
+| `pnpm lint` | Run Biome linting |
+| `pnpm format` | Run Biome formatting |
+| `pnpm email` | Start React Email dev server |
 
-You can check out [the Next.js 
-repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+Deployed on [Vercel](https://vercel.com). Pushing to `main` triggers an automatic production deployment.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
