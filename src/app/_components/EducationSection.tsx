@@ -68,8 +68,27 @@ const education: TimelineEntry[] = [
         (DUCS) and served as Treasurer for 2021-22. I helped hold the first
         in-person society events, shortly after the UK had just emerged from the
         final Coronavirus lockdown. During my time on the committee, we held
-        many successful events such as a Hackathon (sponsored by BlackRock and
-        Unity) and a Ceilidh.
+        many successful events such as a Hackathon (sponsored by{" "}
+        <Link
+          className="text-base no-underline hover:underline"
+          href="https://www.blackrock.com/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BlackRock
+          <Link.Icon />
+        </Link>{" "}
+        and{" "}
+        <Link
+          className="text-base no-underline hover:underline"
+          href="https://unity.com/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Unity
+          <Link.Icon />
+        </Link>
+        ) and a Ceilidh.
       </p>
     ),
     chips: [

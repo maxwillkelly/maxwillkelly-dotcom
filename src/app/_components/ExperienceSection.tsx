@@ -42,16 +42,62 @@ const experiences: TimelineEntry[] = [
         <br />
         <br />
         My colleagues and I were responsible for a complete ground up rewrite of
-        GovernorHub's front-end. At the time I joined, GovernorHub was a legacy
-        AngularJS codebase with React injected into it for specific components.
-        We completely rearchitected it using the Next.js App router which
-        produced a much better user experience. I was responsible for
-        reimplementing many significant features in React.
+        GovernorHub's front-end. At the time I joined, GovernorHub was a legacy{" "}
+        <Link
+          className="text-base no-underline hover:underline"
+          href="https://angularjs.org/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          AngularJS
+          <Link.Icon />
+        </Link>{" "}
+        codebase with{" "}
+        <Link
+          className="text-base no-underline hover:underline"
+          href="https://react.dev/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          React
+          <Link.Icon />
+        </Link>{" "}
+        injected into it for specific components. We completely rearchitected it
+        using the{" "}
+        <Link
+          className="text-base no-underline hover:underline"
+          href="https://nextjs.org/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Next.js
+          <Link.Icon />
+        </Link>{" "}
+        App router which produced a much better user experience. I was
+        responsible for reimplementing many significant features in{" "}
+        <Link
+          className="text-base no-underline hover:underline"
+          href="https://react.dev/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          React
+          <Link.Icon />
+        </Link>
+        .
         <br />
-        <br />I built processes to triage bugs from customer feedback in
-        Intercom and convert them into issues in Linear. I've worked on
-        integrations with products maintained by other teams internally and
-        externally such as{" "}
+        <br />I built processes to triage bugs from customer feedback in{" "}
+        <Link
+          className="text-base no-underline hover:underline"
+          href="https://www.intercom.com/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Intercom
+          <Link.Icon />
+        </Link>{" "}
+        and convert them into issues in Linear. I've worked on integrations with
+        products maintained by other teams internally and externally such as{" "}
         <Link
           className="text-base no-underline hover:underline"
           href="https://www.salesforce.com/"
@@ -105,9 +151,18 @@ const experiences: TimelineEntry[] = [
         rewriting the messaging features in their platform.
         <br />
         <br />
-        This involved creating a Vue.js front-end and a .NET Core messaging
-        microservice. I then led the team that integrated this service into the
-        main platform.
+        This involved creating a{" "}
+        <Link
+          className="text-base no-underline hover:underline"
+          href="https://vuejs.org/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Vue.js
+          <Link.Icon />
+        </Link>{" "}
+        front-end and a .NET Core messaging microservice. I then led the team
+        that integrated this service into the main platform.
       </p>
     ),
     chips: [

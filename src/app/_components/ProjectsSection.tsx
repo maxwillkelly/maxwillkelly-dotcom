@@ -42,9 +42,25 @@ const projects: TimelineEntry[] = [
         <br />
         <br />
         EV Charging Analyser is divided into two projects: the front-end mobile
-        application which uses React Native to compile binaries for iOS and
+        application which uses <Link
+          className="text-base no-underline hover:underline"
+          href="https://reactnative.dev/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          React Native
+          <Link.Icon />
+        </Link> to compile binaries for iOS and
         Android (Android was the main development platform) and the back-end API
-        which uses NestJS. Each project has its own GitHub repository,
+        which uses <Link
+          className="text-base no-underline hover:underline"
+          href="https://nestjs.com/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          NestJS
+          <Link.Icon />
+        </Link>. Each project has its own GitHub repository,
         deployment mechanisms, CI/CD tools and documentation.
       </>
     ),
