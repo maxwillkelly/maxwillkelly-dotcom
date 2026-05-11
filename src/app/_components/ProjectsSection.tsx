@@ -1,3 +1,4 @@
+import { Link } from "@heroui/react";
 import { Expo, React, Typescript } from "@thesvg/react";
 
 import { Timeline, type TimelineEntry } from "./Timeline";
@@ -13,13 +14,22 @@ const projects: TimelineEntry[] = [
     ],
     content: (
       <>
-        EV Charging Analyser is a manufacturer agnostic companion app for
-        electric vehicles (EVs). EV Charging Analyser uses Smartcar Connect
-        which allows drivers to connect their EVs with ease using the login to
-        their manufacturer's account. From there, users can perform basic tasks
-        with their EV such as to lock or unlock the doors or see its location on
-        their phone. We use this application to collect navigation and charging
-        data for academic research.
+        <Link
+          className="text-base no-underline hover:underline"
+          href="https://github.com/maxwillkelly/ev-charging-analyser/wiki"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          EV Charging Analyser
+          <Link.Icon />
+        </Link>{" "}
+        is a manufacturer agnostic companion app for electric vehicles (EVs).
+        EV Charging Analyser uses Smartcar Connect which allows drivers to
+        connect their EVs with ease using the login to their manufacturer's
+        account. From there, users can perform basic tasks with their EV such as
+        to lock or unlock the doors or see its location on their phone. We use
+        this application to collect navigation and charging data for academic
+        research.
         <br />
         <br />
         EV Charging Analyser is divided into two projects: the front-end mobile

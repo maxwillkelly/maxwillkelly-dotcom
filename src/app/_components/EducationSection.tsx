@@ -1,3 +1,4 @@
+import { Link } from "@heroui/react";
 import {
   C,
   Cplusplus,
@@ -31,8 +32,27 @@ const education: TimelineEntry[] = [
     end: new Date(2022, 8, 1),
     content: (
       <p>
-        I attended the University of Dundee from 2018 to 2022 and graduated with
-        a First Class Honours degree in Computing Science.
+        I attended the{" "}
+        <Link
+          className="text-base no-underline hover:underline"
+          href="https://www.dundee.ac.uk/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          University of Dundee
+          <Link.Icon />
+        </Link>{" "}
+        from 2018 to 2022 and graduated with a First Class Honours degree in{" "}
+        <Link
+          className="text-base no-underline hover:underline"
+          href="https://www.dundee.ac.uk/undergraduate/computer-science"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Computing Science
+          <Link.Icon />
+        </Link>
+        .
         <br />
         <br />
         Unlike other computing degrees which place a great deal of emphasis on
