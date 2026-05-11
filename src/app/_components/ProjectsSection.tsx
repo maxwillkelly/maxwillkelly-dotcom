@@ -1,11 +1,19 @@
 import { Link } from "@heroui/react";
 import { Expo, React, Typescript } from "@thesvg/react";
+import { Zap } from "lucide-react";
 
-import { Timeline, type TimelineEntry } from "./Timeline";
+import { ProjectCard } from "./projects/ProjectCard";
+import type { Project } from "./projects/shared/type";
 
-const projects: TimelineEntry[] = [
+const projects: Project[] = [
   {
     title: "EV Charging Analyser",
+    summary:
+      "A manufacturer-agnostic companion app for electric vehicles. Drivers can perform actions such unlocking their car, see its location and contribute charging data to academic research.",
+    icon: <Zap className="size-5" />,
+    href: "https://github.com/maxwillkelly/ev-charging-analyser/wiki",
+    hrefLabel: "View on GitHub",
+    colSpan: "sm:col-span-2",
     chips: [
       {
         label: "TypeScript",
@@ -54,7 +62,8 @@ const projects: TimelineEntry[] = [
         <br />
         <br />
         EV Charging Analyser is divided into two projects: the front-end mobile
-        application which uses <Link
+        application which uses{" "}
+        <Link
           className="text-base no-underline hover:underline"
           href="https://reactnative.dev/"
           rel="noopener noreferrer"
@@ -62,9 +71,10 @@ const projects: TimelineEntry[] = [
         >
           React Native
           <Link.Icon />
-        </Link> to compile binaries for iOS and
-        Android (Android was the main development platform) and the back-end API
-        which uses <Link
+        </Link>{" "}
+        to compile binaries for iOS and Android (Android was the main
+        development platform) and the back-end API which uses{" "}
+        <Link
           className="text-base no-underline hover:underline"
           href="https://nestjs.com/"
           rel="noopener noreferrer"
@@ -72,8 +82,9 @@ const projects: TimelineEntry[] = [
         >
           NestJS
           <Link.Icon />
-        </Link>. Each project has its own GitHub repository,
-        deployment mechanisms, CI/CD tools and documentation.
+        </Link>
+        . Each project has its own GitHub repository, deployment mechanisms,
+        CI/CD tools and documentation.
       </>
     ),
   },
@@ -83,7 +94,11 @@ export const ProjectsSection = () => {
   return (
     <section id="projects">
       <h2 className="text-xl font-bold">Projects</h2>
-      <Timeline entries={projects} />
+      <div className="mt-4 grid auto-rows-fr grid-cols-1 gap-4 sm:grid-cols-2">
+        {projects.map((project) => (
+          <ProjectCard key={project.title} project={project} />
+        ))}
+      </div>
     </section>
   );
 };
