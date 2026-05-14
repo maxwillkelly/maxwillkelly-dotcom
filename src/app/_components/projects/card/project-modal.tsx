@@ -30,7 +30,7 @@ export const ProjectModal = ({ project, isOpen, close }: Props) => {
               ))}
             </div>
           </Modal.Body>
-          <Modal.Footer className="items-right">
+          <Modal.Footer>
             <Button slot="close" variant="secondary">
               Close
             </Button>
