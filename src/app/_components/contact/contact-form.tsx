@@ -16,7 +16,7 @@ import { startTransition, useActionState } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 
 import "m3-ripple/ripple.css";
-import { sendContactEmail } from "@/app/actions/sendContactEmail";
+import { sendContactEmail } from "@/app/actions/send-contact-email";
 import {
   type ContactMessage,
   contactMessageSchema,

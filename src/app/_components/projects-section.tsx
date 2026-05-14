@@ -2,7 +2,7 @@ import { Link } from "@heroui/react";
 import { Expo, React, Typescript } from "@thesvg/react";
 import { Zap } from "lucide-react";
 
-import { ProjectCard } from "./projects/ProjectCard";
+import { ProjectCard } from "./projects/project-card";
 import type { Project } from "./projects/shared/type";
 
 const projects: Project[] = [

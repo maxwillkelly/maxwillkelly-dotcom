@@ -14,7 +14,7 @@ import {
   Vuedotjs,
 } from "@thesvg/react";
 
-import { Timeline, type TimelineEntry } from "./Timeline";
+import { Timeline, type TimelineEntry } from "./timeline";
 
 const experiences: TimelineEntry[] = [
   {

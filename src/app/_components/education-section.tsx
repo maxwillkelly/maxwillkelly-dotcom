@@ -23,7 +23,7 @@ import {
   Typescript,
 } from "@thesvg/react";
 
-import { Timeline, type TimelineEntry } from "./Timeline";
+import { Timeline, type TimelineEntry } from "./timeline";
 
 const education: TimelineEntry[] = [
   {

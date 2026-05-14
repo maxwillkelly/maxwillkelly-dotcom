@@ -1,11 +1,11 @@
 import { BlurFade } from "@/components/ui/blur-fade";
-import { AboutSection } from "./_components/AboutSection";
-import { ContactSection } from "./_components/ContactSection";
-import { EducationSection } from "./_components/EducationSection";
-import { ExperienceSection } from "./_components/ExperienceSection";
-import { HeroSection } from "./_components/HeroSection";
-import { ProjectsSection } from "./_components/ProjectsSection";
-import { ValuesSection } from "./_components/ValuesSection";
+import { AboutSection } from "./_components/about-section";
+import { ContactSection } from "./_components/contact-section";
+import { EducationSection } from "./_components/education-section";
+import { ExperienceSection } from "./_components/experience-section";
+import { HeroSection } from "./_components/hero-section";
+import { ProjectsSection } from "./_components/projects-section";
+import { ValuesSection } from "./_components/values-section";
 
 const HomePage = () => {
   return (
