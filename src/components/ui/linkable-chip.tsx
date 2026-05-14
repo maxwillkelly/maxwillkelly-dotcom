@@ -25,6 +25,7 @@ export const LinkableChip = ({
   if (href) {
     return (
       <Link
+        aria-label={label}
         className="no-underline transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent rounded-full"
         href={href}
         rel={isExternal ? "noopener noreferrer" : undefined}
