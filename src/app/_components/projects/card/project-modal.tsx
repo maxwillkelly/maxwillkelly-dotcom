@@ -12,7 +12,7 @@ export const ProjectModal = ({ project, isOpen, close }: Props) => {
   return (
     <Modal.Backdrop variant="blur" isOpen={isOpen} onOpenChange={close}>
       <Modal.Container size="lg">
-        <Modal.Dialog>
+        <Modal.Dialog aria-label={project.title}>
           <Modal.CloseTrigger />
           <Modal.Header>
             <Modal.Icon className="rounded-2xl bg-accent-soft text-accent-soft-foreground">
