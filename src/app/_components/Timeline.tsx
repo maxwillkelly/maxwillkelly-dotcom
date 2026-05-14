@@ -1,6 +1,6 @@
-import { Chip } from "@heroui/react";
 import type { ReactNode } from "react";
 
+import { LinkableChip } from "../../components/ui/linkable-chip";
 import {
   formatDateRangeinYearsAndMonths,
   formatDurationinYearsAndMonths,
@@ -42,30 +42,9 @@ export const Timeline = ({ entries }: TimelineProps) => {
           <div>{content}</div>
           {chips && chips.length > 0 && (
             <div className="flex flex-wrap gap-2">
-              {chips.map(({ label, icon, href }) => {
-                const chip = (
-                  <Chip variant="primary">
-                    {icon}
-                    <Chip.Label>{label}</Chip.Label>
-                  </Chip>
-                );
-
-                if (href) {
-                  return (
-                    <a
-                      className="no-underline transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent rounded-full"
-                      href={href}
-                      key={label}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      {chip}
-                    </a>
-                  );
-                }
-
-                return <span key={label}>{chip}</span>;
-              })}
+              {chips.map((chip) => (
+                <LinkableChip key={chip.label} {...chip} />
+              ))}
             </div>
           )}
         </div>

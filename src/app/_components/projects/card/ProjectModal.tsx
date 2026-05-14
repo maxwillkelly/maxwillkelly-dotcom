@@ -1,14 +1,14 @@
 import { Button, Modal } from "@heroui/react";
 import { Project } from "../shared/type";
-import { ProjectChipList } from "./ProjectChipList";
+import { LinkableChip } from "@/components/ui/linkable-chip";
 
 type Props = {
+  project: Project;
   isOpen: boolean;
   close: () => void;
-  project: Project;
 };
 
-export const ProjectModal = ({ isOpen, close, project }: Props) => {
+export const ProjectModal = ({ project, isOpen, close }: Props) => {
   return (
     <Modal.Backdrop variant="blur" isOpen={isOpen} onOpenChange={close}>
       <Modal.Container size="lg">
@@ -24,7 +24,11 @@ export const ProjectModal = ({ isOpen, close, project }: Props) => {
           </Modal.Header>
           <Modal.Body className="flex flex-col gap-4 text-base text-foreground">
             <p>{project.content}</p>
-            <ProjectChipList chips={project.chips} linked />
+            <div className="flex flex-wrap gap-2">
+              {project.chips.map((chip) => (
+                <LinkableChip key={chip.label} {...chip} />
+              ))}
+            </div>
           </Modal.Body>
           <Modal.Footer className="items-right">
             <Button slot="close" variant="secondary">
