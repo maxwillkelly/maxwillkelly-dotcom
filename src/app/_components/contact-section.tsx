@@ -8,7 +8,7 @@ export const ContactSection = () => {
   return (
     <section className="flex flex-col gap-4" id="contact">
       <Surface
-        className="flex flex-col gap-6 rounded-3xl p-6 bg-background border border-accent-foreground"
+        className="flex flex-col gap-6 rounded-3xl p-6 bg-background border border-border"
         variant="default"
       >
         <div>
