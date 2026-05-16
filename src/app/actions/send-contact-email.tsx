@@ -4,7 +4,7 @@ import { Resend } from "resend";
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 
-import ContactEmailTemplate from "@/emails/ContactEmailTemplate";
+import ContactEmailTemplate from "@/emails/contact-email-template";
 import { env } from "@/lib/env";
 import { getIpAddress } from "@/lib/headers";
 

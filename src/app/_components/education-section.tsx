@@ -23,7 +23,7 @@ import {
   Typescript,
 } from "@thesvg/react";
 
-import { Timeline, type TimelineEntry } from "./Timeline";
+import { Timeline, type TimelineEntry } from "./timeline";
 
 const education: TimelineEntry[] = [
   {
@@ -68,27 +68,98 @@ const education: TimelineEntry[] = [
         (DUCS) and served as Treasurer for 2021-22. I helped hold the first
         in-person society events, shortly after the UK had just emerged from the
         final Coronavirus lockdown. During my time on the committee, we held
-        many successful events such as a Hackathon (sponsored by BlackRock and
-        Unity) and a Ceilidh.
+        many successful events such as a Hackathon (sponsored by{" "}
+        <Link
+          className="text-base no-underline hover:underline"
+          href="https://www.blackrock.com/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BlackRock
+          <Link.Icon />
+        </Link>{" "}
+        and{" "}
+        <Link
+          className="text-base no-underline hover:underline"
+          href="https://unity.com/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Unity
+          <Link.Icon />
+        </Link>
+        ) and a Ceilidh.
       </p>
     ),
     chips: [
       { label: "JavaScript", icon: <Javascript width={12} /> },
-      { label: "TypeScript", icon: <Typescript width={12} /> },
-      { label: "React", icon: <React width={12} /> },
-      { label: "C#", icon: <Csharp width={12} /> },
-      { label: ".NET", icon: <Dotnet width={12} /> },
-      { label: "Node.js", icon: <Nodedotjs width={12} /> },
-      { label: "Express", icon: <Express width={12} /> },
-      { label: "NestJS", icon: <Nestjs width={12} /> },
-      { label: "GraphQL", icon: <Graphql width={12} /> },
-      { label: "Docker", icon: <Docker width={12} /> },
-      { label: "React Native", icon: <React width={12} /> },
-      { label: "Expo", icon: <Expo width={12} /> },
-      { label: "Electron", icon: <Electron width={12} /> },
+      {
+        label: "TypeScript",
+        icon: <Typescript width={12} />,
+        href: "https://www.typescriptlang.org/",
+      },
+      {
+        label: "React",
+        icon: <React width={12} />,
+        href: "https://react.dev/",
+      },
+      {
+        label: "C#",
+        icon: <Csharp width={12} />,
+        href: "https://learn.microsoft.com/en-us/dotnet/csharp/",
+      },
+      {
+        label: ".NET",
+        icon: <Dotnet width={12} />,
+        href: "https://dotnet.microsoft.com/",
+      },
+      {
+        label: "Node.js",
+        icon: <Nodedotjs width={12} />,
+        href: "https://nodejs.org/",
+      },
+      {
+        label: "Express",
+        icon: <Express width={12} />,
+        href: "https://expressjs.com/",
+      },
+      {
+        label: "NestJS",
+        icon: <Nestjs width={12} />,
+        href: "https://nestjs.com/",
+      },
+      {
+        label: "GraphQL",
+        icon: <Graphql width={12} />,
+        href: "https://graphql.org/",
+      },
+      {
+        label: "Docker",
+        icon: <Docker width={12} />,
+        href: "https://www.docker.com/",
+      },
+      {
+        label: "React Native",
+        icon: <React width={12} />,
+        href: "https://reactnative.dev/",
+      },
+      {
+        label: "Expo",
+        icon: <Expo width={12} />,
+        href: "https://expo.dev/",
+      },
+      {
+        label: "Electron",
+        icon: <Electron width={12} />,
+        href: "https://www.electronjs.org/",
+      },
       { label: "C", icon: <C width={12} /> },
       { label: "C++", icon: <Cplusplus width={12} /> },
-      { label: "Java", icon: <Java width={12} /> },
+      {
+        label: "Java",
+        icon: <Java width={12} />,
+        href: "https://www.java.com/",
+      },
     ],
   },
 ];

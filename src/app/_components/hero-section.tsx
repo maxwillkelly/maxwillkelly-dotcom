@@ -2,9 +2,9 @@ import { DownloadCloud } from "lucide-react";
 import Image from "next/image";
 
 import { DiaTextReveal } from "@/components/ui/dia-text-reveal";
-import { GithubIcon } from "./contact/GithubIcon";
-import { LinkedInIcon } from "./contact/LinkedInIcon";
-import { SocialIcon } from "./hero/SocialIcon";
+import { GithubIcon } from "./contact/github-icon";
+import { LinkedInIcon } from "./contact/linked-in-icon";
+import { SocialIcon } from "./hero/social-icon";
 
 export const HeroSection = () => {
   return (

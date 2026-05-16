@@ -15,7 +15,8 @@
 .DS_Store
 *.pem
 
-# debug
+# pnpm
+.pnpm-store
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
