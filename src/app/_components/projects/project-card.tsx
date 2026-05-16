@@ -25,7 +25,7 @@ export const ProjectCard = ({ project }: { project: Project }) => {
         transition={{ type: "spring", stiffness: 280, damping: 22 }}
         aria-label={`Open details for ${project.title}`}
         className={cn(
-          "group relative flex flex-col items-stretch gap-4 overflow-hidden rounded-3xl border border-accent-foreground p-5 text-left transition-colors duration-300 hover:border-accent/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+          "group relative flex flex-col items-stretch gap-4 overflow-hidden rounded-3xl border border-border p-5 text-left transition-colors duration-300 hover:border-accent/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
           project.colSpan,
         )}
         onClick={open}
