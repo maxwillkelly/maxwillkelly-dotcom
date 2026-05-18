@@ -11,12 +11,12 @@
     "email": "email dev -d ./src/emails"
   },
   "dependencies": {
-    "@heroui/react": "^3.0.4",
-    "@heroui/styles": "^3.0.4",
+    "@heroui/react": "^3.0.5",
+    "@heroui/styles": "^3.0.5",
     "@hookform/resolvers": "^5.2.2",
     "@t3-oss/env-nextjs": "^0.13.11",
     "@tailwindcss/postcss": "^4.3.0",
-    "@thesvg/react": "^2.1.10",
+    "@thesvg/react": "^3.0.0",
     "@upstash/ratelimit": "^2.0.8",
     "@upstash/redis": "^1.38.0",
     "@vercel/analytics": "^2.0.1",
@@ -30,19 +30,19 @@
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "react-email": "^6.1.4",
-    "react-hook-form": "^7.75.0",
+    "react-hook-form": "^7.76.0",
     "resend": "^6.12.3",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.14",
+    "@biomejs/biome": "2.4.15",
     "@types/node": "^24.12.4",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "babel-plugin-react-compiler": "^1.0.0",
-    "fallow": "^2.74.0",
+    "fallow": "^2.75.0",
     "typescript": "^6.0.3"
   },
   "packageManager": "pnpm@11.0.8+sha512.4c4097e1dd2d42372c4e7fa5a791ff28fc75a484c7ac192e64b1df0fdef17594ba982f9b4fed9adfb3c757846f565b799b2763fb3733d1de1bcb82cf46684912"
