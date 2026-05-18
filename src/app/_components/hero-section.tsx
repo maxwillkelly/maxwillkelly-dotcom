@@ -26,7 +26,7 @@ export const HeroSection = () => {
           <SocialIcon
             ariaLabel="Download CV"
             download="Max Kelly - CV.pdf"
-            href="/cv-october-2023.pdf"
+            href="/cv.pdf"
             icon={<DownloadCloud />}
             tooltipContent="Download CV"
           />
