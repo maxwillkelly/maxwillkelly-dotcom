@@ -1,8 +1,6 @@
-import Image from "next/image";
-
 export const LinkedInIcon = () => (
   <>
-    <Image
+    <img
       alt="LinkedIn Icon"
       aria-hidden
       className="size-5 shrink-0 object-contain sm:size-4 dark:hidden"
@@ -10,7 +8,7 @@ export const LinkedInIcon = () => (
       src="/social/linkedin/inbug-black.png"
       width={840}
     />
-    <Image
+    <img
       alt="LinkedIn Icon"
       aria-hidden
       className="hidden size-5 shrink-0 object-contain sm:size-4 dark:block"

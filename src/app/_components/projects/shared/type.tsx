@@ -1,12 +1,13 @@
-import { ReactNode } from "react";
-import { TimelineChip } from "../../timeline";
-
 export type Project = {
   title: string;
   summary: string;
-  content: ReactNode;
-  chips: TimelineChip[];
-  icon: ReactNode;
+  contentSource: string;
+  chips: {
+    label: string;
+    icon?: string;
+    href?: string;
+  }[];
+  icon: "zap";
   href?: string;
   hrefLabel?: string;
   colSpan?: string;

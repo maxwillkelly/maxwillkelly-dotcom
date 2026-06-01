@@ -1,0 +1,52 @@
+---
+import "@fontsource-variable/figtree/index.css";
+import "../styles/globals.css";
+
+import { absoluteUrl, personJsonLd, siteConfig } from "@/lib/site";
+
+type Props = {
+  title?: string;
+  description?: string;
+};
+
+const title = Astro.props.title ?? siteConfig.title;
+const description = Astro.props.description ?? siteConfig.description;
+const canonicalUrl = siteConfig.url;
+const imageUrl = absoluteUrl(siteConfig.image);
+const jsonLd = JSON.stringify(personJsonLd).replace(/</g, "\\u003c");
+---
+
+<!doctype html>
+<html lang="en" class="h-full antialiased font-sans">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="canonical" href={canonicalUrl} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="400" />
+    <meta property="og:image:alt" content={siteConfig.name} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <script is:inline type="application/ld+json" set:html={jsonLd} />
+  </head>
+  <body class="h-full flex flex-col bg-background text-foreground overflow-hidden">
+    <div class="scroll-shadow flex-1 overflow-y-auto">
+      <div id="container" class="relative z-10 max-w-2xl mx-auto py-12 pb-24 sm:py-24 px-6">
+        <slot />
+      </div>
+    </div>
+  </body>
+</html>

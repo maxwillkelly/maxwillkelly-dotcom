@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import { MarkdownContent } from "@/components/ui/markdown-content";
+
+type Props = {
+  entry: CollectionEntry<"about">;
+};
+
+const { entry } = Astro.props;
+---
+
+<section id="about">
+  <h2 class="text-xl font-bold">{entry.data.title}</h2>
+  <div class="mt-4">
+    <MarkdownContent source={entry.body ?? ""} />
+  </div>
+</section>

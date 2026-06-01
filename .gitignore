@@ -38,3 +38,25 @@ next-env.d.ts
 
 # HeroUI Docs for Agents
 .heroui-docs
+
+# Astro
+.astro
+dist/*
+
+# Codex
+.codex
+
+# Cursor
+.cursor
+
+# VSCode
+.vscode
+
+# Zed
+.zed
+
+# Opencode
+.opencode
+
+# MCP
+.mcp.json

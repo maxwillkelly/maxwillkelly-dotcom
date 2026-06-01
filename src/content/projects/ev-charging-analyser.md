@@ -1,0 +1,25 @@
+---
+title: EV Charging Analyser
+summary: A manufacturer-agnostic companion app for electric vehicles. Drivers can perform actions such unlocking their car, see its location and contribute charging data to academic research.
+href: https://github.com/maxwillkelly/ev-charging-analyser/wiki
+hrefLabel: View on GitHub
+colSpan: sm:col-span-2
+icon: zap
+order: 1
+chips:
+  - label: TypeScript
+    icon: typescript
+    href: https://www.typescriptlang.org/
+  - label: React Native
+    icon: react
+    href: https://reactnative.dev/
+  - label: Expo
+    icon: expo
+    href: https://expo.dev/
+  - label: Next.js
+    href: https://nextjs.org/
+---
+
+[EV Charging Analyser](https://github.com/maxwillkelly/ev-charging-analyser/wiki) is a manufacturer agnostic companion app for electric vehicles (EVs). EV Charging Analyser uses [Smartcar Connect](https://smartcar.com/product/connect) which allows drivers to connect their EVs with ease using the login to their manufacturer's account. From there, users can perform basic tasks with their EV such as to lock or unlock the doors or see its location on their phone. We use this application to collect navigation and charging data for academic research.
+
+EV Charging Analyser is divided into two projects: the front-end mobile application which uses [React Native](https://reactnative.dev/) to compile binaries for iOS and Android (Android was the main development platform) and the back-end API which uses [NestJS](https://nestjs.com/). Each project has its own GitHub repository, deployment mechanisms, CI/CD tools and documentation.

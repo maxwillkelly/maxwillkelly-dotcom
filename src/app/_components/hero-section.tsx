@@ -1,5 +1,4 @@
 import { DownloadCloud } from "lucide-react";
-import Image from "next/image";
 
 import { DiaTextReveal } from "@/components/ui/dia-text-reveal";
 import { GithubIcon } from "./contact/github-icon";
@@ -44,11 +43,10 @@ export const HeroSection = () => {
           />
         </div>
       </div>
-      <Image
+      <img
         alt="Max Kelly"
         className="size-24 shrink-0 rounded-xl object-cover sm:size-32"
         height={400}
-        priority
         src="/profile.jpg"
         width={400}
       />

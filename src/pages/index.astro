@@ -1,0 +1,57 @@
+---
+import { getCollection } from "astro:content";
+
+import AboutSection from "@/components/about-section.astro";
+import TimelineSection from "@/components/timeline-section.astro";
+import BaseLayout from "@/layouts/base-layout.astro";
+import { siteConfig } from "@/lib/site";
+import { ContactSection } from "@/app/_components/contact-section";
+import { HeroSection } from "@/app/_components/hero-section";
+import { ProjectsSection } from "@/app/_components/projects-section";
+import { ValuesSection } from "@/app/_components/values-section";
+
+const [aboutEntries, valueEntries, experienceEntries, educationEntries, projectEntries] =
+  await Promise.all([
+    getCollection("about"),
+    getCollection("values"),
+    getCollection("experience"),
+    getCollection("education"),
+    getCollection("projects"),
+  ]);
+
+const about = aboutEntries[0];
+const values = valueEntries
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((entry) => ({
+    title: entry.data.title,
+    icon: entry.data.icon,
+    contentSource: entry.body ?? "",
+  }));
+
+const projects = projectEntries
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((entry) => ({
+    title: entry.data.title,
+    summary: entry.data.summary,
+    href: entry.data.href,
+    hrefLabel: entry.data.hrefLabel,
+    colSpan: entry.data.colSpan,
+    icon: entry.data.icon,
+    chips: entry.data.chips,
+    contentSource: entry.body ?? "",
+  }));
+---
+
+<BaseLayout title={siteConfig.title} description={siteConfig.description}>
+  <main class="flex flex-col gap-12">
+    <HeroSection client:load />
+    <div class="flex flex-col gap-12">
+      {about && <AboutSection entry={about} />}
+      <ValuesSection values={values} client:visible />
+      <TimelineSection id="experience" title="Experience" entries={experienceEntries} />
+      <TimelineSection id="education" title="Education" entries={educationEntries} />
+      <ProjectsSection projects={projects} client:visible />
+      <ContactSection client:visible />
+    </div>
+  </main>
+</BaseLayout>

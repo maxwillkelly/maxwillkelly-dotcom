@@ -1,5 +1,4 @@
 import { Chip } from "@heroui/react";
-import Link from "next/link";
 import type { ReactNode } from "react";
 
 export type LinkableChipProps = {
@@ -24,15 +23,15 @@ export const LinkableChip = ({
 
   if (href) {
     return (
-      <Link
+      <a
         aria-label={label}
         className="no-underline transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent rounded-full"
         href={href}
-        rel={isExternal ? "noopener noreferrer" : undefined}
-        target={isExternal ? "_blank" : undefined}
+        rel={isExternal || href.startsWith("http") ? "noopener noreferrer" : undefined}
+        target={isExternal || href.startsWith("http") ? "_blank" : undefined}
       >
         {chip}
-      </Link>
+      </a>
     );
   }
 

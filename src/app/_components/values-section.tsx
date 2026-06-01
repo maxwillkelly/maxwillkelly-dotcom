@@ -1,4 +1,5 @@
 import { Accordion } from "@heroui/react";
+import { MarkdownContent } from "@/components/ui/markdown-content";
 import {
   Brain,
   ChevronDown,
@@ -16,34 +17,26 @@ const slugify = (title: string): string => {
     .replace(/^-+|-+$/g, "");
 };
 
-const values = [
-  {
-    title: "Write clean maintainable code",
-    icon: <CodeXml className={iconClassName} />,
-    content:
-      "I write code that is clean and maintainable so that any developer can pick up, read and understand it. I am obsessed with naming things, how files and directories are organised and abstractions that are self-evident. The best code doesn't need any comments to be understood, it should document itself.",
-  },
-  {
-    title: "Iterate with an open mind",
-    icon: <RefreshCw className={iconClassName} />,
-    content:
-      "I hold my opinions loosely and I am not afraid to change my mind if the evidence points to another conclusion. I am not afraid to admit when I have been proven wrong and I am always open to feedback and suggestions.",
-  },
-  {
-    title: "Strive for perfection",
-    icon: <FlaskConical className={iconClassName} />,
-    content:
-      "Today's new exciting thing is tomorrow's tech debt. I don't believe in the adage \"if it ain't broke, don't fix it\", I believe that everything can always be improved and that we should always strive towards perfection.",
-  },
-  {
-    title: "AI Agents should augment human thinking",
-    icon: <Brain className={iconClassName} />,
-    content:
-      "No one doubts that Large Language Models (LLMs) have revolutionised the way we write code from simple autocompletion in IDEs to creating fully functional solutions with tools like Claude Code. When you work with an agent you should always evaluate its work, take what's good and discard everything else. For everything going into a critical system it's important to read and understand every line.",
-  },
-];
+type Value = {
+  title: string;
+  icon: "code" | "refresh" | "flask" | "brain";
+  contentSource: string;
+};
 
-export const ValuesSection = () => {
+const getIcon = (icon: Value["icon"]) => {
+  switch (icon) {
+    case "code":
+      return <CodeXml className={iconClassName} />;
+    case "refresh":
+      return <RefreshCw className={iconClassName} />;
+    case "flask":
+      return <FlaskConical className={iconClassName} />;
+    case "brain":
+      return <Brain className={iconClassName} />;
+  }
+};
+
+export const ValuesSection = ({ values }: { values: Value[] }) => {
   return (
     <section id="values">
       <h2 className="text-xl font-bold">Values</h2>
@@ -56,7 +49,7 @@ export const ValuesSection = () => {
           >
             <Accordion.Heading>
               <Accordion.Trigger className="text-base text-foreground">
-                {value.icon}
+                {getIcon(value.icon)}
                 {value.title}
                 <Accordion.Indicator>
                   <ChevronDown />
@@ -65,7 +58,7 @@ export const ValuesSection = () => {
             </Accordion.Heading>
             <Accordion.Panel>
               <Accordion.Body className="text-base text-foreground">
-                {value.content}
+                <MarkdownContent source={value.contentSource} />
               </Accordion.Body>
             </Accordion.Panel>
           </Accordion.Item>
@@ -77,7 +70,7 @@ export const ValuesSection = () => {
             <h3 className="flex items-center text-lg text-foreground">
               {value.title}
             </h3>
-            <p className="text-base">{value.content}</p>
+            <MarkdownContent source={value.contentSource} />
           </div>
         ))}
       </div>

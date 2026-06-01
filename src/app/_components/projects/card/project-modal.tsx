@@ -1,6 +1,8 @@
 import { Button, Modal } from "@heroui/react";
-import { Project } from "../shared/type";
-import { LinkableChip } from "@/components/ui/linkable-chip";
+import { ChipList } from "@/components/ui/chip-list";
+import { MarkdownContent } from "@/components/ui/markdown-content";
+import type { Project } from "../shared/type";
+import { getProjectIcon } from "../shared/icons";
 
 type Props = {
   project: Project;
@@ -9,6 +11,8 @@ type Props = {
 };
 
 export const ProjectModal = ({ project, isOpen, close }: Props) => {
+  const icon = getProjectIcon(project.icon);
+
   return (
     <Modal.Backdrop variant="blur" isOpen={isOpen} onOpenChange={close}>
       <Modal.Container size="lg">
@@ -16,19 +20,15 @@ export const ProjectModal = ({ project, isOpen, close }: Props) => {
           <Modal.CloseTrigger />
           <Modal.Header>
             <Modal.Icon className="rounded-2xl bg-accent-soft text-accent-soft-foreground">
-              {project.icon}
+              {icon}
             </Modal.Icon>
             <Modal.Heading className="text-xl text-foreground font-bold">
               {project.title}
             </Modal.Heading>
           </Modal.Header>
           <Modal.Body className="flex flex-col gap-4 text-base text-foreground">
-            <p>{project.content}</p>
-            <div className="flex flex-wrap gap-2">
-              {project.chips.map((chip) => (
-                <LinkableChip key={chip.label} {...chip} />
-              ))}
-            </div>
+            <MarkdownContent source={project.contentSource} />
+            <ChipList chips={project.chips} />
           </Modal.Body>
           <Modal.Footer>
             <Button slot="close" variant="secondary">

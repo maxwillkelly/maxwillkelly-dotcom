@@ -16,7 +16,6 @@ import { startTransition, useActionState } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 
 import "m3-ripple/ripple.css";
-import { sendContactEmail } from "@/app/actions/send-contact-email";
 import {
   type ContactMessage,
   contactMessageSchema,
@@ -44,14 +43,21 @@ export const ContactForm = () => {
     ContactMessage
   >(
     async (_prev, data) => {
-      const result = await sendContactEmail(data);
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const result = (await response.json()) as ContactFormState;
 
-      if (result.success) {
+      if (result.status === "success") {
         reset();
         return { status: "success" };
       }
 
-      return { status: "error", message: result.message };
+      return result;
     },
     { status: "idle" },
   );

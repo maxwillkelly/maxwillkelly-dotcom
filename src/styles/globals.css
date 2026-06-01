@@ -48,9 +48,28 @@
   --radius: 0.5rem;
   --field-radius: 0.75rem;
 
-  /* Font Family */
-  /* Make sure to load Figtree font in your app */
-  --font-sans: var(--font-figtree);
+  --font-sans: "Figtree Variable", ui-sans-serif, system-ui, sans-serif;
+}
+
+.scroll-shadow {
+  background:
+    linear-gradient(var(--background) 30%, transparent),
+    linear-gradient(transparent, var(--background) 70%) 0 100%,
+    radial-gradient(farthest-side at 50% 0, rgb(0 0 0 / 0.14), transparent),
+    radial-gradient(farthest-side at 50% 100%, rgb(0 0 0 / 0.14), transparent) 0 100%;
+  background-attachment: local, local, scroll, scroll;
+  background-repeat: no-repeat;
+  background-size: 100% 40px, 100% 40px, 100% 16px, 100% 16px;
+}
+
+.content-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+astro-island {
+  display: contents;
 }
 
 .dark,

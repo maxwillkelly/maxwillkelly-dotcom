@@ -1,0 +1,41 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import { ChipList } from "@/components/ui/chip-list";
+import { MarkdownContent } from "@/components/ui/markdown-content";
+import {
+  formatDateRangeinYearsAndMonths,
+  formatDurationinYearsAndMonths,
+} from "@/lib/duration";
+
+type Entry = CollectionEntry<"experience"> | CollectionEntry<"education">;
+
+type Props = {
+  id: string;
+  title: string;
+  entries: Entry[];
+};
+
+const { id, title, entries } = Astro.props;
+const sortedEntries = [...entries].sort((a, b) => a.data.order - b.data.order);
+---
+
+<section id={id}>
+  <h2 class="text-xl font-bold">{title}</h2>
+  <div class="flex flex-col gap-4">
+    {sortedEntries.map((entry) => (
+      <div class="flex flex-col py-2 gap-4">
+        <h3 class="text-lg text-foreground">{entry.data.title}</h3>
+        <h4 class="text-base text-foreground">
+          {formatDateRangeinYearsAndMonths(entry.data.start, entry.data.end)}
+          <span class="text-muted">
+            {" · "}
+            {formatDurationinYearsAndMonths(entry.data.start, entry.data.end)}
+          </span>
+        </h4>
+        <MarkdownContent source={entry.body ?? ""} />
+        <ChipList chips={entry.data.chips} />
+      </div>
+    ))}
+  </div>
+</section>

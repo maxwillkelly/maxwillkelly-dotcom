@@ -1,0 +1,60 @@
+---
+title: University of Dundee
+start: 2018-09-01
+end: 2022-09-01
+order: 1
+chips:
+  - label: JavaScript
+    icon: javascript
+  - label: TypeScript
+    icon: typescript
+    href: https://www.typescriptlang.org/
+  - label: React
+    icon: react
+    href: https://react.dev/
+  - label: C#
+    icon: csharp
+    href: https://learn.microsoft.com/en-us/dotnet/csharp/
+  - label: .NET
+    icon: dotnet
+    href: https://dotnet.microsoft.com/
+  - label: Node.js
+    icon: node
+    href: https://nodejs.org/
+  - label: Express
+    icon: express
+    href: https://expressjs.com/
+  - label: NestJS
+    icon: nestjs
+    href: https://nestjs.com/
+  - label: GraphQL
+    icon: graphql
+    href: https://graphql.org/
+  - label: Docker
+    icon: docker
+    href: https://www.docker.com/
+  - label: React Native
+    icon: react
+    href: https://reactnative.dev/
+  - label: Expo
+    icon: expo
+    href: https://expo.dev/
+  - label: Electron
+    icon: electron
+    href: https://www.electronjs.org/
+  - label: C
+    icon: c
+  - label: C++
+    icon: cpp
+  - label: Java
+    icon: java
+    href: https://www.java.com/
+---
+
+I attended the [University of Dundee](https://www.dundee.ac.uk/) from 2018 to 2022 and graduated with a First Class Honours degree in [Computing Science](https://www.dundee.ac.uk/undergraduate/computer-science).
+
+Unlike other computing degrees which place a great deal of emphasis on the theoretical mathematics underpinning computing, my course was centered around learning practical skills for the workplace.
+
+Most of our course was spent doing projects which were completed in teams, and we were encouraged to collaborate and learn a variety of different programming languages and skills.
+
+I was also active in the Dundee University Computing Society (DUCS) and served as Treasurer for 2021-22. I helped hold the first in-person society events, shortly after the UK had just emerged from the final Coronavirus lockdown. During my time on the committee, we held many successful events such as a Hackathon (sponsored by [BlackRock](https://www.blackrock.com/) and [Unity](https://unity.com/)) and a Ceilidh.

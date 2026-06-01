@@ -1,5 +1,6 @@
+import "@/styles/globals.css";
+
 import { Link, linkVariants, Surface } from "@heroui/react";
-import NextLink from "next/link";
 import { ContactForm } from "./contact/contact-form";
 
 export const ContactSection = () => {
@@ -16,7 +17,7 @@ export const ContactSection = () => {
           <p className="text-base">
             If you have any questions or would like to get in touch, please feel
             free to send me an email at{" "}
-            <NextLink
+            <a
               className={linkSlots.base({
                 className: "text-base no-underline hover:underline",
               })}
@@ -24,7 +25,7 @@ export const ContactSection = () => {
             >
               maxwill.kelly@gmail.com
               <Link.Icon className={linkSlots.icon()} />
-            </NextLink>{" "}
+            </a>{" "}
             or use this form below to send me a message.
           </p>
         </div>

@@ -1,13 +1,13 @@
-"use client";
-
 import { cn, useOverlayState } from "@heroui/react";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 import { ProjectModal } from "./card/project-modal";
+import { getProjectIcon } from "./shared/icons";
 import type { Project } from "./shared/type";
 
 export const ProjectCard = ({ project }: { project: Project }) => {
   const { isOpen, open, close } = useOverlayState();
+  const icon = getProjectIcon(project.icon);
 
   return (
     <>
@@ -43,7 +43,7 @@ export const ProjectCard = ({ project }: { project: Project }) => {
             transition={{ type: "spring", stiffness: 320, damping: 16 }}
             className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-accent-soft text-accent-soft-foreground"
           >
-            {project.icon}
+            {icon}
           </motion.span>
           {/* Arrow in top right corner */}
           <motion.span
