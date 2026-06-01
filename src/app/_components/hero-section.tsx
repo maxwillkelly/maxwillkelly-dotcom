@@ -5,6 +5,7 @@ import { DiaTextReveal } from "@/components/ui/dia-text-reveal";
 import { GithubIcon } from "./contact/github-icon";
 import { LinkedInIcon } from "./contact/linked-in-icon";
 import { SocialIcon } from "./hero/social-icon";
+import { siteConfig } from "@/lib/site";
 
 export const HeroSection = () => {
   return (
@@ -14,18 +15,18 @@ export const HeroSection = () => {
           <DiaTextReveal
             as="h1"
             className="text-6xl font-bold"
-            text="Max Kelly"
-          />
+            text={siteConfig.name}
+          />{" "}
           <DiaTextReveal
             as="p"
             className="text-lg font-light mt-4"
-            text="I'm a Software Engineer that builds interactive applications with an eye for small details."
+            text={`I'm a ${siteConfig.jobTitle} that builds interactive applications with an eye for small details.`}
           />
         </div>
         <div className="flex gap-2">
           <SocialIcon
             ariaLabel="Download CV"
-            download="Max Kelly - CV.pdf"
+            download={`${siteConfig.name} - CV.pdf`}
             href="/cv.pdf"
             icon={<DownloadCloud />}
             tooltipContent="Download CV"
@@ -45,7 +46,7 @@ export const HeroSection = () => {
         </div>
       </div>
       <Image
-        alt="Max Kelly"
+        alt={siteConfig.name}
         className="size-24 shrink-0 rounded-xl object-cover sm:size-32"
         height={400}
         priority

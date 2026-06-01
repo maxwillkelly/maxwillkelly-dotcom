@@ -1,3 +1,4 @@
+import { siteConfig } from "@/lib/site";
 import { Link } from "@heroui/react";
 
 export const AboutSection = () => {
@@ -5,7 +6,7 @@ export const AboutSection = () => {
     <section id="about">
       <h2 className="text-xl font-bold">About</h2>
       <p className="mt-4">
-        Currently I work at{" "}
+        I'm based in {siteConfig.location} where currently I work at{" "}
         <Link
           className="text-base no-underline hover:underline"
           href="https://thekeysupport.com/"

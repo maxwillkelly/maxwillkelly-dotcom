@@ -3,9 +3,10 @@ export const siteConfig = {
   title: "Max Kelly | Software Engineer",
   description:
     "Max Kelly is a Bristol-based software engineer building interactive applications with an eye for small details.",
-  url: "https://maxwillkelly.com",
+  url: "https://www.maxwillkelly.com",
   email: "maxwill.kelly@gmail.com",
   location: "Bristol, United Kingdom",
+  jobTitle: "Software Engineer",
   image: "/profile.jpg",
   sameAs: [
     "https://github.com/maxwillkelly",
@@ -26,7 +27,7 @@ export const personJsonLd = {
   url: siteConfig.url,
   image: absoluteUrl(siteConfig.image),
   email: `mailto:${siteConfig.email}`,
-  jobTitle: "Software Engineer",
+  jobTitle: siteConfig.jobTitle,
   address: {
     "@type": "PostalAddress",
     addressLocality: "Bristol",
