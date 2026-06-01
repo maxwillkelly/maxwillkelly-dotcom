@@ -3,16 +3,56 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
+import { siteConfig } from "@/lib/site";
+import { absoluteUrl, cn } from "@/lib/utils";
+
 import "./globals.css";
-// import { DottedGlowBackground } from "@/components/ui/dotted-glow-background";
-import { cn } from "@/lib/utils";
 
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree" });
 
 export const metadata: Metadata = {
-  title: "Max Kelly",
-  description:
-    "A personal portfolio website for Max Kelly, a software engineer based in Bristol",
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.title,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "profile",
+    url: siteConfig.url,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+    locale: "en_GB",
+    images: [
+      {
+        url: absoluteUrl(siteConfig.image, siteConfig.url),
+        width: 400,
+        height: 400,
+        alt: siteConfig.name,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [absoluteUrl(siteConfig.image, siteConfig.url)],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 };
 
 const RootLayout = ({

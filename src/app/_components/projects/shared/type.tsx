@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { TimelineChip } from "../../timeline";
+import type { ReactNode } from "react";
+import type { TimelineChip } from "../../timeline";
 
 export type Project = {
   title: string;

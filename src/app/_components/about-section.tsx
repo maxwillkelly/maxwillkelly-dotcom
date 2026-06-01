@@ -1,11 +1,12 @@
 import { Link } from "@heroui/react";
+import { siteConfig } from "@/lib/site";
 
 export const AboutSection = () => {
   return (
     <section id="about">
       <h2 className="text-xl font-bold">About</h2>
       <p className="mt-4">
-        Currently I work at{" "}
+        I'm based in {siteConfig.location} where currently I work at{" "}
         <Link
           className="text-base no-underline hover:underline"
           href="https://thekeysupport.com/"
@@ -30,9 +31,9 @@ export const AboutSection = () => {
         stakeholders to deliver new features and improvements for the largest
         volunteer workforce in the UK.
         <br />
-        <br />
-        I have some involvement in every part of the process, from gathering
-        requirements and designing solutions to writing code and testing.
+        <br />I have some involvement in every part of the process, from
+        gathering requirements and designing solutions to writing code and
+        testing.
         <br />
         <br />I have a passion for building high-quality software that automates
         mundane work and solves real problems that impact people's lives.

@@ -1,4 +1,3 @@
-import { type ContactMessage } from "@/schemas/contact-message";
 import {
   Body,
   Button,
@@ -12,6 +11,7 @@ import {
   Tailwind,
   Text,
 } from "react-email";
+import type { ContactMessage } from "@/schemas/contact-message";
 
 interface Props {
   contactMessage?: ContactMessage;

@@ -1,5 +1,6 @@
 import { Link, linkVariants, Surface } from "@heroui/react";
 import NextLink from "next/link";
+import { siteConfig } from "@/lib/site";
 import { ContactForm } from "./contact/contact-form";
 
 export const ContactSection = () => {
@@ -20,9 +21,9 @@ export const ContactSection = () => {
               className={linkSlots.base({
                 className: "text-base no-underline hover:underline",
               })}
-              href="mailto:maxwill.kelly@gmail.com"
+              href={`mailto:${siteConfig.email}`}
             >
-              maxwill.kelly@gmail.com
+              {siteConfig.email}
               <Link.Icon className={linkSlots.icon()} />
             </NextLink>{" "}
             or use this form below to send me a message.

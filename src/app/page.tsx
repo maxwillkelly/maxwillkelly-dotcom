@@ -1,4 +1,5 @@
 import { BlurFade } from "@/components/ui/blur-fade";
+import { personJsonLd } from "@/lib/site";
 import { AboutSection } from "./_components/about-section";
 import { ContactSection } from "./_components/contact-section";
 import { EducationSection } from "./_components/education-section";
@@ -10,6 +11,13 @@ import { ValuesSection } from "./_components/values-section";
 const HomePage = () => {
   return (
     <main className="flex flex-col space-y-12">
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: Structured data must be emitted as JSON-LD.
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       <HeroSection />
       <BlurFade delay={0.6}>
         <div className="flex flex-col space-y-12">
