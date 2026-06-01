@@ -79,10 +79,11 @@ type DiaTextRevealElement =
 /**
  * Props for {@link DiaTextReveal}.
  */
-export interface DiaTextRevealProps extends Omit<
-  HTMLMotionProps<"span">,
-  "ref" | "children" | "style" | "animate" | "transition" | "color"
-> {
+export interface DiaTextRevealProps
+  extends Omit<
+    HTMLMotionProps<"span">,
+    "ref" | "children" | "style" | "animate" | "transition" | "color"
+  > {
   /**
    * HTML element to render.
    * @defaultValue `"span"`

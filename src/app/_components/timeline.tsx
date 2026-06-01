@@ -1,10 +1,9 @@
 import type { ReactNode } from "react";
-
-import { LinkableChip } from "../../components/ui/linkable-chip";
 import {
   formatDateRangeinYearsAndMonths,
   formatDurationinYearsAndMonths,
 } from "@/lib/duration";
+import { LinkableChip } from "../../components/ui/linkable-chip";
 
 export type TimelineChip = {
   label: string;

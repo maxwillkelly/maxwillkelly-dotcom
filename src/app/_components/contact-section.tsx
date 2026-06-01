@@ -1,7 +1,7 @@
 import { Link, linkVariants, Surface } from "@heroui/react";
 import NextLink from "next/link";
-import { ContactForm } from "./contact/contact-form";
 import { siteConfig } from "@/lib/site";
+import { ContactForm } from "./contact/contact-form";
 
 export const ContactSection = () => {
   const linkSlots = linkVariants();

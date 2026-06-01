@@ -1,15 +1,15 @@
 "use server";
 
-import { Resend } from "resend";
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
+import { Resend } from "resend";
 
 import ContactEmailTemplate from "@/emails/contact-email-template";
 import { env } from "@/lib/env";
 import { getIpAddress } from "@/lib/headers";
 
 import {
-  ContactMessage,
+  type ContactMessage,
   contactMessageSchema,
 } from "@/schemas/contact-message";
 

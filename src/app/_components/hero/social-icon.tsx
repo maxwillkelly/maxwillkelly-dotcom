@@ -1,6 +1,6 @@
 "use client";
 
-import { Link, Tooltip, buttonVariants } from "@heroui/react";
+import { buttonVariants, Link, Tooltip } from "@heroui/react";
 import { Ripple } from "m3-ripple";
 
 type Props = {

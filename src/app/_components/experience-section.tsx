@@ -34,9 +34,8 @@ const experiences: TimelineEntry[] = [
         </Link>
         , the leading online service for school governors and trustees.
         <br />
-        <br />
-        I have become the most senior developer on the team. In addition to
-        building software, I've had the opportunity to onboard and train new
+        <br />I have become the most senior developer on the team. In addition
+        to building software, I've had the opportunity to onboard and train new
         engineers. I work with product managers and other stakeholders to write
         technical specifications and gather requirements.
         <br />
@@ -174,9 +173,8 @@ const experiences: TimelineEntry[] = [
         Initially, I worked as a React developer in tandem with a .NET developer
         on Udrafter's platform.
         <br />
-        <br />
-        I later transitioned into the role of a Fullstack engineer independently
-        rewriting the messaging features in their platform.
+        <br />I later transitioned into the role of a Fullstack engineer
+        independently rewriting the messaging features in their platform.
         <br />
         <br />
         This involved creating a{" "}

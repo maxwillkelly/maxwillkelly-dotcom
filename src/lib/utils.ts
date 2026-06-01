@@ -1,13 +1,12 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { siteConfig } from "./site";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const absoluteUrl = (path = "") => {
+export const absoluteUrl = (path = "", baseUrl: string) => {
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
 
-  return new URL(normalizedPath, siteConfig.url).toString();
+  return new URL(normalizedPath, baseUrl).toString();
 };

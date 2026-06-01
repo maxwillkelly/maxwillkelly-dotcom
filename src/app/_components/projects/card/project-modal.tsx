@@ -1,6 +1,6 @@
 import { Button, Modal } from "@heroui/react";
-import { Project } from "../shared/type";
 import { LinkableChip } from "@/components/ui/linkable-chip";
+import type { Project } from "../shared/type";
 
 type Props = {
   project: Project;

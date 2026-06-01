@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     locale: "en_GB",
     images: [
       {
-        url: absoluteUrl(siteConfig.image),
+        url: absoluteUrl(siteConfig.image, siteConfig.url),
         width: 400,
         height: 400,
         alt: siteConfig.name,
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: siteConfig.title,
     description: siteConfig.description,
-    images: [absoluteUrl(siteConfig.image)],
+    images: [absoluteUrl(siteConfig.image, siteConfig.url)],
   },
   robots: {
     index: true,

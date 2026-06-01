@@ -1,4 +1,4 @@
-import { Person, WithContext } from "schema-dts";
+import type { Person, WithContext } from "schema-dts";
 import { absoluteUrl } from "./utils";
 
 export const siteConfig = {
@@ -24,7 +24,7 @@ export const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   ...siteConfig,
-  image: absoluteUrl(siteConfig.image),
+  image: absoluteUrl(siteConfig.image, siteConfig.url),
   email: `mailto:${siteConfig.email}`,
   address: {
     "@type": "PostalAddress",

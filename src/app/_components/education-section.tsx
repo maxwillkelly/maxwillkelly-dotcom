@@ -11,15 +11,9 @@ import {
   Graphql,
   Java,
   Javascript,
-  Mui,
-  Mysql,
   Nestjs,
   Nodedotjs,
-  Postgresql,
-  Python,
   React,
-  Scala,
-  TailwindCss,
   Typescript,
 } from "@thesvg/react";
 
