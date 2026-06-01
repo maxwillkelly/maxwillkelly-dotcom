@@ -2,10 +2,10 @@ import { ScrollShadow } from "@heroui/react";
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
+import { siteConfig } from "@/lib/site";
+import { absoluteUrl, cn } from "@/lib/utils";
+
 import "./globals.css";
-// import { DottedGlowBackground } from "@/components/ui/dotted-glow-background";
-import { absoluteUrl, siteConfig } from "@/lib/site";
-import { cn } from "@/lib/utils";
 
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree" });
 

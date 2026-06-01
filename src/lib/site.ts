@@ -1,5 +1,11 @@
+import { Person, WithContext } from "schema-dts";
+import { absoluteUrl } from "./utils";
+
 export const siteConfig = {
   name: "Max Kelly",
+  additionalName: "Maxwill Kelly",
+  givenName: "Max",
+  familyName: "Kelly",
   title: "Max Kelly | Software Engineer",
   description:
     "Max Kelly is a Bristol-based software engineer building interactive applications with an eye for small details.",
@@ -14,24 +20,15 @@ export const siteConfig = {
   ],
 } as const;
 
-export const absoluteUrl = (path = "") => {
-  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
-
-  return new URL(normalizedPath, siteConfig.url).toString();
-};
-
 export const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: siteConfig.name,
-  url: siteConfig.url,
+  ...siteConfig,
   image: absoluteUrl(siteConfig.image),
   email: `mailto:${siteConfig.email}`,
-  jobTitle: siteConfig.jobTitle,
   address: {
     "@type": "PostalAddress",
     addressLocality: "Bristol",
     addressCountry: "GB",
   },
-  sameAs: siteConfig.sameAs,
-} as const;
+} as const satisfies WithContext<Person>;
