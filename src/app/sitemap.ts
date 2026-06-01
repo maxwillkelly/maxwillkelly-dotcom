@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { siteConfig } from "@/lib/site";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+const sitemap = (): MetadataRoute.Sitemap => {
   return [
     {
       url: siteConfig.url,
@@ -11,4 +11,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
   ];
-}
+};
+
+export default sitemap;
