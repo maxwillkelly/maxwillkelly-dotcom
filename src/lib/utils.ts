@@ -6,6 +6,8 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const absoluteUrl = (path = "", baseUrl: string) => {
+  if (URL.canParse(path)) return path;
+
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
 
   return new URL(normalizedPath, baseUrl).toString();
