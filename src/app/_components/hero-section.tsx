@@ -1,6 +1,7 @@
 import { DownloadCloud } from "lucide-react";
 import Image from "next/image";
 
+import { BlurFade } from "@/components/ui/blur-fade";
 import { DiaTextReveal } from "@/components/ui/dia-text-reveal";
 import { siteConfig } from "@/lib/site";
 import { GithubIcon } from "./contact/github-icon";
@@ -14,7 +15,7 @@ export const HeroSection = () => {
         <div>
           <DiaTextReveal
             as="h1"
-            className="text-6xl font-bold"
+            className="pb-1 text-6xl font-bold leading-[1.08]"
             text={siteConfig.name}
           />
           <DiaTextReveal
@@ -23,27 +24,29 @@ export const HeroSection = () => {
             text={`I'm a ${siteConfig.jobTitle} that builds interactive applications with an eye for small details.`}
           />
         </div>
-        <div className="flex gap-2">
-          <SocialIcon
-            ariaLabel="Download CV"
-            download={`${siteConfig.name} - CV.pdf`}
-            href="/cv.pdf"
-            icon={<DownloadCloud />}
-            tooltipContent="Download CV"
-          />
-          <SocialIcon
-            ariaLabel="GitHub"
-            href="https://github.com/maxwillkelly"
-            icon={<GithubIcon />}
-            tooltipContent="GitHub"
-          />
-          <SocialIcon
-            ariaLabel="LinkedIn"
-            href="https://www.linkedin.com/in/maxwillkelly"
-            icon={<LinkedInIcon />}
-            tooltipContent="LinkedIn"
-          />
-        </div>
+        <BlurFade delay={0.4}>
+          <div className="flex gap-2">
+            <SocialIcon
+              ariaLabel="Download CV"
+              download={`${siteConfig.name} - CV.pdf`}
+              href="/cv.pdf"
+              icon={<DownloadCloud />}
+              tooltipContent="Download CV"
+            />
+            <SocialIcon
+              ariaLabel="GitHub"
+              href="https://github.com/maxwillkelly"
+              icon={<GithubIcon />}
+              tooltipContent="GitHub"
+            />
+            <SocialIcon
+              ariaLabel="LinkedIn"
+              href="https://www.linkedin.com/in/maxwillkelly"
+              icon={<LinkedInIcon />}
+              tooltipContent="LinkedIn"
+            />
+          </div>
+        </BlurFade>
       </div>
       <Image
         alt={siteConfig.name}
