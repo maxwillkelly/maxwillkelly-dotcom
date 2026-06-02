@@ -15,7 +15,7 @@ export const HeroSection = () => {
         <div>
           <DiaTextReveal
             as="h1"
-            className="pb-1 text-6xl font-bold leading-[1.08]"
+            className="pb-1 text-6xl font-bold"
             text={siteConfig.name}
           />
           <DiaTextReveal
