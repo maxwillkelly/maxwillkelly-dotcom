@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/fallow/schema.json",
+  "ignorePatterns": [
+    "src/components/ui/blur-fade.tsx",
+    "src/components/ui/dia-text-reveal.tsx"
+  ],
+  "ignoreDependencies": ["babel-plugin-react-compiler"]
+}
