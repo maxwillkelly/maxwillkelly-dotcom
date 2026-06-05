@@ -12,3 +12,7 @@ export const absoluteUrl = (path = "", baseUrl: string) => {
 
   return new URL(normalizedPath, baseUrl).toString();
 };
+
+export const nonFalsey = <T>(value: T): value is NonNullable<T> => {
+  return Boolean(value);
+};
