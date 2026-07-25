@@ -1,4 +1,4 @@
-import ProfileContent from "@/content/profile.mdx";
+import ProfileContent from "@/content/profile.md";
 
 export const AboutSection = () => {
   return (

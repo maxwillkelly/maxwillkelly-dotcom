@@ -3,8 +3,8 @@
 import { cn, useOverlayState } from "@heroui/react";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
-import type { Project } from "@/components/content/project";
 import { ProjectModal } from "./card/project-modal";
+import type { Project } from "./shared/type";
 
 export const ProjectCard = ({ project }: { project: Project }) => {
   const { isOpen, open, close } = useOverlayState();
