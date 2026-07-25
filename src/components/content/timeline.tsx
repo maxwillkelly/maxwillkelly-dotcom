@@ -4,7 +4,7 @@ import {
   formatDateRangeinYearsAndMonths,
   formatDurationinYearsAndMonths,
 } from "@/lib/duration";
-import { TechnologyList, type TechnologyItem } from "./technology-list";
+import { type TechnologyItem, TechnologyList } from "./technology-list";
 
 type TimelineProps = {
   children: ReactNode;

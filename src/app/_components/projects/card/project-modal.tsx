@@ -1,6 +1,6 @@
 import { Button, Modal } from "@heroui/react";
-import { TechnologyList } from "@/components/content/technology-list";
 import type { Project } from "@/components/content/project";
+import { TechnologyList } from "@/components/content/technology-list";
 
 type Props = {
   project: Project;
