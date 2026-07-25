@@ -1,0 +1,47 @@
+import { ExternalLink } from "@/components/content/external-link";
+import { ProjectEntry } from "@/components/content/project-entry";
+
+<ProjectEntry
+  title="EV Charging Analyser"
+  summary="A manufacturer-agnostic companion app for electric vehicles. Drivers can perform actions such unlocking their car, see its location and contribute charging data to academic research."
+  icon="zap"
+  href="https://github.com/maxwillkelly/ev-charging-analyser/wiki"
+  hrefLabel="View on GitHub"
+  colSpan="sm:col-span-2"
+  technologies={[
+    {
+      label: "TypeScript",
+      icon: "typescript",
+      href: "https://www.typescriptlang.org/",
+    },
+    { label: "React Native", icon: "react", href: "https://reactnative.dev/" },
+    { label: "Expo", icon: "expo", href: "https://expo.dev/" },
+    { label: "Next.js", href: "https://nextjs.org/" },
+  ]}
+>
+  <p>
+    <ExternalLink href="https://github.com/maxwillkelly/ev-charging-analyser/wiki">
+      EV Charging Analyser
+    </ExternalLink>{" "}
+    is a manufacturer agnostic companion app for electric vehicles (EVs). EV
+    Charging Analyser uses{" "}
+    <ExternalLink href="https://smartcar.com/product/connect">
+      Smartcar Connect
+    </ExternalLink>{" "}
+    which allows drivers to connect their EVs with ease using the login to their
+    manufacturer's account. From there, users can perform basic tasks with
+    their EV such as to lock or unlock the doors or see its location on their
+    phone. We use this application to collect navigation and charging data for
+    academic research.
+  </p>
+  <p>
+    EV Charging Analyser is divided into two projects: the front-end mobile
+    application which uses{" "}
+    <ExternalLink href="https://reactnative.dev/">React Native</ExternalLink>{" "}
+    to compile binaries for iOS and Android (Android was the main development
+    platform) and the back-end API which uses{" "}
+    <ExternalLink href="https://nestjs.com/">NestJS</ExternalLink>. Each
+    project has its own GitHub repository, deployment mechanisms, CI/CD tools
+    and documentation.
+  </p>
+</ProjectEntry>

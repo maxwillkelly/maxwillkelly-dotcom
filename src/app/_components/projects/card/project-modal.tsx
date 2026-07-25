@@ -1,6 +1,6 @@
 import { Button, Modal } from "@heroui/react";
-import { LinkableChip } from "@/components/ui/linkable-chip";
-import type { Project } from "../shared/type";
+import { TechnologyList } from "@/components/content/technology-list";
+import type { Project } from "@/components/content/project";
 
 type Props = {
   project: Project;
@@ -23,12 +23,8 @@ export const ProjectModal = ({ project, isOpen, close }: Props) => {
             </Modal.Heading>
           </Modal.Header>
           <Modal.Body className="flex flex-col gap-4 text-base text-foreground">
-            <p>{project.content}</p>
-            <div className="flex flex-wrap gap-2">
-              {project.chips.map((chip) => (
-                <LinkableChip key={chip.label} {...chip} />
-              ))}
-            </div>
+            <div className="flex flex-col gap-4">{project.content}</div>
+            <TechnologyList items={project.technologies} />
           </Modal.Body>
           <Modal.Footer>
             <Button slot="close" variant="secondary">
