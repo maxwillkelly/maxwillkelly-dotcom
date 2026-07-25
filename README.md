@@ -93,6 +93,30 @@ Copy `.env.example` to `.env.local` and fill in the required values:
 
 Deployed on [Vercel](https://vercel.com). Pushing to `main` triggers an automatic production deployment.
 
+### Linear release tracking
+
+Promoted production deployments are recorded in Linear by the
+[`Sync Linear release`](.github/workflows/linear-release.yml) workflow. The
+workflow checks out the exact commit promoted by Vercel, creates a completed
+release in a continuous Linear release pipeline, and links back to the Vercel
+deployment.
+
+To enable release tracking:
+
+1. Use a Linear Business or Enterprise workspace.
+2. Create a continuous pipeline in **Settings → Releases**.
+3. Generate the pipeline access key.
+4. Add the key to this GitHub repository as an Actions secret named
+   `LINEAR_ACCESS_KEY`.
+5. Keep Vercel's repository dispatch events enabled for the connected GitHub
+   repository.
+
+After the workflow is present on `main`, run it manually from GitHub Actions to
+perform a dry-run validation. Automatic runs only process production promotions
+for the maxwillkelly.com Vercel project. Linear issue identifiers such as
+`MAX-83` should appear in branch names, commit messages, or linked pull requests
+so the corresponding issues can be associated with a release.
+
 ## License
 
 MIT

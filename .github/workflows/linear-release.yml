@@ -1,0 +1,52 @@
+name: Sync Linear release
+
+on:
+  repository_dispatch:
+    types:
+      - vercel.deployment.promoted
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: linear-release-production
+  cancel-in-progress: false
+
+jobs:
+  sync-release:
+    name: Sync production release
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (
+        github.event.client_payload.environment == 'production' &&
+        github.event.client_payload.project.id == 'prj_VmYUcVj2wgaENSi1cdk7lFJCZBhJ'
+      )
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out deployed commit
+        if: github.event_name == 'repository_dispatch'
+        uses: vercel/repository-dispatch/actions/checkout@61881006269f0b5ac2cb186b198c54be6afe90e1
+        with:
+          fetch-depth: 0
+
+      - name: Check out default branch
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          fetch-depth: 0
+
+      - name: Sync production release
+        if: github.event_name == 'repository_dispatch'
+        uses: linear/linear-release-action@v0
+        with:
+          access_key: ${{ secrets.LINEAR_ACCESS_KEY }}
+          links: Vercel deployment=${{ github.event.client_payload.url }}
+
+      - name: Validate release configuration
+        if: github.event_name == 'workflow_dispatch'
+        uses: linear/linear-release-action@v0
+        with:
+          access_key: ${{ secrets.LINEAR_ACCESS_KEY }}
+          dry_run: true
