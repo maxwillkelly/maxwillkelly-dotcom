@@ -41,8 +41,11 @@ export const Timeline = ({ entries }: TimelineProps) => {
           description,
           content,
           chips,
-        }) => (
-          <div className="flex flex-col gap-4 py-2" key={`${company}-${position ?? ''}-${start?.getTime() ?? ''}`}>
+        }) => {
+          const key = `${company}-${String(position)}`;
+
+          return (
+          <div className="flex flex-col gap-4 py-2" key={key}>
             <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
               <h3 className="text-lg font-semibold text-foreground">
                 {company}
@@ -81,7 +84,7 @@ export const Timeline = ({ entries }: TimelineProps) => {
               </div>
             )}
           </div>
-        ),
+        )},
       )}
     </div>
   );
