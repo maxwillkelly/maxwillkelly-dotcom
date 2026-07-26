@@ -60,7 +60,7 @@ const experiences: TimelineEntry[] = [
         technical specifications and gather requirements.
         <br />
         <br />
-        My colleagues and I were responsible for a complete ground up rewrite of
+        My colleagues and I were responsible for a complete ground-up rewrite of
         GovernorHub's front-end. At the time I joined, GovernorHub was a legacy{" "}
         <Link
           className="text-base no-underline hover:underline"
@@ -81,8 +81,8 @@ const experiences: TimelineEntry[] = [
           React
           <Link.Icon />
         </Link>{" "}
-        injected into it for specific components. We completely rearchitected it
-        using the{" "}
+        injected into it for specific components. We completely re-architected
+        it using the{" "}
         <Link
           className="text-base no-underline hover:underline"
           href="https://nextjs.org/"
@@ -92,7 +92,7 @@ const experiences: TimelineEntry[] = [
           Next.js
           <Link.Icon />
         </Link>{" "}
-        App router which produced a much better user experience. I was
+        App Router which produced a much better user experience. I was
         responsible for reimplementing many significant features in{" "}
         <Link
           className="text-base no-underline hover:underline"
@@ -205,7 +205,7 @@ const experiences: TimelineEntry[] = [
         Initially, I worked as a React developer in tandem with a .NET developer
         on Udrafter's platform.
         <br />
-        <br />I later transitioned into the role of a Fullstack engineer
+        <br />I later transitioned into the role of a full-stack engineer
         independently rewriting the messaging features in their platform.
         <br />
         <br />

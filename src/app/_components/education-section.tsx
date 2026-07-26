@@ -51,7 +51,7 @@ const education: TimelineEntry[] = [
         <br />
         Unlike other computing degrees which place a great deal of emphasis on
         the theoretical mathematics underpinning computing, my course was
-        centered around learning practical skills for the workplace.
+        centred around learning practical skills for the workplace.
         <br />
         <br />
         Most of our course was spent doing projects which were completed in
