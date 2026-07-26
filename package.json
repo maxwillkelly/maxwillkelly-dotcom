@@ -46,7 +46,7 @@
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "babel-plugin-react-compiler": "^1.0.0",
-    "fallow": "^2.104.0",
+    "fallow": "^3.9.1",
     "schema-dts": "^2.0.0",
     "typescript": "^6.0.3"
   },
