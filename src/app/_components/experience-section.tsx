@@ -18,7 +18,7 @@ import { Timeline, type TimelineEntry } from "./timeline";
 
 const experiences: TimelineEntry[] = [
   {
-    company: "The Key Group",
+    organisation: "The Key Group",
     position: "Software Engineer",
     type: "Full-time",
     location: "Bristol",
@@ -185,7 +185,7 @@ const experiences: TimelineEntry[] = [
     ],
   },
   {
-    company: "Udrafter",
+    organisation: "Udrafter",
     position: "Software Developer",
     type: "Part-time",
     location: "Remote",
