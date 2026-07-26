@@ -77,31 +77,34 @@ export const ContactForm = () => {
   const submitButtonContent = getSubmitButtonContent(state, isPending);
 
   return (
-    <form className="flex flex-col flex-wrap" onSubmit={handleSubmit(onSubmit)}>
-      <div className="mb-6 md:flex">
+    <form
+      className="flex flex-col flex-wrap gap-6"
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <div className="grid gap-6 md:flex md:gap-0">
         <ControllerTextField
           control={control}
           name="firstName"
           label="First Name"
           placeholder="John"
-          className="px-3 md:mb-0 md:w-1/2"
+          className="px-3 md:w-1/2"
         />
         <ControllerTextField
           control={control}
           name="lastName"
           label="Last Name"
           placeholder="Smith"
-          className="px-3 md:mb-0 md:w-1/2"
+          className="px-3 md:w-1/2"
         />
       </div>
-      <div className="mb-6 md:flex">
+      <div className="grid gap-6 md:flex md:gap-0">
         <ControllerTextField
           control={control}
           name="email"
           label="Email"
           placeholder="john.smith@email.com"
           type="email"
-          className="px-3 md:mb-0 md:w-1/2"
+          className="px-3 md:w-1/2"
         />
         <ControllerTextField
           control={control}
@@ -116,7 +119,7 @@ export const ContactForm = () => {
         name="message"
         label="Message"
         placeholder="Let's rock 'n' roll"
-        className="mb-6 px-3"
+        className="px-3"
       />
       <div className="flex flex-row-reverse">
         <Button
