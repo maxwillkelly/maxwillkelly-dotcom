@@ -18,8 +18,28 @@ import { Timeline, type TimelineEntry } from "./timeline";
 
 const experiences: TimelineEntry[] = [
   {
-    title: "The Key Support Services",
+    organisation: "The Key Group",
+    position: "Software Engineer",
+    type: "Full-time",
+    location: "Bristol",
     start: new Date(2022, 5, 28),
+    description: (
+      <p className="text-base leading-6">
+        <Link
+          className="text-base no-underline hover:underline"
+          href="https://thekeygroup.com/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          The Key Group
+          <Link.Icon />
+        </Link>{" "}
+        (trades as The Key Support Services Ltd) is a company that serves 20,000
+        British state schools, including around 80% of schools in England. It
+        sells SaaS cloud-based products and resources for training and guidance.
+        Most of its products are market leading in the sector they operate in.
+      </p>
+    ),
     content: (
       <p>
         I work as a Software Engineer on{" "}
@@ -165,9 +185,21 @@ const experiences: TimelineEntry[] = [
     ],
   },
   {
-    title: "Udrafter",
+    organisation: "Udrafter",
+    position: "Software Developer",
+    type: "Part-time",
+    location: "Remote",
     start: new Date(2020, 8, 1),
     end: new Date(2021, 8, 1),
+    description: (
+      <p className="text-base leading-6">
+        Udrafter was a startup that recruited students for micro-internships. It
+        connected businesses with students for short, paid projects that were
+        relevant to the field they had studied. The students would gain
+        practical experience and businesses could get low-risk access to early
+        career talent.
+      </p>
+    ),
     content: (
       <p>
         Initially, I worked as a React developer in tandem with a .NET developer
