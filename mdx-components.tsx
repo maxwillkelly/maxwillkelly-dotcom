@@ -2,7 +2,7 @@ import { cn, Link } from "@heroui/react";
 import type { MDXComponents } from "mdx/types";
 
 const components = {
-  a: ({ className, href, children }) => {
+  a: ({ className, href, children }) => (
     <Link
       className={cn("text-base no-underline hover:underline", className)}
       href={href}
@@ -11,8 +11,8 @@ const components = {
     >
       {children}
       <Link.Icon />
-    </Link>;
-  },
+    </Link>
+  ),
 } satisfies MDXComponents;
 
 export function useMDXComponents(): MDXComponents {
