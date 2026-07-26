@@ -191,8 +191,15 @@ const experiences: TimelineEntry[] = [
     location: "Remote",
     start: new Date(2020, 8, 1),
     end: new Date(2021, 8, 1),
-    description:
-      "Udrafter was a startup that recruited students for micro-internships. It connected businesses with students for short, paid projects that were relevant to the field they had studied. The students would gain practical experience and businesses could get low-risk access to early career talent.",
+    description: (
+      <p className="text-base leading-6">
+        Udrafter was a startup that recruited students for micro-internships. It
+        connected businesses with students for short, paid projects that were
+        relevant to the field they had studied. The students would gain
+        practical experience and businesses could get low-risk access to early
+        career talent.
+      </p>
+    ),
     content: (
       <p>
         Initially, I worked as a React developer in tandem with a .NET developer

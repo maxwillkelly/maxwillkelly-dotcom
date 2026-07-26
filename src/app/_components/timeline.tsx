@@ -35,6 +35,7 @@ export const Timeline = ({ entries }: TimelineProps) => {
           company,
           position,
           location,
+          type,
           start,
           end,
           description,
@@ -68,6 +69,7 @@ export const Timeline = ({ entries }: TimelineProps) => {
             {position && (
               <p className="text-base font-semibold text-foreground">
                 {position}
+                {type && ` · ${type}`}
               </p>
             )}
             <div>{content}</div>

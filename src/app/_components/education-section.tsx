@@ -21,7 +21,7 @@ import { Timeline, type TimelineEntry } from "./timeline";
 
 const education: TimelineEntry[] = [
   {
-    title: "University of Dundee",
+    company: "University of Dundee",
     start: new Date(2018, 8, 1),
     end: new Date(2022, 8, 1),
     content: (

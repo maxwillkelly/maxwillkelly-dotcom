@@ -1,0 +1,28 @@
+name: Sync Linear release
+
+on:
+  repository_dispatch:
+    types:
+      - vercel.deployment.promoted
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency: linear-release-production
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out release commit
+        uses: vercel/repository-dispatch/actions/checkout@30f760c6640485cd92f8c785ef361382555fb712 # v1
+        with:
+          fetch-depth: 0
+
+      - name: Sync Linear release
+        uses: linear/linear-release-action@3858a5d7892435dc63302ac76b0cdb587435caa9 # v0
+        with:
+          access_key: ${{ secrets.LINEAR_ACCESS_KEY }}
+          dry_run: ${{ github.event_name == 'workflow_dispatch' }}
