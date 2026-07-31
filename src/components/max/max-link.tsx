@@ -7,12 +7,19 @@ interface Props extends LinkProps {
   children: ReactNode;
 }
 
-export function MaxLink({ iconProps, isExternal, children, ...other }: Props) {
+export function MaxLink({
+  iconProps,
+  isExternal,
+  children,
+  rel,
+  target,
+  ...other
+}: Props) {
   return (
     <Link
       {...other}
-      rel={isExternal ? "noopener noreferrer" : undefined}
-      target={isExternal ? "_blank" : undefined}
+      rel={rel ?? (isExternal ? "noopener noreferrer" : undefined)}
+      target={target ?? (isExternal ? "_blank" : undefined)}
     >
       {children}
       {iconProps && <Link.Icon {...iconProps} />}
