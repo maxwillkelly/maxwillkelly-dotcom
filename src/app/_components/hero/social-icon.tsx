@@ -1,7 +1,8 @@
 "use client";
 
-import { buttonVariants, Link, Tooltip } from "@heroui/react";
+import { buttonVariants, Tooltip } from "@heroui/react";
 import { Ripple } from "m3-ripple";
+import { MaxLink } from "@/components/max/max-link";
 
 type Props = {
   href: string;
@@ -20,7 +21,7 @@ export const SocialIcon = ({
 }: Props) => {
   return (
     <Tooltip delay={0}>
-      <Link
+      <MaxLink
         aria-label={ariaLabel}
         className={buttonVariants({
           isIconOnly: true,
@@ -28,12 +29,11 @@ export const SocialIcon = ({
         })}
         download={download}
         href={href}
-        rel={download ? undefined : "noopener noreferrer"}
-        target={download ? undefined : "_blank"}
+        isExternal={!download}
       >
         <Ripple />
         {icon}
-      </Link>
+      </MaxLink>
       <Tooltip.Content placement="bottom">
         <p>{tooltipContent}</p>
       </Tooltip.Content>

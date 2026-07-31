@@ -1,5 +1,5 @@
-import { Link, linkVariants, Surface } from "@heroui/react";
-import NextLink from "next/link";
+import { linkVariants, Surface } from "@heroui/react";
+import { MaxLink } from "@/components/max/max-link";
 import { siteConfig } from "@/lib/site";
 import { ContactForm } from "./contact/contact-form";
 
@@ -17,15 +17,15 @@ export const ContactSection = () => {
           <p className="text-base">
             If you have any questions or would like to get in touch, please feel
             free to send me an email at{" "}
-            <NextLink
+            <MaxLink
+              iconProps={{ className: linkSlots.icon() }}
               className={linkSlots.base({
                 className: "text-base no-underline hover:underline",
               })}
               href={`mailto:${siteConfig.email}`}
             >
               {siteConfig.email}
-              <Link.Icon className={linkSlots.icon()} />
-            </NextLink>{" "}
+            </MaxLink>{" "}
             or use this form below to send me a message.
           </p>
         </div>
