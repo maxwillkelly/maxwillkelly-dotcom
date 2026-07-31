@@ -1,4 +1,3 @@
-import { Link } from "@heroui/react";
 import {
   C,
   Cplusplus,
@@ -16,6 +15,7 @@ import {
   React,
   Typescript,
 } from "@thesvg/react";
+import { MaxLink } from "@/components/max/max-link";
 
 import { Timeline, type TimelineEntry } from "./timeline";
 
@@ -27,25 +27,25 @@ const education: TimelineEntry[] = [
     content: (
       <p>
         I attended the{" "}
-        <Link
+        <MaxLink
           className="text-base no-underline hover:underline"
           href="https://www.dundee.ac.uk/"
           rel="noopener noreferrer"
           target="_blank"
         >
           University of Dundee
-          <Link.Icon />
-        </Link>{" "}
+          <MaxLink.Icon />
+        </MaxLink>{" "}
         from 2018 to 2022 and graduated with a First Class Honours degree in{" "}
-        <Link
+        <MaxLink
           className="text-base no-underline hover:underline"
           href="https://www.dundee.ac.uk/undergraduate/computer-science"
           rel="noopener noreferrer"
           target="_blank"
         >
           Computing Science
-          <Link.Icon />
-        </Link>
+          <MaxLink.Icon />
+        </MaxLink>
         .
         <br />
         <br />
@@ -63,25 +63,25 @@ const education: TimelineEntry[] = [
         in-person society events, shortly after the UK had just emerged from the
         final Coronavirus lockdown. During my time on the committee, we held
         many successful events such as a Hackathon (sponsored by{" "}
-        <Link
+        <MaxLink
           className="text-base no-underline hover:underline"
           href="https://www.blackrock.com/"
           rel="noopener noreferrer"
           target="_blank"
         >
           BlackRock
-          <Link.Icon />
-        </Link>{" "}
+          <MaxLink.Icon />
+        </MaxLink>{" "}
         and{" "}
-        <Link
+        <MaxLink
           className="text-base no-underline hover:underline"
           href="https://unity.com/"
           rel="noopener noreferrer"
           target="_blank"
         >
           Unity
-          <Link.Icon />
-        </Link>
+          <MaxLink.Icon />
+        </MaxLink>
         ) and a Ceilidh.
       </p>
     ),

@@ -1,4 +1,3 @@
-import { Link } from "@heroui/react";
 import {
   Csharp,
   Docker,
@@ -13,6 +12,7 @@ import {
   Typescript,
   Vuedotjs,
 } from "@thesvg/react";
+import { MaxLink } from "@/components/max/max-link";
 
 import { Timeline, type TimelineEntry } from "./timeline";
 
@@ -25,15 +25,15 @@ const experiences: TimelineEntry[] = [
     start: new Date(2022, 5, 28),
     description: (
       <p className="text-base leading-6">
-        <Link
+        <MaxLink
           className="text-base no-underline hover:underline"
           href="https://thekeygroup.com/"
           rel="noopener noreferrer"
           target="_blank"
         >
           The Key Group
-          <Link.Icon />
-        </Link>{" "}
+          <MaxLink.Icon />
+        </MaxLink>{" "}
         (trades as The Key Support Services Ltd) is a company that serves 20,000
         British state schools, including around 80% of schools in England. It
         sells SaaS cloud-based products and resources for training and guidance.
@@ -43,15 +43,15 @@ const experiences: TimelineEntry[] = [
     content: (
       <p>
         I work as a Software Engineer on{" "}
-        <Link
+        <MaxLink
           className="text-base no-underline hover:underline"
           href="https://governorhub.com/"
           rel="noopener noreferrer"
           target="_blank"
         >
           GovernorHub
-          <Link.Icon />
-        </Link>
+          <MaxLink.Icon />
+        </MaxLink>
         , the leading online service for school governors and trustees.
         <br />
         <br />I have become the most senior developer on the team. In addition
@@ -62,80 +62,80 @@ const experiences: TimelineEntry[] = [
         <br />
         My colleagues and I were responsible for a complete ground-up rewrite of
         GovernorHub's front-end. At the time I joined, GovernorHub was a legacy{" "}
-        <Link
+        <MaxLink
           className="text-base no-underline hover:underline"
           href="https://angularjs.org/"
           rel="noopener noreferrer"
           target="_blank"
         >
           AngularJS
-          <Link.Icon />
-        </Link>{" "}
+          <MaxLink.Icon />
+        </MaxLink>{" "}
         codebase with{" "}
-        <Link
+        <MaxLink
           className="text-base no-underline hover:underline"
           href="https://react.dev/"
           rel="noopener noreferrer"
           target="_blank"
         >
           React
-          <Link.Icon />
-        </Link>{" "}
+          <MaxLink.Icon />
+        </MaxLink>{" "}
         injected into it for specific components. We completely re-architected
         it using the{" "}
-        <Link
+        <MaxLink
           className="text-base no-underline hover:underline"
           href="https://nextjs.org/"
           rel="noopener noreferrer"
           target="_blank"
         >
           Next.js
-          <Link.Icon />
-        </Link>{" "}
+          <MaxLink.Icon />
+        </MaxLink>{" "}
         App Router which produced a much better user experience. I was
         responsible for reimplementing many significant features in{" "}
-        <Link
+        <MaxLink
           className="text-base no-underline hover:underline"
           href="https://react.dev/"
           rel="noopener noreferrer"
           target="_blank"
         >
           React
-          <Link.Icon />
-        </Link>
+          <MaxLink.Icon />
+        </MaxLink>
         .
         <br />
         <br />I built processes to triage bugs from customer feedback in{" "}
-        <Link
+        <MaxLink
           className="text-base no-underline hover:underline"
           href="https://www.intercom.com/"
           rel="noopener noreferrer"
           target="_blank"
         >
           Intercom
-          <Link.Icon />
-        </Link>{" "}
+          <MaxLink.Icon />
+        </MaxLink>{" "}
         and convert them into issues in Linear. I've worked on integrations with
         products maintained by other teams internally and externally such as{" "}
-        <Link
+        <MaxLink
           className="text-base no-underline hover:underline"
           href="https://www.salesforce.com/"
           rel="noopener noreferrer"
           target="_blank"
         >
           Salesforce
-          <Link.Icon />
-        </Link>{" "}
+          <MaxLink.Icon />
+        </MaxLink>{" "}
         and{" "}
-        <Link
+        <MaxLink
           className="text-base no-underline hover:underline"
           href="https://get-information-schools.service.gov.uk/"
           rel="noopener noreferrer"
           target="_blank"
         >
           Get Information About Schools (GIAS)
-          <Link.Icon />
-        </Link>
+          <MaxLink.Icon />
+        </MaxLink>
         .
         <br />
         <br />
@@ -210,15 +210,15 @@ const experiences: TimelineEntry[] = [
         <br />
         <br />
         This involved creating a{" "}
-        <Link
+        <MaxLink
           className="text-base no-underline hover:underline"
           href="https://vuejs.org/"
           rel="noopener noreferrer"
           target="_blank"
         >
           Vue.js
-          <Link.Icon />
-        </Link>{" "}
+          <MaxLink.Icon />
+        </MaxLink>{" "}
         front-end and a .NET Core messaging microservice. I then led the team
         that integrated this service into the main platform.
       </p>

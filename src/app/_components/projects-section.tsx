@@ -1,6 +1,6 @@
-import { Link } from "@heroui/react";
 import { Expo, React, Typescript } from "@thesvg/react";
 import { Zap } from "lucide-react";
+import { MaxLink } from "@/components/max/max-link";
 
 import { ProjectCard } from "./projects/project-card";
 import type { Project } from "./projects/shared/type";
@@ -34,26 +34,26 @@ const projects: Project[] = [
     ],
     content: (
       <>
-        <Link
+        <MaxLink
           className="text-base no-underline hover:underline"
           href="https://github.com/maxwillkelly/ev-charging-analyser/wiki"
           rel="noopener noreferrer"
           target="_blank"
         >
           EV Charging Analyser
-          <Link.Icon />
-        </Link>{" "}
+          <MaxLink.Icon />
+        </MaxLink>{" "}
         is a manufacturer-agnostic companion app for electric vehicles (EVs). EV
         Charging Analyser uses{" "}
-        <Link
+        <MaxLink
           className="text-base no-underline hover:underline"
           href="https://smartcar.com/product/connect"
           rel="noopener noreferrer"
           target="_blank"
         >
           Smartcar Connect
-          <Link.Icon />
-        </Link>{" "}
+          <MaxLink.Icon />
+        </MaxLink>{" "}
         which allows drivers to connect their EVs with ease using their
         manufacturer's login. From there, users can perform basic tasks with
         their EV, such as locking or unlocking the doors or viewing its location
@@ -63,26 +63,26 @@ const projects: Project[] = [
         <br />
         EV Charging Analyser is divided into two projects: the front-end mobile
         application which uses{" "}
-        <Link
+        <MaxLink
           className="text-base no-underline hover:underline"
           href="https://reactnative.dev/"
           rel="noopener noreferrer"
           target="_blank"
         >
           React Native
-          <Link.Icon />
-        </Link>{" "}
+          <MaxLink.Icon />
+        </MaxLink>{" "}
         to compile binaries for iOS and Android (Android was the main
         development platform) and the back-end API which uses{" "}
-        <Link
+        <MaxLink
           className="text-base no-underline hover:underline"
           href="https://nestjs.com/"
           rel="noopener noreferrer"
           target="_blank"
         >
           NestJS
-          <Link.Icon />
-        </Link>
+          <MaxLink.Icon />
+        </MaxLink>
         . Each project has its own GitHub repository, deployment mechanisms,
         CI/CD tools and documentation.
       </>
