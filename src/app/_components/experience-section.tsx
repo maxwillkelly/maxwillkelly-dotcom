@@ -28,8 +28,7 @@ const experiences: TimelineEntry[] = [
         <MaxLink
           className="text-base no-underline hover:underline"
           href="https://thekeygroup.com/"
-          rel="noopener noreferrer"
-          target="_blank"
+          isExternal
         >
           The Key Group
           <MaxLink.Icon />
@@ -46,8 +45,7 @@ const experiences: TimelineEntry[] = [
         <MaxLink
           className="text-base no-underline hover:underline"
           href="https://governorhub.com/"
-          rel="noopener noreferrer"
-          target="_blank"
+          isExternal
         >
           GovernorHub
           <MaxLink.Icon />
@@ -65,8 +63,7 @@ const experiences: TimelineEntry[] = [
         <MaxLink
           className="text-base no-underline hover:underline"
           href="https://angularjs.org/"
-          rel="noopener noreferrer"
-          target="_blank"
+          isExternal
         >
           AngularJS
           <MaxLink.Icon />
@@ -75,8 +72,7 @@ const experiences: TimelineEntry[] = [
         <MaxLink
           className="text-base no-underline hover:underline"
           href="https://react.dev/"
-          rel="noopener noreferrer"
-          target="_blank"
+          isExternal
         >
           React
           <MaxLink.Icon />
@@ -86,8 +82,7 @@ const experiences: TimelineEntry[] = [
         <MaxLink
           className="text-base no-underline hover:underline"
           href="https://nextjs.org/"
-          rel="noopener noreferrer"
-          target="_blank"
+          isExternal
         >
           Next.js
           <MaxLink.Icon />
@@ -97,8 +92,7 @@ const experiences: TimelineEntry[] = [
         <MaxLink
           className="text-base no-underline hover:underline"
           href="https://react.dev/"
-          rel="noopener noreferrer"
-          target="_blank"
+          isExternal
         >
           React
           <MaxLink.Icon />
@@ -109,8 +103,7 @@ const experiences: TimelineEntry[] = [
         <MaxLink
           className="text-base no-underline hover:underline"
           href="https://www.intercom.com/"
-          rel="noopener noreferrer"
-          target="_blank"
+          isExternal
         >
           Intercom
           <MaxLink.Icon />
@@ -120,8 +113,7 @@ const experiences: TimelineEntry[] = [
         <MaxLink
           className="text-base no-underline hover:underline"
           href="https://www.salesforce.com/"
-          rel="noopener noreferrer"
-          target="_blank"
+          isExternal
         >
           Salesforce
           <MaxLink.Icon />
@@ -130,8 +122,7 @@ const experiences: TimelineEntry[] = [
         <MaxLink
           className="text-base no-underline hover:underline"
           href="https://get-information-schools.service.gov.uk/"
-          rel="noopener noreferrer"
-          target="_blank"
+          isExternal
         >
           Get Information About Schools (GIAS)
           <MaxLink.Icon />
@@ -213,8 +204,7 @@ const experiences: TimelineEntry[] = [
         <MaxLink
           className="text-base no-underline hover:underline"
           href="https://vuejs.org/"
-          rel="noopener noreferrer"
-          target="_blank"
+          isExternal
         >
           Vue.js
           <MaxLink.Icon />

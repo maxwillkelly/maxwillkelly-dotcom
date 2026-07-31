@@ -29,8 +29,7 @@ export const SocialIcon = ({
         })}
         download={download}
         href={href}
-        rel={download ? undefined : "noopener noreferrer"}
-        target={download ? undefined : "_blank"}
+        isExternal={!download}
       >
         <Ripple />
         {icon}

@@ -30,8 +30,7 @@ const education: TimelineEntry[] = [
         <MaxLink
           className="text-base no-underline hover:underline"
           href="https://www.dundee.ac.uk/"
-          rel="noopener noreferrer"
-          target="_blank"
+          isExternal
         >
           University of Dundee
           <MaxLink.Icon />
@@ -40,8 +39,7 @@ const education: TimelineEntry[] = [
         <MaxLink
           className="text-base no-underline hover:underline"
           href="https://www.dundee.ac.uk/undergraduate/computer-science"
-          rel="noopener noreferrer"
-          target="_blank"
+          isExternal
         >
           Computing Science
           <MaxLink.Icon />
@@ -66,8 +64,7 @@ const education: TimelineEntry[] = [
         <MaxLink
           className="text-base no-underline hover:underline"
           href="https://www.blackrock.com/"
-          rel="noopener noreferrer"
-          target="_blank"
+          isExternal
         >
           BlackRock
           <MaxLink.Icon />
@@ -76,8 +73,7 @@ const education: TimelineEntry[] = [
         <MaxLink
           className="text-base no-underline hover:underline"
           href="https://unity.com/"
-          rel="noopener noreferrer"
-          target="_blank"
+          isExternal
         >
           Unity
           <MaxLink.Icon />

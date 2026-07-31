@@ -37,8 +37,7 @@ const projects: Project[] = [
         <MaxLink
           className="text-base no-underline hover:underline"
           href="https://github.com/maxwillkelly/ev-charging-analyser/wiki"
-          rel="noopener noreferrer"
-          target="_blank"
+          isExternal
         >
           EV Charging Analyser
           <MaxLink.Icon />
@@ -48,8 +47,7 @@ const projects: Project[] = [
         <MaxLink
           className="text-base no-underline hover:underline"
           href="https://smartcar.com/product/connect"
-          rel="noopener noreferrer"
-          target="_blank"
+          isExternal
         >
           Smartcar Connect
           <MaxLink.Icon />
@@ -66,8 +64,7 @@ const projects: Project[] = [
         <MaxLink
           className="text-base no-underline hover:underline"
           href="https://reactnative.dev/"
-          rel="noopener noreferrer"
-          target="_blank"
+          isExternal
         >
           React Native
           <MaxLink.Icon />
@@ -77,8 +74,7 @@ const projects: Project[] = [
         <MaxLink
           className="text-base no-underline hover:underline"
           href="https://nestjs.com/"
-          rel="noopener noreferrer"
-          target="_blank"
+          isExternal
         >
           NestJS
           <MaxLink.Icon />

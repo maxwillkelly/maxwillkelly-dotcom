@@ -7,8 +7,7 @@ const components = {
     <MaxLink
       className={cn("text-base no-underline hover:underline", className)}
       href={href}
-      rel="noopener noreferrer"
-      target="_blank"
+      isExternal
     >
       {children}
       <MaxLink.Icon />
