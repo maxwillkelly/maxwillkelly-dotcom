@@ -1,3 +1,4 @@
+import { connection } from "next/server";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { personJsonLd } from "@/lib/site";
 import { AboutSection } from "./_components/about-section";
@@ -8,7 +9,9 @@ import { HeroSection } from "./_components/hero-section";
 import { ProjectsSection } from "./_components/projects-section";
 import { ValuesSection } from "./_components/values-section";
 
-const HomePage = () => {
+const HomePage = async () => {
+  await connection();
+
   return (
     <main className="flex flex-col space-y-12">
       <script
