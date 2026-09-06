@@ -91,7 +91,29 @@ Copy `.env.example` to `.env.local` and fill in the required values:
 
 ## Deployment
 
-Deployed on [Vercel](https://vercel.com). Pushing to `main` triggers an automatic production deployment.
+The website is deployed on [Vercel](https://vercel.com). Pushing to `main`
+creates a production deployment, but Vercel does not automatically assign the
+production domains. The deployment remains **Staged** until it is promoted.
+
+To release the website:
+
+1. Merge the changes into `main` and wait for the Vercel deployment to become
+   ready.
+2. Open the `maxwillkelly-dotcom` project in Vercel and select **Deployments**.
+3. Find the latest **Staged** deployment from `main`, open its ellipsis menu,
+   select **Promote**, and confirm the promotion.
+
+The equivalent Vercel CLI command is:
+
+```sh
+vercel promote <deployment-url-or-id>
+```
+
+Promotion assigns the production domains without rebuilding the deployment. It
+also triggers the
+[`Sync Linear release`](.github/workflows/linear-release.yml) GitHub Actions
+workflow. Running that workflow manually performs a dry run only; it does not
+release the website.
 
 ## License
 
