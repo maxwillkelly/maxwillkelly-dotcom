@@ -6,9 +6,9 @@ Live at [maxwillkelly.com](https://maxwillkelly.com)
 
 ## Tech Stack
 
-- **Framework**: [Next.js 16](https://nextjs.org) (App Router, React Compiler)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com)
-- **Components**: [HeroUI React v3](https://www.heroui.com)
+- **Framework**: [Next.js](https://nextjs.org) (App Router, React Compiler)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com)
+- **Components**: [HeroUI React](https://www.heroui.com)
 - **Animations**: [Motion](https://motion.dev)
 - **Icons**: [Lucide React](https://lucide.dev) + [thesvg/react](https://thesvg.co)
 - **Email**: [Resend](https://resend.com) + React Email
@@ -52,8 +52,10 @@ src/
 
 ## Getting Started
 
-Requires Node.js 24.x and [pnpm 12](https://pnpm.io). Use
-[fnm](https://github.com/Schniz/fnm) to select the Node.js version in `.nvmrc`.
+Requires Node.js and [pnpm](https://pnpm.io).
+
+I recommend using [fnm](https://github.com/Schniz/fnm) to use the appropriate
+Node.js version in `.nvmrc`.
 
 ```bash
 # Install and select Node.js
