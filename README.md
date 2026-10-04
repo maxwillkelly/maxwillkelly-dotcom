@@ -86,8 +86,25 @@ Copy `.env.example` to `.env.local` and fill in the required values:
 | `pnpm build` | Build for production |
 | `pnpm start` | Start production server |
 | `pnpm lint` | Run Biome linting |
+| `pnpm check:quality --base origin/main` | Audit changed code with fallow |
 | `pnpm format` | Run Biome formatting |
 | `pnpm email` | Start React Email dev server |
+
+## Code Quality
+
+The [Fallow code quality](.github/workflows/fallow.yml) workflow runs on pull
+requests targeting `main` and pushes to `main`. It installs dependencies from
+the lockfile and uses `.fallowrc.json` to check for new dead code, duplication,
+complexity, and styling issues. Findings appear as GitHub Actions annotations
+and fail the check.
+
+Pull requests are compared with their base commit; pushes are compared with the
+previous branch commit. Existing findings inherited from the base do not fail
+the audit. To run the same check locally after fetching `origin/main`:
+
+```sh
+pnpm check:quality --base origin/main
+```
 
 ## Deployment
 

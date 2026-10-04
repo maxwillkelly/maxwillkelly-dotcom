@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
+    "check:quality": "fallow audit --fail-on-issues",
     "format": "biome format --write",
     "email": "email dev -d ./src/emails"
   },
