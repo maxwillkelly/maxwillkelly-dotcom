@@ -7,22 +7,84 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write # Record successful releases with production version tags.
+  pull-requests: read
 
-concurrency: linear-release-production
+concurrency:
+  group: linear-release-production
+  cancel-in-progress: false
+  queue: max
 
 jobs:
   release:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      # Last commit already synced into the existing, unversioned Linear release.
+      LINEAR_RELEASE_INITIAL_SHA: fd88ea599e9eb6ebb8593b97917f857d6622cf7a
 
     steps:
       - name: Check out release commit
-        uses: vercel/repository-dispatch/actions/checkout@30f760c6640485cd92f8c785ef361382555fb712 # v1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          ref: ${{ github.event.client_payload.git.sha || github.sha }}
           fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+
+      - name: Verify production commit
+        if: github.event_name == 'repository_dispatch'
+        env:
+          DEPLOYMENT_SHA: ${{ github.event.client_payload.git.sha }}
+        run: |
+          if [[ ! "$DEPLOYMENT_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo 'Promotion event must contain a full deployment commit SHA.' >&2
+            exit 1
+          fi
+          git merge-base --is-ancestor HEAD origin/main
+
+      - name: Prepare version and release notes
+        id: prepare
+        run: node .github/scripts/prepare-linear-release.mjs
+
+      - name: Reserve version for this production commit
+        if: github.event_name == 'repository_dispatch' && steps.prepare.outputs.reserve == 'true'
+        env:
+          RELEASE_TAG: ${{ steps.prepare.outputs.reservation_tag }}
+          RELEASE_SHA: ${{ steps.prepare.outputs.sha }}
+        run: |
+          gh api --method POST "repos/$GITHUB_REPOSITORY/git/refs" \
+            -f "ref=refs/tags/$RELEASE_TAG" -f "sha=$RELEASE_SHA"
 
       - name: Sync Linear release
+        if: steps.prepare.outputs.publish == 'true' || github.event_name == 'workflow_dispatch'
         uses: linear/linear-release-action@3858a5d7892435dc63302ac76b0cdb587435caa9 # v0
         with:
           access_key: ${{ secrets.LINEAR_ACCESS_KEY }}
+          name: Release ${{ steps.prepare.outputs.version }}
+          version: ${{ steps.prepare.outputs.version }}
+          base_ref: ${{ steps.prepare.outputs.base }}
+          release_notes: linear-release-notes.md
           dry_run: ${{ github.event_name == 'workflow_dispatch' }}
+
+      - name: Complete Linear release
+        if: github.event_name == 'repository_dispatch' && steps.prepare.outputs.publish == 'true'
+        uses: linear/linear-release-action@3858a5d7892435dc63302ac76b0cdb587435caa9 # v0
+        with:
+          access_key: ${{ secrets.LINEAR_ACCESS_KEY }}
+          command: complete
+          version: ${{ steps.prepare.outputs.version }}
+
+      - name: Record successful release version
+        if: github.event_name == 'repository_dispatch' && steps.prepare.outputs.publish == 'true'
+        env:
+          RELEASE_TAG: ${{ steps.prepare.outputs.tag }}
+          RELEASE_SHA: ${{ steps.prepare.outputs.sha }}
+        run: |
+          gh api --method POST "repos/$GITHUB_REPOSITORY/git/refs" \
+            -f "ref=refs/tags/$RELEASE_TAG" -f "sha=$RELEASE_SHA"
