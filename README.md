@@ -52,16 +52,16 @@ src/
 
 ## Getting Started
 
-Requires Node.js 24.x and [pnpm](https://pnpm.io) (managed via `corepack`).
-The `.nvmrc`, package engine requirement, GitHub Actions, and Vercel use Node.js 24.
+Requires Node.js 24.x and [pnpm 12](https://pnpm.io). Use
+[fnm](https://github.com/Schniz/fnm) to select the Node.js version in `.nvmrc`.
 
 ```bash
-# Install and select the Node.js version from .nvmrc (with nvm)
-nvm install
-nvm use
+# Install and select Node.js
+fnm install
+fnm use
 
-# Enable corepack (if not enabled already)
-corepack enable
+# Install pnpm
+npx get-pnpm
 
 # Install dependencies
 pnpm install
@@ -91,27 +91,15 @@ Copy `.env.example` to `.env.local` and fill in the required values:
 | `pnpm build` | Build for production |
 | `pnpm start` | Start production server |
 | `pnpm lint` | Run Biome linting |
-| `pnpm check:quality --base origin/main` | Audit changed code with fallow |
+| `pnpm check:quality` | Audit local changes against `origin/main` with fallow |
 | `pnpm format` | Run Biome formatting |
 | `pnpm email` | Start React Email dev server |
 
 ## Code Quality
 
-The [Fallow code quality](.github/workflows/fallow.yml) workflow runs on all pull
-requests and pushes to every branch. It installs dependencies from
-the lockfile and runs the [official Fallow GitHub Action](https://github.com/marketplace/actions/fallow-codebase-intelligence)
-with `.fallowrc.json` to check for new dead code, duplication,
-complexity, and styling issues. Findings appear as GitHub Actions annotations
-and fail the check.
-
-Pull requests are compared with their base commit; pushes are compared with the
-previous branch commit. The first push of a new branch is compared with the
-repository's default branch. Existing findings inherited from the base do not
-fail the audit. To run the same check locally after fetching `origin/main`:
-
-```sh
-pnpm check:quality --base origin/main
-```
+The [Fallow workflow](.github/workflows/fallow.yml) checks code quality on every
+branch and pull request. Run `pnpm check:quality` to audit local changes against
+`origin/main`; fetch it first to compare with the latest main branch.
 
 ## Deployment
 

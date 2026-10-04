@@ -113,7 +113,7 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0
       fallow:
-        specifier: ^3.31.0
+        specifier: 3.31.0
         version: 3.31.0
       schema-dts:
         specifier: ^2.1.0

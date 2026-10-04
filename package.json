@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
-    "check:quality": "fallow audit --fail-on-issues",
+    "check:quality": "fallow audit --base origin/main --fail-on-issues",
     "format": "biome format --write",
     "email": "email dev -d ./src/emails"
   },
@@ -50,7 +50,7 @@
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "babel-plugin-react-compiler": "^1.0.0",
-    "fallow": "^3.31.0",
+    "fallow": "3.31.0",
     "schema-dts": "^2.1.0",
     "typescript": "^7.0.2"
   },
