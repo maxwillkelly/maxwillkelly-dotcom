@@ -52,10 +52,10 @@ const experiences: TimelineEntry[] = [
         </MaxLink>
         , the leading online service for school governors and trustees.
         <br />
-        <br />I have become the most senior developer on the team. In addition
-        to building software, I've had the opportunity to onboard and train new
-        engineers. I work with product managers and other stakeholders to write
-        technical specifications and gather requirements.
+        <br />
+        In addition to building software, I've had the opportunity to onboard
+        and train new engineers. I work with product managers and other
+        stakeholders to write technical specifications and gather requirements.
         <br />
         <br />
         My colleagues and I were responsible for a complete ground-up rewrite of
