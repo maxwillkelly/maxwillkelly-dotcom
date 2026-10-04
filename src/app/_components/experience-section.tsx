@@ -99,6 +99,11 @@ const experiences: TimelineEntry[] = [
         </MaxLink>
         .
         <br />
+        <br />I helped halve the Largest Contentful Paint (LCP) time on the
+        GovernorHub News page. I also rewrote GovernorHub's file-moving
+        algorithm, reducing the number of queries required for a typical file
+        transfer by around 30%.
+        <br />
         <br />I built processes to triage bugs from customer feedback in{" "}
         <MaxLink
           className="text-base no-underline hover:underline"
