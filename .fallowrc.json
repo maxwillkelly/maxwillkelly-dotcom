@@ -4,5 +4,11 @@
     "src/components/ui/blur-fade.tsx",
     "src/components/ui/dia-text-reveal.tsx"
   ],
-  "ignoreDependencies": ["babel-plugin-react-compiler"]
+  "ignoreDependencies": ["babel-plugin-react-compiler"],
+  "ignoreExports": [
+    {
+      "file": "src/components/max/max-link.tsx",
+      "exports": ["*"]
+    }
+  ]
 }
