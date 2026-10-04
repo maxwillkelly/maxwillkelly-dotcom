@@ -2,11 +2,15 @@
   "name": "maxwillkelly-dotcom",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
+    "check:quality": "fallow audit --base origin/main --fail-on-issues",
     "format": "biome format --write",
     "email": "email dev -d ./src/emails"
   },
@@ -42,11 +46,11 @@
     "@mdx-js/loader": "^3.1.1",
     "@next/mdx": "^16.3.8",
     "@types/mdx": "^2.0.14",
-    "@types/node": "^26.6.4",
+    "@types/node": "^24.19.1",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "babel-plugin-react-compiler": "^1.0.0",
-    "fallow": "^3.31.0",
+    "fallow": "3.31.0",
     "schema-dts": "^2.1.0",
     "typescript": "^7.0.2"
   },
