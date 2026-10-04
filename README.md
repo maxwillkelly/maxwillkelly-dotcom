@@ -52,9 +52,14 @@ src/
 
 ## Getting Started
 
-Requires [pnpm](https://pnpm.io) (managed via `corepack`).
+Requires Node.js 24.x and [pnpm](https://pnpm.io) (managed via `corepack`).
+The `.nvmrc`, package engine requirement, GitHub Actions, and Vercel use Node.js 24.
 
 ```bash
+# Install and select the Node.js version from .nvmrc (with nvm)
+nvm install
+nvm use
+
 # Enable corepack (if not enabled already)
 corepack enable
 
