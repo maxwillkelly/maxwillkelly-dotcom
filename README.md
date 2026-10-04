@@ -94,7 +94,8 @@ Copy `.env.example` to `.env.local` and fill in the required values:
 
 The [Fallow code quality](.github/workflows/fallow.yml) workflow runs on all pull
 requests and pushes to every branch. It installs dependencies from
-the lockfile and uses `.fallowrc.json` to check for new dead code, duplication,
+the lockfile and runs the [official Fallow GitHub Action](https://github.com/marketplace/actions/fallow-codebase-intelligence)
+with `.fallowrc.json` to check for new dead code, duplication,
 complexity, and styling issues. Findings appear as GitHub Actions annotations
 and fail the check.
 
