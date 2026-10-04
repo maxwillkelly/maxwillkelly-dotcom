@@ -92,15 +92,16 @@ Copy `.env.example` to `.env.local` and fill in the required values:
 
 ## Code Quality
 
-The [Fallow code quality](.github/workflows/fallow.yml) workflow runs on pull
-requests targeting `main` and pushes to `main`. It installs dependencies from
+The [Fallow code quality](.github/workflows/fallow.yml) workflow runs on all pull
+requests and pushes to every branch. It installs dependencies from
 the lockfile and uses `.fallowrc.json` to check for new dead code, duplication,
 complexity, and styling issues. Findings appear as GitHub Actions annotations
 and fail the check.
 
 Pull requests are compared with their base commit; pushes are compared with the
-previous branch commit. Existing findings inherited from the base do not fail
-the audit. To run the same check locally after fetching `origin/main`:
+previous branch commit. The first push of a new branch is compared with the
+repository's default branch. Existing findings inherited from the base do not
+fail the audit. To run the same check locally after fetching `origin/main`:
 
 ```sh
 pnpm check:quality --base origin/main
