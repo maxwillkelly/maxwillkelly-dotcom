@@ -105,6 +105,43 @@ branch and pull request. Run `pnpm check:quality` to audit local changes against
 
 ## Deployment
 
+### Staging
+
+Open the [staging site](https://maxwillkelly-dotcom-git-main-max-kellys-projects-ea88b442.vercel.app)
+to review the latest successful deployment from `main`. Vercel's Git integration
+updates this stable branch URL after each successful build. While a build is
+running, or if it fails, staging continues to serve the previous successful build.
+
+Staging uses the existing `maxwillkelly-dotcom` project and the same production
+build and environment variables that will be released. It does not require a
+separate Vercel project, paid custom environment, or deployment workflow.
+
+The Vercel project settings that keep this working are:
+
+| Setting | Value |
+|---------|-------|
+| Git repository | `maxwillkelly/maxwillkelly-dotcom` |
+| Production branch | `main` |
+| Auto-assign custom production domains | Disabled (`autoAssignCustomDomains: false`) |
+| Deployment Protection | Vercel Authentication with Standard Protection (`all_except_custom_domains`) |
+
+Vercel Authentication protects the staging branch URL and individual deployment
+URLs. Sign in with Max's personal Vercel account (`maxwillkelly`) to view staging.
+Max is the only confirmed team member. Keep team/project access restricted and do
+not grant external access, create shareable links, or enable protection bypasses
+if staging must remain accessible only to Max. Authentication permits authorised
+team/project members; it is not an allowlist for one email address.
+
+To check staging, open its URL in a private browser window and confirm that Vercel
+requires sign-in. Then sign in with Max's account and review the website. In the
+Vercel deployment details, confirm that the branch is `main` and the commit matches
+the latest successful build. The public site stays on its last promoted release.
+
+See Vercel's documentation for [branch URLs](https://vercel.com/docs/deployments/generated-urls)
+and [Vercel Authentication](https://vercel.com/docs/deployment-protection/methods-to-protect-deployments/vercel-authentication).
+
+### Production releases
+
 The website is deployed on [Vercel](https://vercel.com). Pushing to `main`
 creates a production deployment, but Vercel does not automatically assign the
 production domains. The deployment remains **Staged** until it is promoted.
