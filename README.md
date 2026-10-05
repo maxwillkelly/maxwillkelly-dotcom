@@ -6,9 +6,9 @@ Live at [maxwillkelly.com](https://maxwillkelly.com)
 
 ## Tech Stack
 
-- **Framework**: [Next.js 16](https://nextjs.org) (App Router, React Compiler)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com)
-- **Components**: [HeroUI React v3](https://www.heroui.com)
+- **Framework**: [Next.js](https://nextjs.org) (App Router, React Compiler)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com)
+- **Components**: [HeroUI React](https://www.heroui.com)
 - **Animations**: [Motion](https://motion.dev)
 - **Icons**: [Lucide React](https://lucide.dev) + [thesvg/react](https://thesvg.co)
 - **Email**: [Resend](https://resend.com) + React Email
@@ -52,11 +52,18 @@ src/
 
 ## Getting Started
 
-Requires [pnpm](https://pnpm.io) (managed via `corepack`).
+Requires Node.js and [pnpm](https://pnpm.io).
+
+I recommend using [fnm](https://github.com/Schniz/fnm) to use the appropriate
+Node.js version in `.nvmrc`.
 
 ```bash
-# Enable corepack (if not enabled already)
-corepack enable
+# Install and select Node.js
+fnm install
+fnm use
+
+# Install pnpm
+npx get-pnpm
 
 # Install dependencies
 pnpm install
@@ -86,8 +93,15 @@ Copy `.env.example` to `.env.local` and fill in the required values:
 | `pnpm build` | Build for production |
 | `pnpm start` | Start production server |
 | `pnpm lint` | Run Biome linting |
+| `pnpm check:quality` | Audit local changes against `origin/main` with fallow |
 | `pnpm format` | Run Biome formatting |
 | `pnpm email` | Start React Email dev server |
+
+## Code Quality
+
+The [Fallow workflow](.github/workflows/fallow.yml) checks code quality on every
+branch and pull request. Run `pnpm check:quality` to audit local changes against
+`origin/main`; fetch it first to compare with the latest main branch.
 
 ## Deployment
 

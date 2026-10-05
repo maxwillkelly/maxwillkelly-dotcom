@@ -2,11 +2,15 @@
   "name": "maxwillkelly-dotcom",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
+    "check:quality": "fallow audit --base origin/main --fail-on-issues",
     "format": "biome format --write",
     "email": "email dev -d ./src/emails"
   },
@@ -39,15 +43,16 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.15",
-    "typescript": "^7.0.2",
+    "@mdx-js/loader": "^3.1.1",
     "@next/mdx": "^16.3.8",
     "@types/mdx": "^2.0.14",
-    "@types/node": "^26.6.4",
+    "@types/node": "^24.19.1",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "babel-plugin-react-compiler": "^1.0.0",
-    "fallow": "^3.31.0",
-    "schema-dts": "^2.1.0"
+    "fallow": "3.31.0",
+    "schema-dts": "^2.1.0",
+    "typescript": "^7.0.2"
   },
-  "packageManager": "pnpm@12.9.1+sha512.BrBV//XNINwSeB3hc87TMQzglRvy7GICEaFgRdVETVyTpmMhB2TvKaZTphBFm6A2jw50+E2AxUcjz5Wq57wNbQ=="
+  "packageManager": "pnpm@12.9.1+sha512.06b055fff5cd20dc12781de173ced3310ce0951bf2ec620211a16045d5444d5c93a663210764ef29a653a610459ba0368f0e74f84d80c54723cf95aae7bc0d6d"
 }
