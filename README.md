@@ -129,44 +129,6 @@ also triggers the
 workflow. Running that workflow manually performs a dry run only; it does not
 release the website.
 
-Each promotion syncs the shipped changes into Linear, sets the release name and
-version, and completes that exact release. Use the Linear pipeline's existing
-changelog to review shipped changes.
-
-The workflow has three steps: check out the promoted commit, sync the release,
-and complete it using Linear's official release action. Versions use GitHub's
-built-in workflow run number: `v0.1.42`, `v0.1.43`, and so on. Each new run
-increments the number; rerunning a failed run keeps its version. Read-only
-previews and failed runs can leave gaps. These are deployment versions, rather
-than versions based on commit types. No versioning package, Git tags, or custom
-scripts are needed, and `package.json` is unchanged.
-
-Linear's release action selects the commit range using the pipeline's recent
-release history. The workflow no longer maintains a separate Git-tag baseline
-or custom rollback and duplicate-promotion checks. A new promotion event gets a
-new version, even when it promotes the same commit. Promotions queue rather than
-cancel another release sync in progress.
-
-The Max Kelly team's **Workflows & automations → Release automations** rule
-already moves issues to **Done** on completion of any production pipeline,
-including `maxwillkelly-dotcom`. Keep this enabled. Linear completes issues with
-no linked PRs or a merged closing PR, provided no linked PRs remain open; issues
-linked only through contributing PRs remain open. Use a closing issue reference
-on PRs that finish an issue. See [Linear's release automation rules](https://linear.app/docs/releases#status-automations).
-
-The workflow uses the existing `LINEAR_ACCESS_KEY` repository secret and the
-automatic GitHub token with read-only repository access. It
-does not need a personal Linear API key. Linear's pipeline remains **Scheduled**;
-the workflow runs `sync` followed by `complete`, both targeting the same version.
-
-To preview, run **Sync Linear release** manually from the desired branch. Linear
-logs the proposed version and changes in read-only dry-run mode; the completion
-step is skipped. If a promotion workflow fails, rerun that workflow before
-promoting newer changes. Reruns target the same release version.
-
-The release workflow does not install Node or project dependencies. Its actions
-provide their own runtime. Workflows that set up Node read `.nvmrc`.
-
 ## License
 
 MIT
