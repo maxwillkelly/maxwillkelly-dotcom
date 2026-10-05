@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 concurrency:
   group: linear-release-production
@@ -15,7 +16,6 @@ concurrency:
 
 jobs:
   release:
-    if: github.event_name == 'workflow_dispatch' || github.event.client_payload.git.sha != ''
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
@@ -28,6 +28,27 @@ jobs:
           ref: ${{ github.event.client_payload.git.sha || github.sha }}
           fetch-depth: 0
           persist-credentials: false
+
+      - name: Validate promotion
+        if: github.event_name == 'repository_dispatch'
+        env:
+          DEPLOYMENT_SHA: ${{ github.event.client_payload.git.sha }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [[ ! "$DEPLOYMENT_SHA" =~ ^[0-9a-fA-F]{40}$ ]]; then
+            echo '::error::Promotion payload must contain a full deployment commit SHA.'
+            exit 1
+          fi
+
+          # A newer failed run may also have synced to Linear before failing.
+          newer_runs=$(gh api --paginate \
+            "repos/$GITHUB_REPOSITORY/actions/workflows/linear-release.yml/runs?event=repository_dispatch&status=completed&per_page=100" \
+            --jq ".workflow_runs[] | select(.run_number > $GITHUB_RUN_NUMBER) | .html_url")
+          if [[ -n "$newer_runs" ]]; then
+            echo '::error::A newer promotion run has completed. This older run cannot update Linear.'
+            echo "$newer_runs"
+            exit 1
+          fi
 
       - name: Sync Linear release
         uses: linear/linear-release-action@3858a5d7892435dc63302ac76b0cdb587435caa9 # v0
