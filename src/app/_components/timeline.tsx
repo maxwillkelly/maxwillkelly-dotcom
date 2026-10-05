@@ -27,7 +27,7 @@ type TimelineProps = {
   entries: TimelineEntry[];
 };
 
-function TimelineMetadata({ location, start, end }: TimelineEntry) {
+const TimelineMetadata = ({ location, start, end }: TimelineEntry) => {
   return (
     <div className="text-base text-foreground sm:text-right">
       {location && (
@@ -47,9 +47,9 @@ function TimelineMetadata({ location, start, end }: TimelineEntry) {
       )}
     </div>
   );
-}
+};
 
-function TimelineChips({ chips = [] }: Pick<TimelineEntry, "chips">) {
+const TimelineChips = ({ chips = [] }: Pick<TimelineEntry, "chips">) => {
   if (chips.length === 0) return null;
 
   return (
@@ -59,9 +59,9 @@ function TimelineChips({ chips = [] }: Pick<TimelineEntry, "chips">) {
       ))}
     </div>
   );
-}
+};
 
-function TimelineItem({ entry }: { entry: TimelineEntry }) {
+const TimelineItem = ({ entry }: { entry: TimelineEntry }) => {
   const { organisation, description, position, type, content, chips } = entry;
 
   return (
@@ -83,7 +83,7 @@ function TimelineItem({ entry }: { entry: TimelineEntry }) {
       <TimelineChips chips={chips} />
     </div>
   );
-}
+};
 
 export const Timeline = ({ entries }: TimelineProps) => {
   return (

@@ -18,13 +18,13 @@ export const ContactSection = () => {
             If you have any questions or would like to get in touch, please feel
             free to send me an email at{" "}
             <MaxLink
-              iconProps={{ className: linkSlots.icon() }}
               className={linkSlots.base({
                 className: "text-base no-underline hover:underline",
               })}
               href={`mailto:${siteConfig.email}`}
             >
               {siteConfig.email}
+              <MaxLink.Icon className={linkSlots.icon()} />
             </MaxLink>{" "}
             or use this form below to send me a message.
           </p>
