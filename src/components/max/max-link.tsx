@@ -7,7 +7,12 @@ interface Props extends LinkProps {
   children: ReactNode;
 }
 
-export function MaxLink({
+function getExternalLinkDefaults(isExternal: boolean | undefined) {
+  if (!isExternal) return {};
+  return { rel: "noopener noreferrer", target: "_blank" };
+}
+
+function MaxLinkRoot({
   iconProps,
   isExternal,
   children,
@@ -15,11 +20,13 @@ export function MaxLink({
   target,
   ...other
 }: Props) {
+  const defaults = getExternalLinkDefaults(isExternal);
+
   return (
     <Link
       {...other}
-      rel={rel ?? (isExternal ? "noopener noreferrer" : undefined)}
-      target={target ?? (isExternal ? "_blank" : undefined)}
+      rel={rel ?? defaults.rel}
+      target={target ?? defaults.target}
     >
       {children}
       {iconProps && <Link.Icon {...iconProps} />}
@@ -27,6 +34,4 @@ export function MaxLink({
   );
 }
 
-export namespace MaxLink {
-  export const Icon = Link.Icon;
-}
+export const MaxLink = Object.assign(MaxLinkRoot, { Icon: Link.Icon });
