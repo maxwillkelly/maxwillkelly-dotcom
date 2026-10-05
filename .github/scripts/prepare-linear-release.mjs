@@ -81,10 +81,6 @@ function main() {
       .map(([key, value]) => `${key}=${value}\n`)
       .join(""),
   );
-  appendFileSync(
-    process.env.GITHUB_STEP_SUMMARY,
-    "Release notes will be generated in Linear from linked issue titles on completion.\n",
-  );
 }
 
 if (

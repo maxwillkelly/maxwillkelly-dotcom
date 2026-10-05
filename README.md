@@ -130,13 +130,8 @@ workflow. Running that workflow manually performs a dry run only; it does not
 release the website.
 
 Each promotion syncs the shipped changes into Linear, sets the release name and
-version, and completes that exact release. Linear's built-in release-note
-generation then lists the linked issues using their titles and issue links.
-The configured template is saved in
-[linear-release-notes-template.md](.github/linear-release-notes-template.md).
-It instructs Linear Agent to list each issue once using its exact title, without
-commit messages or PR titles. Note generation runs asynchronously in Linear;
-the GitHub workflow does not wait for the generated note.
+version, and completes that exact release. Use the Linear pipeline's existing
+changelog to review shipped changes.
 
 The pinned [GitHub Tag action](https://github.com/mathieudutour/github-tag-action)
 increments the patch number: `v0.1.1`, `v0.1.2`, and so on. The first version
@@ -169,11 +164,6 @@ The workflow uses the existing `LINEAR_ACCESS_KEY` repository secret and the
 automatic GitHub token with permission to create release tags. It
 does not need a personal Linear API key. Linear's pipeline remains **Scheduled**;
 the workflow runs `sync` followed by `complete`, both targeting the same version.
-Keep **Auto-generate on completion** enabled in this pipeline's release-note
-settings, with the template above. Linear Agent uses the issues associated with
-the completed release to generate notes; changes without linked Linear issues
-are not listed. Template changes in the repository must also be copied to the
-pipeline setting. See [Linear's release notes documentation](https://linear.app/docs/releases#release-notes).
 
 To preview, run **Sync Linear release** manually from the desired branch. The
 workflow summary contains the proposed version. The Linear action runs
@@ -182,7 +172,7 @@ If a promotion workflow fails, rerun the failed workflow before promoting newer
 changes. A failed attempt before the tag is recorded proposes the same version;
 reruns after a successful tag are skipped.
 
-Validate the generator locally with
+Validate the release guard locally with
 `node --test .github/scripts/prepare-linear-release.test.mjs`; the
 **Check Linear release automation** workflow also runs these tests when the
 release guard or workflows change. These tests use temporary Git repositories
