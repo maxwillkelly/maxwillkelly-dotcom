@@ -33,22 +33,21 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Resolve push audit base
-        if: github.event_name == 'push'
-        id: audit-base
-        env:
-          BEFORE_SHA: ${{ github.event.before }}
-          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-        run: |
-          base="origin/$DEFAULT_BRANCH"
-          if git cat-file -e "$BEFORE_SHA^{commit}" 2>/dev/null; then
-            base="$BEFORE_SHA"
-          fi
-          echo "ref=$base" >> "$GITHUB_OUTPUT"
-
       - name: Check code quality
+        id: fallow
         uses: fallow-rs/fallow@71369f80d099e25726ad04382f15aef14a251abc # v3.31.0
         with:
-          command: audit
-          changed-since: ${{ steps.audit-base.outputs.ref }}
-          sarif: true
+          format: sarif
+
+      - name: Assign SARIF analysis categories
+        if: always() && steps.fallow.outputs.sarif != ''
+        run: |
+          jq '.runs |= (to_entries | map(.value.automationDetails.id =
+            ("fallow/analysis-" + (.key | tostring) + "/") | .value))' \
+            fallow-results.sarif > fallow-results-categorized.sarif
+
+      - name: Upload SARIF
+        if: always() && steps.fallow.outputs.sarif != ''
+        uses: github/codeql-action/upload-sarif@1c5b675653bb5c22dbe9b12b556ec555138e09fd # v4
+        with:
+          sarif_file: fallow-results-categorized.sarif
