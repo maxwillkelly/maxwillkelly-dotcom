@@ -22,13 +22,6 @@ jobs:
       RELEASE_VERSION: v0.1.${{ github.run_number }}
 
     steps:
-      - name: Check out release commit
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          ref: ${{ github.event.client_payload.git.sha || github.sha }}
-          fetch-depth: 0
-          persist-credentials: false
-
       - name: Validate promotion
         if: github.event_name == 'repository_dispatch'
         env:
@@ -49,6 +42,13 @@ jobs:
             echo "$newer_runs"
             exit 1
           fi
+
+      - name: Check out release commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.client_payload.git.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
 
       - name: Sync Linear release
         uses: linear/linear-release-action@3858a5d7892435dc63302ac76b0cdb587435caa9 # v0
