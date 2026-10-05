@@ -2,27 +2,66 @@ name: Sync Linear release
 
 on:
   repository_dispatch:
-    types:
-      - vercel.deployment.promoted
+    types: [vercel.deployment.promoted]
   workflow_dispatch:
 
 permissions:
   contents: read
+  actions: read
 
-concurrency: linear-release-production
+concurrency:
+  group: linear-release-production
+  cancel-in-progress: false
+  queue: max
 
 jobs:
   release:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      RELEASE_VERSION: v0.1.${{ github.run_number }}
 
     steps:
+      - name: Validate promotion
+        if: github.event_name == 'repository_dispatch'
+        env:
+          DEPLOYMENT_SHA: ${{ github.event.client_payload.git.sha }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [[ ! "$DEPLOYMENT_SHA" =~ ^[0-9a-fA-F]{40}$ ]]; then
+            echo '::error::Promotion payload must contain a full deployment commit SHA.'
+            exit 1
+          fi
+
+          # A newer failed run may also have synced to Linear before failing.
+          newer_runs=$(gh api --paginate \
+            "repos/$GITHUB_REPOSITORY/actions/workflows/linear-release.yml/runs?event=repository_dispatch&status=completed&per_page=100" \
+            --jq ".workflow_runs[] | select(.run_number > $GITHUB_RUN_NUMBER) | .html_url")
+          if [[ -n "$newer_runs" ]]; then
+            echo '::error::A newer promotion run has completed. This older run cannot update Linear.'
+            echo "$newer_runs"
+            exit 1
+          fi
+
       - name: Check out release commit
-        uses: vercel/repository-dispatch/actions/checkout@30f760c6640485cd92f8c785ef361382555fb712 # v1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          ref: ${{ github.event.client_payload.git.sha || github.sha }}
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Sync Linear release
         uses: linear/linear-release-action@3858a5d7892435dc63302ac76b0cdb587435caa9 # v0
         with:
           access_key: ${{ secrets.LINEAR_ACCESS_KEY }}
+          name: Release ${{ env.RELEASE_VERSION }}
+          version: ${{ env.RELEASE_VERSION }}
           dry_run: ${{ github.event_name == 'workflow_dispatch' }}
+
+      - name: Complete Linear release
+        if: github.event_name == 'repository_dispatch'
+        uses: linear/linear-release-action@3858a5d7892435dc63302ac76b0cdb587435caa9 # v0
+        with:
+          access_key: ${{ secrets.LINEAR_ACCESS_KEY }}
+          command: complete
+          version: ${{ env.RELEASE_VERSION }}

@@ -1,32 +1,23 @@
-import { Link, type LinkIconProps, type LinkProps } from "@heroui/react";
+import { Link, type LinkProps } from "@heroui/react";
 import type { ReactNode } from "react";
 
 interface Props extends LinkProps {
-  iconProps?: LinkIconProps;
   isExternal?: boolean;
   children: ReactNode;
 }
 
-export function MaxLink({
-  iconProps,
+export const MaxLink = ({
   isExternal,
   children,
-  rel,
-  target,
+  rel = isExternal ? "noopener noreferrer" : undefined,
+  target = isExternal ? "_blank" : undefined,
   ...other
-}: Props) {
+}: Props) => {
   return (
-    <Link
-      {...other}
-      rel={rel ?? (isExternal ? "noopener noreferrer" : undefined)}
-      target={target ?? (isExternal ? "_blank" : undefined)}
-    >
+    <Link {...other} rel={rel} target={target}>
       {children}
-      {iconProps && <Link.Icon {...iconProps} />}
     </Link>
   );
-}
+};
 
-export namespace MaxLink {
-  export const Icon = Link.Icon;
-}
+MaxLink.Icon = Link.Icon;
