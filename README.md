@@ -133,22 +133,19 @@ Each promotion syncs the shipped changes into Linear, sets the release name and
 version, and completes that exact release. Use the Linear pipeline's existing
 changelog to review shipped changes.
 
-The pinned [GitHub Tag action](https://github.com/mathieudutour/github-tag-action)
-increments the patch number: `v0.1.1`, `v0.1.2`, and so on. The workflow's
-`initial_version: 0.1.0` seeds the first increment; later versions use the highest
-`production/v*` Git tag. The action calculates the next version in dry-run mode.
-A successful release records a tag pointing to
-the promoted commit after Linear completion. Keep these tags: they identify the
-previously released commit and prevent duplicate versions on successful reruns.
-This does not change `package.json` or rebuild the website.
+The workflow has three steps: check out the promoted commit, sync the release,
+and complete it using Linear's official release action. Versions use GitHub's
+built-in workflow run number: `v0.1.42`, `v0.1.43`, and so on. Each new run
+increments the number; rerunning a failed run keeps its version. Read-only
+previews and failed runs can leave gaps. These are deployment versions, rather
+than versions based on commit types. No versioning package, Git tags, or custom
+scripts are needed, and `package.json` is unchanged.
 
-The initial baseline is `fd88ea599e9eb6ebb8593b97917f857d6622cf7a`, the commit
-already synced to the existing Linear release when this automation was added.
-The first automated release includes changes after that commit; later releases
-include changes after the previous production tag. Missing or divergent history
-fails the workflow instead of silently skipping commits. Re-promoting a tagged
-commit does not create a release; an untagged rollback fails and requires manual
-review. Promotions queue rather than cancel another release sync in progress.
+Linear's release action selects the commit range using the pipeline's recent
+release history. The workflow no longer maintains a separate Git-tag baseline
+or custom rollback and duplicate-promotion checks. A new promotion event gets a
+new version, even when it promotes the same commit. Promotions queue rather than
+cancel another release sync in progress.
 
 The Max Kelly team's **Workflows & automations → Release automations** rule
 already moves issues to **Done** on completion of any production pipeline,
@@ -158,23 +155,17 @@ linked only through contributing PRs remain open. Use a closing issue reference
 on PRs that finish an issue. See [Linear's release automation rules](https://linear.app/docs/releases#status-automations).
 
 The workflow uses the existing `LINEAR_ACCESS_KEY` repository secret and the
-automatic GitHub token with permission to create release tags. It
+automatic GitHub token with read-only repository access. It
 does not need a personal Linear API key. Linear's pipeline remains **Scheduled**;
 the workflow runs `sync` followed by `complete`, both targeting the same version.
 
-To preview, run **Sync Linear release** manually from the desired branch. The
-versioning action logs the proposed version. The Linear action runs
-in read-only dry-run mode, and the completion and tag-writing steps are skipped.
-If a promotion workflow fails, rerun the failed workflow before promoting newer
-changes. A failed attempt before the tag is recorded proposes the same version;
-reruns after a successful tag are skipped.
+To preview, run **Sync Linear release** manually from the desired branch. Linear
+logs the proposed version and changes in read-only dry-run mode; the completion
+step is skipped. If a promotion workflow fails, rerun that workflow before
+promoting newer changes. Reruns target the same release version.
 
-Version calculation, release syncing, and completion use the pinned GitHub Tag
-and Linear Release actions. The workflow has no custom Node script or reservation
-tags. It uses short Git commands to validate history and skip already-tagged
-commits. Failed releases do not automatically block newer promotions; rerun a
-failed workflow before promoting another commit to keep the release baseline
-consistent.
+The release workflow does not install Node or project dependencies. Its actions
+provide their own runtime. Workflows that set up Node read `.nvmrc`.
 
 ## License
 

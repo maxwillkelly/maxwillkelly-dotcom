@@ -2,12 +2,11 @@ name: Sync Linear release
 
 on:
   repository_dispatch:
-    types:
-      - vercel.deployment.promoted
+    types: [vercel.deployment.promoted]
   workflow_dispatch:
 
 permissions:
-  contents: write # Record successful releases with production version tags.
+  contents: read
 
 concurrency:
   group: linear-release-production
@@ -16,84 +15,32 @@ concurrency:
 
 jobs:
   release:
+    if: github.event_name == 'workflow_dispatch' || github.event.client_payload.git.sha != ''
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    env:
+      RELEASE_VERSION: v0.1.${{ github.run_number }}
 
     steps:
       - name: Check out release commit
-        id: checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ github.event.client_payload.git.sha || github.sha }}
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Set up Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
-        with:
-          node-version-file: .nvmrc
-
-      - name: Verify production commit
-        if: github.event_name == 'repository_dispatch'
-        env:
-          DEPLOYMENT_SHA: ${{ github.event.client_payload.git.sha }}
-        run: |
-          if [[ ! "$DEPLOYMENT_SHA" =~ ^[0-9a-f]{40}$ ]]; then
-            echo 'Promotion event must contain a full deployment commit SHA.' >&2
-            exit 1
-          fi
-          git merge-base --is-ancestor HEAD origin/main
-
-      - name: Check for a recorded release
-        id: existing
-        run: echo "tag=$(git describe --tags --exact-match --match 'production/v*' HEAD 2>/dev/null || true)" >> "$GITHUB_OUTPUT"
-
-      - name: Calculate next patch version
-        id: version
-        if: steps.existing.outputs.tag == ''
-        uses: mathieudutour/github-tag-action@af99e60ce8132224b8e6ebab5023449fe256ed46 # v7
-        with:
-          github_token: ${{ github.token }}
-          tag_prefix: production/v
-          prefix_match_tag: true
-          initial_version: 0.1.0
-          force_bump: patch
-          commit_sha: ${{ steps.checkout.outputs.commit }}
-          ref: refs/heads/main
-          dry_run: true
-
-      - name: Verify release history
-        if: steps.version.outputs.new_version != ''
-        env:
-          BASE_REF: ${{ steps.version.outputs.latest_release_tag != 'production/v0.0.0' && steps.version.outputs.latest_release_tag || 'fd88ea599e9eb6ebb8593b97917f857d6622cf7a' }}
-        run: git merge-base --is-ancestor "$BASE_REF" HEAD
-
       - name: Sync Linear release
-        id: sync
-        if: steps.version.outputs.new_version != ''
         uses: linear/linear-release-action@3858a5d7892435dc63302ac76b0cdb587435caa9 # v0
         with:
           access_key: ${{ secrets.LINEAR_ACCESS_KEY }}
-          name: Release v${{ steps.version.outputs.new_version }}
-          version: v${{ steps.version.outputs.new_version }}
-          # GitHub Tag reports production/v0.0.0 when there are no matching tags.
-          base_ref: ${{ steps.version.outputs.latest_release_tag != 'production/v0.0.0' && steps.version.outputs.latest_release_tag || 'fd88ea599e9eb6ebb8593b97917f857d6622cf7a' }}
+          name: Release ${{ env.RELEASE_VERSION }}
+          version: ${{ env.RELEASE_VERSION }}
           dry_run: ${{ github.event_name == 'workflow_dispatch' }}
 
       - name: Complete Linear release
-        if: github.event_name == 'repository_dispatch' && steps.sync.outputs.release-id != ''
+        if: github.event_name == 'repository_dispatch'
         uses: linear/linear-release-action@3858a5d7892435dc63302ac76b0cdb587435caa9 # v0
         with:
           access_key: ${{ secrets.LINEAR_ACCESS_KEY }}
           command: complete
-          version: v${{ steps.version.outputs.new_version }}
-
-      - name: Record successful release version
-        if: github.event_name == 'repository_dispatch' && steps.sync.outputs.release-id != ''
-        uses: mathieudutour/github-tag-action@af99e60ce8132224b8e6ebab5023449fe256ed46 # v7
-        with:
-          github_token: ${{ github.token }}
-          tag_prefix: production/v
-          custom_tag: ${{ steps.version.outputs.new_version }}
-          commit_sha: ${{ steps.checkout.outputs.commit }}
-          ref: refs/heads/main
+          version: ${{ env.RELEASE_VERSION }}
