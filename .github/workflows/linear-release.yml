@@ -8,7 +8,6 @@ on:
 
 permissions:
   contents: write # Record successful releases with production version tags.
-  pull-requests: read
 
 concurrency:
   group: linear-release-production
@@ -48,28 +47,56 @@ jobs:
           fi
           git merge-base --is-ancestor HEAD origin/main
 
-      - name: Prepare version and release notes
+      - name: Check release baseline and retry state
         id: prepare
         run: node .github/scripts/prepare-linear-release.mjs
 
-      - name: Reserve version for this production commit
-        if: github.event_name == 'repository_dispatch' && steps.prepare.outputs.reserve == 'true'
+      - name: Calculate next patch version
+        id: bump
+        if: steps.prepare.outputs.publish == 'true' && steps.prepare.outputs.version == ''
+        uses: mathieudutour/github-tag-action@af99e60ce8132224b8e6ebab5023449fe256ed46 # v7
+        with:
+          github_token: ${{ github.token }}
+          tag_prefix: production/v
+          prefix_match_tag: true
+          previous_tag: ${{ steps.prepare.outputs.base }}
+          previous_version: ${{ steps.prepare.outputs.previous_version }}
+          force_bump: patch
+          commit_sha: ${{ steps.prepare.outputs.sha }}
+          ref: refs/heads/main
+          dry_run: true
+
+      - name: Select release version
+        id: version
         env:
-          RELEASE_TAG: ${{ steps.prepare.outputs.reservation_tag }}
-          RELEASE_SHA: ${{ steps.prepare.outputs.sha }}
+          VERSION: ${{ steps.prepare.outputs.version || steps.bump.outputs.new_version }}
+          PUBLISH: ${{ steps.prepare.outputs.publish }}
         run: |
-          gh api --method POST "repos/$GITHUB_REPOSITORY/git/refs" \
-            -f "ref=refs/tags/$RELEASE_TAG" -f "sha=$RELEASE_SHA"
+          if [[ "$PUBLISH" == true && ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo 'Versioning action must return a stable semantic version.' >&2
+            exit 1
+          fi
+          echo "value=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Proposed release version: ${VERSION:-no new release}" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Reserve version for this production commit
+        if: github.event_name == 'repository_dispatch' && steps.prepare.outputs.publish == 'true' && steps.prepare.outputs.reserve == 'true'
+        uses: mathieudutour/github-tag-action@af99e60ce8132224b8e6ebab5023449fe256ed46 # v7
+        with:
+          github_token: ${{ github.token }}
+          tag_prefix: production-reserved/v
+          custom_tag: ${{ steps.version.outputs.value }}
+          commit_sha: ${{ steps.prepare.outputs.sha }}
+          ref: refs/heads/main
 
       - name: Sync Linear release
-        if: steps.prepare.outputs.publish == 'true' || github.event_name == 'workflow_dispatch'
+        if: steps.prepare.outputs.publish == 'true'
         uses: linear/linear-release-action@3858a5d7892435dc63302ac76b0cdb587435caa9 # v0
         with:
           access_key: ${{ secrets.LINEAR_ACCESS_KEY }}
-          name: Release ${{ steps.prepare.outputs.version }}
-          version: ${{ steps.prepare.outputs.version }}
+          name: Release v${{ steps.version.outputs.value }}
+          version: v${{ steps.version.outputs.value }}
           base_ref: ${{ steps.prepare.outputs.base }}
-          release_notes: linear-release-notes.md
           dry_run: ${{ github.event_name == 'workflow_dispatch' }}
 
       - name: Complete Linear release
@@ -78,13 +105,14 @@ jobs:
         with:
           access_key: ${{ secrets.LINEAR_ACCESS_KEY }}
           command: complete
-          version: ${{ steps.prepare.outputs.version }}
+          version: v${{ steps.version.outputs.value }}
 
       - name: Record successful release version
         if: github.event_name == 'repository_dispatch' && steps.prepare.outputs.publish == 'true'
-        env:
-          RELEASE_TAG: ${{ steps.prepare.outputs.tag }}
-          RELEASE_SHA: ${{ steps.prepare.outputs.sha }}
-        run: |
-          gh api --method POST "repos/$GITHUB_REPOSITORY/git/refs" \
-            -f "ref=refs/tags/$RELEASE_TAG" -f "sha=$RELEASE_SHA"
+        uses: mathieudutour/github-tag-action@af99e60ce8132224b8e6ebab5023449fe256ed46 # v7
+        with:
+          github_token: ${{ github.token }}
+          tag_prefix: production/v
+          custom_tag: ${{ steps.version.outputs.value }}
+          commit_sha: ${{ steps.prepare.outputs.sha }}
+          ref: refs/heads/main
