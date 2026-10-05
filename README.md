@@ -134,15 +134,12 @@ version, and completes that exact release. Use the Linear pipeline's existing
 changelog to review shipped changes.
 
 The pinned [GitHub Tag action](https://github.com/mathieudutour/github-tag-action)
-increments the patch number: `v0.1.1`, `v0.1.2`, and so on. The first version
-starts from `package.json`'s current version; later versions use the highest
-`production/v*` Git tag. The action calculates the next version in dry-run mode
-and also publishes reservation and successful-release tags. A successful release records a tag pointing to
+increments the patch number: `v0.1.1`, `v0.1.2`, and so on. The workflow's
+`initial_version: 0.1.0` seeds the first increment; later versions use the highest
+`production/v*` Git tag. The action calculates the next version in dry-run mode.
+A successful release records a tag pointing to
 the promoted commit after Linear completion. Keep these tags: they identify the
 previously released commit and prevent duplicate versions on successful reruns.
-Before syncing, a `production-reserved/v*` tag reserves the version for that
-commit. Until its matching production tag exists, other commits cannot release;
-rerun the unfinished workflow to recover. Keep reservation tags as well.
 This does not change `package.json` or rebuild the website.
 
 The initial baseline is `fd88ea599e9eb6ebb8593b97917f857d6622cf7a`, the commit
@@ -166,18 +163,18 @@ does not need a personal Linear API key. Linear's pipeline remains **Scheduled**
 the workflow runs `sync` followed by `complete`, both targeting the same version.
 
 To preview, run **Sync Linear release** manually from the desired branch. The
-workflow summary contains the proposed version. The Linear action runs
+versioning action logs the proposed version. The Linear action runs
 in read-only dry-run mode, and the completion and tag-writing steps are skipped.
 If a promotion workflow fails, rerun the failed workflow before promoting newer
 changes. A failed attempt before the tag is recorded proposes the same version;
 reruns after a successful tag are skipped.
 
-Validate the release guard locally with
-`node --test .github/scripts/prepare-linear-release.test.mjs`; the
-**Check Linear release automation** workflow also runs these tests when the
-release guard or workflows change. These tests use temporary Git repositories
-and do not modify Linear or production tags. Version calculation is delegated
-to GitHub Tag rather than implemented in the release guard.
+Version calculation, release syncing, and completion use the pinned GitHub Tag
+and Linear Release actions. The workflow has no custom Node script or reservation
+tags. It uses short Git commands to validate history and skip already-tagged
+commits. Failed releases do not automatically block newer promotions; rerun a
+failed workflow before promoting another commit to keep the release baseline
+consistent.
 
 ## License
 
