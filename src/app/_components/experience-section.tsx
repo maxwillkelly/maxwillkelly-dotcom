@@ -97,12 +97,13 @@ const experiences: TimelineEntry[] = [
           React
           <MaxLink.Icon />
         </MaxLink>
-        .
+        . This rewrite led to the Largest Contentful Paint (LCP) time on an
+        average GovernorHub page being halved.
         <br />
-        <br />I helped halve the Largest Contentful Paint (LCP) time on the
-        GovernorHub News page. I also rewrote GovernorHub's file-moving
-        algorithm, reducing the number of queries required for a typical file
-        transfer by around 30%.
+        <br />
+        I've also been responsible for other performance improvements such as
+        rewriting GovernorHub's file-moving algorithm to reduce the number of
+        queries required for a typical file transfer by 30%.
         <br />
         <br />I built processes to triage bugs from customer feedback in{" "}
         <MaxLink
