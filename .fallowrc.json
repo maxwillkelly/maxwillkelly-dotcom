@@ -1,8 +1,12 @@
 {
   "$schema": "./node_modules/fallow/schema.json",
-  "ignoreFindings": [
+  "ignorePatterns": [
     "src/components/ui/blur-fade.tsx",
     "src/components/ui/dia-text-reveal.tsx"
   ],
-  "ignoreDependencies": ["@mdx-js/loader", "babel-plugin-react-compiler"]
+  "ignoreDependencies": [
+    "@mdx-js/loader",
+    "babel-plugin-react-compiler",
+    "motion"
+  ]
 }
