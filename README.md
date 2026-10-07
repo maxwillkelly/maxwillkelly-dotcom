@@ -95,7 +95,7 @@ Copy `.env.example` to `.env.local` and fill in the required values:
 | `pnpm lint`          | Run Oxlint linting and Oxfmt formatting checks            |
 | `pnpm check:quality` | Audit local changes against `origin/main` with fallow     |
 | `pnpm lint:fix`      | Apply Oxlint automatic fixes                              |
-| `pnpm format`        | Apply safe lint fixes, format files and sort imports      |
+| `pnpm format`        | Format files and sort imports                             |
 | `pnpm format:check`  | Check formatting and import sorting without writing files |
 | `pnpm email`         | Start React Email dev server                              |
 
