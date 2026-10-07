@@ -205,22 +205,23 @@ export function DiaTextReveal({
   }, [Array.isArray(text) ? text.join("\0") : text]);
 
   playRef.current = () => {
-    const options = optsRef.current;
+    // oxlint-disable-next-line no-shadow -- Snapshot current options using the same names as the component props.
+    const { duration, delay, repeat, repeatDelay, texts } = optsRef.current;
 
     sweepPos.set(SWEEP_START);
 
     const controls = animate(sweepPos, SWEEP_END, {
-      duration: options.duration,
-      delay: options.delay,
+      duration,
+      delay,
       ease: sweepEase,
       onComplete() {
-        if (!options.repeat) return;
+        if (!repeat) return;
         timerRef.current = setTimeout(() => {
-          const next = (indexRef.current + 1) % options.texts.length;
+          const next = (indexRef.current + 1) % texts.length;
           indexRef.current = next;
           setActiveIndex(next);
           playRef.current();
-        }, options.repeatDelay * 1000);
+        }, repeatDelay * 1000);
       },
     });
 

@@ -101,15 +101,6 @@ Copy `.env.example` to `.env.local` and fill in the required values:
 
 ## Code Quality
 
-Oxlint checks Next.js, React, TypeScript and accessibility rules. The maximum
-control-flow depth is 1, so nested blocks (including nested `if` statements) fail
-linting. Oxfmt formats files and sorts import statements, including the `@/` source alias.
-Oxlint sorts named import members; `pnpm format` applies safe lint fixes,
-including member sorting, then formats files and sorts import statements.
-The [Oxc workflow](.github/workflows/oxc.yml) runs `pnpm lint` on every branch and
-pull request. Install the recommended Oxc VS Code extension for fixes, formatting
-and import sorting on save.
-
 The [Fallow workflow](.github/workflows/fallow.yml) checks code quality on every
 branch and pull request. Run `pnpm check:quality` to audit local changes against
 `origin/main`; fetch it first to compare with the latest main branch.

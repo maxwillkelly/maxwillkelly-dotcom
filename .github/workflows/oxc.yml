@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   oxc:
-    name: Lint and formatting
+    name: Linting and formatting
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
