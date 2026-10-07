@@ -1,5 +1,5 @@
-/** biome-ignore-all lint/correctness/useExhaustiveDependencies: From library */
-/** biome-ignore-all lint/style/noNonNullAssertion: From library */
+/* oxlint-disable react/exhaustive-deps -- From library */
+/* oxlint-disable typescript/no-non-null-assertion -- From library */
 "use client";
 
 import {
@@ -79,11 +79,10 @@ type DiaTextRevealElement =
 /**
  * Props for {@link DiaTextReveal}.
  */
-export interface DiaTextRevealProps
-  extends Omit<
-    HTMLMotionProps<"span">,
-    "ref" | "children" | "style" | "animate" | "transition" | "color"
-  > {
+export interface DiaTextRevealProps extends Omit<
+  HTMLMotionProps<"span">,
+  "ref" | "children" | "style" | "animate" | "transition" | "color"
+> {
   /**
    * HTML element to render.
    * @defaultValue `"span"`
@@ -206,22 +205,22 @@ export function DiaTextReveal({
   }, [Array.isArray(text) ? text.join("\0") : text]);
 
   playRef.current = () => {
-    const { duration, delay, repeat, repeatDelay, texts } = optsRef.current;
+    const options = optsRef.current;
 
     sweepPos.set(SWEEP_START);
 
     const controls = animate(sweepPos, SWEEP_END, {
-      duration,
-      delay,
+      duration: options.duration,
+      delay: options.delay,
       ease: sweepEase,
       onComplete() {
-        if (!repeat) return;
+        if (!options.repeat) return;
         timerRef.current = setTimeout(() => {
-          const next = (indexRef.current + 1) % texts.length;
+          const next = (indexRef.current + 1) % options.texts.length;
           indexRef.current = next;
           setActiveIndex(next);
           playRef.current();
-        }, repeatDelay * 1000);
+        }, options.repeatDelay * 1000);
       },
     });
 

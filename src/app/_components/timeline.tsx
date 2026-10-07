@@ -1,8 +1,10 @@
 import type { ReactNode } from "react";
+
 import {
   formatDateRangeinYearsAndMonths,
   formatDurationinYearsAndMonths,
 } from "@/lib/duration";
+
 import { LinkableChip } from "../../components/ui/linkable-chip";
 
 export type TimelineChip = {
@@ -72,7 +74,7 @@ const TimelineItem = ({ entry }: { entry: TimelineEntry }) => {
         </h3>
         <TimelineMetadata {...entry} />
       </div>
-      {description && description}
+      {description}
       {position && (
         <p className="text-base font-semibold text-foreground">
           {position}

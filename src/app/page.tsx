@@ -1,6 +1,8 @@
 import { connection } from "next/server";
+
 import { BlurFade } from "@/components/ui/blur-fade";
 import { personJsonLd } from "@/lib/site";
+
 import { AboutSection } from "./_components/about-section";
 import { ContactSection } from "./_components/contact-section";
 import { EducationSection } from "./_components/education-section";
@@ -15,7 +17,7 @@ const HomePage = async () => {
     <main className="flex flex-col space-y-12">
       <script
         type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: Structured data must be emitted as JSON-LD.
+        // oxlint-disable-next-line react/no-danger -- Structured data must be emitted as JSON-LD.
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
         }}

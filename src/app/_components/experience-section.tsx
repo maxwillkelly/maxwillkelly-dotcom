@@ -12,6 +12,7 @@ import {
   Typescript,
   Vuedotjs,
 } from "@thesvg/react";
+
 import { MaxLink } from "@/components/max/max-link";
 
 import { Timeline, type TimelineEntry } from "./timeline";

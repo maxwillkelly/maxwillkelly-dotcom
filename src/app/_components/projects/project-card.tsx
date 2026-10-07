@@ -3,6 +3,7 @@
 import { cn, useOverlayState } from "@heroui/react";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
+
 import { ProjectModal } from "./card/project-modal";
 import type { Project } from "./shared/type";
 

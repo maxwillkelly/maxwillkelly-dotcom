@@ -2,6 +2,7 @@
 
 import { buttonVariants, Tooltip } from "@heroui/react";
 import { Ripple } from "m3-ripple";
+
 import { MaxLink } from "@/components/max/max-link";
 
 type Props = {

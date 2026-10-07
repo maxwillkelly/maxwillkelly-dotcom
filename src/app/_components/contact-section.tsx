@@ -1,6 +1,8 @@
 import { linkVariants, Surface } from "@heroui/react";
+
 import { MaxLink } from "@/components/max/max-link";
 import { siteConfig } from "@/lib/site";
+
 import { ContactForm } from "./contact/contact-form";
 
 export const ContactSection = () => {

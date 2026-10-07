@@ -1,5 +1,6 @@
 import { Expo, React, Typescript } from "@thesvg/react";
 import { Zap } from "lucide-react";
+
 import { MaxLink } from "@/components/max/max-link";
 
 import { ProjectCard } from "./projects/project-card";

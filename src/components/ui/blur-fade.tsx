@@ -2,10 +2,10 @@
 
 import {
   AnimatePresence,
-  type MotionProps,
   motion,
-  type UseInViewOptions,
+  type MotionProps,
   useInView,
+  type UseInViewOptions,
   type Variants,
 } from "motion/react";
 import { useRef } from "react";
