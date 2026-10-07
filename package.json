@@ -11,7 +11,7 @@
     "start": "next start",
     "lint": "oxlint --deny-warnings && oxfmt --check",
     "check:quality": "fallow audit --base origin/main --fail-on-issues",
-    "format": "oxlint --fix && oxfmt --write",
+    "format": "oxfmt --write",
     "email": "email dev -d ./src/emails",
     "lint:fix": "oxlint --fix",
     "format:check": "oxfmt --check"
