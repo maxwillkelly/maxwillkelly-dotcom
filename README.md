@@ -36,9 +36,7 @@ src/
 │   ├── favicon.ico
 │   ├── globals.css
 │   ├── layout.tsx
-│   ├── page.tsx
-│   ├── robots.ts
-│   └── sitemap.ts
+│   └── page.tsx
 ├── components/                  # Reusable UI components
 │   ├── max/
 │   └── ui/
