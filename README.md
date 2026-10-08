@@ -33,8 +33,6 @@ src/
 │   │   └── timeline.tsx          # Timeline rendering and metadata schema
 │   ├── actions/
 │   │   └── send-contact-email.tsx
-│   ├── favicon.ico
-│   ├── globals.css
 │   ├── layout.tsx
 │   └── page.tsx
 ├── components/                  # Reusable UI components
