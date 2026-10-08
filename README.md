@@ -24,12 +24,10 @@ src/
 │   ├── _components/              # Page sections and content rendering
 │   │   ├── about-section.tsx
 │   │   ├── contact-section.tsx
-│   │   ├── contact/
 │   │   ├── education-section.tsx
 │   │   ├── experience-section.tsx
 │   │   ├── hero-description.tsx
 │   │   ├── hero-section.tsx
-│   │   ├── hero/
 │   │   ├── projects-section.tsx
 │   │   ├── timeline-section.tsx  # Markdown discovery and date sorting
 │   │   └── timeline.tsx          # Timeline rendering and metadata schema
@@ -42,8 +40,6 @@ src/
 │   ├── robots.ts
 │   └── sitemap.ts
 ├── components/                  # Reusable UI components
-│   ├── max/
-│   └── ui/
 ├── content/                     # Markdown CV copy and timeline metadata
 │   ├── education/
 │   │   └── university-of-dundee.md
