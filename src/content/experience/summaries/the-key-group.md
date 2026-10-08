@@ -1,0 +1,1 @@
+[The Key Group](https://thekeygroup.com/) (trades as The Key Support Services Ltd) is a company that serves 20,000 British state schools, including around 80% of schools in England. It sells SaaS cloud-based products and resources for training and guidance. Most of its products are market leading in the sector they operate in.

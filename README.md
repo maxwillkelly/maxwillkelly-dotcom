@@ -50,6 +50,38 @@ src/
     └── contact-message.tsx   # Zod schema for contact form
 ```
 
+## Content
+
+The single-page portfolio is generated from the Markdown files in `src/content`.
+React components provide layout, icons, animations and the contact form.
+
+- `hero.md` holds the introduction and YAML metadata for site identity, SEO,
+  structured data, image and social links.
+- `profile.md` and `contact.md` hold section headings and copy. Contact form
+  labels, placeholders and button text live in `contact.md` frontmatter.
+- `experience.md`, `education.md` and `projects.md` hold section headings and
+  ordered `entries` lists. Each slug names a Markdown file in the matching folder.
+- Each timeline file holds prose and YAML metadata for `organisation`, optional
+  `position`, `type`, `location`, `start`, `end`, and technology `chips`.
+  An optional `summary` slug references a Markdown file in that folder's
+  `summaries/` directory, displayed before the role heading.
+
+Use quoted ISO calendar dates (`start: "2022-06-28"`). Omit `end` for a current
+role, and omit both dates for an undated project. End dates must not precede start
+dates. Chips can include a `label`, optional URL `href`, and an optional icon name
+from `technologyIcons` in `src/schemas/content.ts`.
+
+To add a timeline entry, create a `.md` file in the relevant folder and add its
+slug to that section's `entries` list in the desired display order. Metadata is
+validated with Zod before rendering. Standard Markdown links use the site's link
+component; HTTP(S) links open externally, while email and internal links keep
+normal navigation behaviour.
+
+Keep prose as standard Markdown and metadata as YAML so a future CV PDF renderer
+can reuse the same sources. PDF generation is not implemented here; `/cv.pdf`
+remains the existing download. Run `pnpm test:content` to verify the content and
+metadata, then `pnpm build` to check the Next.js integration.
+
 ## Getting Started
 
 Requires Node.js and [pnpm](https://pnpm.io).

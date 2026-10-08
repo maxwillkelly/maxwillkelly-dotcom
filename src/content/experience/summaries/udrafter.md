@@ -1,0 +1,1 @@
+Udrafter was a startup that recruited students for micro-internships. It connected businesses with students for short, paid projects that were relevant to the field they had studied. The students would gain practical experience and businesses could get low-risk access to early career talent.
