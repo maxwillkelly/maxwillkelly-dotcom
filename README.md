@@ -57,7 +57,7 @@ src/
 ## Content
 
 CV copy lives in `src/content`. Timeline files use YAML metadata for roles,
-ISO dates and technology IDs mapped in `src/components/max/technologies.tsx`. Folders load
+ISO dates and technology IDs. Folders load
 automatically, newest first. Timeline components live in `src/components/max`.
 
 ## Getting Started
