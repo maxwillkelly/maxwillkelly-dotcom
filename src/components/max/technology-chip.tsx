@@ -48,7 +48,7 @@ export const technologyIds = [
   "vuejs",
 ] as const;
 
-export type TechnologyId = (typeof technologyIds)[number];
+type TechnologyId = (typeof technologyIds)[number];
 
 type Props = {
   technology: TechnologyId;
