@@ -36,8 +36,8 @@ src/
 │   ├── layout.tsx
 │   └── page.tsx
 ├── components/                  # Reusable UI components
-│   ├── max/
-│   └── ui/
+│   ├── max/                     # Components created by me
+│   └── ui/                      # Components from open-source UI libraries
 ├── content/                     # Markdown CV copy and timeline metadata
 │   ├── education/
 │   │   └── university-of-dundee.md
