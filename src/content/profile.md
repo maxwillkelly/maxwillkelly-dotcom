@@ -4,6 +4,8 @@ I'm based in Bristol, United Kingdom, and work at [The Key Group](https://thekey
 
 As part of GovernorHub's engineering team, I work with our principal product lead and other stakeholders to deliver new features and improvements for the largest volunteer workforce in the UK. My role spans the full development lifecycle, from gathering requirements and designing solutions to writing, reviewing and testing code. I also maintain our software by updating dependencies, fixing bugs and monitoring deployments and logs.
 
+I have experience with cloud platforms including Vercel, Amazon Web Services (S3 and SQS) and Google Cloud (Kubernetes, Cloud Logging and Pub/Sub). I also work with continuous integration and continuous delivery (CI/CD) platforms such as GitHub Actions.
+
 I enjoy building high-quality software that automates repetitive tasks and solves problems that make a difference to people's lives.
 
 I use AI coding agents to write, review and test code. I use both [Anthropic](https://www.anthropic.com/) and [OpenAI](https://openai.com/) models regularly through harnesses such as [Claude Code](https://claude.com/product/claude-code), [Codex](https://chatgpt.com/codex/), [OpenCode](https://opencode.ai/) and [PI](https://pi.dev/). I maintain a personal library of agent skills to support this work.
