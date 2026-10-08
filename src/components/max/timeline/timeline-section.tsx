@@ -14,20 +14,17 @@ type Props = {
   title: string;
 };
 
+const compareStartDates = (left?: Date, right?: Date) => {
+  if (!left) return right ? 1 : 0;
+  if (!right) return -1;
+
+  return compareDesc(left, right);
+};
+
 const sortTimelineEntries = (left: TimelineEntry, right: TimelineEntry) => {
-  if (!left.start && right.start) {
-    return 1;
-  }
-
-  if (left.start && !right.start) {
-    return -1;
-  }
-
-  const dateOrder =
-    left.start && right.start ? compareDesc(left.start, right.start) : 0;
-
   return (
-    dateOrder || left.organisation.localeCompare(right.organisation, "en-GB")
+    compareStartDates(left.start, right.start) ||
+    left.organisation.localeCompare(right.organisation, "en-GB")
   );
 };
 

@@ -54,6 +54,7 @@ type Props = {
   technology: TechnologyId;
 };
 
+// fallow-ignore-next-line complexity -- Each technology has one independent rendering case.
 export const TechnologyChip = ({ technology }: Props) => {
   switch (technology) {
     case "c":
