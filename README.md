@@ -21,33 +21,62 @@ Live at [maxwillkelly.com](https://maxwillkelly.com)
 ```text
 src/
 ├── app/
-│   ├── _components/          # Page sections
-│   │   ├── AboutSection.tsx
-│   │   ├── ContactSection.tsx
-│   │   ├── EducationSection.tsx
-│   │   ├── ExperienceSection.tsx
-│   │   ├── HeroSection.tsx
-│   │   ├── ProjectsSection.tsx
-│   │   ├── Timeline.tsx
-│   │   ├── ValuesSection.tsx
-│   │   └── contact/
-│   │       └── ContactForm.tsx
+│   ├── _components/              # Page sections and content rendering
+│   │   ├── about-section.tsx
+│   │   ├── contact-section.tsx
+│   │   ├── contact/
+│   │   │   ├── contact-form.tsx
+│   │   │   ├── github-icon.tsx
+│   │   │   └── linked-in-icon.tsx
+│   │   ├── education-section.tsx
+│   │   ├── experience-section.tsx
+│   │   ├── hero-description.tsx
+│   │   ├── hero-section.tsx
+│   │   ├── hero/
+│   │   │   └── social-icon.tsx
+│   │   ├── projects-section.tsx
+│   │   ├── timeline-section.tsx  # Markdown discovery and date sorting
+│   │   └── timeline.tsx          # Timeline rendering and metadata schema
 │   ├── actions/
-│   │   └── sendContactEmail.tsx  # Server action for contact form
+│   │   └── send-contact-email.tsx
+│   ├── favicon.ico
 │   ├── globals.css
 │   ├── layout.tsx
-│   └── page.tsx
-├── components/ui/            # Reusable UI components
-│   ├── blur-fade.tsx
-│   └── dia-text-reveal.tsx
+│   ├── page.tsx
+│   ├── robots.ts
+│   └── sitemap.ts
+├── components/                  # Reusable UI components
+│   ├── max/
+│   │   └── max-link.tsx
+│   └── ui/
+│       ├── blur-fade.tsx
+│       ├── controller-text-area.tsx
+│       ├── controller-text-field.tsx
+│       ├── dia-text-reveal.tsx
+│       └── linkable-chip.tsx
+├── content/                     # Markdown CV copy and timeline metadata
+│   ├── education/
+│   │   └── university-of-dundee.md
+│   ├── experience/
+│   │   ├── the-key-group.md
+│   │   └── udrafter.md
+│   ├── hero.md
+│   ├── profile.md
+│   └── projects/
+│       └── ev-charging-analyser.md
 ├── emails/
-│   └── ContactEmailTemplate.tsx
+│   └── contact-email-template.tsx
 ├── lib/
-│   ├── duration.ts           # Date formatting utilities
-│   ├── env.ts                # Environment validation (t3-env)
-│   └── utils.ts              # cn() helper
-└── schemas/
-    └── contact-message.tsx   # Zod schema for contact form
+│   ├── duration.ts              # Date formatting utilities
+│   ├── env.ts                   # Environment validation (t3-env)
+│   ├── headers.ts
+│   ├── site.ts                  # Site metadata and links
+│   ├── technologies.tsx         # Technology IDs, labels, logos and links
+│   └── utils.ts                 # cn() helper
+├── schemas/
+│   └── contact-message.tsx       # Zod schema for contact form
+└── types/
+    └── markdown.d.ts            # Markdown module declarations
 ```
 
 ## Content
