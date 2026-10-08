@@ -14,9 +14,14 @@ type Props = {
   title: string;
 };
 
-const compareEntries = (left: TimelineEntry, right: TimelineEntry) => {
-  if (!left.start && right.start) return 1;
-  if (left.start && !right.start) return -1;
+const sortTimelineEntries = (left: TimelineEntry, right: TimelineEntry) => {
+  if (!left.start && right.start) {
+    return 1;
+  }
+
+  if (left.start && !right.start) {
+    return -1;
+  }
 
   const dateOrder =
     left.start && right.start ? compareDesc(left.start, right.start) : 0;
@@ -31,14 +36,17 @@ export const TimelineSection = async ({ section, title }: Props) => {
     path.join(process.cwd(), "src/content", section),
     { withFileTypes: true },
   );
-  const slugs = files
-    .filter((file) => file.isFile() && file.name.endsWith(".md"))
-    .map((file) => file.name.slice(0, -3));
+
+  const filenames = files
+    .filter((file) => file.isFile())
+    .map((file) => file.name);
+
   const entries = await Promise.all(
-    slugs.map(async (slug): Promise<TimelineEntry> => {
+    filenames.map(async (filename): Promise<TimelineEntry> => {
       const { default: Content, frontmatter } = await import(
-        `@/content/${section}/${slug}.md`
+        `@/content/${section}/${filename}`
       );
+
       const entry = timelineMetadataSchema.parse(frontmatter);
 
       return {
@@ -52,10 +60,12 @@ export const TimelineSection = async ({ section, title }: Props) => {
     }),
   );
 
+  const sortedEntries = entries.toSorted(sortTimelineEntries);
+
   return (
     <section id={section}>
       <h2 className="text-xl font-bold">{title}</h2>
-      <Timeline entries={entries.toSorted(compareEntries)} />
+      <Timeline entries={sortedEntries} />
     </section>
   );
 };
