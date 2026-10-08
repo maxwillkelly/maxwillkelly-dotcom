@@ -53,7 +53,7 @@ src/
 ## Content
 
 CV content lives in the Markdown files in `src/content`. React components provide
-timeline headings, display order, layout and interactive website features.
+timeline headings, layout and interactive website features.
 
 - `hero.md` and `profile.md` hold the introduction and profile copy.
 - Files in `experience/`, `education/` and `projects/` hold prose and YAML
@@ -73,9 +73,11 @@ chips:
 ```
 
 Labels, logos and links are defined once in `src/lib/technologies.tsx`. To add a
-timeline entry, create a `.md` file in the relevant folder and add its slug to
-the matching section component's `entries` array in the desired display order.
-Metadata is validated with Zod before rendering. Site metadata and contact copy
+timeline entry, create a `.md` file in the relevant folder. Each section scans
+its folder for Markdown entries and sorts them by start date, newest first.
+Undated entries appear last; matching dates are ordered by organisation name.
+Summary subfolders are loaded only when referenced by an entry. Metadata is
+validated with Zod before rendering. Site metadata and contact copy
 remain defined in code.
 
 Keep prose as standard Markdown and metadata as YAML so a future CV PDF renderer

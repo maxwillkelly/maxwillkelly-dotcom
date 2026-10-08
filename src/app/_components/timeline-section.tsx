@@ -1,3 +1,6 @@
+import { readdir } from "node:fs/promises";
+import path from "node:path";
+
 import { technologies } from "@/lib/technologies";
 import { timelineDate, timelineMetadataSchema } from "@/schemas/content";
 
@@ -6,14 +9,21 @@ import { Timeline, type TimelineEntry } from "./timeline";
 type Props = {
   section: "experience" | "education" | "projects";
   title: string;
-  entries: string[];
 };
 
-export const TimelineSection = async ({
-  section,
-  title,
-  entries: slugs,
-}: Props) => {
+const compareEntries = (left: TimelineEntry, right: TimelineEntry) =>
+  (right.start?.getTime() ?? -Infinity) -
+    (left.start?.getTime() ?? -Infinity) ||
+  left.organisation.localeCompare(right.organisation, "en-GB");
+
+export const TimelineSection = async ({ section, title }: Props) => {
+  const files = await readdir(
+    path.join(process.cwd(), "src/content", section),
+    { withFileTypes: true },
+  );
+  const slugs = files
+    .filter((file) => file.isFile() && file.name.endsWith(".md"))
+    .map((file) => file.name.slice(0, -3));
   const entries = await Promise.all(
     slugs.map(async (slug): Promise<TimelineEntry> => {
       const { default: Content, frontmatter } = await import(
@@ -43,7 +53,7 @@ export const TimelineSection = async ({
   return (
     <section id={section}>
       <h2 className="text-xl font-bold">{title}</h2>
-      <Timeline entries={entries} />
+      <Timeline entries={entries.toSorted(compareEntries)} />
     </section>
   );
 };

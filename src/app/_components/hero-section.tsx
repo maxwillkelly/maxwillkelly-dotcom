@@ -8,17 +8,8 @@ import { siteConfig } from "@/lib/site";
 
 import { GithubIcon } from "./contact/github-icon";
 import { LinkedInIcon } from "./contact/linked-in-icon";
+import { HeroDescription } from "./hero-description";
 import { SocialIcon } from "./hero/social-icon";
-
-const HeroDescription = ({ children }: { children?: React.ReactNode }) => {
-  if (typeof children !== "string") {
-    return <p className="text-lg font-light mt-4">{children}</p>;
-  }
-
-  return (
-    <DiaTextReveal as="p" className="text-lg font-light mt-4" text={children} />
-  );
-};
 
 export const HeroSection = () => {
   return (

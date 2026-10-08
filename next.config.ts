@@ -6,6 +6,9 @@ import "./src/lib/env";
 const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   reactCompiler: true,
+  outputFileTracingIncludes: {
+    "/": ["./src/content/**/*.md"],
+  },
 };
 
 const withMDX = createMDX({
