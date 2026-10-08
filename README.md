@@ -25,15 +25,11 @@ src/
 │   │   ├── about-section.tsx
 │   │   ├── contact-section.tsx
 │   │   ├── contact/
-│   │   │   ├── contact-form.tsx
-│   │   │   ├── github-icon.tsx
-│   │   │   └── linked-in-icon.tsx
 │   │   ├── education-section.tsx
 │   │   ├── experience-section.tsx
 │   │   ├── hero-description.tsx
 │   │   ├── hero-section.tsx
 │   │   ├── hero/
-│   │   │   └── social-icon.tsx
 │   │   ├── projects-section.tsx
 │   │   ├── timeline-section.tsx  # Markdown discovery and date sorting
 │   │   └── timeline.tsx          # Timeline rendering and metadata schema
@@ -47,13 +43,7 @@ src/
 │   └── sitemap.ts
 ├── components/                  # Reusable UI components
 │   ├── max/
-│   │   └── max-link.tsx
 │   └── ui/
-│       ├── blur-fade.tsx
-│       ├── controller-text-area.tsx
-│       ├── controller-text-field.tsx
-│       ├── dia-text-reveal.tsx
-│       └── linkable-chip.tsx
 ├── content/                     # Markdown CV copy and timeline metadata
 │   ├── education/
 │   │   └── university-of-dundee.md
