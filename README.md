@@ -40,14 +40,10 @@ src/
 │   └── ui/                      # Components from open-source UI libraries
 ├── content/                     # Markdown CV copy and timeline metadata
 │   ├── education/
-│   │   └── university-of-dundee.md
 │   ├── experience/
-│   │   ├── the-key-group.md
-│   │   └── udrafter.md
 │   ├── hero.md
 │   ├── profile.md
 │   └── projects/
-│       └── ev-charging-analyser.md
 ├── emails/
 │   └── contact-email-template.tsx
 ├── lib/
