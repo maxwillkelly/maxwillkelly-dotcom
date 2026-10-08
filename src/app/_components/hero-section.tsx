@@ -7,6 +7,7 @@ import { siteConfig } from "@/lib/site";
 
 import { GithubIcon } from "./contact/github-icon";
 import { LinkedInIcon } from "./contact/linked-in-icon";
+import { HeroContent } from "./hero-description";
 import { SocialIcon } from "./hero/social-icon";
 
 export const HeroSection = () => {
@@ -19,11 +20,7 @@ export const HeroSection = () => {
             className="pb-1 text-6xl font-bold"
             text={siteConfig.name}
           />
-          <DiaTextReveal
-            as="p"
-            className="text-lg font-light mt-4"
-            text={`I'm a ${siteConfig.jobTitle} that builds interactive applications with an eye for small details.`}
-          />
+          <HeroContent />
         </div>
         <BlurFade delay={0.4}>
           <div className="flex gap-2">

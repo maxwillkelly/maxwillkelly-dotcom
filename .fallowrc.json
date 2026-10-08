@@ -7,6 +7,8 @@
   "ignoreDependencies": [
     "@mdx-js/loader",
     "babel-plugin-react-compiler",
-    "motion"
+    "motion",
+    "remark-frontmatter",
+    "remark-mdx-frontmatter"
   ]
 }

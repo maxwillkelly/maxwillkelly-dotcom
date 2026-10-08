@@ -21,33 +21,37 @@ Live at [maxwillkelly.com](https://maxwillkelly.com)
 ```text
 src/
 ├── app/
-│   ├── _components/          # Page sections
-│   │   ├── AboutSection.tsx
-│   │   ├── ContactSection.tsx
-│   │   ├── EducationSection.tsx
-│   │   ├── ExperienceSection.tsx
-│   │   ├── HeroSection.tsx
-│   │   ├── ProjectsSection.tsx
-│   │   ├── Timeline.tsx
-│   │   ├── ValuesSection.tsx
-│   │   └── contact/
-│   │       └── ContactForm.tsx
+│   ├── _components/                  # Page sections and content rendering
+│   │   ├── about-section.tsx
+│   │   ├── contact-section.tsx
+│   │   ├── education-section.tsx
+│   │   ├── experience-section.tsx
+│   │   ├── hero-description.tsx
+│   │   ├── hero-section.tsx
+│   │   └── projects-section.tsx
 │   ├── actions/
-│   │   └── sendContactEmail.tsx  # Server action for contact form
-│   ├── globals.css
+│   │   └── send-contact-email.tsx    # Next.js server action
 │   ├── layout.tsx
 │   └── page.tsx
-├── components/ui/            # Reusable UI components
-│   ├── blur-fade.tsx
-│   └── dia-text-reveal.tsx
+├── components/                       # Reusable UI components
+│   ├── max/                          # Components created by me
+│   └── ui/                           # Components from open-source UI libraries
+├── content/                          # Markdown CV copy and timeline metadata
+│   ├── education/
+│   ├── experience/
+│   ├── hero.md
+│   ├── profile.md
+│   └── projects/
 ├── emails/
-│   └── ContactEmailTemplate.tsx
+│   └── contact-email-template.tsx
 ├── lib/
-│   ├── duration.ts           # Date formatting utilities
-│   ├── env.ts                # Environment validation (t3-env)
-│   └── utils.ts              # cn() helper
+│   ├── duration.ts                   # Date formatting utilities
+│   ├── env.ts                        # Environment validation (t3-env)
+│   ├── headers.ts
+│   ├── site.ts                       # Site metadata and links
+│   └── utils.ts                      # cn() helper
 └── schemas/
-    └── contact-message.tsx   # Zod schema for contact form
+    └── contact-message.tsx           # Zod schema for contact form
 ```
 
 ## Getting Started
@@ -128,8 +132,7 @@ vercel promote <deployment-url-or-id>
 Promotion assigns the production domains without rebuilding the deployment. It
 also triggers the
 [`Sync Linear release`](.github/workflows/linear-release.yml) GitHub Actions
-workflow. Running that workflow manually performs a dry run only; it does not
-release the website.
+workflow.
 
 ## License
 

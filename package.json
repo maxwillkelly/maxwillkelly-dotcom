@@ -54,6 +54,8 @@
     "fallow": "3.31.0",
     "oxfmt": "^0.72.0",
     "oxlint": "^1.87.0",
+    "remark-frontmatter": "^5.0.0",
+    "remark-mdx-frontmatter": "^6.0.0",
     "schema-dts": "^2.1.0",
     "typescript": "^7.0.2"
   },
