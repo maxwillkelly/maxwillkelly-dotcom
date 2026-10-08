@@ -57,10 +57,8 @@ src/
 │   ├── site.ts                  # Site metadata and links
 │   ├── technologies.tsx         # Technology IDs, labels, logos and links
 │   └── utils.ts                 # cn() helper
-├── schemas/
-│   └── contact-message.tsx       # Zod schema for contact form
-└── types/
-    └── markdown.d.ts            # Markdown module declarations
+└── schemas/
+    └── contact-message.tsx       # Zod schema for contact form
 ```
 
 ## Content
