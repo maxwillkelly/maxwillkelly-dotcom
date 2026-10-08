@@ -1,20 +1,12 @@
 import { Expo, React, Typescript } from "@thesvg/react";
-import { Zap } from "lucide-react";
 
 import { MaxLink } from "@/components/max/max-link";
 
-import { ProjectCard } from "./projects/project-card";
-import type { Project } from "./projects/shared/type";
+import { Timeline, type TimelineEntry } from "./timeline";
 
-const projects: Project[] = [
+const projects: TimelineEntry[] = [
   {
-    title: "EV Charging Analyser",
-    summary:
-      "A manufacturer-agnostic companion app for electric vehicles. Drivers can perform actions such as unlocking their car, seeing its location and contributing charging data to academic research.",
-    icon: <Zap className="size-5" />,
-    href: "https://github.com/maxwillkelly/ev-charging-analyser/wiki",
-    hrefLabel: "View on GitHub",
-    colSpan: "sm:col-span-2",
+    organisation: "EV Charging Analyser",
     chips: [
       {
         label: "TypeScript",
@@ -34,7 +26,7 @@ const projects: Project[] = [
       { label: "Next.js", href: "https://nextjs.org/" },
     ],
     content: (
-      <>
+      <p>
         <MaxLink
           className="text-base no-underline hover:underline"
           href="https://github.com/maxwillkelly/ev-charging-analyser/wiki"
@@ -82,7 +74,7 @@ const projects: Project[] = [
         </MaxLink>
         . Each project has its own GitHub repository, deployment mechanisms,
         CI/CD tools and documentation.
-      </>
+      </p>
     ),
   },
 ];
@@ -91,11 +83,7 @@ export const ProjectsSection = () => {
   return (
     <section id="projects">
       <h2 className="text-xl font-bold">Projects</h2>
-      <div className="mt-4 grid auto-rows-fr grid-cols-1 gap-4 sm:grid-cols-2">
-        {projects.map((project) => (
-          <ProjectCard key={project.title} project={project} />
-        ))}
-      </div>
+      <Timeline entries={projects} />
     </section>
   );
 };
