@@ -2,18 +2,11 @@ import { parseISO } from "date-fns";
 import type { ReactNode } from "react";
 import { z } from "zod";
 
-import { LinkableChip } from "@/components/ui/linkable-chip";
+import { TechnologyChip, technologyIds } from "@/components/max/technologies";
 import {
   formatDateRangeinYearsAndMonths,
   formatDurationinYearsAndMonths,
 } from "@/lib/duration";
-import { technologies, type TechnologyId } from "@/lib/technologies";
-
-export type TimelineChip = {
-  label: string;
-  icon?: ReactNode;
-  href?: string;
-};
 
 const text = z.string().min(1);
 const date = z.iso.date().transform((value) => parseISO(value));
@@ -28,10 +21,7 @@ export const timelineMetadataSchema = z
       .optional(),
     start: date.optional(),
     end: date.optional(),
-    chips: z
-      .array(z.enum(Object.keys(technologies) as TechnologyId[]))
-      .default([])
-      .transform((ids) => ids.map((id) => technologies[id])),
+    chips: z.array(z.enum(technologyIds)).default([]),
   })
   .refine(
     ({ start, end }) => !end || (start !== undefined && end >= start),
@@ -74,7 +64,7 @@ const TimelineChips = ({ chips = [] }: Pick<TimelineEntry, "chips">) => {
   return (
     <div className="flex flex-wrap gap-2">
       {chips.map((chip) => (
-        <LinkableChip key={chip.label} {...chip} />
+        <TechnologyChip key={chip} technology={chip} />
       ))}
     </div>
   );
