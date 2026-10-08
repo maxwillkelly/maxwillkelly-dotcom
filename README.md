@@ -40,6 +40,8 @@ src/
 │   ├── robots.ts
 │   └── sitemap.ts
 ├── components/                  # Reusable UI components
+│   ├── max/
+│   └── ui/
 ├── content/                     # Markdown CV copy and timeline metadata
 │   ├── education/
 │   │   └── university-of-dundee.md
