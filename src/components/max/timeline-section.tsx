@@ -1,6 +1,8 @@
 import { readdir } from "node:fs/promises";
 import path from "node:path";
 
+import { compareDesc } from "date-fns";
+
 import {
   Timeline,
   type TimelineEntry,
@@ -12,10 +14,17 @@ type Props = {
   title: string;
 };
 
-const compareEntries = (left: TimelineEntry, right: TimelineEntry) =>
-  (right.start?.getTime() ?? -Infinity) -
-    (left.start?.getTime() ?? -Infinity) ||
-  left.organisation.localeCompare(right.organisation, "en-GB");
+const compareEntries = (left: TimelineEntry, right: TimelineEntry) => {
+  if (!left.start && right.start) return 1;
+  if (left.start && !right.start) return -1;
+
+  const dateOrder =
+    left.start && right.start ? compareDesc(left.start, right.start) : 0;
+
+  return (
+    dateOrder || left.organisation.localeCompare(right.organisation, "en-GB")
+  );
+};
 
 export const TimelineSection = async ({ section, title }: Props) => {
   const files = await readdir(
