@@ -21,7 +21,7 @@ Live at [maxwillkelly.com](https://maxwillkelly.com)
 ```text
 src/
 ├── app/
-│   ├── _components/              # Page sections and content rendering
+│   ├── _components/                  # Page sections and content rendering
 │   │   ├── about-section.tsx
 │   │   ├── contact-section.tsx
 │   │   ├── education-section.tsx
@@ -30,13 +30,13 @@ src/
 │   │   ├── hero-section.tsx
 │   │   └── projects-section.tsx
 │   ├── actions/
-│   │   └── send-contact-email.tsx
+│   │   └── send-contact-email.tsx    # Next.js server action
 │   ├── layout.tsx
 │   └── page.tsx
-├── components/                  # Reusable UI components
-│   ├── max/                     # Components created by me
-│   └── ui/                      # Components from open-source UI libraries
-├── content/                     # Markdown CV copy and timeline metadata
+├── components/                       # Reusable UI components
+│   ├── max/                          # Components created by me
+│   └── ui/                           # Components from open-source UI libraries
+├── content/                          # Markdown CV copy and timeline metadata
 │   ├── education/
 │   ├── experience/
 │   ├── hero.md
@@ -45,20 +45,14 @@ src/
 ├── emails/
 │   └── contact-email-template.tsx
 ├── lib/
-│   ├── duration.ts              # Date formatting utilities
-│   ├── env.ts                   # Environment validation (t3-env)
+│   ├── duration.ts                   # Date formatting utilities
+│   ├── env.ts                        # Environment validation (t3-env)
 │   ├── headers.ts
-│   ├── site.ts                  # Site metadata and links
-│   └── utils.ts                 # cn() helper
+│   ├── site.ts                       # Site metadata and links
+│   └── utils.ts                      # cn() helper
 └── schemas/
-    └── contact-message.tsx       # Zod schema for contact form
+    └── contact-message.tsx           # Zod schema for contact form
 ```
-
-## Content
-
-CV copy lives in `src/content`. Timeline files use YAML metadata for roles,
-ISO dates and technology IDs. Folders load
-automatically, newest first. Timeline components live in `src/components/max`.
 
 ## Getting Started
 
@@ -138,8 +132,7 @@ vercel promote <deployment-url-or-id>
 Promotion assigns the production domains without rebuilding the deployment. It
 also triggers the
 [`Sync Linear release`](.github/workflows/linear-release.yml) GitHub Actions
-workflow. Running that workflow manually performs a dry run only; it does not
-release the website.
+workflow.
 
 ## License
 
