@@ -4,17 +4,11 @@ import Image from "next/image";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { DiaTextReveal } from "@/components/ui/dia-text-reveal";
 import HeroContent from "@/content/hero.md";
-import { heroMetadata, siteConfig } from "@/lib/site";
+import { siteConfig } from "@/lib/site";
 
 import { GithubIcon } from "./contact/github-icon";
 import { LinkedInIcon } from "./contact/linked-in-icon";
 import { SocialIcon } from "./hero/social-icon";
-
-const socialIcons = {
-  DownloadCloud,
-  Github: GithubIcon,
-  LinkedIn: LinkedInIcon,
-};
 
 const HeroDescription = ({ children }: { children?: React.ReactNode }) => {
   if (typeof children !== "string") {
@@ -40,19 +34,25 @@ export const HeroSection = () => {
         </div>
         <BlurFade delay={0.4}>
           <div className="flex gap-2">
-            {heroMetadata.socialLinks.map(({ label, href, icon, download }) => {
-              const Icon = socialIcons[icon];
-              return (
-                <SocialIcon
-                  key={label}
-                  ariaLabel={label}
-                  tooltipContent={label}
-                  href={href}
-                  download={download}
-                  icon={<Icon />}
-                />
-              );
-            })}
+            <SocialIcon
+              ariaLabel="Download CV"
+              download={`${siteConfig.name} - CV.pdf`}
+              href="/cv.pdf"
+              icon={<DownloadCloud />}
+              tooltipContent="Download CV"
+            />
+            <SocialIcon
+              ariaLabel="GitHub"
+              href="https://github.com/maxwillkelly"
+              icon={<GithubIcon />}
+              tooltipContent="GitHub"
+            />
+            <SocialIcon
+              ariaLabel="LinkedIn"
+              href="https://www.linkedin.com/in/maxwillkelly"
+              icon={<LinkedInIcon />}
+              tooltipContent="LinkedIn"
+            />
           </div>
         </BlurFade>
       </div>
@@ -61,7 +61,7 @@ export const HeroSection = () => {
         className="size-24 shrink-0 rounded-xl object-cover sm:size-32"
         height={400}
         priority
-        src={siteConfig.image}
+        src="/profile.jpg"
         width={400}
       />
     </section>

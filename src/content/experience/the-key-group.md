@@ -6,33 +6,16 @@ location: "Bristol"
 start: "2022-06-28"
 summary: the-key-group
 chips:
-  - label: "React"
-    icon: React
-    href: "https://react.dev/"
-  - label: "Next.js"
-    href: "https://nextjs.org/"
-  - label: "JavaScript"
-    icon: Javascript
-  - label: "TypeScript"
-    icon: Typescript
-    href: "https://www.typescriptlang.org/"
-  - label: "Node.js"
-    icon: Nodedotjs
-    href: "https://nodejs.org/"
-  - label: "gRPC"
-    href: "https://grpc.io/"
-  - label: "GraphQL"
-    icon: Graphql
-    href: "https://graphql.org/"
-  - label: "MongoDB"
-    icon: Mongodb
-    href: "https://www.mongodb.com/"
-  - label: "Firebase"
-    icon: Firebase
-    href: "https://firebase.google.com/"
-  - label: "Docker"
-    icon: Docker
-    href: "https://www.docker.com/"
+  - react
+  - nextjs
+  - javascript
+  - typescript
+  - nodejs
+  - grpc
+  - graphql
+  - mongodb
+  - firebase
+  - docker
 ---
 
 I work as a Software Engineer on [GovernorHub](https://governorhub.com/), the leading online service for school governors and trustees.

@@ -15,7 +15,6 @@ import {
   type ContactMessage,
   contactMessageSchema,
 } from "@/schemas/contact-message";
-import type { ContactFormCopy } from "@/schemas/content";
 
 type ContactFormState =
   | { status: "idle" }
@@ -25,24 +24,23 @@ type ContactFormState =
 const getSubmitButtonContent = (
   state: ContactFormState,
   isPending: boolean,
-  copy: ContactFormCopy,
 ) => {
   if (isPending) {
-    return { label: copy.pending, icon: <Spinner color="current" size="sm" /> };
+    return { label: "Sending...", icon: <Spinner color="current" size="sm" /> };
   }
 
   if (state.status === "success") {
-    return { label: copy.success, icon: <Check /> };
+    return { label: "Sent", icon: <Check /> };
   }
 
   if (state.status === "error") {
     return { label: state.message, icon: <SendHorizontal /> };
   }
 
-  return { label: copy.submit, icon: <SendHorizontal /> };
+  return { label: "Send message", icon: <SendHorizontal /> };
 };
 
-export const ContactForm = ({ copy }: { copy: ContactFormCopy }) => {
+export const ContactForm = () => {
   const { control, handleSubmit, reset } = useForm<ContactMessage>({
     defaultValues: {
       firstName: "",
@@ -76,7 +74,7 @@ export const ContactForm = ({ copy }: { copy: ContactFormCopy }) => {
   };
 
   const isSuccess = state.status === "success" && !isPending;
-  const submitButtonContent = getSubmitButtonContent(state, isPending, copy);
+  const submitButtonContent = getSubmitButtonContent(state, isPending);
 
   return (
     <form
@@ -87,15 +85,15 @@ export const ContactForm = ({ copy }: { copy: ContactFormCopy }) => {
         <ControllerTextField
           control={control}
           name="firstName"
-          label={copy.firstName.label}
-          placeholder={copy.firstName.placeholder}
+          label="First Name"
+          placeholder="John"
           className="px-3 md:w-1/2"
         />
         <ControllerTextField
           control={control}
           name="lastName"
-          label={copy.lastName.label}
-          placeholder={copy.lastName.placeholder}
+          label="Last Name"
+          placeholder="Smith"
           className="px-3 md:w-1/2"
         />
       </div>
@@ -103,24 +101,24 @@ export const ContactForm = ({ copy }: { copy: ContactFormCopy }) => {
         <ControllerTextField
           control={control}
           name="email"
-          label={copy.email.label}
-          placeholder={copy.email.placeholder}
+          label="Email"
+          placeholder="john.smith@email.com"
           type="email"
           className="px-3 md:w-1/2"
         />
         <ControllerTextField
           control={control}
           name="subtitle"
-          label={copy.subtitle.label}
-          placeholder={copy.subtitle.placeholder}
+          label="Subtitle"
+          placeholder="Hello"
           className="px-3 md:w-1/2"
         />
       </div>
       <ControllerTextArea
         control={control}
         name="message"
-        label={copy.message.label}
-        placeholder={copy.message.placeholder}
+        label="Message"
+        placeholder="Let's rock 'n' roll"
         className="px-3"
       />
       <div className="flex flex-row-reverse">

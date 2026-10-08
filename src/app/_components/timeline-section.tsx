@@ -1,68 +1,19 @@
-import {
-  C,
-  Cplusplus,
-  Csharp,
-  Docker,
-  Dotnet,
-  Electron,
-  Expo,
-  Express,
-  Firebase,
-  Graphql,
-  Java,
-  Javascript,
-  MicrosoftSqlServer,
-  Mongodb,
-  Nestjs,
-  Nodedotjs,
-  React,
-  Typescript,
-  Vuedotjs,
-} from "@thesvg/react";
-import type { MDXContent } from "mdx/types";
-
-import {
-  timelineDate,
-  timelineMetadataSchema,
-  timelineSectionSchema,
-} from "@/schemas/content";
+import { technologies } from "@/lib/technologies";
+import { timelineDate, timelineMetadataSchema } from "@/schemas/content";
 
 import { Timeline, type TimelineEntry } from "./timeline";
 
-const icons = {
-  C,
-  Cplusplus,
-  Csharp,
-  Docker,
-  Dotnet,
-  Electron,
-  Expo,
-  Express,
-  Firebase,
-  Graphql,
-  Java,
-  Javascript,
-  MicrosoftSqlServer,
-  Mongodb,
-  Nestjs,
-  Nodedotjs,
-  React,
-  Typescript,
-  Vuedotjs,
-};
-
 type Props = {
   section: "experience" | "education" | "projects";
-  Heading: MDXContent;
-  metadata: unknown;
+  title: string;
+  entries: string[];
 };
 
 export const TimelineSection = async ({
   section,
-  Heading,
-  metadata,
+  title,
+  entries: slugs,
 }: Props) => {
-  const { entries: slugs } = timelineSectionSchema.parse(metadata);
   const entries = await Promise.all(
     slugs.map(async (slug): Promise<TimelineEntry> => {
       const { default: Content, frontmatter } = await import(
@@ -70,7 +21,6 @@ export const TimelineSection = async ({
       );
       const { start, end, chips, summary, ...entry } =
         timelineMetadataSchema.parse(frontmatter);
-
       const Summary = summary
         ? (await import(`@/content/${section}/summaries/${summary}.md`)).default
         : undefined;
@@ -85,26 +35,14 @@ export const TimelineSection = async ({
             <Content />
           </div>
         ),
-        chips: chips.map(({ icon, ...chip }) => {
-          const Icon = icon ? icons[icon] : undefined;
-          return {
-            ...chip,
-            icon: Icon ? (
-              icon === "Mongodb" ? (
-                <Icon height={12} />
-              ) : (
-                <Icon width={12} />
-              )
-            ) : undefined,
-          };
-        }),
+        chips: chips.map((id) => technologies[id]),
       };
     }),
   );
 
   return (
     <section id={section}>
-      <Heading />
+      <h2 className="text-xl font-bold">{title}</h2>
       <Timeline entries={entries} />
     </section>
   );

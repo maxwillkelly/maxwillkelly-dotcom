@@ -1,11 +1,9 @@
-import Heading, { frontmatter } from "@/content/projects.md";
-
 import { TimelineSection } from "./timeline-section";
 
 export const ProjectsSection = () => (
   <TimelineSection
     section="projects"
-    Heading={Heading}
-    metadata={frontmatter}
+    title="Projects"
+    entries={["ev-charging-analyser"]}
   />
 );

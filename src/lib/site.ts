@@ -1,18 +1,25 @@
 import type { Person, WithContext } from "schema-dts";
 
-import { frontmatter } from "@/content/hero.md";
-import { heroMetadataSchema } from "@/schemas/content";
-
 import { absoluteUrl } from "./utils";
 
-export const heroMetadata = heroMetadataSchema.parse(frontmatter);
-const {
-  socialLinks: _socialLinks,
-  addressLocality,
-  addressCountry,
-  ...site
-} = heroMetadata;
-export const siteConfig = site;
+export const siteConfig = {
+  name: "Max Kelly",
+  additionalName: "Maxwill Kelly",
+  givenName: "Max",
+  familyName: "Kelly",
+  title: "Max Kelly | Software Engineer",
+  description:
+    "Max Kelly is a Bristol-based software engineer building interactive applications with an eye for small details.",
+  url: "https://www.maxwillkelly.com",
+  email: "maxwill.kelly@gmail.com",
+  location: "Bristol, United Kingdom",
+  jobTitle: "Software Engineer",
+  image: "/profile.jpg",
+  sameAs: [
+    "https://github.com/maxwillkelly",
+    "https://www.linkedin.com/in/maxwillkelly",
+  ],
+} as const;
 
 export const personJsonLd = {
   "@context": "https://schema.org",
@@ -22,7 +29,7 @@ export const personJsonLd = {
   email: `mailto:${siteConfig.email}`,
   address: {
     "@type": "PostalAddress",
-    addressLocality,
-    addressCountry,
+    addressLocality: "Bristol",
+    addressCountry: "GB",
   },
 } as const satisfies WithContext<Person>;

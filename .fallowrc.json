@@ -8,6 +8,7 @@
     "@mdx-js/loader",
     "babel-plugin-react-compiler",
     "motion",
-    "react-dom"
+    "remark-frontmatter",
+    "remark-mdx-frontmatter"
   ]
 }

@@ -8,7 +8,6 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "test:content": "node --test tests/content.test.mjs",
     "start": "next start",
     "lint": "oxlint --deny-warnings && oxfmt --check",
     "check:quality": "fallow audit --base origin/main --fail-on-issues",

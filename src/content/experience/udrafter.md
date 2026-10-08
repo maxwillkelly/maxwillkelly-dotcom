@@ -7,23 +7,12 @@ start: "2020-09-01"
 end: "2021-09-01"
 summary: udrafter
 chips:
-  - label: "JavaScript"
-    icon: Javascript
-  - label: "Vue.js"
-    icon: Vuedotjs
-    href: "https://vuejs.org/"
-  - label: ".NET Core"
-    icon: Dotnet
-    href: "https://dotnet.microsoft.com/"
-  - label: "C#"
-    icon: Csharp
-    href: "https://learn.microsoft.com/en-us/dotnet/csharp/"
-  - label: "SQL Server"
-    icon: MicrosoftSqlServer
-    href: "https://www.microsoft.com/en-us/sql-server"
-  - label: "Docker"
-    icon: Docker
-    href: "https://www.docker.com/"
+  - javascript
+  - vuejs
+  - dotnet-core
+  - csharp
+  - sql-server
+  - docker
 ---
 
 Initially, I worked as a React developer in tandem with a .NET developer on Udrafter's platform.

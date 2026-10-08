@@ -3,51 +3,22 @@ organisation: "University of Dundee"
 start: "2018-09-01"
 end: "2022-09-01"
 chips:
-  - label: "JavaScript"
-    icon: Javascript
-  - label: "TypeScript"
-    icon: Typescript
-    href: "https://www.typescriptlang.org/"
-  - label: "React"
-    icon: React
-    href: "https://react.dev/"
-  - label: "C#"
-    icon: Csharp
-    href: "https://learn.microsoft.com/en-us/dotnet/csharp/"
-  - label: ".NET"
-    icon: Dotnet
-    href: "https://dotnet.microsoft.com/"
-  - label: "Node.js"
-    icon: Nodedotjs
-    href: "https://nodejs.org/"
-  - label: "Express"
-    icon: Express
-    href: "https://expressjs.com/"
-  - label: "NestJS"
-    icon: Nestjs
-    href: "https://nestjs.com/"
-  - label: "GraphQL"
-    icon: Graphql
-    href: "https://graphql.org/"
-  - label: "Docker"
-    icon: Docker
-    href: "https://www.docker.com/"
-  - label: "React Native"
-    icon: React
-    href: "https://reactnative.dev/"
-  - label: "Expo"
-    icon: Expo
-    href: "https://expo.dev/"
-  - label: "Electron"
-    icon: Electron
-    href: "https://www.electronjs.org/"
-  - label: "C"
-    icon: C
-  - label: "C++"
-    icon: Cplusplus
-  - label: "Java"
-    icon: Java
-    href: "https://www.java.com/"
+  - javascript
+  - typescript
+  - react
+  - csharp
+  - dotnet
+  - nodejs
+  - express
+  - nestjs
+  - graphql
+  - docker
+  - react-native
+  - expo
+  - electron
+  - c
+  - cplusplus
+  - java
 ---
 
 I attended the [University of Dundee](https://www.dundee.ac.uk/) from 2018 to 2022 and graduated with a First Class Honours degree in [Computing Science](https://www.dundee.ac.uk/undergraduate/computer-science).
