@@ -20,7 +20,7 @@ import {
   Vuedotjs,
 } from "@thesvg/react";
 
-import type { TimelineChip } from "@/app/_components/timeline";
+import type { TimelineChip } from "@/components/max/timeline";
 
 export const technologies = {
   c: {

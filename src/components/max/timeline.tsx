@@ -2,13 +2,12 @@ import { parseISO } from "date-fns";
 import type { ReactNode } from "react";
 import { z } from "zod";
 
+import { LinkableChip } from "@/components/ui/linkable-chip";
 import {
   formatDateRangeinYearsAndMonths,
   formatDurationinYearsAndMonths,
 } from "@/lib/duration";
 import { technologies, type TechnologyId } from "@/lib/technologies";
-
-import { LinkableChip } from "../../components/ui/linkable-chip";
 
 export type TimelineChip = {
   label: string;
