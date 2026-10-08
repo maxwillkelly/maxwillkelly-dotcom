@@ -7,7 +7,7 @@ import {
   Timeline,
   type TimelineEntry,
   timelineMetadataSchema,
-} from "./timeline";
+} from "../timeline";
 
 type Props = {
   section: "experience" | "education" | "projects";

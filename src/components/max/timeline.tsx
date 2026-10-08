@@ -2,7 +2,10 @@ import { parseISO } from "date-fns";
 import type { ReactNode } from "react";
 import { z } from "zod";
 
-import { TechnologyChip, technologyIds } from "@/components/max/technologies";
+import {
+  TechnologyChip,
+  technologyIds,
+} from "@/components/max/technology-chip";
 import {
   formatDateRangeinYearsAndMonths,
   formatDurationinYearsAndMonths,
