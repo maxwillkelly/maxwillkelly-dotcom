@@ -52,37 +52,9 @@ src/
 
 ## Content
 
-CV content lives in the Markdown files in `src/content`. React components provide
-timeline headings, layout and interactive website features.
-
-- `hero.md` and `profile.md` hold the introduction and profile copy.
-- Files in `experience/`, `education/` and `projects/` hold prose and YAML
-  metadata for `organisation`, optional `position`, `type`, `location`, `start`,
-  `end`, and technology `chips`. An optional `summary` slug references a Markdown
-  file in that folder's `summaries/` directory, displayed before the role heading.
-
-Use quoted ISO calendar dates (`start: "2022-06-28"`). Omit `end` for a current
-role, and omit both dates for an undated project. End dates must not precede start
-dates. Chips are simple technology IDs, for example:
-
-```yaml
-chips:
-  - typescript
-  - react-native
-  - expo
-```
-
-Labels, logos and links are defined once in `src/lib/technologies.tsx`. To add a
-timeline entry, create a `.md` file in the relevant folder. Each section scans
-its folder for Markdown entries and sorts them by start date, newest first.
-Undated entries appear last; matching dates are ordered by organisation name.
-Summary subfolders are loaded only when referenced by an entry. Metadata is
-validated with Zod before rendering. Site metadata and contact copy
-remain defined in code.
-
-Keep prose as standard Markdown and metadata as YAML so a future CV PDF renderer
-can reuse the same sources. PDF generation is not implemented here; `/cv.pdf`
-remains the existing download. Run `pnpm build` to check the Next.js integration.
+CV copy lives in `src/content`. Timeline files use YAML metadata for roles,
+ISO dates and technology IDs mapped in `src/lib/technologies.tsx`. Folders load
+automatically, newest first.
 
 ## Getting Started
 

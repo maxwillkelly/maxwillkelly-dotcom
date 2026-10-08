@@ -1,9 +1,12 @@
+import { parseISO } from "date-fns";
 import type { ReactNode } from "react";
+import { z } from "zod";
 
 import {
   formatDateRangeinYearsAndMonths,
   formatDurationinYearsAndMonths,
 } from "@/lib/duration";
+import { technologies, type TechnologyId } from "@/lib/technologies";
 
 import { LinkableChip } from "../../components/ui/linkable-chip";
 
@@ -13,16 +16,31 @@ export type TimelineChip = {
   href?: string;
 };
 
-export type TimelineEntry = {
-  organisation: string;
-  position?: string;
-  location?: string;
-  type?: "Full-time" | "Part-time" | "Contractor" | "Freelancer";
-  start?: Date;
-  end?: Date;
-  description?: ReactNode;
+const text = z.string().min(1);
+const date = z.iso.date().transform((value) => parseISO(value));
+
+export const timelineMetadataSchema = z
+  .object({
+    organisation: text,
+    position: text.optional(),
+    location: text.optional(),
+    type: z
+      .enum(["Full-time", "Part-time", "Contractor", "Freelancer"])
+      .optional(),
+    start: date.optional(),
+    end: date.optional(),
+    chips: z
+      .array(z.enum(Object.keys(technologies) as TechnologyId[]))
+      .default([])
+      .transform((ids) => ids.map((id) => technologies[id])),
+  })
+  .refine(
+    ({ start, end }) => !end || (start !== undefined && end >= start),
+    "End date requires a start date and cannot precede it",
+  );
+
+export type TimelineEntry = z.infer<typeof timelineMetadataSchema> & {
   content: ReactNode;
-  chips?: TimelineChip[];
 };
 
 type TimelineProps = {
@@ -64,7 +82,7 @@ const TimelineChips = ({ chips = [] }: Pick<TimelineEntry, "chips">) => {
 };
 
 const TimelineItem = ({ entry }: { entry: TimelineEntry }) => {
-  const { organisation, description, position, type, content, chips } = entry;
+  const { organisation, position, type, content, chips } = entry;
 
   return (
     <div className="flex flex-col gap-4 py-2">
@@ -74,7 +92,6 @@ const TimelineItem = ({ entry }: { entry: TimelineEntry }) => {
         </h3>
         <TimelineMetadata {...entry} />
       </div>
-      {description}
       {position && (
         <p className="text-base font-semibold text-foreground">
           {position}

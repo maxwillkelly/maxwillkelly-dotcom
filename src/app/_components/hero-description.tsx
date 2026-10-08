@@ -1,10 +1,7 @@
 import { DiaTextReveal } from "@/components/ui/dia-text-reveal";
+import MarkdownContent from "@/content/hero.md";
 
-export const HeroDescription = ({
-  children,
-}: {
-  children?: React.ReactNode;
-}) => {
+const HeroDescription = ({ children }: { children?: React.ReactNode }) => {
   if (typeof children !== "string") {
     return <p className="text-lg font-light mt-4">{children}</p>;
   }
@@ -13,3 +10,7 @@ export const HeroDescription = ({
     <DiaTextReveal as="p" className="text-lg font-light mt-4" text={children} />
   );
 };
+
+export const HeroContent = () => (
+  <MarkdownContent components={{ p: HeroDescription }} />
+);

@@ -3,12 +3,11 @@ import Image from "next/image";
 
 import { BlurFade } from "@/components/ui/blur-fade";
 import { DiaTextReveal } from "@/components/ui/dia-text-reveal";
-import HeroContent from "@/content/hero.md";
 import { siteConfig } from "@/lib/site";
 
 import { GithubIcon } from "./contact/github-icon";
 import { LinkedInIcon } from "./contact/linked-in-icon";
-import { HeroDescription } from "./hero-description";
+import { HeroContent } from "./hero-description";
 import { SocialIcon } from "./hero/social-icon";
 
 export const HeroSection = () => {
@@ -21,7 +20,7 @@ export const HeroSection = () => {
             className="pb-1 text-6xl font-bold"
             text={siteConfig.name}
           />
-          <HeroContent components={{ p: HeroDescription }} />
+          <HeroContent />
         </div>
         <BlurFade delay={0.4}>
           <div className="flex gap-2">

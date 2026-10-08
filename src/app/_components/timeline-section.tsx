@@ -1,10 +1,11 @@
 import { readdir } from "node:fs/promises";
 import path from "node:path";
 
-import { technologies } from "@/lib/technologies";
-import { timelineDate, timelineMetadataSchema } from "@/schemas/content";
-
-import { Timeline, type TimelineEntry } from "./timeline";
+import {
+  Timeline,
+  type TimelineEntry,
+  timelineMetadataSchema,
+} from "./timeline";
 
 type Props = {
   section: "experience" | "education" | "projects";
@@ -29,23 +30,15 @@ export const TimelineSection = async ({ section, title }: Props) => {
       const { default: Content, frontmatter } = await import(
         `@/content/${section}/${slug}.md`
       );
-      const { start, end, chips, summary, ...entry } =
-        timelineMetadataSchema.parse(frontmatter);
-      const Summary = summary
-        ? (await import(`@/content/${section}/summaries/${summary}.md`)).default
-        : undefined;
+      const entry = timelineMetadataSchema.parse(frontmatter);
 
       return {
         ...entry,
-        start: timelineDate(start),
-        end: timelineDate(end),
-        description: Summary ? <Summary /> : undefined,
         content: (
           <div className="flex flex-col gap-4">
             <Content />
           </div>
         ),
-        chips: chips.map((id) => technologies[id]),
       };
     }),
   );
