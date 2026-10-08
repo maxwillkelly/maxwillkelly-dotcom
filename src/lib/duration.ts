@@ -1,5 +1,6 @@
 import { format, intervalToDuration } from "date-fns";
 import { enGB } from "date-fns/locale";
+
 import { nonFalsey } from "./utils";
 
 export const formatDateRangeinYearsAndMonths = (start: Date, end?: Date) => {
@@ -8,22 +9,22 @@ export const formatDateRangeinYearsAndMonths = (start: Date, end?: Date) => {
   }`;
 };
 
+const formatDurationPart = (value: number, unit: string) => {
+  switch (value) {
+    case 0:
+      return undefined;
+    case 1:
+      return `1 ${unit}`;
+    default:
+      return `${value} ${unit}s`;
+  }
+};
+
 export const formatDurationinYearsAndMonths = (
   start: Date,
   end: Date = new Date(),
 ) => {
   const { years = 0, months = 0 } = intervalToDuration({ start, end });
-
-  const formatDurationPart = (value: number, unit: string) => {
-    switch (value) {
-      case 0:
-        return undefined;
-      case 1:
-        return `1 ${unit}`;
-      default:
-        return `${value} ${unit}s`;
-    }
-  };
 
   const parts = [
     formatDurationPart(years, "yr"),

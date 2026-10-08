@@ -15,6 +15,7 @@ import {
   React,
   Typescript,
 } from "@thesvg/react";
+
 import { MaxLink } from "@/components/max/max-link";
 
 import { Timeline, type TimelineEntry } from "./timeline";

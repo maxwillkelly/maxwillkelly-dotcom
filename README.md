@@ -14,7 +14,7 @@ Live at [maxwillkelly.com](https://maxwillkelly.com)
 - **Email**: [Resend](https://resend.com) + React Email
 - **Rate Limiting**: Upstash Redis
 - **Analytics**: Vercel Analytics
-- **Linting/Formatting**: Biome
+- **Linting/Formatting**: Oxlint and Oxfmt
 
 ## Project Structure
 
@@ -78,24 +78,26 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 Copy `.env.example` to `.env.local` and fill in the required values:
 
-| Variable | Description |
-|----------|-------------|
-| `RESEND_API_KEY` | Resend API key for sending contact emails |
-| `SEND_EMAIL` | Verified sender email address |
-| `UPSTASH_REDIS_REST_URL` | Upstash Redis REST URL for rate limiting |
-| `UPSTASH_REDIS_REST_TOKEN` | Upstash Redis REST token |
+| Variable                   | Description                               |
+| -------------------------- | ----------------------------------------- |
+| `RESEND_API_KEY`           | Resend API key for sending contact emails |
+| `SEND_EMAIL`               | Verified sender email address             |
+| `UPSTASH_REDIS_REST_URL`   | Upstash Redis REST URL for rate limiting  |
+| `UPSTASH_REDIS_REST_TOKEN` | Upstash Redis REST token                  |
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start development server |
-| `pnpm build` | Build for production |
-| `pnpm start` | Start production server |
-| `pnpm lint` | Run Biome linting |
-| `pnpm check:quality` | Audit local changes against `origin/main` with fallow |
-| `pnpm format` | Run Biome formatting |
-| `pnpm email` | Start React Email dev server |
+| Command              | Description                                               |
+| -------------------- | --------------------------------------------------------- |
+| `pnpm dev`           | Start development server                                  |
+| `pnpm build`         | Build for production                                      |
+| `pnpm start`         | Start production server                                   |
+| `pnpm lint`          | Run Oxlint linting and Oxfmt formatting checks            |
+| `pnpm check:quality` | Audit local changes against `origin/main` with fallow     |
+| `pnpm lint:fix`      | Apply Oxlint automatic fixes                              |
+| `pnpm format`        | Format files and sort imports                             |
+| `pnpm format:check`  | Check formatting and import sorting without writing files |
+| `pnpm email`         | Start React Email dev server                              |
 
 ## Code Quality
 

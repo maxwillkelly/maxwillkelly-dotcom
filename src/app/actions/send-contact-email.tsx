@@ -7,7 +7,6 @@ import { Resend } from "resend";
 import ContactEmailTemplate from "@/emails/contact-email-template";
 import { env } from "@/lib/env";
 import { getIpAddress } from "@/lib/headers";
-
 import {
   type ContactMessage,
   contactMessageSchema,

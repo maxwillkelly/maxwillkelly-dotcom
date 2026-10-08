@@ -1,5 +1,6 @@
 import { cn } from "@heroui/react";
 import type { MDXComponents } from "mdx/types";
+
 import { MaxLink } from "@/components/max/max-link";
 
 const components = {

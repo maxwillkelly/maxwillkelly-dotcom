@@ -1,5 +1,5 @@
-/** biome-ignore-all lint/correctness/useExhaustiveDependencies: From library */
-/** biome-ignore-all lint/style/noNonNullAssertion: From library */
+/* oxlint-disable react/exhaustive-deps -- From library */
+/* oxlint-disable typescript/no-non-null-assertion -- From library */
 "use client";
 
 import {
@@ -79,11 +79,10 @@ type DiaTextRevealElement =
 /**
  * Props for {@link DiaTextReveal}.
  */
-export interface DiaTextRevealProps
-  extends Omit<
-    HTMLMotionProps<"span">,
-    "ref" | "children" | "style" | "animate" | "transition" | "color"
-  > {
+export interface DiaTextRevealProps extends Omit<
+  HTMLMotionProps<"span">,
+  "ref" | "children" | "style" | "animate" | "transition" | "color"
+> {
   /**
    * HTML element to render.
    * @defaultValue `"span"`
@@ -206,6 +205,7 @@ export function DiaTextReveal({
   }, [Array.isArray(text) ? text.join("\0") : text]);
 
   playRef.current = () => {
+    // oxlint-disable-next-line no-shadow -- Snapshot current options using the same names as the component props.
     const { duration, delay, repeat, repeatDelay, texts } = optsRef.current;
 
     sweepPos.set(SWEEP_START);
