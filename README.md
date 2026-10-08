@@ -28,9 +28,7 @@ src/
 │   │   ├── experience-section.tsx
 │   │   ├── hero-description.tsx
 │   │   ├── hero-section.tsx
-│   │   ├── projects-section.tsx
-│   │   ├── timeline-section.tsx  # Markdown discovery and date sorting
-│   │   └── timeline.tsx          # Timeline rendering and metadata schema
+│   │   └── projects-section.tsx
 │   ├── actions/
 │   │   └── send-contact-email.tsx
 │   ├── layout.tsx
@@ -51,7 +49,6 @@ src/
 │   ├── env.ts                   # Environment validation (t3-env)
 │   ├── headers.ts
 │   ├── site.ts                  # Site metadata and links
-│   ├── technologies.tsx         # Technology IDs, labels, logos and links
 │   └── utils.ts                 # cn() helper
 └── schemas/
     └── contact-message.tsx       # Zod schema for contact form
@@ -60,8 +57,8 @@ src/
 ## Content
 
 CV copy lives in `src/content`. Timeline files use YAML metadata for roles,
-ISO dates and technology IDs mapped in `src/lib/technologies.tsx`. Folders load
-automatically, newest first.
+ISO dates and technology IDs mapped in `src/components/max/technologies.tsx`. Folders load
+automatically, newest first. Timeline components live in `src/components/max`.
 
 ## Getting Started
 
