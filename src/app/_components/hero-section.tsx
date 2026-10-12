@@ -59,19 +59,16 @@ export const HeroSection = () => {
             download={`${siteConfig.name} - CV.pdf`}
             href="/cv.pdf"
             icon={<DownloadCloud />}
-            tooltipContent="Download CV"
           />
           <SocialIcon
             ariaLabel="GitHub"
             href="https://github.com/maxwillkelly"
             icon={<GithubIcon />}
-            tooltipContent="GitHub"
           />
           <SocialIcon
             ariaLabel="LinkedIn"
             href="https://www.linkedin.com/in/maxwillkelly"
             icon={<LinkedInIcon />}
-            tooltipContent="LinkedIn"
           />
         </div>
       </BlurFade>
