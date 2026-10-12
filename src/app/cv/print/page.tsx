@@ -1,8 +1,9 @@
 import type { MDXComponents } from "mdx/types";
 import type { Metadata } from "next";
 
+import About from "@/content/about.md";
 import Hero from "@/content/hero.md";
-import Profile from "@/content/profile.md";
+import HowIWork from "@/content/how-i-work.md";
 import {
   formatDateRangeinYearsAndMonths,
   formatDurationinYearsAndMonths,
@@ -90,7 +91,8 @@ export default async function CvPrintPage() {
         </div>
       </header>
       <section>
-        <Profile components={components} />
+        <About components={components} />
+        <HowIWork components={components} />
       </section>
       <CvTimeline section="experience" title="Experience" />
       <CvTimeline section="education" title="Education" />
