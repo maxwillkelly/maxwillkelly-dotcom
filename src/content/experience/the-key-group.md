@@ -15,6 +15,7 @@ chips:
   - mongodb
   - google-cloud
   - aws
+  - vercel
   - firebase
   - docker
 ---
@@ -34,3 +35,7 @@ I work as a Software Engineer on [GovernorHub](https://governorhub.com/), the le
 - **Cross-team integrations:** I designed and built integrations with products maintained by other teams, including a subscriptions system using [Google Cloud Pub/Sub](https://cloud.google.com/pubsub).
 
 - **Onboarding and collaboration:** I onboard and train new engineers, and work with product managers and other stakeholders to gather requirements and write technical specifications.
+
+- **CI/CD:** I've learned how to set up Github Actions and CircleCI to provide automatically check and build deployments
+
+- **Security:** I treat security concerns as an urgent priority and take care to protect personal and sensitive data. I work within legal, ethical and information security requirements relevant to my role, including data protection requirements under GDPR and standards such as ISO 27001.
