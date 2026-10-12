@@ -21,8 +21,6 @@ chips:
   - java
 ---
 
-I attended the [University of Dundee](https://www.dundee.ac.uk/) from 2018 to 2022 and graduated with a First Class Honours degree in [Computing Science](https://www.dundee.ac.uk/undergraduate/computer-science).
+I attended the [University of Dundee](https://www.dundee.ac.uk/) from 2018 to 2022 and graduated with a **First Class Honours** degree in [Computing Science](https://www.dundee.ac.uk/undergraduate/computer-science).
 
-Unlike other computing degrees which place a great deal of emphasis on the theoretical mathematics underpinning computing, my course was centred around learning practical skills for the workplace.
-
-Most of our course was spent doing projects which were completed in teams, and we were encouraged to collaborate and learn a variety of different programming languages and skills.
+Unlike some other computer science degrees, my course was centred around learning practical skills for the workplace. I spent most of the course completing software projects in teams. I learned how to collaborate with my fellow engineers and learn a variety of different programming languages and skills.

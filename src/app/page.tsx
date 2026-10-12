@@ -8,6 +8,7 @@ import { ContactSection } from "./_components/contact-section";
 import { EducationSection } from "./_components/education-section";
 import { ExperienceSection } from "./_components/experience-section";
 import { HeroSection } from "./_components/hero-section";
+import { HowIWorkSection } from "./_components/how-i-work-section";
 import { ProjectsSection } from "./_components/projects-section";
 
 const HomePage = async () => {
@@ -25,7 +26,10 @@ const HomePage = async () => {
       <HeroSection />
       <BlurFade delay={0.6}>
         <div className="flex flex-col space-y-12">
-          <AboutSection />
+          <div className="space-y-12 [&>section]:flex [&>section]:flex-col [&>section]:gap-4 [&>section>ul]:space-y-4">
+            <AboutSection />
+            <HowIWorkSection />
+          </div>
           <ExperienceSection />
           <EducationSection />
           <ProjectsSection />
