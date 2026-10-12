@@ -11,6 +11,7 @@ chips:
   - dotnet-core
   - csharp
   - sql-server
+  - aws
   - docker
 ---
 

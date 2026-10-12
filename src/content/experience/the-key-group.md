@@ -13,6 +13,8 @@ chips:
   - grpc
   - graphql
   - mongodb
+  - google-cloud
+  - aws
   - firebase
   - docker
 ---

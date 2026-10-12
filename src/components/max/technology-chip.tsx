@@ -1,4 +1,5 @@
 import {
+  AmazonWebServices,
   C,
   Cplusplus,
   Csharp,
@@ -8,6 +9,7 @@ import {
   Expo,
   Express,
   Firebase,
+  GoogleCloud,
   Graphql,
   Java,
   Javascript,
@@ -23,6 +25,7 @@ import {
 import { LinkableChip } from "@/components/ui/linkable-chip";
 
 export const technologyIds = [
+  "aws",
   "c",
   "cplusplus",
   "csharp",
@@ -33,6 +36,7 @@ export const technologyIds = [
   "expo",
   "express",
   "firebase",
+  "google-cloud",
   "graphql",
   "grpc",
   "java",
@@ -57,6 +61,14 @@ type Props = {
 // fallow-ignore-next-line complexity -- Each technology has one independent rendering case.
 export const TechnologyChip = ({ technology }: Props) => {
   switch (technology) {
+    case "aws":
+      return (
+        <LinkableChip
+          label="Amazon Web Services"
+          icon={<AmazonWebServices width={12} />}
+          href="https://aws.amazon.com/"
+        />
+      );
     case "c":
       return <LinkableChip label="C" icon={<C width={12} />} />;
     case "cplusplus":
@@ -123,6 +135,14 @@ export const TechnologyChip = ({ technology }: Props) => {
           label="Firebase"
           icon={<Firebase width={12} />}
           href="https://firebase.google.com/"
+        />
+      );
+    case "google-cloud":
+      return (
+        <LinkableChip
+          label="Google Cloud"
+          icon={<GoogleCloud width={12} />}
+          href="https://cloud.google.com/"
         />
       );
     case "graphql":
