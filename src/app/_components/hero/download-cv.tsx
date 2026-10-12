@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Spinner, Tooltip } from "@heroui/react";
+import { Button, Spinner } from "@heroui/react";
 import { DownloadCloud } from "lucide-react";
 import { Ripple } from "m3-ripple";
 import { useRef, useState } from "react";
@@ -35,18 +35,15 @@ async function generateDownload() {
 export const DownloadCv = () => {
   const downloading = useRef(false);
   const [isPending, setPending] = useState(false);
-  const [message, setMessage] = useState("");
 
   const download = async () => {
     if (downloading.current) return;
     downloading.current = true;
     setPending(true);
-    setMessage("Generating CV…");
     try {
       await generateDownload();
-      setMessage("CV download started.");
-    } catch {
-      setMessage("Could not generate the CV. Click to retry.");
+    } catch (error) {
+      console.error("CV download failed", error);
     } finally {
       downloading.current = false;
       setPending(false);
@@ -54,29 +51,17 @@ export const DownloadCv = () => {
   };
 
   return (
-    <div className="relative flex shrink-0 items-start">
-      <Tooltip delay={0}>
-        <Button
-          aria-label={isPending ? "Generating CV" : "Download CV"}
-          isIconOnly
-          isPending={isPending}
-          variant="tertiary"
-          onPress={download}
-        >
-          <Ripple />
-          {isPending ? (
-            <Spinner color="current" size="sm" />
-          ) : (
-            <DownloadCloud />
-          )}
-        </Button>
-        <Tooltip.Content placement="bottom">
-          <p>Download CV</p>
-        </Tooltip.Content>
-      </Tooltip>
-      <output className="absolute left-0 top-full w-48 pt-2 text-xs text-muted">
-        {message}
-      </output>
-    </div>
+    <Button
+      aria-label={isPending ? "Generating CV" : "Download CV"}
+      className="gap-2 text-xs [&_svg]:size-4"
+      isPending={isPending}
+      size="sm"
+      variant="tertiary"
+      onPress={download}
+    >
+      <Ripple />
+      {isPending ? <Spinner color="current" size="sm" /> : <DownloadCloud />}
+      Download CV
+    </Button>
   );
 };
