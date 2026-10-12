@@ -19,6 +19,23 @@ const ratelimit = new Ratelimit({
   timeout: 3_000,
 });
 
+// Local development should not require the hosted Redis service.
+let localWindow = { requests: 0, reset: 0 };
+
+async function limitDownloads() {
+  if (process.env.NODE_ENV !== "development")
+    return ratelimit.limit(await getIpAddress());
+  const now = Date.now();
+  if (now >= localWindow.reset)
+    localWindow = { requests: 0, reset: now + 60_000 };
+  localWindow.requests += 1;
+  return {
+    success: localWindow.requests <= 5,
+    reset: localWindow.reset,
+    reason: undefined,
+  };
+}
+
 let rendering = false;
 const headers = { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" };
 
@@ -30,7 +47,7 @@ function unavailable(message: string, status: number, retryAfter = 10) {
 }
 
 async function generateResponse() {
-  const limit = await ratelimit.limit(await getIpAddress());
+  const limit = await limitDownloads();
   if (limit.reason === "timeout")
     return unavailable(
       "CV generation is temporarily unavailable. Please retry.",
