@@ -103,7 +103,6 @@ export default async function CvPrintPage() {
       </section>
       <CvTimeline section="experience" title="Experience" />
       <CvTimeline section="education" title="Education" />
-      <CvTimeline section="projects" title="Projects" />
       <span data-cv-ready />
     </main>
   );
