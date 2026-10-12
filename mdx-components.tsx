@@ -6,6 +6,9 @@ import { MaxLink } from "@/components/max/max-link";
 const components = {
   h1: ({ children }) => <h2 className="text-xl font-bold">{children}</h2>,
   p: ({ children }) => <p className="text-base leading-6">{children}</p>,
+  ul: ({ children }) => (
+    <ul className="list-disc pl-6 space-y-2 text-base leading-6">{children}</ul>
+  ),
   a: ({ className, href, children }) => (
     <MaxLink
       className={cn("text-base no-underline hover:underline", className)}
