@@ -28,8 +28,8 @@ src/
 │   │   ├── experience-section.tsx
 │   │   ├── hero-description.tsx
 │   │   ├── hero-section.tsx
+│   │   └── how-i-work-section.tsx
 │   │   ├── projects-section.tsx
-│   │   └── skills-section.tsx
 │   ├── actions/
 │   │   └── send-contact-email.tsx    # Next.js server action
 │   ├── layout.tsx
@@ -37,13 +37,13 @@ src/
 ├── components/                       # Reusable UI components
 │   ├── max/                          # Components created by me
 │   └── ui/                           # Components from open-source UI libraries
-├── content/                          # Markdown CV copy and timeline metadata
+├── content/                          # Markdown content and timeline metadata
 │   ├── education/
 │   ├── experience/
 │   ├── hero.md
+│   └── how-i-work.md
 │   ├── profile.md
 │   ├── projects/
-│   └── skills.md
 ├── emails/
 │   └── contact-email-template.tsx
 ├── lib/
