@@ -24,7 +24,6 @@ import {
 } from "@thesvg/react";
 
 import { LinkableChip } from "@/components/ui/linkable-chip";
-
 import { type TechnologyId, technologyLabels } from "@/lib/technologies";
 
 export const technologyIds = [
