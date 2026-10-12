@@ -1,5 +1,5 @@
 import chromium from "@sparticuz/chromium";
-import puppeteer, { type Browser } from "puppeteer-core";
+import puppeteer, { type Browser } from "puppeteer";
 
 const renderTimeout = 45_000;
 
@@ -32,13 +32,10 @@ async function closeBrowser(browser: Browser) {
 }
 
 async function launchBrowser() {
-  const localExecutable =
-    !process.env.VERCEL && process.env.CV_CHROMIUM_EXECUTABLE_PATH;
   const options = { timeout: 10_000, protocolTimeout: 15_000 };
-  if (localExecutable)
+  if (!process.env.VERCEL)
     return puppeteer.launch({
       ...options,
-      executablePath: localExecutable,
       headless: true,
     });
   return puppeteer.launch({

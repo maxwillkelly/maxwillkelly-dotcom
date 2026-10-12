@@ -6,7 +6,7 @@ import "./src/lib/env";
 const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   reactCompiler: true,
-  serverExternalPackages: ["@sparticuz/chromium", "puppeteer-core"],
+  serverExternalPackages: ["@sparticuz/chromium", "puppeteer"],
   outputFileTracingIncludes: {
     "/": ["./src/content/**/*"],
     "/cv/print": ["./src/content/**/*"],

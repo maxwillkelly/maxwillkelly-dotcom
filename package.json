@@ -14,8 +14,7 @@
     "format": "oxfmt --write",
     "email": "email dev -d ./src/emails",
     "lint:fix": "oxlint --fix",
-    "format:check": "oxfmt --check",
-    "test:cv": "node --test tests/cv-renderer.test.mjs"
+    "format:check": "oxfmt --check"
   },
   "dependencies": {
     "@heroui/react": "^3.2.6",
@@ -36,7 +35,7 @@
     "motion": "^14.0.0",
     "next": "16.3.8",
     "postcss": "^8.5.28",
-    "puppeteer-core": "25.11.0",
+    "puppeteer": "25.11.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-email": "^6.11.0",
