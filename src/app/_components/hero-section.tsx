@@ -30,8 +30,9 @@ export const HeroSection = () => {
         <div className="flex flex-wrap gap-2">
           <MaxLink
             className={buttonVariants({
+              size: "sm",
               variant: "tertiary",
-              className: "w-fit gap-2 text-sm",
+              className: "w-fit gap-2 text-xs",
             })}
             href={`mailto:${siteConfig.email}`}
           >
@@ -40,8 +41,9 @@ export const HeroSection = () => {
           </MaxLink>
           <MaxLink
             className={buttonVariants({
+              size: "sm",
               variant: "tertiary",
-              className: "w-fit gap-2 text-sm",
+              className: "w-fit gap-2 text-xs",
             })}
             href={`tel:${siteConfig.telephone.replace(/\s/g, "")}`}
           >
