@@ -67,7 +67,7 @@ export const TechnologyChip = ({ technology }: Props) => {
     case "aws":
       return (
         <LinkableChip
-          label="Amazon Web Services"
+          label={technologyLabels[technology]}
           icon={<AmazonWebServices width={12} />}
           href="https://aws.amazon.com/"
         />
@@ -153,7 +153,7 @@ export const TechnologyChip = ({ technology }: Props) => {
     case "google-cloud":
       return (
         <LinkableChip
-          label="Google Cloud"
+          label={technologyLabels[technology]}
           icon={<GoogleCloud width={12} />}
           href="https://cloud.google.com/"
         />
@@ -254,7 +254,7 @@ export const TechnologyChip = ({ technology }: Props) => {
     case "vercel":
       return (
         <LinkableChip
-          label="Vercel"
+          label={technologyLabels[technology]}
           icon={<Vercel width={12} />}
           href="https://vercel.com/"
         />
