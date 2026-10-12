@@ -19,6 +19,7 @@ import {
   Nodedotjs,
   React,
   Typescript,
+  Vercel,
   Vuedotjs,
 } from "@thesvg/react";
 
@@ -49,6 +50,7 @@ export const technologyIds = [
   "react-native",
   "sql-server",
   "typescript",
+  "vercel",
   "vuejs",
 ] as const;
 
@@ -223,6 +225,14 @@ export const TechnologyChip = ({ technology }: Props) => {
           label="TypeScript"
           icon={<Typescript width={12} />}
           href="https://www.typescriptlang.org/"
+        />
+      );
+    case "vercel":
+      return (
+        <LinkableChip
+          label="Vercel"
+          icon={<Vercel width={12} />}
+          href="https://vercel.com/"
         />
       );
     case "vuejs":
