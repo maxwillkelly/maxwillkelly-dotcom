@@ -15,7 +15,7 @@ import { SocialIcon } from "./hero/social-icon";
 export const HeroSection = () => {
   return (
     <section
-      className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-6 gap-y-4"
+      className="grid grid-cols-1 items-center gap-x-6 gap-y-4 sm:grid-cols-[minmax(0,1fr)_auto]"
       id="hero"
     >
       <div>
@@ -26,7 +26,7 @@ export const HeroSection = () => {
         />
         <HeroContent />
       </div>
-      <BlurFade className="col-span-2 sm:col-span-1 sm:col-start-1" delay={0.4}>
+      <BlurFade className="sm:col-start-1" delay={0.4}>
         <div className="flex flex-wrap gap-2">
           <MaxLink
             className={buttonVariants({
@@ -52,7 +52,7 @@ export const HeroSection = () => {
           </MaxLink>
         </div>
       </BlurFade>
-      <BlurFade className="col-span-2 sm:col-span-1 sm:col-start-1" delay={0.4}>
+      <BlurFade className="sm:col-start-1" delay={0.4}>
         <div className="flex flex-wrap gap-2">
           <SocialIcon
             ariaLabel="Download CV"
@@ -74,7 +74,7 @@ export const HeroSection = () => {
       </BlurFade>
       <Image
         alt={siteConfig.name}
-        className="col-start-2 row-start-1 size-24 rounded-xl object-cover sm:row-span-3 sm:row-start-1 sm:size-32"
+        className="hidden rounded-xl object-cover sm:col-start-2 sm:row-span-3 sm:row-start-1 sm:block sm:size-32"
         height={400}
         priority
         src="/profile.jpg"
