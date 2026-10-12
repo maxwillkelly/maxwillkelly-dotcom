@@ -1,7 +1,7 @@
 import ProfileContent from "@/content/profile.md";
 
 export const AboutSection = () => (
-  <section id="about" className="flex flex-col gap-4">
+  <section id="about">
     <ProfileContent />
   </section>
 );

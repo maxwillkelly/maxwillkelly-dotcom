@@ -4,6 +4,7 @@ import { BlurFade } from "@/components/ui/blur-fade";
 import { personJsonLd } from "@/lib/site";
 
 import { AboutSection } from "./_components/about-section";
+import { AISection } from "./_components/ai-section";
 import { ContactSection } from "./_components/contact-section";
 import { EducationSection } from "./_components/education-section";
 import { ExperienceSection } from "./_components/experience-section";
@@ -26,8 +27,11 @@ const HomePage = async () => {
       <HeroSection />
       <BlurFade delay={0.6}>
         <div className="flex flex-col space-y-12">
-          <AboutSection />
-          <SkillsSection />
+          <div className="space-y-12 [&>section]:flex [&>section]:flex-col [&>section]:gap-4 [&>section>ul]:space-y-4">
+            <AboutSection />
+            <AISection />
+            <SkillsSection />
+          </div>
           <ExperienceSection />
           <EducationSection />
           <ProjectsSection />
