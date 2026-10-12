@@ -4,11 +4,11 @@ import { BlurFade } from "@/components/ui/blur-fade";
 import { personJsonLd } from "@/lib/site";
 
 import { AboutSection } from "./_components/about-section";
-import { AISection } from "./_components/ai-section";
 import { ContactSection } from "./_components/contact-section";
 import { EducationSection } from "./_components/education-section";
 import { ExperienceSection } from "./_components/experience-section";
 import { HeroSection } from "./_components/hero-section";
+import { HowIWorkSection } from "./_components/how-i-work-section";
 import { ProjectsSection } from "./_components/projects-section";
 
 const HomePage = async () => {
@@ -28,7 +28,7 @@ const HomePage = async () => {
         <div className="flex flex-col space-y-12">
           <div className="space-y-12 [&>section]:flex [&>section]:flex-col [&>section]:gap-4 [&>section>ul]:space-y-4">
             <AboutSection />
-            <AISection />
+            <HowIWorkSection />
           </div>
           <ExperienceSection />
           <EducationSection />
