@@ -23,14 +23,14 @@ chips:
 
 I work as a Software Engineer on [GovernorHub](https://governorhub.com/), the leading online service for school governors and trustees.
 
-- **Rewrite of GovernorHub's front-end:** Completely re-wrote GovernorHub's front-end in [Next.js](https://nextjs.org/) and [React](https://react.dev/) from [AngularJS](https://angularjs.org/). I was responsible for 58% of commits in this project. This rewrite led to the Largest Contentful Paint (LCP) time on an average GovernorHub page being reduced by 50%.
+- **Front-end rewrite:** I contributed 58% of the commits to the rewrite of GovernorHub's front-end from [AngularJS](https://angularjs.org/) to [Next.js](https://nextjs.org/) and [React](https://react.dev/). The rewrite reduced Largest Contentful Paint (LCP) times on an average GovernorHub page by 50%.
 
-- **Project management:** I led a project to completely overhaul GovernorHub's system for project management using [Linear](https://linear.app/). I built extensive processes to triage bugs from customer feedback in [Intercom](https://www.intercom.com/) and convert them into issues in [Linear](https://linear.app/). Later on this was adopted by other teams in the business due to its success in reducing average lead times by 40%.
+- **Project management:** I led an overhaul of GovernorHub's project-management processes using [Linear](https://linear.app/), including triaging customer-reported bugs from [Intercom](https://www.intercom.com/). The changes reduced average lead times by 40% and were subsequently adopted by other teams in the business.
 
-- **Scripting platform:** I from the ground up built an internal platform for writing scripts to perform actions and create cronjobs, such as deleting data for inactive users and syncing data from internal and external services.
+- **Performance improvements:** I rewrote GovernorHub's file-moving algorithm, reducing the queries required for a typical file transfer by 30%.
 
-- **Performance Improvements:** I rewrote GovernorHub's file-moving algorithm to reduce the number of queries required for a typical file transfer by 30%.
+- **Scripting platform:** I built an internal scripting platform from the ground up to run tasks and scheduled jobs, including deleting inactive users' data and syncing data between internal and external services.
 
-- **Cross-team Integrations:** I've worked on integrations with products maintained by other teams and designed the architecture to do so. For example I built a subscriptions system using [Google Cloud Pub/Sub](https://cloud.google.com/pubsub).
+- **Cross-team integrations:** I designed and built integrations with products maintained by other teams, including a subscriptions system using [Google Cloud Pub/Sub](https://cloud.google.com/pubsub).
 
-- **Onboarded new engineers:** In addition to building software, I've had the opportunity to onboard and train new engineers. I work with product managers and other stakeholders to write technical specifications and gather requirements.
+- **Onboarding and collaboration:** I onboard and train new engineers, and work with product managers and other stakeholders to gather requirements and write technical specifications.
