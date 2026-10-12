@@ -21,34 +21,7 @@ import {
 } from "@thesvg/react";
 
 import { LinkableChip } from "@/components/ui/linkable-chip";
-
-export const technologyIds = [
-  "c",
-  "cplusplus",
-  "csharp",
-  "docker",
-  "dotnet",
-  "dotnet-core",
-  "electron",
-  "expo",
-  "express",
-  "firebase",
-  "graphql",
-  "grpc",
-  "java",
-  "javascript",
-  "mongodb",
-  "nestjs",
-  "nextjs",
-  "nodejs",
-  "react",
-  "react-native",
-  "sql-server",
-  "typescript",
-  "vuejs",
-] as const;
-
-type TechnologyId = (typeof technologyIds)[number];
+import { type TechnologyId, technologyLabels } from "@/lib/technologies";
 
 type Props = {
   technology: TechnologyId;
@@ -58,13 +31,23 @@ type Props = {
 export const TechnologyChip = ({ technology }: Props) => {
   switch (technology) {
     case "c":
-      return <LinkableChip label="C" icon={<C width={12} />} />;
+      return (
+        <LinkableChip
+          label={technologyLabels[technology]}
+          icon={<C width={12} />}
+        />
+      );
     case "cplusplus":
-      return <LinkableChip label="C++" icon={<Cplusplus width={12} />} />;
+      return (
+        <LinkableChip
+          label={technologyLabels[technology]}
+          icon={<Cplusplus width={12} />}
+        />
+      );
     case "csharp":
       return (
         <LinkableChip
-          label="C#"
+          label={technologyLabels[technology]}
           icon={<Csharp width={12} />}
           href="https://learn.microsoft.com/en-us/dotnet/csharp/"
         />
@@ -72,7 +55,7 @@ export const TechnologyChip = ({ technology }: Props) => {
     case "docker":
       return (
         <LinkableChip
-          label="Docker"
+          label={technologyLabels[technology]}
           icon={<Docker width={12} />}
           href="https://www.docker.com/"
         />
@@ -80,7 +63,7 @@ export const TechnologyChip = ({ technology }: Props) => {
     case "dotnet":
       return (
         <LinkableChip
-          label=".NET"
+          label={technologyLabels[technology]}
           icon={<Dotnet width={12} />}
           href="https://dotnet.microsoft.com/"
         />
@@ -88,7 +71,7 @@ export const TechnologyChip = ({ technology }: Props) => {
     case "dotnet-core":
       return (
         <LinkableChip
-          label=".NET Core"
+          label={technologyLabels[technology]}
           icon={<Dotnet width={12} />}
           href="https://dotnet.microsoft.com/"
         />
@@ -96,7 +79,7 @@ export const TechnologyChip = ({ technology }: Props) => {
     case "electron":
       return (
         <LinkableChip
-          label="Electron"
+          label={technologyLabels[technology]}
           icon={<Electron width={12} />}
           href="https://www.electronjs.org/"
         />
@@ -104,7 +87,7 @@ export const TechnologyChip = ({ technology }: Props) => {
     case "expo":
       return (
         <LinkableChip
-          label="Expo"
+          label={technologyLabels[technology]}
           icon={<Expo width={12} />}
           href="https://expo.dev/"
         />
@@ -112,7 +95,7 @@ export const TechnologyChip = ({ technology }: Props) => {
     case "express":
       return (
         <LinkableChip
-          label="Express"
+          label={technologyLabels[technology]}
           icon={<Express width={12} />}
           href="https://expressjs.com/"
         />
@@ -120,7 +103,7 @@ export const TechnologyChip = ({ technology }: Props) => {
     case "firebase":
       return (
         <LinkableChip
-          label="Firebase"
+          label={technologyLabels[technology]}
           icon={<Firebase width={12} />}
           href="https://firebase.google.com/"
         />
@@ -128,29 +111,37 @@ export const TechnologyChip = ({ technology }: Props) => {
     case "graphql":
       return (
         <LinkableChip
-          label="GraphQL"
+          label={technologyLabels[technology]}
           icon={<Graphql width={12} />}
           href="https://graphql.org/"
         />
       );
     case "grpc":
-      return <LinkableChip label="gRPC" href="https://grpc.io/" />;
+      return (
+        <LinkableChip
+          label={technologyLabels[technology]}
+          href="https://grpc.io/"
+        />
+      );
     case "java":
       return (
         <LinkableChip
-          label="Java"
+          label={technologyLabels[technology]}
           icon={<Java width={12} />}
           href="https://www.java.com/"
         />
       );
     case "javascript":
       return (
-        <LinkableChip label="JavaScript" icon={<Javascript width={12} />} />
+        <LinkableChip
+          label={technologyLabels[technology]}
+          icon={<Javascript width={12} />}
+        />
       );
     case "mongodb":
       return (
         <LinkableChip
-          label="MongoDB"
+          label={technologyLabels[technology]}
           icon={<Mongodb height={12} />}
           href="https://www.mongodb.com/"
         />
@@ -158,17 +149,22 @@ export const TechnologyChip = ({ technology }: Props) => {
     case "nestjs":
       return (
         <LinkableChip
-          label="NestJS"
+          label={technologyLabels[technology]}
           icon={<Nestjs width={12} />}
           href="https://nestjs.com/"
         />
       );
     case "nextjs":
-      return <LinkableChip label="Next.js" href="https://nextjs.org/" />;
+      return (
+        <LinkableChip
+          label={technologyLabels[technology]}
+          href="https://nextjs.org/"
+        />
+      );
     case "nodejs":
       return (
         <LinkableChip
-          label="Node.js"
+          label={technologyLabels[technology]}
           icon={<Nodedotjs width={12} />}
           href="https://nodejs.org/"
         />
@@ -176,7 +172,7 @@ export const TechnologyChip = ({ technology }: Props) => {
     case "react":
       return (
         <LinkableChip
-          label="React"
+          label={technologyLabels[technology]}
           icon={<React width={12} />}
           href="https://react.dev/"
         />
@@ -184,7 +180,7 @@ export const TechnologyChip = ({ technology }: Props) => {
     case "react-native":
       return (
         <LinkableChip
-          label="React Native"
+          label={technologyLabels[technology]}
           icon={<React width={12} />}
           href="https://reactnative.dev/"
         />
@@ -192,7 +188,7 @@ export const TechnologyChip = ({ technology }: Props) => {
     case "sql-server":
       return (
         <LinkableChip
-          label="SQL Server"
+          label={technologyLabels[technology]}
           icon={<MicrosoftSqlServer width={12} />}
           href="https://www.microsoft.com/en-us/sql-server"
         />
@@ -200,7 +196,7 @@ export const TechnologyChip = ({ technology }: Props) => {
     case "typescript":
       return (
         <LinkableChip
-          label="TypeScript"
+          label={technologyLabels[technology]}
           icon={<Typescript width={12} />}
           href="https://www.typescriptlang.org/"
         />
@@ -208,7 +204,7 @@ export const TechnologyChip = ({ technology }: Props) => {
     case "vuejs":
       return (
         <LinkableChip
-          label="Vue.js"
+          label={technologyLabels[technology]}
           icon={<Vuedotjs width={12} />}
           href="https://vuejs.org/"
         />
