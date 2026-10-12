@@ -9,6 +9,7 @@ import { EducationSection } from "./_components/education-section";
 import { ExperienceSection } from "./_components/experience-section";
 import { HeroSection } from "./_components/hero-section";
 import { ProjectsSection } from "./_components/projects-section";
+import { SkillsSection } from "./_components/skills-section";
 
 const HomePage = async () => {
   await connection();
@@ -26,6 +27,7 @@ const HomePage = async () => {
       <BlurFade delay={0.6}>
         <div className="flex flex-col space-y-12">
           <AboutSection />
+          <SkillsSection />
           <ExperienceSection />
           <EducationSection />
           <ProjectsSection />

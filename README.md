@@ -28,7 +28,8 @@ src/
 │   │   ├── experience-section.tsx
 │   │   ├── hero-description.tsx
 │   │   ├── hero-section.tsx
-│   │   └── projects-section.tsx
+│   │   ├── projects-section.tsx
+│   │   └── skills-section.tsx
 │   ├── actions/
 │   │   └── send-contact-email.tsx    # Next.js server action
 │   ├── layout.tsx
@@ -41,7 +42,8 @@ src/
 │   ├── experience/
 │   ├── hero.md
 │   ├── profile.md
-│   └── projects/
+│   ├── projects/
+│   └── skills.md
 ├── emails/
 │   └── contact-email-template.tsx
 ├── lib/
