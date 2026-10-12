@@ -25,8 +25,9 @@ export const SocialIcon = ({
       <MaxLink
         aria-label={ariaLabel}
         className={buttonVariants({
-          isIconOnly: true,
+          size: "sm",
           variant: "tertiary",
+          className: "gap-2 text-xs [&_img]:size-4",
         })}
         download={download}
         href={href}
@@ -34,6 +35,7 @@ export const SocialIcon = ({
       >
         <Ripple />
         {icon}
+        {ariaLabel}
       </MaxLink>
       <Tooltip.Content placement="bottom">
         <p>{tooltipContent}</p>

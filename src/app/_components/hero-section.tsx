@@ -51,7 +51,7 @@ export const HeroSection = () => {
         </div>
       </BlurFade>
       <BlurFade className="col-span-2 sm:col-span-1 sm:col-start-1" delay={0.4}>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <SocialIcon
             ariaLabel="Download CV"
             download={`${siteConfig.name} - CV.pdf`}
