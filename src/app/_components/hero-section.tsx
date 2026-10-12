@@ -27,6 +27,24 @@ export const HeroSection = () => {
           <HeroContent />
         </div>
         <BlurFade delay={0.4}>
+          <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-6">
+            <MaxLink
+              className="w-fit gap-2 text-sm no-underline hover:underline"
+              href={`mailto:${siteConfig.email}`}
+            >
+              <Mail aria-hidden="true" className="size-4 shrink-0" />
+              {siteConfig.email}
+            </MaxLink>
+            <MaxLink
+              className="w-fit gap-2 text-sm no-underline hover:underline"
+              href={`tel:${siteConfig.telephone.replace(/\s/g, "")}`}
+            >
+              <Phone aria-hidden="true" className="size-4 shrink-0" />
+              {siteConfig.telephone}
+            </MaxLink>
+          </div>
+        </BlurFade>
+        <BlurFade delay={0.4}>
           <div className="flex gap-2">
             <SocialIcon
               ariaLabel="Download CV"
@@ -58,24 +76,6 @@ export const HeroSection = () => {
         src="/profile.jpg"
         width={400}
       />
-      <BlurFade className="w-full" delay={0.4}>
-        <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-6">
-          <MaxLink
-            className="w-fit gap-2 text-sm no-underline hover:underline"
-            href={`mailto:${siteConfig.email}`}
-          >
-            <Mail aria-hidden="true" className="size-4 shrink-0" />
-            {siteConfig.email}
-          </MaxLink>
-          <MaxLink
-            className="w-fit gap-2 text-sm no-underline hover:underline"
-            href={`tel:${siteConfig.telephone.replace(/\s/g, "")}`}
-          >
-            <Phone aria-hidden="true" className="size-4 shrink-0" />
-            {siteConfig.telephone}
-          </MaxLink>
-        </div>
-      </BlurFade>
     </section>
   );
 };
