@@ -83,10 +83,7 @@ body:has(.cv-document) #container {
 .cv-hero > div {
   flex: 1;
 }
-.cv-hero img {
-  border-radius: 3mm;
-  flex-shrink: 0;
-}
+
 .cv-links {
   display: flex;
   flex-wrap: wrap;

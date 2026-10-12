@@ -1,6 +1,5 @@
 import type { MDXComponents } from "mdx/types";
 import type { Metadata } from "next";
-import Image from "next/image";
 
 import Hero from "@/content/hero.md";
 import Profile from "@/content/profile.md";
@@ -89,14 +88,6 @@ export default async function CvPrintPage() {
             ))}
           </p>
         </div>
-        <Image
-          src={siteConfig.image}
-          alt={siteConfig.name}
-          width={88}
-          height={88}
-          priority
-          unoptimized
-        />
       </header>
       <section>
         <Profile components={components} />
