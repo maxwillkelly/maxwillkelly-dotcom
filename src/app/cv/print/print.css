@@ -84,12 +84,6 @@ body:has(.cv-document) #container {
   flex: 1;
 }
 
-.cv-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1mm 3mm;
-}
-
 @page {
   size: A4 portrait;
   margin: 14mm;

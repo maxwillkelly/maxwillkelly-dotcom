@@ -83,10 +83,13 @@ export default async function CvPrintPage() {
             <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
           </p>
           <p className="cv-links">
-            {[siteConfig.url, ...siteConfig.sameAs].map((url) => (
-              <a key={url} href={url}>
-                {url.replace("https://", "").replace("www.", "")}
-              </a>
+            {[siteConfig.url, ...siteConfig.sameAs].map((url, index) => (
+              <span key={url}>
+                {index > 0 && " · "}
+                <a href={url}>
+                  {url.replace("https://", "").replace("www.", "")}
+                </a>
+              </span>
             ))}
           </p>
         </div>
