@@ -54,7 +54,7 @@ export const DownloadCv = () => {
   };
 
   return (
-    <div className="flex max-w-48 flex-col items-start gap-2">
+    <div className="relative flex shrink-0 items-start">
       <Tooltip delay={0}>
         <Button
           aria-label={isPending ? "Generating CV" : "Download CV"}
@@ -74,7 +74,9 @@ export const DownloadCv = () => {
           <p>Download CV</p>
         </Tooltip.Content>
       </Tooltip>
-      <output className="text-xs text-muted">{message}</output>
+      <output className="absolute left-0 top-full w-48 pt-2 text-xs text-muted">
+        {message}
+      </output>
     </div>
   );
 };
