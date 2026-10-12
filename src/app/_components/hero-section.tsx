@@ -1,4 +1,3 @@
-import { DownloadCloud } from "lucide-react";
 import Image from "next/image";
 
 import { BlurFade } from "@/components/ui/blur-fade";
@@ -8,6 +7,7 @@ import { siteConfig } from "@/lib/site";
 import { GithubIcon } from "./contact/github-icon";
 import { LinkedInIcon } from "./contact/linked-in-icon";
 import { HeroContent } from "./hero-description";
+import { DownloadCv } from "./hero/download-cv";
 import { SocialIcon } from "./hero/social-icon";
 
 export const HeroSection = () => {
@@ -24,13 +24,7 @@ export const HeroSection = () => {
         </div>
         <BlurFade delay={0.4}>
           <div className="flex gap-2">
-            <SocialIcon
-              ariaLabel="Download CV"
-              download={`${siteConfig.name} - CV.pdf`}
-              href="/cv.pdf"
-              icon={<DownloadCloud />}
-              tooltipContent="Download CV"
-            />
+            <DownloadCv />
             <SocialIcon
               ariaLabel="GitHub"
               href="https://github.com/maxwillkelly"
