@@ -7,3 +7,5 @@ I work at [The Key Group](https://thekeygroup.com/) on [GovernorHub](https://gov
 I enjoy building high-quality software that automates repetitive tasks and solves problems that make a difference to people's lives.
 
 I primarily work with [TypeScript](https://www.typescriptlang.org/), JavaScript, [Next.js](https://nextjs.org/) and [Node.js](https://nodejs.org/) but I like to dabble in plenty of other languages and frameworks. I also worked professionally with [C#](https://learn.microsoft.com/en-us/dotnet/csharp/) and [.NET](https://dotnet.microsoft.com/) earlier in my career.
+
+I write and maintain code that other developers can easily read and understand, with clear naming, thoughtful organisation, and abstractions with an obvious purpose.

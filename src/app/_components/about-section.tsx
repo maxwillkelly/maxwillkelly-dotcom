@@ -1,7 +1,7 @@
-import ProfileContent from "@/content/profile.md";
+import AboutContent from "@/content/about.md";
 
 export const AboutSection = () => (
   <section id="about">
-    <ProfileContent />
+    <AboutContent />
   </section>
 );

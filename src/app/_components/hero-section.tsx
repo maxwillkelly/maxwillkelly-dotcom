@@ -7,7 +7,7 @@ import { siteConfig } from "@/lib/site";
 
 import { GithubIcon } from "./contact/github-icon";
 import { LinkedInIcon } from "./contact/linked-in-icon";
-import { HeroContent } from "./hero-description";
+import { HeroContent } from "./hero/hero-content";
 import { SocialIcon } from "./hero/social-icon";
 
 export const HeroSection = () => {
