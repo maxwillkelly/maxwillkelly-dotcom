@@ -1,4 +1,5 @@
 export const technologyIds = [
+  "aws",
   "c",
   "cplusplus",
   "csharp",
@@ -21,12 +22,14 @@ export const technologyIds = [
   "react-native",
   "sql-server",
   "typescript",
+  "vercel",
   "vuejs",
 ] as const;
 
 export type TechnologyId = (typeof technologyIds)[number];
 
 export const technologyLabels: Record<TechnologyId, string> = {
+  aws: "Amazon Web Services",
   c: "C",
   cplusplus: "C++",
   csharp: "C#",
@@ -49,5 +52,6 @@ export const technologyLabels: Record<TechnologyId, string> = {
   "react-native": "React Native",
   "sql-server": "SQL Server",
   typescript: "TypeScript",
+  vercel: "Vercel",
   vuejs: "Vue.js",
 };

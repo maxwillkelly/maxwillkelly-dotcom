@@ -1,4 +1,5 @@
 import {
+  AmazonWebServices,
   C,
   Cplusplus,
   Csharp,
@@ -8,6 +9,7 @@ import {
   Expo,
   Express,
   Firebase,
+  GoogleCloud,
   Graphql,
   Java,
   Javascript,
@@ -17,11 +19,44 @@ import {
   Nodedotjs,
   React,
   Typescript,
+  Vercel,
   Vuedotjs,
 } from "@thesvg/react";
 
 import { LinkableChip } from "@/components/ui/linkable-chip";
+
 import { type TechnologyId, technologyLabels } from "@/lib/technologies";
+
+export const technologyIds = [
+  "aws",
+  "c",
+  "cplusplus",
+  "csharp",
+  "docker",
+  "dotnet",
+  "dotnet-core",
+  "electron",
+  "expo",
+  "express",
+  "firebase",
+  "google-cloud",
+  "graphql",
+  "grpc",
+  "java",
+  "javascript",
+  "mongodb",
+  "nestjs",
+  "nextjs",
+  "nodejs",
+  "react",
+  "react-native",
+  "sql-server",
+  "typescript",
+  "vercel",
+  "vuejs",
+] as const;
+
+type TechnologyId = (typeof technologyIds)[number];
 
 type Props = {
   technology: TechnologyId;
@@ -30,6 +65,14 @@ type Props = {
 // fallow-ignore-next-line complexity -- Each technology has one independent rendering case.
 export const TechnologyChip = ({ technology }: Props) => {
   switch (technology) {
+    case "aws":
+      return (
+        <LinkableChip
+          label="Amazon Web Services"
+          icon={<AmazonWebServices width={12} />}
+          href="https://aws.amazon.com/"
+        />
+      );
     case "c":
       return (
         <LinkableChip
@@ -106,6 +149,14 @@ export const TechnologyChip = ({ technology }: Props) => {
           label={technologyLabels[technology]}
           icon={<Firebase width={12} />}
           href="https://firebase.google.com/"
+        />
+      );
+    case "google-cloud":
+      return (
+        <LinkableChip
+          label="Google Cloud"
+          icon={<GoogleCloud width={12} />}
+          href="https://cloud.google.com/"
         />
       );
     case "graphql":
@@ -199,6 +250,14 @@ export const TechnologyChip = ({ technology }: Props) => {
           label={technologyLabels[technology]}
           icon={<Typescript width={12} />}
           href="https://www.typescriptlang.org/"
+        />
+      );
+    case "vercel":
+      return (
+        <LinkableChip
+          label="Vercel"
+          icon={<Vercel width={12} />}
+          href="https://vercel.com/"
         />
       );
     case "vuejs":

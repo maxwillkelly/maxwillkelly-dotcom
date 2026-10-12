@@ -5,10 +5,10 @@ import { BlurFade } from "@/components/ui/blur-fade";
 import { DiaTextReveal } from "@/components/ui/dia-text-reveal";
 import { siteConfig } from "@/lib/site";
 
-import { GithubIcon } from "./contact/github-icon";
-import { LinkedInIcon } from "./contact/linked-in-icon";
-import { HeroContent } from "./hero-description";
 import { DownloadCv } from "./hero/download-cv";
+import { GithubIcon } from "./hero/github-icon";
+import { HeroContent } from "./hero/hero-content";
+import { LinkedInIcon } from "./hero/linked-in-icon";
 import { SocialIcon } from "./hero/social-icon";
 
 export const HeroSection = () => {
