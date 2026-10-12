@@ -12,6 +12,7 @@ export const siteConfig = {
     "Max Kelly is a Bristol-based software engineer building interactive applications with an eye for small details.",
   url: "https://www.maxwillkelly.com",
   email: "maxwill.kelly@gmail.com",
+  telephone: "+44 7397 932 640",
   location: "Bristol, United Kingdom",
   jobTitle: "Software Engineer",
   image: "/profile.jpg",

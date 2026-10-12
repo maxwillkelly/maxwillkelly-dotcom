@@ -1,6 +1,7 @@
-import { DownloadCloud } from "lucide-react";
+import { DownloadCloud, Mail, Phone } from "lucide-react";
 import Image from "next/image";
 
+import { MaxLink } from "@/components/max/max-link";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { DiaTextReveal } from "@/components/ui/dia-text-reveal";
 import { siteConfig } from "@/lib/site";
@@ -12,7 +13,10 @@ import { SocialIcon } from "./hero/social-icon";
 
 export const HeroSection = () => {
   return (
-    <section className="flex items-center justify-between gap-6" id="hero">
+    <section
+      className="flex flex-wrap items-center justify-between gap-6"
+      id="hero"
+    >
       <div className="flex flex-1 flex-col gap-4">
         <div>
           <DiaTextReveal
@@ -54,6 +58,24 @@ export const HeroSection = () => {
         src="/profile.jpg"
         width={400}
       />
+      <BlurFade className="w-full" delay={0.4}>
+        <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-6">
+          <MaxLink
+            className="w-fit gap-2 text-sm no-underline hover:underline"
+            href={`mailto:${siteConfig.email}`}
+          >
+            <Mail aria-hidden="true" className="size-4 shrink-0" />
+            {siteConfig.email}
+          </MaxLink>
+          <MaxLink
+            className="w-fit gap-2 text-sm no-underline hover:underline"
+            href={`tel:${siteConfig.telephone.replace(/\s/g, "")}`}
+          >
+            <Phone aria-hidden="true" className="size-4 shrink-0" />
+            {siteConfig.telephone}
+          </MaxLink>
+        </div>
+      </BlurFade>
     </section>
   );
 };
