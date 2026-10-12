@@ -1,8 +1,6 @@
-import { buttonVariants } from "@heroui/react";
 import { DownloadCloud, Mail, Phone } from "lucide-react";
 import Image from "next/image";
 
-import { MaxLink } from "@/components/max/max-link";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { DiaTextReveal } from "@/components/ui/dia-text-reveal";
 import { siteConfig } from "@/lib/site";
@@ -28,28 +26,16 @@ export const HeroSection = () => {
       </div>
       <BlurFade className="sm:col-start-1" delay={0.4}>
         <div className="flex flex-wrap gap-2">
-          <MaxLink
-            className={buttonVariants({
-              size: "sm",
-              variant: "tertiary",
-              className: "w-fit gap-2 text-xs",
-            })}
+          <SocialIcon
+            ariaLabel={siteConfig.email}
             href={`mailto:${siteConfig.email}`}
-          >
-            <Mail aria-hidden="true" className="size-4 shrink-0" />
-            {siteConfig.email}
-          </MaxLink>
-          <MaxLink
-            className={buttonVariants({
-              size: "sm",
-              variant: "tertiary",
-              className: "w-fit gap-2 text-xs",
-            })}
+            icon={<Mail />}
+          />
+          <SocialIcon
+            ariaLabel={siteConfig.telephone}
             href={`tel:${siteConfig.telephone.replace(/\s/g, "")}`}
-          >
-            <Phone aria-hidden="true" className="size-4 shrink-0" />
-            {siteConfig.telephone}
-          </MaxLink>
+            icon={<Phone />}
+          />
         </div>
       </BlurFade>
       <BlurFade className="sm:col-start-1" delay={0.4}>
@@ -64,11 +50,13 @@ export const HeroSection = () => {
             ariaLabel="GitHub"
             href="https://github.com/maxwillkelly"
             icon={<GithubIcon />}
+            isExternal
           />
           <SocialIcon
             ariaLabel="LinkedIn"
             href="https://www.linkedin.com/in/maxwillkelly"
             icon={<LinkedInIcon />}
+            isExternal
           />
         </div>
       </BlurFade>

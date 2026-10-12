@@ -10,9 +10,16 @@ type Props = {
   ariaLabel: string;
   icon: React.ReactNode;
   download?: string;
+  isExternal?: boolean;
 };
 
-export const SocialIcon = ({ href, ariaLabel, icon, download }: Props) => {
+export const SocialIcon = ({
+  href,
+  ariaLabel,
+  icon,
+  download,
+  isExternal = false,
+}: Props) => {
   return (
     <MaxLink
       aria-label={ariaLabel}
@@ -23,7 +30,7 @@ export const SocialIcon = ({ href, ariaLabel, icon, download }: Props) => {
       })}
       download={download}
       href={href}
-      isExternal={!download}
+      isExternal={isExternal}
     >
       <Ripple />
       {icon}
