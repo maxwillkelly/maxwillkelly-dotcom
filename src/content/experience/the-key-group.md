@@ -23,12 +23,14 @@ chips:
 
 I work as a Software Engineer on [GovernorHub](https://governorhub.com/), the leading online service for school governors and trustees.
 
-In addition to building software, I've had the opportunity to onboard and train new engineers. I work with product managers and other stakeholders to write technical specifications and gather requirements.
+- **Rewrite of GovernorHub's front-end:** Completely re-wrote GovernorHub's front-end in [Next.js](https://nextjs.org/) and [React](https://react.dev/) from [AngularJS](https://angularjs.org/). I was responsible for 58% of commits in this project. This rewrite led to the Largest Contentful Paint (LCP) time on an average GovernorHub page being reduced by 50%.
 
-My colleagues and I were responsible for a complete ground-up rewrite of GovernorHub's front-end. At the time I joined, GovernorHub was a legacy [AngularJS](https://angularjs.org/) codebase with [React](https://react.dev/) injected into it for specific components. We completely re-architected it using the [Next.js](https://nextjs.org/) App Router which produced a much better user experience. I was responsible for reimplementing many significant features in [React](https://react.dev/). This rewrite led to the Largest Contentful Paint (LCP) time on an average GovernorHub page being halved.
+- **Project management:** I led a project to completely overhaul GovernorHub's system for project management using [Linear](https://linear.app/). I built extensive processes to triage bugs from customer feedback in [Intercom](https://www.intercom.com/) and convert them into issues in [Linear](https://linear.app/). Later on this was adopted by other teams in the business due to its success in reducing average lead times by 40%.
 
-I've also been responsible for other performance improvements such as rewriting GovernorHub's file-moving algorithm to reduce the number of queries required for a typical file transfer by 30%.
+- **Scripting platform:** I from the ground up built an internal platform for writing scripts to perform actions and create cronjobs, such as deleting data for inactive users and syncing data from internal and external services.
 
-I built processes to triage bugs from customer feedback in [Intercom](https://www.intercom.com/) and convert them into issues in Linear. I've worked on integrations with products maintained by other teams internally and externally such as [Salesforce](https://www.salesforce.com/) and [Get Information About Schools (GIAS)](https://get-information-schools.service.gov.uk/).
+- **Performance Improvements:** I rewrote GovernorHub's file-moving algorithm to reduce the number of queries required for a typical file transfer by 30%.
 
-I've also had the opportunity to onboard new developers into an expanding team and write developer specifications for new features.
+- **Cross-team Integrations:** I've worked on integrations with products maintained by other teams and designed the architecture to do so. For example I built a subscriptions system using [Google Cloud Pub/Sub](https://cloud.google.com/pubsub).
+
+- **Onboarded new engineers:** In addition to building software, I've had the opportunity to onboard and train new engineers. I work with product managers and other stakeholders to write technical specifications and gather requirements.
