@@ -19,6 +19,6 @@ Udrafter was a startup that recruited students for micro-internships. It connect
 
 Initially, I worked as a [React](https://react.dev/) developer in tandem with a [.NET](https://dotnet.microsoft.com/en-us/) developer on Udrafter's platform. I later transitioned into the role of a full-stack engineer.
 
-I built a [.NET Core](https://dotnet.microsoft.com/en-us/) microservice for messaging between businesses and jobseekers with an MSSQL database, an SQS queue for syncing between other microservices and SignalR for real-time updates using WebSockets
+I built a [.NET Core](https://dotnet.microsoft.com/en-us/) microservice for messaging between businesses and jobseekers with an MSSQL database, an SQS queue to synchronise data with other microservices and SignalR for real-time updates using WebSockets.
 
 I also created and designed a [Vue.js](https://vuejs.org/) front-end for these features and acted as a product owner deciding the product scope and necessary features.
