@@ -26,10 +26,9 @@ src/
 │   │   ├── contact-section.tsx
 │   │   ├── education-section.tsx
 │   │   ├── experience-section.tsx
-│   │   ├── hero-description.tsx
 │   │   ├── hero-section.tsx
-│   │   └── how-i-work-section.tsx
-│   │   ├── projects-section.tsx
+│   │   ├──how-i-work-section.tsx
+│   │   └── projects-section.tsx
 │   ├── actions/
 │   │   └── send-contact-email.tsx    # Next.js server action
 │   ├── layout.tsx
@@ -38,12 +37,12 @@ src/
 │   ├── max/                          # Components created by me
 │   └── ui/                           # Components from open-source UI libraries
 ├── content/                          # Markdown content and timeline metadata
+│   ├── about.md
+│   ├── hero.md
+│   ├── how-i-work.md
 │   ├── education/
 │   ├── experience/
-│   ├── hero.md
-│   └── how-i-work.md
-│   ├── profile.md
-│   ├── projects/
+│   └── projects/
 ├── emails/
 │   └── contact-email-template.tsx
 ├── lib/
