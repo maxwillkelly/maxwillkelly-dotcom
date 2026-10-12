@@ -10,7 +10,6 @@ import { EducationSection } from "./_components/education-section";
 import { ExperienceSection } from "./_components/experience-section";
 import { HeroSection } from "./_components/hero-section";
 import { ProjectsSection } from "./_components/projects-section";
-import { SkillsSection } from "./_components/skills-section";
 
 const HomePage = async () => {
   await connection();
@@ -30,7 +29,6 @@ const HomePage = async () => {
           <div className="space-y-12 [&>section]:flex [&>section]:flex-col [&>section]:gap-4 [&>section>ul]:space-y-4">
             <AboutSection />
             <AISection />
-            <SkillsSection />
           </div>
           <ExperienceSection />
           <EducationSection />
