@@ -44,7 +44,7 @@ async function generateDownload() {
 export const DownloadCvButton = () => {
   const [isPending, setPending] = useState(false);
 
-  const download = async () => {
+  const downloadCv = async () => {
     setPending(true);
 
     try {
@@ -63,7 +63,7 @@ export const DownloadCvButton = () => {
       isPending={isPending}
       size="sm"
       variant="tertiary"
-      onPress={download}
+      onPress={downloadCv}
     >
       <Ripple />
       {isPending ? <Spinner color="current" size="sm" /> : <DownloadCloud />}
