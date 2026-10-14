@@ -12,34 +12,47 @@ async function generateDownload() {
     cache: "no-store",
     signal: AbortSignal.timeout(65_000),
   });
+
   if (
     !response.ok ||
     !response.headers.get("content-type")?.startsWith("application/pdf")
   ) {
     throw new Error("CV generation failed");
   }
+
   const pdf = await response.blob();
-  if ((await pdf.slice(0, 5).text()) !== "%PDF-")
+
+  if ((await pdf.slice(0, 5).text()) !== "%PDF-") {
     throw new Error("Invalid PDF");
+  }
+
   const url = URL.createObjectURL(pdf);
   const link = document.createElement("a");
+
   link.href = url;
   link.download = `${siteConfig.name} - CV.pdf`;
+
   document.body.append(link);
+
   link.click();
   link.remove();
+
   // Allow browsers time to start consuming the download before releasing it.
   setTimeout(() => URL.revokeObjectURL(url), 60_000);
 }
 
-export const DownloadCv = () => {
-  const downloading = useRef(false);
+export const DownloadCvButton = () => {
   const [isPending, setPending] = useState(false);
+
+  const downloading = useRef(false);
 
   const download = async () => {
     if (downloading.current) return;
+
     downloading.current = true;
+
     setPending(true);
+
     try {
       await generateDownload();
     } catch (error) {
