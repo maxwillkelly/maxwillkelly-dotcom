@@ -3,7 +3,7 @@
 import { Button, Spinner } from "@heroui/react";
 import { DownloadCloud } from "lucide-react";
 import { Ripple } from "m3-ripple";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import { siteConfig } from "@/lib/site";
 
@@ -44,13 +44,7 @@ async function generateDownload() {
 export const DownloadCvButton = () => {
   const [isPending, setPending] = useState(false);
 
-  const downloading = useRef(false);
-
   const download = async () => {
-    if (downloading.current) return;
-
-    downloading.current = true;
-
     setPending(true);
 
     try {
@@ -58,7 +52,6 @@ export const DownloadCvButton = () => {
     } catch (error) {
       console.error("CV download failed", error);
     } finally {
-      downloading.current = false;
       setPending(false);
     }
   };
