@@ -1,11 +1,10 @@
+import { components } from "@/app/cv/print/_components/mdx-components";
 import {
   formatDateRangeinYearsAndMonths,
   formatDurationinYearsAndMonths,
 } from "@/lib/duration";
 import { getTechnology } from "@/lib/technologies";
 import type { loadTimeline } from "@/lib/timeline";
-
-import { components } from "./mdx-components";
 
 export const CvTimeline = ({
   entries,

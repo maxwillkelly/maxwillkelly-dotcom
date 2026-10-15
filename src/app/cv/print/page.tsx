@@ -3,26 +3,22 @@ import { connection } from "next/server";
 
 import About from "@/content/about.md";
 import HowIWork from "@/content/how-i-work.md";
-import { loadTimeline } from "@/lib/timeline";
 
+import { CvEducationSection } from "./_components/cv-education-section";
+import { CvExperienceSection } from "./_components/cv-experience-section";
 import { CvHero } from "./_components/cv-hero";
-import { CvTimeline } from "./_components/cv-timeline";
 import { components } from "./_components/mdx-components";
 
 import "./print.css";
 
 export const metadata: Metadata = {
-  title: "CV",
+  title: "Max Kelly - CV",
   robots: { index: false, follow: false },
 };
 
 export default async function CvPrintPage() {
-  // Current-role durations must use the download date, not the build date.
+  // We want to generate CV's at runtime for current role durations
   await connection();
-  const [experience, education] = await Promise.all([
-    loadTimeline("experience"),
-    loadTimeline("education"),
-  ]);
 
   return (
     // The renderer waits for this marker, then separately waits for fonts/images.
@@ -32,8 +28,8 @@ export default async function CvPrintPage() {
         <About components={components} />
         <HowIWork components={components} />
       </section>
-      <CvTimeline entries={experience} title="Experience" />
-      <CvTimeline entries={education} title="Education" />
+      <CvExperienceSection />
+      <CvEducationSection />
     </main>
   );
 }
