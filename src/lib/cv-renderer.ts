@@ -81,7 +81,6 @@ async function renderPage(browser: Browser, url: URL) {
   if (!response?.ok() || new URL(page.url()).origin !== url.origin)
     throw new Error("CV print page unavailable");
   await atCvStage("assets", async () => {
-    await page.waitForSelector("[data-cv-ready]");
     await page.waitForFunction(
       () =>
         document.fonts.status === "loaded" &&

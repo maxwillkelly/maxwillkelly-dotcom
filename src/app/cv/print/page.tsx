@@ -21,8 +21,7 @@ export default async function CvPrintPage() {
   await connection();
 
   return (
-    // The renderer waits for this marker, then separately waits for fonts/images.
-    <main className="cv-document" data-cv-ready>
+    <main className="cv-document">
       <CvHero />
       <section>
         <About components={components} />
