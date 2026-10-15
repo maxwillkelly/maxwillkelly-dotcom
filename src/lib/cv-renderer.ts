@@ -5,23 +5,14 @@ import { atCvStage } from "./cv-error";
 
 const renderTimeout = 45_000;
 
-function printUrl() {
+function printUrl(requestUrl: string) {
   if (process.env.VERCEL_URL)
     return new URL("/cv/print", `https://${process.env.VERCEL_URL}`);
-  return localPrintUrl();
-}
+  const url = new URL("http://localhost/cv/print");
 
-function localPrintUrl() {
-  const origin = new URL(
-    process.env.CV_LOCAL_ORIGIN ?? "http://localhost:3000",
-  );
-  if (
-    !["localhost", "127.0.0.1"].includes(origin.hostname) ||
-    origin.protocol !== "http:"
-  ) {
-    throw new Error("CV_LOCAL_ORIGIN must be an HTTP loopback URL");
-  }
-  return new URL("/cv/print", origin);
+  url.port = new URL(requestUrl).port;
+
+  return url;
 }
 
 async function closeBrowser(browser: Browser) {
@@ -48,8 +39,8 @@ async function launchBrowser() {
   });
 }
 
-export async function renderCv() {
-  const url = await atCvStage("print-url", printUrl);
+export async function renderCv(requestUrl: string) {
+  const url = await atCvStage("print-url", () => printUrl(requestUrl));
   const browser = await atCvStage("browser-launch", launchBrowser);
   const deadline = setTimeout(
     () => browser.process()?.kill("SIGKILL"),

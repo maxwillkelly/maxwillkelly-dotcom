@@ -53,7 +53,7 @@ function unavailable(message: string, status: number, retryAfter = 10) {
   );
 }
 
-async function generateResponse() {
+async function generateResponse(request: Request) {
   const limit = await atCvStage("rate-limit", limitDownloads);
   if (limit.reason === "timeout") {
     console.error("CV generation failed", {
@@ -71,7 +71,7 @@ async function generateResponse() {
       429,
       Math.max(1, Math.ceil((limit.reset - Date.now()) / 1000)),
     );
-  const pdf = await renderCv();
+  const pdf = await renderCv(request.url);
   if (pdf.byteLength > 4_000_000) throw new CvGenerationError("response-size");
   return new Response(new Uint8Array(pdf), {
     headers: {
@@ -82,13 +82,13 @@ async function generateResponse() {
   });
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   if (activeRenders.size > 0)
     return unavailable("CV generation is busy. Please retry shortly.", 503);
   const render = Symbol("cv-render");
   activeRenders.add(render);
   try {
-    return await generateResponse();
+    return await generateResponse(request);
   } catch (error) {
     console.error("CV generation failed", {
       stage: error instanceof CvGenerationError ? error.stage : "unknown",
