@@ -27,7 +27,7 @@ src/
 │   │   ├── education-section.tsx
 │   │   ├── experience-section.tsx
 │   │   ├── hero-section.tsx
-│   │   ├──how-i-work-section.tsx
+│   │   ├── how-i-work-section.tsx
 │   │   └── projects-section.tsx
 │   ├── actions/
 │   │   └── send-contact-email.tsx    # Next.js server action
