@@ -1,6 +1,7 @@
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 
+import { atCvStage, CvGenerationError } from "@/lib/cv-error";
 import { renderCv } from "@/lib/cv-renderer";
 import { env } from "@/lib/env";
 import { getIpAddress } from "@/lib/headers";
@@ -53,12 +54,17 @@ function unavailable(message: string, status: number, retryAfter = 10) {
 }
 
 async function generateResponse() {
-  const limit = await limitDownloads();
-  if (limit.reason === "timeout")
+  const limit = await atCvStage("rate-limit", limitDownloads);
+  if (limit.reason === "timeout") {
+    console.error("CV generation failed", {
+      stage: "rate-limit",
+      reason: "timeout",
+    });
     return unavailable(
       "CV generation is temporarily unavailable. Please retry.",
       503,
     );
+  }
   if (!limit.success)
     return unavailable(
       "Too many downloads. Please retry shortly.",
@@ -66,8 +72,7 @@ async function generateResponse() {
       Math.max(1, Math.ceil((limit.reset - Date.now()) / 1000)),
     );
   const pdf = await renderCv();
-  if (pdf.byteLength > 4_000_000)
-    throw new Error("CV exceeds the response size budget");
+  if (pdf.byteLength > 4_000_000) throw new CvGenerationError("response-size");
   return new Response(new Uint8Array(pdf), {
     headers: {
       ...headers,
@@ -84,8 +89,10 @@ export async function GET() {
   activeRenders.add(render);
   try {
     return await generateResponse();
-  } catch {
-    console.error("CV generation failed");
+  } catch (error) {
+    console.error("CV generation failed", {
+      stage: error instanceof CvGenerationError ? error.stage : "unknown",
+    });
     return unavailable("Could not generate the CV. Please retry shortly.", 503);
   } finally {
     activeRenders.delete(render);

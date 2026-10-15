@@ -1,6 +1,8 @@
 import chromium from "@sparticuz/chromium";
 import puppeteer, { type Browser } from "puppeteer";
 
+import { atCvStage } from "./cv-error";
+
 const renderTimeout = 45_000;
 
 function printUrl() {
@@ -47,17 +49,17 @@ async function launchBrowser() {
 }
 
 export async function renderCv() {
-  const url = printUrl();
-  const browser = await launchBrowser();
+  const url = await atCvStage("print-url", printUrl);
+  const browser = await atCvStage("browser-launch", launchBrowser);
   const deadline = setTimeout(
     () => browser.process()?.kill("SIGKILL"),
     renderTimeout,
   );
   try {
-    return await renderPage(browser, url);
+    return await atCvStage("print-page", () => renderPage(browser, url));
   } finally {
     clearTimeout(deadline);
-    await closeBrowser(browser);
+    await atCvStage("browser-close", () => closeBrowser(browser));
   }
 }
 
@@ -87,23 +89,27 @@ async function renderPage(browser: Browser, url: URL) {
   });
   if (!response?.ok() || new URL(page.url()).origin !== url.origin)
     throw new Error("CV print page unavailable");
-  await page.waitForSelector("[data-cv-ready]");
-  await page.waitForFunction(
-    () =>
-      document.fonts.status === "loaded" &&
-      [...document.images].every((image) => image.complete),
-  );
-  const assetsReady = await page.evaluate(
-    () =>
-      [...document.images].every((image) => image.naturalWidth > 0) &&
-      [...document.fonts].every((font) => font.status !== "error"),
-  );
-  if (!assetsReady) throw new Error("CV assets failed to load");
-  return await page.pdf({
-    format: "A4",
-    preferCSSPageSize: true,
-    printBackground: true,
-    tagged: true,
-    timeout: 15_000,
+  await atCvStage("assets", async () => {
+    await page.waitForSelector("[data-cv-ready]");
+    await page.waitForFunction(
+      () =>
+        document.fonts.status === "loaded" &&
+        [...document.images].every((image) => image.complete),
+    );
+    const assetsReady = await page.evaluate(
+      () =>
+        [...document.images].every((image) => image.naturalWidth > 0) &&
+        [...document.fonts].every((font) => font.status !== "error"),
+    );
+    if (!assetsReady) throw new Error("CV assets failed to load");
   });
+  return await atCvStage("pdf-render", () =>
+    page.pdf({
+      format: "A4",
+      preferCSSPageSize: true,
+      printBackground: true,
+      tagged: true,
+      timeout: 15_000,
+    }),
+  );
 }
