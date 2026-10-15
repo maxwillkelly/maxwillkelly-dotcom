@@ -22,7 +22,7 @@ export default async function CvPrintPage() {
 
   return (
     // The renderer waits for this marker, then separately waits for fonts/images.
-    <main className="cv-document" data-cv-document data-cv-ready>
+    <main className="cv-document" data-cv-ready>
       <CvHero />
       <section>
         <About components={components} />
