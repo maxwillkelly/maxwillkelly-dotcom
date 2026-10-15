@@ -1,7 +1,10 @@
+import {
+  formatDateRangeinYearsAndMonths,
+  formatDurationinYearsAndMonths,
+} from "@/lib/duration";
 import { getTechnology } from "@/lib/technologies";
 import type { loadTimeline } from "@/lib/timeline";
 
-import { CvMetadata } from "./cv-metadata";
 import { components } from "./mdx-components";
 
 export const CvTimeline = ({
@@ -14,26 +17,34 @@ export const CvTimeline = ({
   return (
     <section>
       <h2>{title}</h2>
-      {entries.map(({ Content, ...entry }) => (
-        <article key={`${entry.organisation}-${entry.position}`}>
-          <header>
-            <h3>{entry.organisation}</h3>
-            {entry.position && (
-              <p className="cv-position">
-                {entry.position}
-                {entry.type && ` · ${entry.type}`}
+      {entries.map(({ Content, ...entry }) => {
+        const date = entry.start
+          ? `${formatDateRangeinYearsAndMonths(entry.start, entry.end)} · ${formatDurationinYearsAndMonths(entry.start, entry.end)}`
+          : undefined;
+
+        return (
+          <article key={`${entry.organisation}-${entry.position}`}>
+            <header>
+              <h3>{entry.organisation}</h3>
+              {entry.position && (
+                <p className="cv-position">
+                  {entry.position}
+                  {entry.type && ` · ${entry.type}`}
+                </p>
+              )}
+              <p className="cv-meta">
+                {[entry.location, date].filter(Boolean).join(" · ")}
+              </p>
+            </header>
+            <Content components={components} />
+            {entry.chips.length > 0 && (
+              <p className="cv-technologies">
+                {entry.chips.map((id) => getTechnology(id).label).join(" · ")}
               </p>
             )}
-            <CvMetadata {...entry} />
-          </header>
-          <Content components={components} />
-          {entry.chips.length > 0 && (
-            <p className="cv-technologies">
-              {entry.chips.map((id) => getTechnology(id).label).join(" · ")}
-            </p>
-          )}
-        </article>
-      ))}
+          </article>
+        );
+      })}
     </section>
   );
 };
