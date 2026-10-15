@@ -36,6 +36,6 @@ I work as a Software Engineer on [GovernorHub](https://governorhub.com/), the le
 
 - **Onboarding and collaboration:** I onboard and train new engineers, and work with product managers and other stakeholders to gather requirements and write technical specifications.
 
-- **CI/CD:** I've learned how to set up Github Actions and CircleCI to automatically check and build deployments
+- **CI/CD:** I've learned how to set up GitHub Actions and CircleCI to automatically check and build deployments.
 
 - **Security:** I treat security concerns as an urgent priority and take care to protect personal and sensitive data. I work within legal, ethical and information security requirements relevant to my role, including data protection requirements under GDPR and standards such as ISO 27001.
