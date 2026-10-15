@@ -23,4 +23,4 @@ chips:
 
 I attended the [University of Dundee](https://www.dundee.ac.uk/) from 2018 to 2022 and graduated with a **First Class Honours** degree in [Computing Science](https://www.dundee.ac.uk/undergraduate/computer-science).
 
-Unlike some other computer science degrees, my course was centred around learning practical skills for the workplace. I spent most of the course completing software projects in teams. I learned to collaborate with fellow engineers and gained experience with a variety of different programming languages and skills.
+Unlike some other computer science degrees, my course was centred around learning practical skills for the workplace. I spent most of the course completing software projects in teams. I learned how to collaborate with my fellow engineers and learn a variety of different programming languages and skills.
