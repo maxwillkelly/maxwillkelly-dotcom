@@ -7,8 +7,10 @@ import { useState } from "react";
 
 import { siteConfig } from "@/lib/site";
 
+// Runs in the browser; /api/cv generates the PDF on the server.
 async function generateDownload() {
   const response = await fetch("/api/cv", {
+    // Every click requests a newly generated CV, bypassing the browser cache.
     cache: "no-store",
     signal: AbortSignal.timeout(65_000),
   });
@@ -22,8 +24,9 @@ async function generateDownload() {
 
   const pdf = await response.blob();
 
+  // Check the PDF header to reject non-PDF bodies, not document integrity.
   if ((await pdf.slice(0, 5).text()) !== "%PDF-") {
-    throw new Error("Invalid PDF");
+    throw new Error("CV response is missing the PDF header");
   }
 
   const url = URL.createObjectURL(pdf);

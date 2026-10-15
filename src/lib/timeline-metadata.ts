@@ -1,7 +1,7 @@
 import { parseISO } from "date-fns";
 import { z } from "zod";
 
-import { technologyIds } from "./technologies";
+import { technologies } from "./technologies";
 
 const text = z.string().min(1);
 const date = z.iso.date().transform((value) => parseISO(value));
@@ -16,7 +16,7 @@ export const timelineMetadataSchema = z
       .optional(),
     start: date.optional(),
     end: date.optional(),
-    chips: z.array(z.enum(technologyIds)).default([]),
+    chips: z.array(z.enum(technologies.map(({ id }) => id))).default([]),
   })
   .refine(
     ({ start, end }) => !end || (start !== undefined && end >= start),

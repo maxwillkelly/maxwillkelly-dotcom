@@ -20,23 +20,29 @@ const ratelimit = new Ratelimit({
 });
 
 // Local development should not require the hosted Redis service.
-let localWindow = { requests: 0, reset: 0 };
+const localDownloads: number[] = [];
 
-async function limitDownloads() {
-  if (process.env.NODE_ENV !== "development")
-    return ratelimit.limit(await getIpAddress());
+function limitLocalDownloads() {
   const now = Date.now();
-  if (now >= localWindow.reset)
-    localWindow = { requests: 0, reset: now + 60_000 };
-  localWindow.requests += 1;
+  const expired = localDownloads.filter((time) => time <= now - 60_000).length;
+  localDownloads.splice(0, expired);
+  const success = localDownloads.length < 5;
+  if (success) localDownloads.push(now);
   return {
-    success: localWindow.requests <= 5,
-    reset: localWindow.reset,
+    success,
+    reset: (localDownloads[0] ?? now) + 60_000,
     reason: undefined,
   };
 }
 
-let rendering = false;
+async function limitDownloads() {
+  if (process.env.NODE_ENV !== "development")
+    return ratelimit.limit(await getIpAddress());
+  return limitLocalDownloads();
+}
+
+// One active render per process; production rate limits remain shared in Redis.
+const activeRenders = new Set<symbol>();
 const headers = { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" };
 
 function unavailable(message: string, status: number, retryAfter = 10) {
@@ -72,16 +78,17 @@ async function generateResponse() {
 }
 
 export async function GET() {
-  if (rendering)
+  if (activeRenders.size > 0)
     return unavailable("CV generation is busy. Please retry shortly.", 503);
-  rendering = true;
+  const render = Symbol("cv-render");
+  activeRenders.add(render);
   try {
     return await generateResponse();
   } catch {
     console.error("CV generation failed");
     return unavailable("Could not generate the CV. Please retry shortly.", 503);
   } finally {
-    rendering = false;
+    activeRenders.delete(render);
   }
 }
 
