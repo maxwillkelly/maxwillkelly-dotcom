@@ -1,39 +1,13 @@
-import { parseISO } from "date-fns";
 import type { ReactNode } from "react";
-import { z } from "zod";
 
-import {
-  TechnologyChip,
-  technologyIds,
-} from "@/components/max/technology-chip";
+import { TechnologyChip } from "@/components/max/technology-chip";
 import {
   formatDateRangeinYearsAndMonths,
   formatDurationinYearsAndMonths,
 } from "@/lib/duration";
+import type { TimelineMetadata } from "@/lib/timeline";
 
-const text = z.string().min(1);
-const date = z.iso.date().transform((value) => parseISO(value));
-
-export const timelineMetadataSchema = z
-  .object({
-    organisation: text,
-    position: text.optional(),
-    location: text.optional(),
-    type: z
-      .enum(["Full-time", "Part-time", "Contractor", "Freelancer"])
-      .optional(),
-    start: date.optional(),
-    end: date.optional(),
-    chips: z.array(z.enum(technologyIds)).default([]),
-  })
-  .refine(
-    ({ start, end }) => !end || (start !== undefined && end >= start),
-    "End date requires a start date and cannot precede it",
-  );
-
-export type TimelineEntry = z.infer<typeof timelineMetadataSchema> & {
-  content: ReactNode;
-};
+type TimelineEntry = TimelineMetadata & { content: ReactNode };
 
 type TimelineProps = {
   entries: TimelineEntry[];

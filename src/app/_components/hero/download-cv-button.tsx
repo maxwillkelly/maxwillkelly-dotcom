@@ -1,0 +1,74 @@
+"use client";
+
+import { Button, Spinner } from "@heroui/react";
+import { DownloadCloud } from "lucide-react";
+import { Ripple } from "m3-ripple";
+import { useState } from "react";
+
+import { siteConfig } from "@/lib/site";
+
+async function generateDownload() {
+  const response = await fetch("/api/cv", {
+    cache: "no-store",
+    signal: AbortSignal.timeout(65_000),
+  });
+
+  if (
+    !response.ok ||
+    !response.headers.get("content-type")?.startsWith("application/pdf")
+  ) {
+    throw new Error("CV generation failed");
+  }
+
+  const pdf = await response.blob();
+
+  // Check the PDF header to reject non-PDF bodies
+  if ((await pdf.slice(0, 5).text()) !== "%PDF-") {
+    throw new Error("CV response is missing the PDF header");
+  }
+
+  const url = URL.createObjectURL(pdf);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = `${siteConfig.name} - CV.pdf`;
+
+  document.body.append(link);
+
+  link.click();
+  link.remove();
+
+  // Allow browsers time to start consuming the download before releasing it.
+  setTimeout(() => URL.revokeObjectURL(url), 60_000);
+}
+
+export const DownloadCvButton = () => {
+  const [isPending, setPending] = useState(false);
+
+  const downloadCv = async () => {
+    setPending(true);
+
+    try {
+      await generateDownload();
+    } catch (error) {
+      console.error("CV download failed", error);
+    } finally {
+      setPending(false);
+    }
+  };
+
+  return (
+    <Button
+      aria-label={isPending ? "Generating CV" : "Download CV"}
+      className="gap-2 text-xs [&_svg]:size-4"
+      isPending={isPending}
+      size="sm"
+      variant="tertiary"
+      onPress={downloadCv}
+    >
+      <Ripple />
+      {isPending ? <Spinner color="current" size="sm" /> : <DownloadCloud />}
+      Download CV
+    </Button>
+  );
+};

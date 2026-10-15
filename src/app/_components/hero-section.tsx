@@ -1,10 +1,11 @@
-import { DownloadCloud, Mail, Phone } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 import Image from "next/image";
 
 import { BlurFade } from "@/components/ui/blur-fade";
 import { DiaTextReveal } from "@/components/ui/dia-text-reveal";
 import { siteConfig } from "@/lib/site";
 
+import { DownloadCvButton } from "./hero/download-cv-button";
 import { GithubIcon } from "./hero/github-icon";
 import { HeroContent } from "./hero/hero-content";
 import { LinkedInIcon } from "./hero/linked-in-icon";
@@ -40,12 +41,7 @@ export const HeroSection = () => {
       </BlurFade>
       <BlurFade className="sm:col-start-1" delay={0.4}>
         <div className="flex flex-wrap gap-2">
-          <SocialIcon
-            ariaLabel="Download CV"
-            download={`${siteConfig.name} - CV.pdf`}
-            href="/cv.pdf"
-            icon={<DownloadCloud />}
-          />
+          <DownloadCvButton />
           <SocialIcon
             ariaLabel="GitHub"
             href="https://github.com/maxwillkelly"
