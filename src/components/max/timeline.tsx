@@ -5,7 +5,7 @@ import {
   formatDateRangeinYearsAndMonths,
   formatDurationinYearsAndMonths,
 } from "@/lib/duration";
-import type { TimelineMetadata } from "@/lib/timeline-metadata";
+import type { TimelineMetadata } from "@/lib/timeline";
 
 type TimelineEntry = TimelineMetadata & { content: ReactNode };
 
