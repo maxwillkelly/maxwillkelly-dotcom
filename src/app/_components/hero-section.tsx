@@ -5,7 +5,7 @@ import { BlurFade } from "@/components/ui/blur-fade";
 import { DiaTextReveal } from "@/components/ui/dia-text-reveal";
 import { siteConfig } from "@/lib/site";
 
-import { DownloadCv } from "./hero/download-cv";
+import { DownloadCvButton } from "./hero/download-cv-button";
 import { GithubIcon } from "./hero/github-icon";
 import { HeroContent } from "./hero/hero-content";
 import { LinkedInIcon } from "./hero/linked-in-icon";
@@ -41,7 +41,7 @@ export const HeroSection = () => {
       </BlurFade>
       <BlurFade className="sm:col-start-1" delay={0.4}>
         <div className="flex flex-wrap gap-2">
-          <DownloadCv />
+          <DownloadCvButton />
           <SocialIcon
             ariaLabel="GitHub"
             href="https://github.com/maxwillkelly"
