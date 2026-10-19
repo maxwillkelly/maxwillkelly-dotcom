@@ -47,7 +47,7 @@ async function launchBrowser() {
   });
 }
 
-export async function renderCv(requestUrl: string) {
+export async function generatePdf(requestUrl: string) {
   let stage = "print-url";
   let url: URL;
   let browser: Browser;

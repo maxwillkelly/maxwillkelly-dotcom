@@ -1,7 +1,7 @@
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 
-import { renderCv } from "@/lib/cv-renderer";
+import { generatePdf } from "@/lib/cv-renderer";
 import { env } from "@/lib/env";
 import { getIpAddress } from "@/lib/headers";
 
@@ -66,7 +66,7 @@ const generateResponse = async (request: Request) => {
     return rateLimitedResponse;
   }
 
-  const pdf = await renderCv(request.url);
+  const pdf = await generatePdf(request.url);
 
   if (pdf.byteLength > 4_000_000) {
     return unavailable("Could not generate the CV. Please retry shortly.", 503);
