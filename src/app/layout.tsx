@@ -4,7 +4,6 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 
-import { locale } from "@/lib/date";
 import { siteConfig } from "@/lib/site";
 import { absoluteUrl, cn } from "@/lib/utils";
 
@@ -28,7 +27,7 @@ export const metadata: Metadata = {
     title: siteConfig.title,
     description: siteConfig.description,
     siteName: siteConfig.name,
-    locale: locale.code.replace("-", "_"),
+    locale: siteConfig.locale.replace("-", "_"),
     images: [
       {
         url: absoluteUrl(siteConfig.image, siteConfig.url),
@@ -64,7 +63,7 @@ const RootLayout = ({
 }>) => {
   return (
     <html
-      lang={locale.code}
+      lang={siteConfig.locale}
       suppressHydrationWarning
       className={cn(
         // "dark",

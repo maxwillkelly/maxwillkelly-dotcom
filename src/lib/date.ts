@@ -1,9 +1,10 @@
 import { format, intervalToDuration } from "date-fns";
 import { enGB } from "date-fns/locale";
 
+import { siteConfig } from "./site";
 import { nonFalsey } from "./utils";
 
-export const locale = enGB;
+const locale = { "en-GB": enGB }[siteConfig.locale];
 
 export const formatDateRangeinYearsAndMonths = (start: Date, end?: Date) => {
   return `${format(start, "MMMM yyyy", { locale })} - ${

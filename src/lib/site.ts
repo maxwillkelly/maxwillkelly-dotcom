@@ -3,6 +3,7 @@ import type { Person, WithContext } from "schema-dts";
 import { absoluteUrl } from "./utils";
 
 export const siteConfig = {
+  locale: "en-GB",
   name: "Max Kelly",
   additionalName: "Maxwill Kelly",
   givenName: "Max",

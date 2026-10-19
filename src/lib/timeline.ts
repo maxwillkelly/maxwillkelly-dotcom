@@ -5,7 +5,7 @@ import { compareDesc, parseISO } from "date-fns";
 import type { MDXContent } from "mdx/types";
 import { z } from "zod";
 
-import { locale } from "./date";
+import { siteConfig } from "./site";
 import { technologies } from "./technologies";
 
 const textSchema = z.string().min(1);
@@ -54,7 +54,7 @@ const sortLoadedTimelineEntries = (
 ) => {
   return (
     compareStartDates(left.start, right.start) ||
-    left.organisation.localeCompare(right.organisation, locale.code)
+    left.organisation.localeCompare(right.organisation, siteConfig.locale)
   );
 };
 
