@@ -1,7 +1,6 @@
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 
-import { atCvStage, CvGenerationError } from "@/lib/cv-error";
 import { renderCv } from "@/lib/cv-renderer";
 import { env } from "@/lib/env";
 import { getIpAddress } from "@/lib/headers";
@@ -28,7 +27,11 @@ function limitLocalDownloads() {
   const expired = localDownloads.filter((time) => time <= now - 60_000).length;
   localDownloads.splice(0, expired);
   const success = localDownloads.length < 5;
-  if (success) localDownloads.push(now);
+
+  if (success) {
+    localDownloads.push(now);
+  }
+
   return {
     success,
     reset: (localDownloads[0] ?? now) + 60_000,
@@ -37,8 +40,10 @@ function limitLocalDownloads() {
 }
 
 async function limitDownloads() {
-  if (process.env.NODE_ENV !== "development")
+  if (process.env.NODE_ENV !== "development") {
     return ratelimit.limit(await getIpAddress());
+  }
+
   return limitLocalDownloads();
 }
 
@@ -53,26 +58,53 @@ function unavailable(message: string, status: number, retryAfter = 10) {
   );
 }
 
-async function generateResponse(request: Request) {
-  const limit = await atCvStage("rate-limit", limitDownloads);
+async function downloadLimitResponse() {
+  let limit: Awaited<ReturnType<typeof limitDownloads>>;
+
+  try {
+    limit = await limitDownloads();
+  } catch (error) {
+    console.error("CV generation failed", { stage: "rate-limit" });
+
+    throw error;
+  }
+
   if (limit.reason === "timeout") {
     console.error("CV generation failed", {
       stage: "rate-limit",
       reason: "timeout",
     });
+
     return unavailable(
       "CV generation is temporarily unavailable. Please retry.",
       503,
     );
   }
-  if (!limit.success)
+
+  if (!limit.success) {
     return unavailable(
       "Too many downloads. Please retry shortly.",
       429,
       Math.max(1, Math.ceil((limit.reset - Date.now()) / 1000)),
     );
+  }
+}
+
+async function generateResponse(request: Request) {
+  const limited = await downloadLimitResponse();
+
+  if (limited) {
+    return limited;
+  }
+
   const pdf = await renderCv(request.url);
-  if (pdf.byteLength > 4_000_000) throw new CvGenerationError("response-size");
+
+  if (pdf.byteLength > 4_000_000) {
+    console.error("CV generation failed", { stage: "response-size" });
+
+    return unavailable("Could not generate the CV. Please retry shortly.", 503);
+  }
+
   return new Response(new Uint8Array(pdf), {
     headers: {
       ...headers,
@@ -83,16 +115,16 @@ async function generateResponse(request: Request) {
 }
 
 export async function GET(request: Request) {
-  if (activeRenders.size > 0)
+  if (activeRenders.size > 0) {
     return unavailable("CV generation is busy. Please retry shortly.", 503);
+  }
+
   const render = Symbol("cv-render");
   activeRenders.add(render);
+
   try {
     return await generateResponse(request);
-  } catch (error) {
-    console.error("CV generation failed", {
-      stage: error instanceof CvGenerationError ? error.stage : "unknown",
-    });
+  } catch {
     return unavailable("Could not generate the CV. Please retry shortly.", 503);
   } finally {
     activeRenders.delete(render);

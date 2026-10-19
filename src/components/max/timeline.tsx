@@ -36,7 +36,9 @@ const TimelineMetadata = ({ location, start, end }: TimelineEntry) => {
 };
 
 const TimelineChips = ({ chips = [] }: Pick<TimelineEntry, "chips">) => {
-  if (chips.length === 0) return null;
+  if (chips.length === 0) {
+    return null;
+  }
 
   return (
     <div className="flex flex-wrap gap-2">

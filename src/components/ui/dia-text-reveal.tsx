@@ -30,19 +30,22 @@ function buildGradient(pos: number, colors: string[], textColor: string) {
   if (bandStart >= 100) {
     return `linear-gradient(90deg, ${textColor}, ${textColor})`;
   }
+
   const n = colors.length;
   const parts: string[] = [];
 
-  if (bandStart > 0)
+  if (bandStart > 0) {
     parts.push(`${textColor} 0%`, `${textColor} ${bandStart.toFixed(2)}%`);
+  }
 
   colors.forEach((c, i) => {
     const pct = n === 1 ? pos : bandStart + (i / (n - 1)) * BAND_HALF * 2;
     parts.push(`${c} ${pct.toFixed(2)}%`);
   });
 
-  if (bandEnd < 100)
+  if (bandEnd < 100) {
     parts.push(`transparent ${bandEnd.toFixed(2)}%`, `transparent 100%`);
+  }
 
   return `linear-gradient(90deg, ${parts.join(", ")})`;
 }
@@ -59,9 +62,11 @@ function measureWidths(el: HTMLElement, texts: string[]) {
   el.parentElement!.appendChild(ghost);
   const widths = texts.map((t) => {
     ghost.textContent = t;
+
     return ghost.getBoundingClientRect().width;
   });
   ghost.remove();
+
   return widths;
 }
 
@@ -200,7 +205,11 @@ export function DiaTextReveal({
 
   useEffect(() => {
     const el = spanRef.current;
-    if (!el || !isMulti) return;
+
+    if (!el || !isMulti) {
+      return;
+    }
+
     setMeasuredWidths(measureWidths(el, texts));
   }, [Array.isArray(text) ? text.join("\0") : text]);
 
@@ -215,7 +224,10 @@ export function DiaTextReveal({
       delay,
       ease: sweepEase,
       onComplete() {
-        if (!repeat) return;
+        if (!repeat) {
+          return;
+        }
+
         timerRef.current = setTimeout(() => {
           const next = (indexRef.current + 1) % texts.length;
           indexRef.current = next;
@@ -231,10 +243,18 @@ export function DiaTextReveal({
   useEffect(() => {
     if (prefersReducedMotion) {
       sweepPos.set(SWEEP_END);
+
       return;
     }
-    if (startOnView && !isInView) return;
-    if (once && hasPlayedRef.current) return;
+
+    if (startOnView && !isInView) {
+      return;
+    }
+
+    if (once && hasPlayedRef.current) {
+      return;
+    }
+
     hasPlayedRef.current = true;
     playRef.current();
 

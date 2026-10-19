@@ -61,6 +61,7 @@ export const ContactForm = () => {
 
       if (result.success) {
         reset();
+
         return { status: "success" };
       }
 

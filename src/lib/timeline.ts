@@ -5,21 +5,22 @@ import { compareDesc, parseISO } from "date-fns";
 import type { MDXContent } from "mdx/types";
 import { z } from "zod";
 
+import { locale } from "./locale";
 import { technologies } from "./technologies";
 
-const text = z.string().min(1);
-const date = z.iso.date().transform((value) => parseISO(value));
+const textSchema = z.string().min(1);
+const dateSchema = z.iso.date().transform((value) => parseISO(value));
 
-export const timelineMetadataSchema = z
+const timelineMetadataSchema = z
   .object({
-    organisation: text,
-    position: text.optional(),
-    location: text.optional(),
+    organisation: textSchema,
+    position: textSchema.optional(),
+    location: textSchema.optional(),
     type: z
       .enum(["Full-time", "Part-time", "Contractor", "Freelancer"])
       .optional(),
-    start: date.optional(),
-    end: date.optional(),
+    start: dateSchema.optional(),
+    end: dateSchema.optional(),
     chips: z.array(z.enum(technologies.map(({ id }) => id))).default([]),
   })
   .refine(
@@ -34,8 +35,13 @@ export type TimelineSection = "experience" | "education" | "projects";
 type LoadedTimelineEntry = TimelineMetadata & { Content: MDXContent };
 
 const compareStartDates = (left?: Date, right?: Date) => {
-  if (!left) return right ? 1 : 0;
-  if (!right) return -1;
+  if (!left) {
+    return right ? 1 : 0;
+  }
+
+  if (!right) {
+    return -1;
+  }
 
   return compareDesc(left, right);
 };
@@ -46,11 +52,15 @@ const sortLoadedTimelineEntries = (
 ) => {
   return (
     compareStartDates(left.start, right.start) ||
-    left.organisation.localeCompare(right.organisation, "en-GB")
+    left.organisation.localeCompare(right.organisation, locale.code)
   );
 };
 
-export const loadTimeline = async (section: TimelineSection) => {
+export type Timeline = LoadedTimelineEntry[];
+
+export const loadTimeline = async (
+  section: TimelineSection,
+): Promise<Timeline> => {
   const files = await readdir(
     path.join(process.cwd(), "src/content", section),
     { withFileTypes: true },

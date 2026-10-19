@@ -131,6 +131,10 @@ export type TechnologyId = (typeof technologies)[number]["id"];
 
 export function getTechnology(id: TechnologyId) {
   const technology = technologies.find((entry) => entry.id === id);
-  if (!technology) throw new Error(`Unknown technology: ${id}`);
+
+  if (!technology) {
+    throw new Error(`Unknown technology: ${id}`);
+  }
+
   return technology;
 }
