@@ -19,34 +19,6 @@ const ratelimit = new Ratelimit({
   timeout: 3_000,
 });
 
-// Local development should not require the hosted Redis service.
-const localDownloads: number[] = [];
-
-const limitLocalDownloads = () => {
-  const now = Date.now();
-  const expired = localDownloads.filter((time) => time <= now - 60_000).length;
-  localDownloads.splice(0, expired);
-  const success = localDownloads.length < 5;
-
-  if (success) {
-    localDownloads.push(now);
-  }
-
-  return {
-    success,
-    reset: (localDownloads[0] ?? now) + 60_000,
-    reason: undefined,
-  };
-};
-
-const limitDownloads = async () => {
-  if (process.env.NODE_ENV !== "development") {
-    return ratelimit.limit(await getIpAddress());
-  }
-
-  return limitLocalDownloads();
-};
-
 // One active render per process; production rate limits remain shared in Redis.
 const activeRenders = new Set<symbol>();
 const headers = { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" };
@@ -59,10 +31,14 @@ const unavailable = (message: string, status: number, retryAfter = 10) => {
 };
 
 const downloadLimitResponse = async () => {
-  let limit: Awaited<ReturnType<typeof limitDownloads>>;
+  if (process.env.NODE_ENV === "development") {
+    return;
+  }
+
+  let limit: Awaited<ReturnType<typeof ratelimit.limit>>;
 
   try {
-    limit = await limitDownloads();
+    limit = await ratelimit.limit(await getIpAddress());
   } catch (error) {
     console.error("CV generation failed", { stage: "rate-limit" });
 
