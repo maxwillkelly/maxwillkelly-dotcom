@@ -4,7 +4,7 @@ import { TechnologyChip } from "@/components/max/technology-chip";
 import {
   formatDateRangeinYearsAndMonths,
   formatDurationinYearsAndMonths,
-} from "@/lib/duration";
+} from "@/lib/date";
 import type { TimelineMetadata } from "@/lib/timeline";
 
 type TimelineEntry = TimelineMetadata & { content: ReactNode };

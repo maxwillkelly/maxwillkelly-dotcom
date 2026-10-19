@@ -2,7 +2,7 @@ import { components } from "@/app/cv/print/_components/mdx-components";
 import {
   formatDateRangeinYearsAndMonths,
   formatDurationinYearsAndMonths,
-} from "@/lib/duration";
+} from "@/lib/date";
 import { getTechnology } from "@/lib/technologies";
 import type { Timeline } from "@/lib/timeline";
 

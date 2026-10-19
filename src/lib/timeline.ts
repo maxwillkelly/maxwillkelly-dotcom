@@ -5,7 +5,7 @@ import { compareDesc, parseISO } from "date-fns";
 import type { MDXContent } from "mdx/types";
 import { z } from "zod";
 
-import { locale } from "./locale";
+import { locale } from "./date";
 import { technologies } from "./technologies";
 
 const textSchema = z.string().min(1);
@@ -34,6 +34,8 @@ export type TimelineSection = "experience" | "education" | "projects";
 
 type LoadedTimelineEntry = TimelineMetadata & { Content: MDXContent };
 
+export type Timeline = LoadedTimelineEntry[];
+
 const compareStartDates = (left?: Date, right?: Date) => {
   if (!left) {
     return right ? 1 : 0;
@@ -55,8 +57,6 @@ const sortLoadedTimelineEntries = (
     left.organisation.localeCompare(right.organisation, locale.code)
   );
 };
-
-export type Timeline = LoadedTimelineEntry[];
 
 export const loadTimeline = async (
   section: TimelineSection,

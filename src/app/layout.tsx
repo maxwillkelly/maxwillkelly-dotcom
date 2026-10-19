@@ -4,7 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 
-import { locale } from "@/lib/locale";
+import { locale } from "@/lib/date";
 import { siteConfig } from "@/lib/site";
 import { absoluteUrl, cn } from "@/lib/utils";
 
