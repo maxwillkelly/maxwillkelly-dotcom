@@ -30,7 +30,7 @@ const unavailable = (message: string, status: number, retryAfter = 10) => {
   );
 };
 
-const downloadLimitResponse = async () => {
+const rateLimitResponse = async () => {
   if (process.env.NODE_ENV === "development") {
     return;
   }
@@ -60,10 +60,10 @@ const downloadLimitResponse = async () => {
 };
 
 const generateResponse = async (request: Request) => {
-  const limited = await downloadLimitResponse();
+  const rateLimitedResponse = await rateLimitResponse();
 
-  if (limited) {
-    return limited;
+  if (rateLimitedResponse) {
+    return rateLimitedResponse;
   }
 
   const pdf = await renderCv(request.url);
