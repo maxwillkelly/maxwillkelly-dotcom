@@ -33,15 +33,13 @@ const downloadLimitResponse = async () => {
     return;
   }
 
-  let limit: Awaited<ReturnType<typeof ratelimit.limit>>;
+  const limit = await getIpAddress()
+    .then((ip) => ratelimit.limit(ip))
+    .catch((error) => {
+      console.error("CV generation failed", { stage: "rate-limit" });
 
-  try {
-    limit = await ratelimit.limit(await getIpAddress());
-  } catch (error) {
-    console.error("CV generation failed", { stage: "rate-limit" });
-
-    throw error;
-  }
+      throw error;
+    });
 
   if (limit.reason === "timeout") {
     console.error("CV generation failed", {
