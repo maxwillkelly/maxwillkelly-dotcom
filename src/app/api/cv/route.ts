@@ -19,8 +19,6 @@ const ratelimit = new Ratelimit({
   timeout: 3_000,
 });
 
-// One active render per process; production rate limits remain shared in Redis.
-const activeRenders = new Set<symbol>();
 const headers = { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" };
 
 const unavailable = (message: string, status: number, retryAfter = 10) => {
@@ -91,19 +89,10 @@ const generateResponse = async (request: Request) => {
 };
 
 export const GET = async (request: Request) => {
-  if (activeRenders.size > 0) {
-    return unavailable("CV generation is busy. Please retry shortly.", 503);
-  }
-
-  const render = Symbol("cv-render");
-  activeRenders.add(render);
-
   try {
     return await generateResponse(request);
   } catch {
     return unavailable("Could not generate the CV. Please retry shortly.", 503);
-  } finally {
-    activeRenders.delete(render);
   }
 };
 
