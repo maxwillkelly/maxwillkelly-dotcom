@@ -1,12 +1,10 @@
 import type { MDXComponents } from "mdx/types";
 
-import {
-  PrintLink,
-  PrintList,
-  PrintParagraph,
-  PrintSectionHeading,
-  PrintSubheading,
-} from "./print-components";
+import { PrintLink } from "./print-link";
+import { PrintList } from "./print-list";
+import { PrintParagraph } from "./print-paragraph";
+import { PrintSectionHeading } from "./print-section-heading";
+import { PrintSubheading } from "./print-subheading";
 
 export const components = {
   h1: PrintSectionHeading,

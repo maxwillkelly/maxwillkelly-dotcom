@@ -2,7 +2,8 @@ import Hero from "@/content/hero.md";
 import { siteConfig } from "@/lib/site";
 
 import { components } from "./mdx-components";
-import { PrintLink, PrintParagraph } from "./print-components";
+import { PrintLink } from "./print-link";
+import { PrintParagraph } from "./print-paragraph";
 
 export const PrintHero = () => (
   <header className="flex items-start gap-[6mm] break-inside-avoid">

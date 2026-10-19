@@ -1,9 +1,7 @@
 import { components } from "@/app/cv/print/_components/mdx-components";
-import {
-  PrintParagraph,
-  PrintSectionHeading,
-  PrintSubheading,
-} from "@/app/cv/print/_components/print-components";
+import { PrintParagraph } from "@/app/cv/print/_components/print-paragraph";
+import { PrintSectionHeading } from "@/app/cv/print/_components/print-section-heading";
+import { PrintSubheading } from "@/app/cv/print/_components/print-subheading";
 import {
   formatDateRangeinYearsAndMonths,
   formatDurationinYearsAndMonths,
