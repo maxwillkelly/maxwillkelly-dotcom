@@ -22,7 +22,7 @@ const ratelimit = new Ratelimit({
 // Local development should not require the hosted Redis service.
 const localDownloads: number[] = [];
 
-function limitLocalDownloads() {
+const limitLocalDownloads = () => {
   const now = Date.now();
   const expired = localDownloads.filter((time) => time <= now - 60_000).length;
   localDownloads.splice(0, expired);
@@ -37,28 +37,28 @@ function limitLocalDownloads() {
     reset: (localDownloads[0] ?? now) + 60_000,
     reason: undefined,
   };
-}
+};
 
-async function limitDownloads() {
+const limitDownloads = async () => {
   if (process.env.NODE_ENV !== "development") {
     return ratelimit.limit(await getIpAddress());
   }
 
   return limitLocalDownloads();
-}
+};
 
 // One active render per process; production rate limits remain shared in Redis.
 const activeRenders = new Set<symbol>();
 const headers = { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" };
 
-function unavailable(message: string, status: number, retryAfter = 10) {
+const unavailable = (message: string, status: number, retryAfter = 10) => {
   return Response.json(
     { message },
     { status, headers: { ...headers, "Retry-After": String(retryAfter) } },
   );
-}
+};
 
-async function downloadLimitResponse() {
+const downloadLimitResponse = async () => {
   let limit: Awaited<ReturnType<typeof limitDownloads>>;
 
   try {
@@ -88,9 +88,9 @@ async function downloadLimitResponse() {
       Math.max(1, Math.ceil((limit.reset - Date.now()) / 1000)),
     );
   }
-}
+};
 
-async function generateResponse(request: Request) {
+const generateResponse = async (request: Request) => {
   const limited = await downloadLimitResponse();
 
   if (limited) {
@@ -112,9 +112,9 @@ async function generateResponse(request: Request) {
       "Content-Disposition": 'attachment; filename="Max Kelly - CV.pdf"',
     },
   });
-}
+};
 
-export async function GET(request: Request) {
+export const GET = async (request: Request) => {
   if (activeRenders.size > 0) {
     return unavailable("CV generation is busy. Please retry shortly.", 503);
   }
@@ -129,11 +129,11 @@ export async function GET(request: Request) {
   } finally {
     activeRenders.delete(render);
   }
-}
+};
 
-export function HEAD() {
+export const HEAD = () => {
   return new Response(null, {
     status: 405,
     headers: { ...headers, Allow: "GET" },
   });
-}
+};
