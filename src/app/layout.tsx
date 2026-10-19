@@ -68,14 +68,14 @@ const RootLayout = ({
       suppressHydrationWarning
       className={cn(
         // "dark",
-        "h-full has-[[data-print-document]]:h-auto has-[[data-print-document]]:overflow-visible has-[[data-print-document]]:bg-white has-[[data-print-document]]:text-[#202020] has-[[data-print-document]]:scheme-light",
+        "h-full has-data-print-document:h-auto has-data-print-document:overflow-visible has-data-print-document:bg-white has-data-print-document:text-[#202020] has-data-print-document:scheme-light",
         "antialiased",
         "font-sans",
         figtree.variable,
       )}
       // data-theme="dark"
     >
-      <body className="h-full flex flex-col bg-background text-foreground overflow-hidden has-[[data-print-document]]:h-auto has-[[data-print-document]]:overflow-visible has-[[data-print-document]]:block has-[[data-print-document]]:bg-white has-[[data-print-document]]:text-[#202020] has-[[data-print-document]]:scheme-light">
+      <body className="h-full flex flex-col bg-background text-foreground overflow-hidden has-data-print-document:h-auto has-data-print-document:overflow-visible has-data-print-document:block has-data-print-document:bg-white has-data-print-document:text-[#202020] has-data-print-document:scheme-light">
         {/* <div className="fixed inset-0 z-0 pointer-events-none">
           <DottedGlowBackground
             className="mask-radial-to-20% mask-radial-at-left"
@@ -91,13 +91,13 @@ const RootLayout = ({
           />
         </div> */}
         <ScrollShadow
-          className="flex-1 has-[[data-print-document]]:h-auto has-[[data-print-document]]:overflow-visible has-[[data-print-document]]:mask-none has-[[data-print-document]]:block"
+          className="flex-1 has-data-print-document:h-auto has-data-print-document:overflow-visible has-data-print-document:mask-none has-data-print-document:block"
           hideScrollBar
           size={60}
         >
           <div
             id="container"
-            className="relative z-10 max-w-2xl mx-auto py-12 pb-24 sm:py-24 px-6 has-[[data-print-document]]:max-w-[210mm] has-[[data-print-document]]:p-[14mm] print:has-[[data-print-document]]:max-w-none print:has-[[data-print-document]]:m-0 print:has-[[data-print-document]]:p-0"
+            className="relative z-10 max-w-2xl mx-auto py-12 pb-24 sm:py-24 px-6 has-data-print-document:max-w-[210mm] has-data-print-document:p-[14mm] print:has-data-print-document:max-w-none print:has-data-print-document:m-0 print:has-data-print-document:p-0"
           >
             {children}
           </div>
