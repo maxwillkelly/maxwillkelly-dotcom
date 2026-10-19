@@ -1,4 +1,9 @@
-import { components } from "@/app/cv/print/_components/mdx-components";
+import {
+  components,
+  PrintParagraph,
+  PrintSectionHeading,
+  PrintSubheading,
+} from "@/app/cv/print/_components/mdx-components";
 import {
   formatDateRangeinYearsAndMonths,
   formatDurationinYearsAndMonths,
@@ -24,26 +29,26 @@ const PrintTimelineItem = ({
   entry: Timeline[number];
   referenceDate: Date;
 }) => (
-  <article>
-    <header>
-      <h3>{entry.organisation}</h3>
+  <article className="mb-[4mm]">
+    <header className="break-after-avoid break-inside-avoid">
+      <PrintSubheading>{entry.organisation}</PrintSubheading>
       {entry.position && (
-        <p className="font-semibold">
+        <PrintParagraph className="font-semibold">
           {entry.position}
           {entry.type && ` · ${entry.type}`}
-        </p>
+        </PrintParagraph>
       )}
-      <p className="text-[9pt] text-[#444]">
+      <PrintParagraph className="text-[9pt] text-[#444]">
         {[entry.location, printDate(entry, referenceDate)]
           .filter(Boolean)
           .join(" · ")}
-      </p>
+      </PrintParagraph>
     </header>
     <Content components={components} />
     {entry.chips.length > 0 && (
-      <p className="break-before-avoid text-[9pt] text-[#444]">
+      <PrintParagraph className="break-before-avoid text-[9pt] text-[#444]">
         {entry.chips.map((id) => getTechnology(id).label).join(" · ")}
-      </p>
+      </PrintParagraph>
     )}
   </article>
 );
@@ -58,7 +63,7 @@ export const PrintTimeline = ({
   title: string;
 }) => (
   <section>
-    <h2>{title}</h2>
+    <PrintSectionHeading>{title}</PrintSectionHeading>
     {entries.map((entry) => (
       <PrintTimelineItem
         key={`${entry.organisation}-${entry.position}`}
