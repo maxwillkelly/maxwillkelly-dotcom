@@ -22,6 +22,8 @@ const ratelimit = new Ratelimit({
 const headers = { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" };
 
 const unavailable = (message: string, status: number, retryAfter = 10) => {
+  console.error(message);
+
   return Response.json(
     { message },
     { status, headers: { ...headers, "Retry-After": String(retryAfter) } },
@@ -42,11 +44,6 @@ const downloadLimitResponse = async () => {
     });
 
   if (limit.reason === "timeout") {
-    console.error("CV generation failed", {
-      stage: "rate-limit",
-      reason: "timeout",
-    });
-
     return unavailable(
       "CV generation is temporarily unavailable. Please retry.",
       503,
@@ -72,8 +69,6 @@ const generateResponse = async (request: Request) => {
   const pdf = await renderCv(request.url);
 
   if (pdf.byteLength > 4_000_000) {
-    console.error("CV generation failed", { stage: "response-size" });
-
     return unavailable("Could not generate the CV. Please retry shortly.", 503);
   }
 
