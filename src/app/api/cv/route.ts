@@ -21,7 +21,13 @@ const ratelimit = new Ratelimit({
 
 const headers = { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" };
 
-const unavailable = (message: string, status: number, retryAfter = 10) => {
+let renderActive = false;
+
+const unavailableResponse = (
+  message: string,
+  status: number,
+  retryAfter = 10,
+) => {
   console.error(message);
 
   return Response.json(
@@ -44,14 +50,14 @@ const rateLimitResponse = async () => {
     });
 
   if (limit.reason === "timeout") {
-    return unavailable(
+    return unavailableResponse(
       "CV generation is temporarily unavailable. Please retry.",
       503,
     );
   }
 
   if (!limit.success) {
-    return unavailable(
+    return unavailableResponse(
       "Too many downloads. Please retry shortly.",
       429,
       Math.max(1, Math.ceil((limit.reset - Date.now()) / 1000)),
@@ -59,17 +65,14 @@ const rateLimitResponse = async () => {
   }
 };
 
-const generateResponse = async (request: Request) => {
-  const rateLimitedResponse = await rateLimitResponse();
-
-  if (rateLimitedResponse) {
-    return rateLimitedResponse;
-  }
-
+const pdfResponse = async (request: Request) => {
   const pdf = await generatePdf(request.url);
 
   if (pdf.byteLength > 4_000_000) {
-    return unavailable("Could not generate the CV. Please retry shortly.", 503);
+    return unavailableResponse(
+      "Could not generate the CV. Please retry shortly.",
+      503,
+    );
   }
 
   return new Response(new Uint8Array(pdf), {
@@ -81,11 +84,37 @@ const generateResponse = async (request: Request) => {
   });
 };
 
+const generateResponse = async (request: Request) => {
+  const rateLimitedResponse = await rateLimitResponse();
+
+  if (rateLimitedResponse) {
+    return rateLimitedResponse;
+  }
+
+  if (renderActive) {
+    return unavailableResponse(
+      "CV generation is temporarily unavailable. Please retry.",
+      503,
+    );
+  }
+
+  renderActive = true;
+
+  try {
+    return await pdfResponse(request);
+  } finally {
+    renderActive = false;
+  }
+};
+
 export const GET = async (request: Request) => {
   try {
     return await generateResponse(request);
   } catch {
-    return unavailable("Could not generate the CV. Please retry shortly.", 503);
+    return unavailableResponse(
+      "Could not generate the CV. Please retry shortly.",
+      503,
+    );
   }
 };
 

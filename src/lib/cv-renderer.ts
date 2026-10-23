@@ -20,10 +20,9 @@ async function closeBrowser(browser: Browser) {
 
   try {
     await browser.close();
-  } catch (error) {
+  } catch {
     console.error("CV generation failed", { stage: "browser-close" });
-
-    throw error;
+    browser.process()?.kill("SIGKILL");
   } finally {
     clearTimeout(kill);
   }
