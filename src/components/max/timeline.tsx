@@ -10,7 +10,7 @@ import type { TimelineOrganisation, TimelinePosition } from "@/lib/schema";
 type TimelineEntry = TimelinePosition & { id: string; content: ReactNode };
 
 type TimelineProps = {
-  entries: (TimelineOrganisation & {
+  organisations: (TimelineOrganisation & {
     id: string;
     content: ReactNode;
     positions: TimelineEntry[];
@@ -83,10 +83,10 @@ const TimelineItem = ({
   );
 };
 
-export const Timeline = ({ entries }: TimelineProps) => {
+export const Timeline = ({ organisations }: TimelineProps) => {
   return (
     <div className="flex flex-col gap-8">
-      {entries.map(({ id, organisation, chips, content, positions }) => (
+      {organisations.map(({ id, organisation, chips, content, positions }) => (
         <div key={id} className="flex flex-col gap-2">
           <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
             <h3 className="text-lg font-semibold text-foreground">
