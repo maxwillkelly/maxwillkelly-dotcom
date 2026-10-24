@@ -3,7 +3,7 @@ import puppeteer, { type Browser } from "puppeteer";
 
 const renderTimeout = 45_000;
 
-function printUrl(requestUrl: string) {
+const printUrl = (requestUrl: string) => {
   if (process.env.VERCEL_URL) {
     return new URL("/print", `https://${process.env.VERCEL_URL}`);
   }
@@ -13,9 +13,9 @@ function printUrl(requestUrl: string) {
   url.port = new URL(requestUrl).port;
 
   return url;
-}
+};
 
-async function closeBrowser(browser: Browser) {
+const closeBrowser = async (browser: Browser) => {
   const kill = setTimeout(() => browser.process()?.kill("SIGKILL"), 3_000);
 
   try {
@@ -26,9 +26,9 @@ async function closeBrowser(browser: Browser) {
   } finally {
     clearTimeout(kill);
   }
-}
+};
 
-async function launchBrowser() {
+const launchBrowser = async () => {
   const options = { timeout: 10_000, protocolTimeout: 15_000 };
 
   if (!process.env.VERCEL) {
@@ -44,9 +44,9 @@ async function launchBrowser() {
     args: chromium.args,
     headless: "shell",
   });
-}
+};
 
-export async function generatePdf(requestUrl: string) {
+export const generatePdf = async (requestUrl: string) => {
   let stage = "print-url";
   let url: URL;
   let browser: Browser;
@@ -74,9 +74,9 @@ export async function generatePdf(requestUrl: string) {
 
     await closeBrowser(browser);
   }
-}
+};
 
-async function preparePage(browser: Browser, url: URL) {
+const preparePage = async (browser: Browser, url: URL) => {
   const page = await browser.newPage();
   page.setDefaultTimeout(10_000);
   await page.emulateMediaType("print");
@@ -111,9 +111,9 @@ async function preparePage(browser: Browser, url: URL) {
   }
 
   return page;
-}
+};
 
-async function waitForAssets(page: Awaited<ReturnType<typeof preparePage>>) {
+const waitForAssets = async (page: Awaited<ReturnType<typeof preparePage>>) => {
   await page.waitForFunction(
     () =>
       document.fonts.status === "loaded" &&
@@ -128,9 +128,9 @@ async function waitForAssets(page: Awaited<ReturnType<typeof preparePage>>) {
   if (!assetsReady) {
     throw new Error("PDF assets failed to load");
   }
-}
+};
 
-async function renderPage(browser: Browser, url: URL) {
+const renderPage = async (browser: Browser, url: URL) => {
   let stage = "print-page";
 
   try {
@@ -151,4 +151,4 @@ async function renderPage(browser: Browser, url: URL) {
 
     throw error;
   }
-}
+};
