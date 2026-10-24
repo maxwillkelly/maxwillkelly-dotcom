@@ -3,6 +3,24 @@ import puppeteer, { type Browser } from "puppeteer";
 
 const renderTimeout = 45_000;
 
+export const generatePdf = async (requestUrl: string) => {
+  const url = await handleError("print-url", () => printUrl(requestUrl));
+  const browser = await handleError("browser-launch", launchBrowser);
+
+  const deadline = setTimeout(
+    () => browser.process()?.kill("SIGKILL"),
+    renderTimeout,
+  );
+
+  try {
+    return await renderPage(browser, url);
+  } finally {
+    clearTimeout(deadline);
+
+    await closeBrowser(browser);
+  }
+};
+
 const printUrl = (requestUrl: string) => {
   if (process.env.VERCEL_URL) {
     return new URL("/print", `https://${process.env.VERCEL_URL}`);
@@ -13,16 +31,17 @@ const printUrl = (requestUrl: string) => {
   return new URL("/print", `http://localhost${port ? `:${port}` : ""}`);
 };
 
-const closeBrowser = async (browser: Browser) => {
-  const kill = setTimeout(() => browser.process()?.kill("SIGKILL"), 3_000);
-
+const handleError = async <T>(
+  stage: string,
+  operation: () => T | Promise<T>,
+) => {
   try {
-    await browser.close();
-  } catch {
-    console.error("PDF generation failed", { stage: "browser-close" });
-    browser.process()?.kill("SIGKILL");
-  } finally {
-    clearTimeout(kill);
+    return await operation();
+  } catch (error) {
+    // Log fixed labels only: third-party errors may contain credentials or URLs.
+    console.error("PDF generation failed", { stage });
+
+    throw error;
   }
 };
 
@@ -44,36 +63,33 @@ const launchBrowser = async () => {
   });
 };
 
-const handleError = async <T>(
-  stage: string,
-  operation: () => T | Promise<T>,
-) => {
-  try {
-    return await operation();
-  } catch (error) {
-    // Log fixed labels only: third-party errors may contain credentials or URLs.
-    console.error("PDF generation failed", { stage });
+const closeBrowser = async (browser: Browser) => {
+  const kill = setTimeout(() => browser.process()?.kill("SIGKILL"), 3_000);
 
-    throw error;
+  try {
+    await browser.close();
+  } catch {
+    console.error("PDF generation failed", { stage: "browser-close" });
+    browser.process()?.kill("SIGKILL");
+  } finally {
+    clearTimeout(kill);
   }
 };
 
-export const generatePdf = async (requestUrl: string) => {
-  const url = await handleError("print-url", () => printUrl(requestUrl));
-  const browser = await handleError("browser-launch", launchBrowser);
+const renderPage = async (browser: Browser, url: URL) => {
+  const page = await handleError("print-page", () => preparePage(browser, url));
 
-  const deadline = setTimeout(
-    () => browser.process()?.kill("SIGKILL"),
-    renderTimeout,
+  await handleError("assets", () => waitForAssets(page));
+
+  return handleError("pdf-render", () =>
+    page.pdf({
+      format: "A4",
+      preferCSSPageSize: true,
+      printBackground: true,
+      tagged: true,
+      timeout: 15_000,
+    }),
   );
-
-  try {
-    return await renderPage(browser, url);
-  } finally {
-    clearTimeout(deadline);
-
-    await closeBrowser(browser);
-  }
 };
 
 const preparePage = async (browser: Browser, url: URL) => {
@@ -135,20 +151,4 @@ const waitForAssets = async (page: Awaited<ReturnType<typeof preparePage>>) => {
   if (!assetsReady) {
     throw new Error("PDF assets failed to load");
   }
-};
-
-const renderPage = async (browser: Browser, url: URL) => {
-  const page = await handleError("print-page", () => preparePage(browser, url));
-
-  await handleError("assets", () => waitForAssets(page));
-
-  return handleError("pdf-render", () =>
-    page.pdf({
-      format: "A4",
-      preferCSSPageSize: true,
-      printBackground: true,
-      tagged: true,
-      timeout: 15_000,
-    }),
-  );
 };
