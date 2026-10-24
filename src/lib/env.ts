@@ -3,6 +3,10 @@ import { z } from "zod";
 
 export const env = createEnv({
   server: {
+    PDF_FILENAME: z
+      .string()
+      .regex(/^[a-zA-Z0-9][a-zA-Z0-9 ._-]*\.pdf$/i)
+      .default("Max Kelly - CV.pdf"),
     PDF_CACHE_LIFETIME_SECONDS: z.coerce
       .number()
       .int()

@@ -9,11 +9,17 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
+const PDF_MAXIMUM_SIZE_MEGABYTES = (
+  env.PDF_MAXIMUM_SIZE_BYTES / 1_000_000
+).toFixed(2);
+
+const redis = new Redis({
+  url: env.UPSTASH_REDIS_REST_URL,
+  token: env.UPSTASH_REDIS_REST_TOKEN,
+});
+
 const ratelimit = new Ratelimit({
-  redis: new Redis({
-    url: env.UPSTASH_REDIS_REST_URL,
-    token: env.UPSTASH_REDIS_REST_TOKEN,
-  }),
+  redis,
   limiter: Ratelimit.slidingWindow(5, "1 m"),
   prefix: "cv-download",
   timeout: 3_000,
@@ -21,7 +27,7 @@ const ratelimit = new Ratelimit({
 
 const headers = { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" };
 
-const pendingRenders: Promise<Response>[] = [];
+const pendingRenders = new Map<string, Promise<Uint8Array<ArrayBuffer>>>();
 
 const unavailableResponse = (
   message: string,
@@ -65,23 +71,72 @@ const rateLimitResponse = async () => {
   }
 };
 
-const pdfResponse = async (request: Request) => {
-  const pdf = await generatePdf(request.url);
+const renderPdf = async (requestUrl: string, cacheKey: string) => {
+  const useCache = process.env.NODE_ENV !== "development";
 
-  if (pdf.byteLength > 4_000_000) {
-    return unavailableResponse(
-      "Could not generate the CV. Please retry shortly.",
-      503,
+  const cached = useCache
+    ? await redis.get<string>(cacheKey).catch(() => {
+        console.error("CV generation failed", { stage: "cache-read" });
+      })
+    : undefined;
+
+  if (cached) {
+    return new Uint8Array(Buffer.from(cached, "base64"));
+  }
+
+  return generateAndCachePdf(requestUrl, cacheKey, useCache);
+};
+
+const generateAndCachePdf = async (
+  requestUrl: string,
+  cacheKey: string,
+  useCache: boolean,
+) => {
+  const pdf = await generatePdf(requestUrl);
+
+  if (pdf.byteLength > env.PDF_MAXIMUM_SIZE_BYTES) {
+    const pdfSizeMegaBytes = (pdf.byteLength / 1_000_000).toFixed(2);
+
+    throw new Error(
+      `The PDF size of ${pdfSizeMegaBytes} MB exceeds the response size limit of ${PDF_MAXIMUM_SIZE_MEGABYTES} MB`,
     );
   }
 
-  return new Response(new Uint8Array(pdf), {
-    headers: {
-      ...headers,
-      "Content-Type": "application/pdf",
-      "Content-Disposition": 'attachment; filename="Max Kelly - CV.pdf"',
-    },
+  if (useCache) {
+    await redis
+      .set(cacheKey, Buffer.from(pdf).toString("base64"), {
+        ex: env.PDF_CACHE_LIFETIME_SECONDS,
+      })
+      .catch(() => {
+        console.error("CV generation failed", { stage: "cache-write" });
+      });
+  }
+
+  return new Uint8Array(pdf);
+};
+
+const startRenderingPdf = (requestUrl: string, cacheKey: string) => {
+  const render = renderPdf(requestUrl, cacheKey).finally(() => {
+    pendingRenders.delete(cacheKey);
   });
+
+  pendingRenders.set(cacheKey, render);
+
+  return render;
+};
+
+const fetchOrGeneratePdf = async (request: Request) => {
+  const deployment = process.env.VERCEL_URL ?? new URL(request.url).origin;
+
+  const cacheKey = `pdf:${deployment}`;
+
+  const pendingRender = pendingRenders.get(cacheKey);
+
+  if (pendingRender) {
+    return pendingRender;
+  }
+
+  return startRenderingPdf(request.url, cacheKey);
 };
 
 const generateResponse = async (request: Request) => {
@@ -91,18 +146,15 @@ const generateResponse = async (request: Request) => {
     return rateLimitedResponse;
   }
 
-  if (pendingRenders.length > 0) {
-    return unavailableResponse(
-      "CV generation is temporarily unavailable. Please retry.",
-      503,
-    );
-  }
+  const pdf = await fetchOrGeneratePdf(request);
 
-  const render = pdfResponse(request);
-
-  pendingRenders.push(render);
-
-  return render.finally(() => pendingRenders.pop());
+  return new Response(pdf, {
+    headers: {
+      ...headers,
+      "Content-Type": "application/pdf",
+      "Content-Disposition": `attachment; filename="${env.PDF_FILENAME}"`,
+    },
+  });
 };
 
 export const GET = async (request: Request) => {
