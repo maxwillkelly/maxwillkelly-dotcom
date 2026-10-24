@@ -29,7 +29,6 @@ export const organisationMetadataSchema = z.object({
 
 // These types only contain the metadata validated from Markdown frontmatter
 export type TimelinePosition = z.infer<typeof positionMetadataSchema>;
-
 export type TimelineOrganisation = z.infer<typeof organisationMetadataSchema>;
 
 export const upstashDurationSchema = z.custom<Duration>(
