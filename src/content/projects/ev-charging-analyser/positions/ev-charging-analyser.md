@@ -1,10 +1,4 @@
 ---
-organisation: "EV Charging Analyser"
-chips:
-  - typescript
-  - react-native
-  - expo
-  - nextjs
 ---
 
 [EV Charging Analyser](https://github.com/maxwillkelly/ev-charging-analyser/wiki) is a manufacturer-agnostic companion app for electric vehicles (EVs). EV Charging Analyser uses [Smartcar Connect](https://smartcar.com/product/connect), which allows drivers to connect their EVs with ease using their manufacturer's login. From there, users can perform basic tasks with their EV, such as locking or unlocking the doors or viewing its location on their phone. We use this application to collect navigation and charging data for academic research.

@@ -1,0 +1,21 @@
+---
+organisation: "The Key Group"
+chips:
+  - react
+  - nextjs
+  - javascript
+  - typescript
+  - nodejs
+  - grpc
+  - graphql
+  - mongodb
+  - google-cloud
+  - aws
+  - vercel
+  - firebase
+  - docker
+---
+
+[The Key Group](https://thekeygroup.com/) (trades as The Key Support Services Ltd) is a company that serves 20,000 British state schools, including around 80% of schools in England. It sells SaaS cloud-based products and resources for training and guidance. Most of its products are market leading in the sector they operate in.
+
+I work as a Senior Software Engineer on [GovernorHub](https://governorhub.com/), the leading online service for school governors and trustees.

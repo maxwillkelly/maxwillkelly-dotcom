@@ -5,13 +5,9 @@ import {
   formatDateRangeinYearsAndMonths,
   formatDurationinYearsAndMonths,
 } from "@/lib/date";
-import type { TimelineMetadata } from "@/lib/timeline";
+import type { TimelineOrganisation, TimelinePosition } from "@/lib/schema";
 
-type TimelineEntry = TimelineMetadata & { content: ReactNode };
-
-type TimelineProps = {
-  entries: TimelineEntry[];
-};
+type TimelineEntry = TimelinePosition & { id: string; content: ReactNode };
 
 const TimelineMetadata = ({ location, start, end }: TimelineEntry) => {
   return (
@@ -35,7 +31,7 @@ const TimelineMetadata = ({ location, start, end }: TimelineEntry) => {
   );
 };
 
-const TimelineChips = ({ chips = [] }: Pick<TimelineEntry, "chips">) => {
+const TimelineChips = ({ chips = [] }: Pick<TimelineOrganisation, "chips">) => {
   if (chips.length === 0) {
     return null;
   }
@@ -49,37 +45,65 @@ const TimelineChips = ({ chips = [] }: Pick<TimelineEntry, "chips">) => {
   );
 };
 
-const TimelineItem = ({ entry }: { entry: TimelineEntry }) => {
-  const { organisation, position, type, content, chips } = entry;
+const TimelinePositionHeading = ({ position, type }: TimelineEntry) =>
+  position && (
+    <h4 className="text-base font-semibold text-foreground">
+      {position}
+      {type && ` · ${type}`}
+    </h4>
+  );
+
+const TimelineItem = ({
+  entry,
+  showMetadata,
+}: {
+  entry: TimelineEntry;
+  showMetadata: boolean;
+}) => {
+  const { position, content } = entry;
 
   return (
-    <div className="flex flex-col gap-4 py-2">
-      <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-        <h3 className="text-lg font-semibold text-foreground">
-          {organisation}
-        </h3>
-        <TimelineMetadata {...entry} />
-      </div>
-      {position && (
-        <p className="text-base font-semibold text-foreground">
-          {position}
-          {type && ` · ${type}`}
-        </p>
+    <div className="flex flex-col gap-4 py-4">
+      {(position || showMetadata) && (
+        <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+          <TimelinePositionHeading {...entry} />
+          {showMetadata && <TimelineMetadata {...entry} />}
+        </div>
       )}
       <div>{content}</div>
-      <TimelineChips chips={chips} />
     </div>
   );
 };
 
-export const Timeline = ({ entries }: TimelineProps) => {
+type TimelineProps = {
+  organisations: (TimelineOrganisation & {
+    id: string;
+    content: ReactNode;
+    positions: TimelineEntry[];
+  })[];
+};
+
+export const Timeline = ({ organisations }: TimelineProps) => {
   return (
-    <div className="flex flex-col gap-4">
-      {entries.map((entry) => (
-        <TimelineItem
-          key={`${entry.organisation}-${String(entry.position)}`}
-          entry={entry}
-        />
+    <div className="flex flex-col gap-8">
+      {organisations.map(({ id, organisation, chips, content, positions }) => (
+        <div key={id} className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+            <h3 className="text-lg font-semibold text-foreground">
+              {organisation}
+            </h3>
+            {positions.length === 1 && <TimelineMetadata {...positions[0]} />}
+          </div>
+          {content}
+          {positions.map((entry) => (
+            <TimelineItem
+              key={entry.id}
+              entry={entry}
+              showMetadata={positions.length !== 1}
+            />
+          ))}
+          <TimelineChips chips={chips} />
+        </div>
       ))}
     </div>
   );

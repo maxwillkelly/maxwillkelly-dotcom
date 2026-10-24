@@ -41,8 +41,20 @@ src/
 │   ├── hero.md
 │   ├── how-i-work.md
 │   ├── education/
+│   │   └── university-of-dundee/
+│   │       ├── index.md              # Organisation metadata and description
+│   │       └── positions/            # Text for individual positions
 │   ├── experience/
+│   │   ├── the-key-group/
+│   │   │   ├── index.md
+│   │   │   └── positions/
+│   │   └── udrafter/
+│   │       ├── index.md
+│   │       └── positions/
 │   └── projects/
+│       └── ev-charging-analyser/
+│           ├── index.md
+│           └── positions/
 ├── emails/
 │   └── contact-email-template.tsx
 ├── lib/

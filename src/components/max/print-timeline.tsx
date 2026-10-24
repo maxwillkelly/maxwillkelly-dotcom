@@ -6,13 +6,11 @@ import {
   formatDateRangeinYearsAndMonths,
   formatDurationinYearsAndMonths,
 } from "@/lib/date";
+import type { TimelinePosition } from "@/lib/schema";
 import { getTechnology } from "@/lib/technologies";
-import type { Timeline } from "@/lib/timeline";
+import type { LoadedTimelinePosition, Timeline } from "@/lib/timeline";
 
-const printDate = (
-  entry: Omit<Timeline[number], "Content">,
-  referenceDate: Date,
-) => {
+const printDate = (entry: TimelinePosition, referenceDate: Date) => {
   const { start, end } = entry;
 
   if (!start) {
@@ -26,37 +24,45 @@ const printDate = (
   return `${dateRange} · ${duration}`;
 };
 
-const PrintTimelineItem = ({
+const PrintTimelineMetadata = ({
   entry,
   referenceDate,
 }: {
-  entry: Timeline[number];
+  entry: TimelinePosition;
   referenceDate: Date;
+}) => (
+  <PrintParagraph className="text-[9pt] text-[#444]">
+    {[entry.location, printDate(entry, referenceDate)]
+      .filter(Boolean)
+      .join(" · ")}
+  </PrintParagraph>
+);
+
+const PrintTimelineItem = ({
+  entry,
+  referenceDate,
+  showMetadata,
+}: {
+  entry: LoadedTimelinePosition;
+  referenceDate: Date;
+  showMetadata: boolean;
 }) => {
-  const { Content, organisation, position, type, location, chips } = entry;
+  const { Content, position, type } = entry;
 
   return (
     <article className="mb-[4mm]">
       <header className="break-after-avoid break-inside-avoid">
-        <PrintSubheading>{organisation}</PrintSubheading>
         {position && (
           <PrintParagraph className="font-semibold">
             {position}
             {type && ` · ${type}`}
           </PrintParagraph>
         )}
-        <PrintParagraph className="text-[9pt] text-[#444]">
-          {[location, printDate(entry, referenceDate)]
-            .filter(Boolean)
-            .join(" · ")}
-        </PrintParagraph>
+        {showMetadata && (
+          <PrintTimelineMetadata entry={entry} referenceDate={referenceDate} />
+        )}
       </header>
       <Content components={components} />
-      {chips.length > 0 && (
-        <PrintParagraph className="break-before-avoid text-[9pt] text-[#444]">
-          {chips.map((id) => getTechnology(id).label).join(" · ")}
-        </PrintParagraph>
-      )}
     </article>
   );
 };
@@ -72,16 +78,34 @@ export const PrintTimeline = ({
 }) => (
   <section>
     <PrintSectionHeading>{title}</PrintSectionHeading>
-    {entries.map((entry) => {
-      const { organisation, position } = entry;
-
-      return (
-        <PrintTimelineItem
-          key={`${organisation}-${position}`}
-          entry={entry}
-          referenceDate={referenceDate}
-        />
-      );
-    })}
+    {entries.map(({ id, organisation, chips, Content, positions }) => (
+      <div key={id}>
+        <header className="flex items-baseline justify-between gap-4 break-after-avoid break-inside-avoid">
+          <PrintSubheading>{organisation}</PrintSubheading>
+          {positions.length === 1 && positions[0] && (
+            <PrintTimelineMetadata
+              entry={positions[0]}
+              referenceDate={referenceDate}
+            />
+          )}
+        </header>
+        <Content components={components} />
+        {positions.map((entry) => (
+          <PrintTimelineItem
+            key={entry.id}
+            entry={entry}
+            referenceDate={referenceDate}
+            showMetadata={positions.length !== 1}
+          />
+        ))}
+        {chips.length > 0 && (
+          <PrintParagraph className="break-before-avoid text-[9pt] text-[#444]">
+            {chips
+              .map((technology) => getTechnology(technology).label)
+              .join(" · ")}
+          </PrintParagraph>
+        )}
+      </div>
+    ))}
   </section>
 );
