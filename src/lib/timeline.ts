@@ -14,12 +14,12 @@ const dateSchema = z.iso.date().transform((value) => parseISO(value));
 const positionMetadataSchema = z
   .object({
     position: textSchema.optional(),
+    location: textSchema.optional(),
     type: z
       .enum(["Full-time", "Part-time", "Contractor", "Freelancer"])
       .optional(),
     start: dateSchema.optional(),
     end: dateSchema.optional(),
-    chips: z.array(z.enum(technologies.map(({ id }) => id))).default([]),
   })
   .refine(
     ({ start, end }) => !end || (start !== undefined && end >= start),
@@ -28,7 +28,7 @@ const positionMetadataSchema = z
 
 const organisationMetadataSchema = z.object({
   organisation: textSchema,
-  location: textSchema.optional(),
+  chips: z.array(z.enum(technologies.map(({ id }) => id))).default([]),
 });
 
 export type TimelinePosition = z.infer<typeof positionMetadataSchema> & {
@@ -78,7 +78,7 @@ const loadPositions = async (
         );
 
         return {
-          ...positionMetadataSchema.parse(frontmatter),
+          ...positionMetadataSchema.parse(frontmatter ?? {}),
           id: name,
           Content,
         };

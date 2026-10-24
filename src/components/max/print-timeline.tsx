@@ -30,7 +30,7 @@ const PrintTimelineItem = ({
   entry: TimelinePosition;
   referenceDate: Date;
 }) => {
-  const { Content, position, type, chips } = entry;
+  const { Content, position, type, location } = entry;
 
   return (
     <article className="mb-[4mm]">
@@ -42,15 +42,12 @@ const PrintTimelineItem = ({
           </PrintParagraph>
         )}
         <PrintParagraph className="text-[9pt] text-[#444]">
-          {printDate(entry, referenceDate)}
+          {[location, printDate(entry, referenceDate)]
+            .filter(Boolean)
+            .join(" · ")}
         </PrintParagraph>
       </header>
       <Content components={components} />
-      {chips.length > 0 && (
-        <PrintParagraph className="break-before-avoid text-[9pt] text-[#444]">
-          {chips.map((id) => getTechnology(id).label).join(" · ")}
-        </PrintParagraph>
-      )}
     </article>
   );
 };
@@ -66,15 +63,10 @@ export const PrintTimeline = ({
 }) => (
   <section>
     <PrintSectionHeading>{title}</PrintSectionHeading>
-    {entries.map(({ id, organisation, location, Content, positions }) => (
+    {entries.map(({ id, organisation, chips, Content, positions }) => (
       <div key={id}>
         <header className="break-after-avoid break-inside-avoid">
           <PrintSubheading>{organisation}</PrintSubheading>
-          {location && (
-            <PrintParagraph className="text-[9pt] text-[#444]">
-              {location}
-            </PrintParagraph>
-          )}
         </header>
         <Content components={components} />
         {positions.map((entry) => (
@@ -84,6 +76,13 @@ export const PrintTimeline = ({
             referenceDate={referenceDate}
           />
         ))}
+        {chips.length > 0 && (
+          <PrintParagraph className="break-before-avoid text-[9pt] text-[#444]">
+            {chips
+              .map((technology) => getTechnology(technology).label)
+              .join(" · ")}
+          </PrintParagraph>
+        )}
       </div>
     ))}
   </section>

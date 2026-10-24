@@ -1,4 +1,11 @@
 ---
 organisation: "Udrafter"
-location: "Remote"
+chips:
+  - javascript
+  - vuejs
+  - dotnet-core
+  - csharp
+  - sql-server
+  - aws
+  - docker
 ---

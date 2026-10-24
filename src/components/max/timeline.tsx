@@ -16,9 +16,15 @@ type TimelineProps = {
   })[];
 };
 
-const TimelineMetadata = ({ start, end }: TimelineEntry) => {
+const TimelineMetadata = ({ location, start, end }: TimelineEntry) => {
   return (
     <div className="text-base text-foreground sm:text-right">
+      {location && (
+        <span>
+          {location}
+          {start && " · "}
+        </span>
+      )}
       {start && (
         <span>
           {formatDateRangeinYearsAndMonths(start, end)}
@@ -32,7 +38,7 @@ const TimelineMetadata = ({ start, end }: TimelineEntry) => {
   );
 };
 
-const TimelineChips = ({ chips = [] }: Pick<TimelineEntry, "chips">) => {
+const TimelineChips = ({ chips = [] }: Pick<TimelineOrganisation, "chips">) => {
   if (chips.length === 0) {
     return null;
   }
@@ -47,7 +53,7 @@ const TimelineChips = ({ chips = [] }: Pick<TimelineEntry, "chips">) => {
 };
 
 const TimelineItem = ({ entry }: { entry: TimelineEntry }) => {
-  const { position, type, content, chips } = entry;
+  const { position, type, content } = entry;
 
   return (
     <div className="flex flex-col gap-4 py-2">
@@ -61,7 +67,6 @@ const TimelineItem = ({ entry }: { entry: TimelineEntry }) => {
         <TimelineMetadata {...entry} />
       </div>
       <div>{content}</div>
-      <TimelineChips chips={chips} />
     </div>
   );
 };
@@ -69,20 +74,16 @@ const TimelineItem = ({ entry }: { entry: TimelineEntry }) => {
 export const Timeline = ({ entries }: TimelineProps) => {
   return (
     <div className="flex flex-col gap-4">
-      {entries.map(({ id, organisation, location, content, positions }) => (
+      {entries.map(({ id, organisation, chips, content, positions }) => (
         <div key={id} className="flex flex-col gap-2">
-          <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-            <h3 className="text-lg font-semibold text-foreground">
-              {organisation}
-            </h3>
-            {location && (
-              <span className="text-base text-foreground">{location}</span>
-            )}
-          </div>
+          <h3 className="text-lg font-semibold text-foreground">
+            {organisation}
+          </h3>
           {content}
           {positions.map((entry) => (
             <TimelineItem key={entry.id} entry={entry} />
           ))}
+          <TimelineChips chips={chips} />
         </div>
       ))}
     </div>
