@@ -21,7 +21,7 @@ const ratelimit = new Ratelimit({
 
 const headers = { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" };
 
-let renderActive = false;
+const pendingRenders: Promise<Response>[] = [];
 
 const unavailableResponse = (
   message: string,
@@ -91,20 +91,18 @@ const generateResponse = async (request: Request) => {
     return rateLimitedResponse;
   }
 
-  if (renderActive) {
+  if (pendingRenders.length > 0) {
     return unavailableResponse(
       "CV generation is temporarily unavailable. Please retry.",
       503,
     );
   }
 
-  renderActive = true;
+  const render = pdfResponse(request);
 
-  try {
-    return await pdfResponse(request);
-  } finally {
-    renderActive = false;
-  }
+  pendingRenders.push(render);
+
+  return render.finally(() => pendingRenders.pop());
 };
 
 export const GET = async (request: Request) => {
