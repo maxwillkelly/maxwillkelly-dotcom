@@ -50,7 +50,7 @@ const PrintTimelineItem = ({
   const { Content, position, type } = entry;
 
   return (
-    <article className="mb-[4mm]">
+    <article className="mb-[6mm]">
       <header className="break-after-avoid break-inside-avoid">
         {position && (
           <PrintParagraph className="font-semibold">
@@ -79,7 +79,7 @@ export const PrintTimeline = ({
   <section>
     <PrintSectionHeading>{title}</PrintSectionHeading>
     {entries.map(({ id, organisation, chips, Content, positions }) => (
-      <div key={id}>
+      <div key={id} className="mb-[6mm] last:mb-0">
         <header className="flex items-baseline justify-between gap-4 break-after-avoid break-inside-avoid">
           <PrintSubheading>{organisation}</PrintSubheading>
           {positions.length === 1 && positions[0] && (
@@ -89,7 +89,9 @@ export const PrintTimeline = ({
             />
           )}
         </header>
-        <Content components={components} />
+        <div className="not-empty:mb-[6mm]">
+          <Content components={components} />
+        </div>
         {positions.map((entry) => (
           <PrintTimelineItem
             key={entry.id}
