@@ -1,6 +1,6 @@
 ---
 organisation: "The Key Group"
-position: "Software Engineer"
+position: "Senior Software Engineer"
 type: "Full-time"
 location: "Bristol"
 start: "2022-06-28"
@@ -22,7 +22,7 @@ chips:
 
 [The Key Group](https://thekeygroup.com/) (trades as The Key Support Services Ltd) is a company that serves 20,000 British state schools, including around 80% of schools in England. It sells SaaS cloud-based products and resources for training and guidance. Most of its products are market leading in the sector they operate in.
 
-I work as a Software Engineer on [GovernorHub](https://governorhub.com/), the leading online service for school governors and trustees.
+I work as a Senior Software Engineer on [GovernorHub](https://governorhub.com/), the leading online service for school governors and trustees. I was promoted from Software Engineer on 15 October 2026.
 
 - **Front-end rewrite:** I contributed 58% of the commits to the rewrite of GovernorHub's front-end from [AngularJS](https://angularjs.org/) to [Next.js](https://nextjs.org/) and [React](https://react.dev/). The rewrite reduced Largest Contentful Paint (LCP) times on an average GovernorHub page by 50%.
 

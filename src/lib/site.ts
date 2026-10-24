@@ -8,14 +8,14 @@ export const siteConfig = {
   additionalName: "Maxwill Kelly",
   givenName: "Max",
   familyName: "Kelly",
-  title: "Max Kelly | Software Engineer",
+  title: "Max Kelly | Senior Software Engineer",
   description:
-    "Max Kelly is a Bristol-based software engineer building interactive applications with an eye for small details.",
+    "Max Kelly is a Bristol-based senior software engineer building interactive applications with an eye for small details.",
   url: "https://www.maxwillkelly.com",
   email: "maxwill.kelly@gmail.com",
   telephone: "+44 7397 932 640",
   location: "Bristol, United Kingdom",
-  jobTitle: "Software Engineer",
+  jobTitle: "Senior Software Engineer",
   image: "/profile.jpg",
   sameAs: [
     "https://github.com/maxwillkelly",
