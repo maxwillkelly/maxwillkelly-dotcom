@@ -41,8 +41,20 @@ src/
 │   ├── hero.md
 │   ├── how-i-work.md
 │   ├── education/
+│   │   └── university-of-dundee/
+│   │       ├── index.md              # Organisation metadata and description
+│   │       └── positions/            # Text for individual positions
 │   ├── experience/
+│   │   ├── the-key-group/
+│   │   │   ├── index.md
+│   │   │   └── positions/
+│   │   └── udrafter/
+│   │       ├── index.md
+│   │       └── positions/
 │   └── projects/
+│       └── ev-charging-analyser/
+│           ├── index.md
+│           └── positions/
 ├── emails/
 │   └── contact-email-template.tsx
 ├── lib/
@@ -54,14 +66,6 @@ src/
 └── schemas/
     └── contact-message.tsx           # Zod schema for contact form
 ```
-
-Timeline content is organised as `src/content/<section>/<organisation>/index.md`
-for organisation details, with one Markdown file per position in its `positions/`
-folder. Organisation frontmatter contains `organisation` and an optional
-technology `chips`; position frontmatter contains an optional `position`,
-`location`, employment `type`, `start` and `end`. Each file's body supplies its
-content. Organisations and positions are discovered automatically and sorted by
-their most recent start dates, with undated entries last.
 
 ## Getting Started
 
