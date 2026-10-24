@@ -70,7 +70,7 @@ const TimelineItem = ({
   const { position, content } = entry;
 
   return (
-    <div className="flex flex-col gap-4 py-2">
+    <div className="flex flex-col gap-4 py-4">
       {(position || showMetadata) && (
         <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
           <TimelinePositionHeading {...entry} />
@@ -84,7 +84,7 @@ const TimelineItem = ({
 
 export const Timeline = ({ entries }: TimelineProps) => {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-8">
       {entries.map(({ id, organisation, chips, content, positions }) => (
         <div key={id} className="flex flex-col gap-2">
           <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
