@@ -1,6 +1,8 @@
 import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
 
+import { upstashDurationSchema } from "@/lib/schema";
+
 export const env = createEnv({
   server: {
     PDF_FILENAME: z
@@ -17,6 +19,13 @@ export const env = createEnv({
       .int()
       .positive()
       .default(4_000_000),
+    PDF_RATE_LIMIT_REQUESTS: z.coerce.number().int().positive().default(5),
+    PDF_RATE_LIMIT_WINDOW_DURATION: upstashDurationSchema.default("1 m"),
+    PDF_RATE_LIMIT_TIMEOUT_MS: z.coerce
+      .number()
+      .int()
+      .positive()
+      .default(3_000),
     RESEND_API_KEY: z.string().min(1),
     SEND_EMAIL: z.email().min(1),
     UPSTASH_REDIS_REST_URL: z.url().min(1),

@@ -20,9 +20,12 @@ const redis = new Redis({
 
 const ratelimit = new Ratelimit({
   redis,
-  limiter: Ratelimit.slidingWindow(5, "1 m"),
+  limiter: Ratelimit.slidingWindow(
+    env.PDF_RATE_LIMIT_REQUESTS,
+    env.PDF_RATE_LIMIT_WINDOW_DURATION,
+  ),
   prefix: "pdf-download",
-  timeout: 3_000,
+  timeout: env.PDF_RATE_LIMIT_TIMEOUT_MS,
 });
 
 const headers = { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" };
