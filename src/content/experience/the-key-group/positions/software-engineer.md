@@ -6,6 +6,8 @@ end: "2026-10-14"
 location: "Bristol"
 ---
 
+I work as a Software Engineer on [GovernorHub](https://governorhub.com/), the leading online service for school governors and trustees.
+
 - **Front-end rewrite:** I contributed 58% of the commits to the rewrite of GovernorHub's front-end from [AngularJS](https://angularjs.org/) to [Next.js](https://nextjs.org/) and [React](https://react.dev/). The rewrite reduced Largest Contentful Paint (LCP) times on an average GovernorHub page by 50%.
 
 - **Project management:** I led an overhaul of GovernorHub's project-management processes using [Linear](https://linear.app/), including triaging customer-reported bugs from [Intercom](https://www.intercom.com/). The changes reduced average lead times by 40% and were subsequently adopted by other teams in the business.
