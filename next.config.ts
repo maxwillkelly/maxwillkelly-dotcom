@@ -6,8 +6,11 @@ import "./src/lib/env";
 const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   reactCompiler: true,
+  serverExternalPackages: ["@sparticuz/chromium", "puppeteer"],
   outputFileTracingIncludes: {
     "/": ["./src/content/**/*"],
+    "/print": ["./src/content/**/*"],
+    "/api/pdf": ["./node_modules/@sparticuz/chromium/bin/**/*"],
   },
 };
 

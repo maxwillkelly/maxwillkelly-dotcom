@@ -6,6 +6,10 @@
     "suspicious": "error"
   },
   "rules": {
+    "prefer-arrow-functions/prefer-arrow-functions": [
+      "error",
+      { "allowObjectProperties": true }
+    ],
     "max-depth": [
       "error",
       {
@@ -24,6 +28,20 @@
         "ignoreDeclarationSort": true,
         "ignoreCase": true
       }
+    ],
+    "curly": ["error", "all"],
+    "@stylistic/padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": ["if", "return", "throw", "try"]
+      },
+      {
+        "blankLine": "always",
+        "prev": ["if", "block-like"],
+        "next": "*"
+      }
     ]
   },
   "ignorePatterns": [
@@ -35,5 +53,9 @@
     ".react-email/**",
     ".heroui-docs/**",
     "next-env.d.ts"
+  ],
+  "jsPlugins": [
+    "@stylistic/eslint-plugin",
+    "eslint-plugin-prefer-arrow-functions"
   ]
 }

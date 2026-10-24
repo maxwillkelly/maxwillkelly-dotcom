@@ -1,11 +1,14 @@
 import { format, intervalToDuration } from "date-fns";
 import { enGB } from "date-fns/locale";
 
+import { siteConfig } from "./site";
 import { nonFalsey } from "./utils";
 
+const locale = { "en-GB": enGB }[siteConfig.locale];
+
 export const formatDateRangeinYearsAndMonths = (start: Date, end?: Date) => {
-  return `${format(start, "MMMM yyyy", { locale: enGB })} - ${
-    end ? format(end, "MMMM yyyy", { locale: enGB }) : "Present"
+  return `${format(start, "MMMM yyyy", { locale })} - ${
+    end ? format(end, "MMMM yyyy", { locale }) : "Present"
   }`;
 };
 
@@ -31,5 +34,5 @@ export const formatDurationinYearsAndMonths = (
     formatDurationPart(months, "mo"),
   ].filter(nonFalsey);
 
-  return parts.join(" ") ?? "less than a month";
+  return parts.join(" ") || "less than a month";
 };

@@ -23,31 +23,34 @@ const SWEEP_END = 100 + BAND_HALF;
 const sweepEase = (t: number) =>
   t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2;
 
-function buildGradient(pos: number, colors: string[], textColor: string) {
+const buildGradient = (pos: number, colors: string[], textColor: string) => {
   const bandStart = pos - BAND_HALF;
   const bandEnd = pos + BAND_HALF;
 
   if (bandStart >= 100) {
     return `linear-gradient(90deg, ${textColor}, ${textColor})`;
   }
+
   const n = colors.length;
   const parts: string[] = [];
 
-  if (bandStart > 0)
+  if (bandStart > 0) {
     parts.push(`${textColor} 0%`, `${textColor} ${bandStart.toFixed(2)}%`);
+  }
 
   colors.forEach((c, i) => {
     const pct = n === 1 ? pos : bandStart + (i / (n - 1)) * BAND_HALF * 2;
     parts.push(`${c} ${pct.toFixed(2)}%`);
   });
 
-  if (bandEnd < 100)
+  if (bandEnd < 100) {
     parts.push(`transparent ${bandEnd.toFixed(2)}%`, `transparent 100%`);
+  }
 
   return `linear-gradient(90deg, ${parts.join(", ")})`;
-}
+};
 
-function measureWidths(el: HTMLElement, texts: string[]) {
+const measureWidths = (el: HTMLElement, texts: string[]) => {
   const ghost = el.cloneNode() as HTMLElement;
   Object.assign(ghost.style, {
     position: "absolute",
@@ -59,11 +62,13 @@ function measureWidths(el: HTMLElement, texts: string[]) {
   el.parentElement!.appendChild(ghost);
   const widths = texts.map((t) => {
     ghost.textContent = t;
+
     return ghost.getBoundingClientRect().width;
   });
   ghost.remove();
+
   return widths;
-}
+};
 
 type DiaTextRevealElement =
   | "span"
@@ -142,7 +147,7 @@ export interface DiaTextRevealProps extends Omit<
   fixedWidth?: boolean;
 }
 
-export function DiaTextReveal({
+export const DiaTextReveal = ({
   as = "span",
   text,
   colors = DEFAULT_COLORS,
@@ -156,7 +161,7 @@ export function DiaTextReveal({
   className,
   fixedWidth = false,
   ...props
-}: DiaTextRevealProps) {
+}: DiaTextRevealProps) => {
   const texts = Array.isArray(text) ? text : [text];
   const isMulti = texts.length > 1;
   const prefersReducedMotion = useReducedMotion();
@@ -200,7 +205,11 @@ export function DiaTextReveal({
 
   useEffect(() => {
     const el = spanRef.current;
-    if (!el || !isMulti) return;
+
+    if (!el || !isMulti) {
+      return;
+    }
+
     setMeasuredWidths(measureWidths(el, texts));
   }, [Array.isArray(text) ? text.join("\0") : text]);
 
@@ -215,7 +224,10 @@ export function DiaTextReveal({
       delay,
       ease: sweepEase,
       onComplete() {
-        if (!repeat) return;
+        if (!repeat) {
+          return;
+        }
+
         timerRef.current = setTimeout(() => {
           const next = (indexRef.current + 1) % texts.length;
           indexRef.current = next;
@@ -231,10 +243,18 @@ export function DiaTextReveal({
   useEffect(() => {
     if (prefersReducedMotion) {
       sweepPos.set(SWEEP_END);
+
       return;
     }
-    if (startOnView && !isInView) return;
-    if (once && hasPlayedRef.current) return;
+
+    if (startOnView && !isInView) {
+      return;
+    }
+
+    if (once && hasPlayedRef.current) {
+      return;
+    }
+
     hasPlayedRef.current = true;
     playRef.current();
 
@@ -282,4 +302,4 @@ export function DiaTextReveal({
       {texts[activeIndex]}
     </MotionComponent>
   );
-}
+};
