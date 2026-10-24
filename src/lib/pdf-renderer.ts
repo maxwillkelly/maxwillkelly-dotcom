@@ -1,7 +1,7 @@
 import chromium from "@sparticuz/chromium";
 import puppeteer, { type Browser } from "puppeteer";
 
-const renderTimeout = 45_000;
+import { env } from "./env";
 
 export const generatePdf = async (requestUrl: string) => {
   const url = await handleError("print-url", () => printUrl(requestUrl));
@@ -9,7 +9,7 @@ export const generatePdf = async (requestUrl: string) => {
 
   const deadline = setTimeout(
     () => browser.process()?.kill("SIGKILL"),
-    renderTimeout,
+    env.PDF_RENDER_TIMEOUT_MS,
   );
 
   try {
@@ -46,7 +46,10 @@ const handleError = async <T>(
 };
 
 const launchBrowser = async () => {
-  const options = { timeout: 10_000, protocolTimeout: 15_000 };
+  const options = {
+    timeout: env.PDF_OPERATION_TIMEOUT_MS,
+    protocolTimeout: env.PDF_OPERATION_TIMEOUT_MS,
+  };
 
   if (!process.env.VERCEL) {
     return puppeteer.launch({
@@ -64,7 +67,10 @@ const launchBrowser = async () => {
 };
 
 const closeBrowser = async (browser: Browser) => {
-  const kill = setTimeout(() => browser.process()?.kill("SIGKILL"), 3_000);
+  const kill = setTimeout(
+    () => browser.process()?.kill("SIGKILL"),
+    env.PDF_BROWSER_CLOSE_TIMEOUT,
+  );
 
   try {
     await browser.close();
@@ -87,7 +93,7 @@ const renderPage = async (browser: Browser, url: URL) => {
       preferCSSPageSize: true,
       printBackground: true,
       tagged: true,
-      timeout: 15_000,
+      timeout: env.PDF_OPERATION_TIMEOUT_MS,
     }),
   );
 };
@@ -95,7 +101,7 @@ const renderPage = async (browser: Browser, url: URL) => {
 const preparePage = async (browser: Browser, url: URL) => {
   const page = await browser.newPage();
 
-  page.setDefaultTimeout(10_000);
+  page.setDefaultTimeout(env.PDF_OPERATION_TIMEOUT_MS);
 
   await page.emulateMediaType("print");
   await page.setRequestInterception(true);
@@ -126,7 +132,7 @@ const preparePage = async (browser: Browser, url: URL) => {
 
   const response = await page.goto(url.href, {
     waitUntil: "load",
-    timeout: 15_000,
+    timeout: env.PDF_OPERATION_TIMEOUT_MS,
   });
 
   if (!response?.ok() || new URL(page.url()).origin !== url.origin) {

@@ -5,6 +5,17 @@ import { upstashDurationSchema } from "./schema";
 
 export const env = createEnv({
   server: {
+    PDF_BROWSER_CLOSE_TIMEOUT: z.coerce
+      .number()
+      .int()
+      .positive()
+      .default(3_000),
+    PDF_RENDER_TIMEOUT_MS: z.coerce.number().int().positive().default(45_000),
+    PDF_OPERATION_TIMEOUT_MS: z.coerce
+      .number()
+      .int()
+      .positive()
+      .default(15_000),
     PDF_CACHE_LIFETIME_SECONDS: z.coerce
       .number()
       .int()
