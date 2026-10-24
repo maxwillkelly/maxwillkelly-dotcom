@@ -9,14 +9,6 @@ import type { TimelineOrganisation, TimelinePosition } from "@/lib/schema";
 
 type TimelineEntry = TimelinePosition & { id: string; content: ReactNode };
 
-type TimelineProps = {
-  organisations: (TimelineOrganisation & {
-    id: string;
-    content: ReactNode;
-    positions: TimelineEntry[];
-  })[];
-};
-
 const TimelineMetadata = ({ location, start, end }: TimelineEntry) => {
   return (
     <div className="text-base text-foreground sm:text-right">
@@ -81,6 +73,14 @@ const TimelineItem = ({
       <div>{content}</div>
     </div>
   );
+};
+
+type TimelineProps = {
+  organisations: (TimelineOrganisation & {
+    id: string;
+    content: ReactNode;
+    positions: TimelineEntry[];
+  })[];
 };
 
 export const Timeline = ({ organisations }: TimelineProps) => {
