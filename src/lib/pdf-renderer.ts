@@ -5,7 +5,7 @@ import { env } from "./env";
 
 export const generatePdf = async (requestUrl: string) => {
   const url = printUrl(requestUrl);
-  const browser = await handleError("browser-launch", launchBrowser);
+  const browser = await launchBrowser();
 
   const deadline = setTimeout(
     () => browser.process()?.kill("SIGKILL"),
@@ -31,38 +31,21 @@ const printUrl = (requestUrl: string) => {
   return new URL("/print", `http://localhost${port ? `:${port}` : ""}`);
 };
 
-const handleError = async <T>(
-  stage: string,
-  operation: () => T | Promise<T>,
-) => {
-  try {
-    return await operation();
-  } catch (error) {
-    // Log fixed labels only: third-party errors may contain credentials or URLs.
-    console.error("PDF generation failed", { stage });
-
-    throw error;
-  }
-};
-
 const launchBrowser = async () => {
   const options = {
     timeout: env.PDF_OPERATION_TIMEOUT_MS,
     protocolTimeout: env.PDF_OPERATION_TIMEOUT_MS,
   };
 
-  if (!process.env.VERCEL) {
-    return puppeteer.launch({
-      ...options,
-      headless: true,
-    });
-  }
-
   return puppeteer.launch({
     ...options,
-    executablePath: await chromium.executablePath(),
-    args: chromium.args,
-    headless: "shell",
+    ...(process.env.VERCEL
+      ? {
+          executablePath: await chromium.executablePath(),
+          args: chromium.args,
+          headless: "shell" as const,
+        }
+      : { headless: true }),
   });
 };
 
@@ -83,19 +66,17 @@ const closeBrowser = async (browser: Browser) => {
 };
 
 const renderPage = async (browser: Browser, url: URL) => {
-  const page = await handleError("print-page", () => preparePage(browser, url));
+  const page = await preparePage(browser, url);
 
-  await handleError("assets", () => waitForAssets(page));
+  await waitForAssets(page);
 
-  return handleError("pdf-render", () =>
-    page.pdf({
-      format: "A4",
-      preferCSSPageSize: true,
-      printBackground: true,
-      tagged: true,
-      timeout: env.PDF_OPERATION_TIMEOUT_MS,
-    }),
-  );
+  return page.pdf({
+    format: "A4",
+    preferCSSPageSize: true,
+    printBackground: true,
+    tagged: true,
+    timeout: env.PDF_OPERATION_TIMEOUT_MS,
+  });
 };
 
 const preparePage = async (browser: Browser, url: URL) => {
