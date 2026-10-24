@@ -1,52 +1,32 @@
 import { readdir } from "node:fs/promises";
 import path from "node:path";
 
-import { compareDesc, parseISO } from "date-fns";
+import { compareDesc } from "date-fns";
 import type { MDXContent } from "mdx/types";
-import { z } from "zod";
 
+import {
+  organisationMetadataSchema,
+  positionMetadataSchema,
+  type TimelineOrganisation,
+  type TimelinePosition,
+} from "./schema";
 import { siteConfig } from "./site";
-import { technologies } from "./technologies";
 
-const textSchema = z.string().min(1);
-const dateSchema = z.iso.date().transform((value) => parseISO(value));
-
-const positionMetadataSchema = z
-  .object({
-    position: textSchema.optional(),
-    location: textSchema.optional(),
-    type: z
-      .enum(["Full-time", "Part-time", "Contractor", "Freelancer"])
-      .optional(),
-    start: dateSchema.optional(),
-    end: dateSchema.optional(),
-  })
-  .refine(
-    ({ start, end }) => !end || (start !== undefined && end >= start),
-    "End date requires a start date and cannot precede it",
-  );
-
-const organisationMetadataSchema = z.object({
-  organisation: textSchema,
-  chips: z.array(z.enum(technologies.map(({ id }) => id))).default([]),
-});
-
-export type TimelinePosition = z.infer<typeof positionMetadataSchema> & {
+// These types extend the originals with what the file loader produces
+export type LoadedTimelinePosition = TimelinePosition & {
   id: string;
   Content: MDXContent;
 };
 
-export type TimelineOrganisation = z.infer<
-  typeof organisationMetadataSchema
-> & {
+type LoadedTimelineOrganisation = TimelineOrganisation & {
   id: string;
   Content: MDXContent;
-  positions: TimelinePosition[];
+  positions: LoadedTimelinePosition[];
 };
 
 export type TimelineSection = "experience" | "education" | "projects";
 
-export type Timeline = TimelineOrganisation[];
+export type Timeline = LoadedTimelineOrganisation[];
 
 const compareStartDates = (left?: Date, right?: Date) => {
   if (!left) {
@@ -63,7 +43,7 @@ const compareStartDates = (left?: Date, right?: Date) => {
 const loadPositions = async (
   section: TimelineSection,
   organisation: string,
-): Promise<TimelinePosition[]> => {
+): Promise<LoadedTimelinePosition[]> => {
   const files = await readdir(
     path.join(process.cwd(), "src/content", section, organisation, "positions"),
     { withFileTypes: true },

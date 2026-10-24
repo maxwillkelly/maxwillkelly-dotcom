@@ -6,8 +6,9 @@ import {
   formatDateRangeinYearsAndMonths,
   formatDurationinYearsAndMonths,
 } from "@/lib/date";
+import type { TimelinePosition } from "@/lib/schema";
 import { getTechnology } from "@/lib/technologies";
-import type { Timeline, TimelinePosition } from "@/lib/timeline";
+import type { LoadedTimelinePosition, Timeline } from "@/lib/timeline";
 
 const printDate = (entry: TimelinePosition, referenceDate: Date) => {
   const { start, end } = entry;
@@ -42,7 +43,7 @@ const PrintTimelineItem = ({
   referenceDate,
   showMetadata,
 }: {
-  entry: TimelinePosition;
+  entry: LoadedTimelinePosition;
   referenceDate: Date;
   showMetadata: boolean;
 }) => {

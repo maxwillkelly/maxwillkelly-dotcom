@@ -5,12 +5,13 @@ import {
   formatDateRangeinYearsAndMonths,
   formatDurationinYearsAndMonths,
 } from "@/lib/date";
-import type { TimelineOrganisation, TimelinePosition } from "@/lib/timeline";
+import type { TimelineOrganisation, TimelinePosition } from "@/lib/schema";
 
-type TimelineEntry = Omit<TimelinePosition, "Content"> & { content: ReactNode };
+type TimelineEntry = TimelinePosition & { id: string; content: ReactNode };
 
 type TimelineProps = {
-  entries: (Omit<TimelineOrganisation, "Content" | "positions"> & {
+  entries: (TimelineOrganisation & {
+    id: string;
     content: ReactNode;
     positions: TimelineEntry[];
   })[];
