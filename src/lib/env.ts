@@ -3,6 +3,16 @@ import { z } from "zod";
 
 export const env = createEnv({
   server: {
+    PDF_CACHE_LIFETIME_SECONDS: z.coerce
+      .number()
+      .int()
+      .positive()
+      .default(14_400),
+    PDF_MAXIMUM_SIZE_BYTES: z.coerce
+      .number()
+      .int()
+      .positive()
+      .default(4_000_000),
     RESEND_API_KEY: z.string().min(1),
     SEND_EMAIL: z.email().min(1),
     UPSTASH_REDIS_REST_URL: z.url().min(1),
