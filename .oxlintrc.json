@@ -6,6 +6,10 @@
     "suspicious": "error"
   },
   "rules": {
+    "prefer-arrow-functions/prefer-arrow-functions": [
+      "error",
+      { "allowObjectProperties": true }
+    ],
     "max-depth": [
       "error",
       {
@@ -50,5 +54,8 @@
     ".heroui-docs/**",
     "next-env.d.ts"
   ],
-  "jsPlugins": ["@stylistic/eslint-plugin"]
+  "jsPlugins": [
+    "@stylistic/eslint-plugin",
+    "eslint-plugin-prefer-arrow-functions"
+  ]
 }

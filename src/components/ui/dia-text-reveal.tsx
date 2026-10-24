@@ -23,7 +23,7 @@ const SWEEP_END = 100 + BAND_HALF;
 const sweepEase = (t: number) =>
   t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2;
 
-function buildGradient(pos: number, colors: string[], textColor: string) {
+const buildGradient = (pos: number, colors: string[], textColor: string) => {
   const bandStart = pos - BAND_HALF;
   const bandEnd = pos + BAND_HALF;
 
@@ -48,9 +48,9 @@ function buildGradient(pos: number, colors: string[], textColor: string) {
   }
 
   return `linear-gradient(90deg, ${parts.join(", ")})`;
-}
+};
 
-function measureWidths(el: HTMLElement, texts: string[]) {
+const measureWidths = (el: HTMLElement, texts: string[]) => {
   const ghost = el.cloneNode() as HTMLElement;
   Object.assign(ghost.style, {
     position: "absolute",
@@ -68,7 +68,7 @@ function measureWidths(el: HTMLElement, texts: string[]) {
   ghost.remove();
 
   return widths;
-}
+};
 
 type DiaTextRevealElement =
   | "span"
@@ -147,7 +147,7 @@ export interface DiaTextRevealProps extends Omit<
   fixedWidth?: boolean;
 }
 
-export function DiaTextReveal({
+export const DiaTextReveal = ({
   as = "span",
   text,
   colors = DEFAULT_COLORS,
@@ -161,7 +161,7 @@ export function DiaTextReveal({
   className,
   fixedWidth = false,
   ...props
-}: DiaTextRevealProps) {
+}: DiaTextRevealProps) => {
   const texts = Array.isArray(text) ? text : [text];
   const isMulti = texts.length > 1;
   const prefersReducedMotion = useReducedMotion();
@@ -302,4 +302,4 @@ export function DiaTextReveal({
       {texts[activeIndex]}
     </MotionComponent>
   );
-}
+};

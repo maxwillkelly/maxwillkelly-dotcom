@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default async function PrintPage() {
+const PrintPage = async () => {
   // Render per request so current-role durations stay up to date.
   await connection();
 
@@ -37,4 +37,6 @@ export default async function PrintPage() {
       <PrintEducationSection referenceDate={referenceDate} />
     </main>
   );
-}
+};
+
+export default PrintPage;

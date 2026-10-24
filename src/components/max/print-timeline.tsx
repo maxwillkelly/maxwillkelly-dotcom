@@ -9,16 +9,16 @@ import {
 import { getTechnology } from "@/lib/technologies";
 import type { Timeline } from "@/lib/timeline";
 
-function printDate(
+const printDate = (
   entry: Omit<Timeline[number], "Content">,
   referenceDate: Date,
-) {
+) => {
   if (!entry.start) {
     return undefined;
   }
 
   return `${formatDateRangeinYearsAndMonths(entry.start, entry.end)} · ${formatDurationinYearsAndMonths(entry.start, entry.end ?? referenceDate)}`;
-}
+};
 
 const PrintTimelineItem = ({
   entry: { Content, ...entry },

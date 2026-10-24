@@ -7,7 +7,7 @@ import { useState } from "react";
 
 import { siteConfig } from "@/lib/site";
 
-async function generateDownload() {
+const generateDownload = async () => {
   const response = await fetch("/api/pdf", {
     cache: "no-store",
     signal: AbortSignal.timeout(65_000),
@@ -40,7 +40,7 @@ async function generateDownload() {
 
   // Allow browsers time to start consuming the download before releasing it.
   setTimeout(() => URL.revokeObjectURL(url), 60_000);
-}
+};
 
 export const DownloadPdfButton = () => {
   const [isPending, setPending] = useState(false);

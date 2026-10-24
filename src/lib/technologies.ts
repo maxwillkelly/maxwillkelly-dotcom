@@ -129,7 +129,7 @@ export const technologies = [
 
 export type TechnologyId = (typeof technologies)[number]["id"];
 
-export function getTechnology(id: TechnologyId) {
+export const getTechnology = (id: TechnologyId) => {
   const technology = technologies.find((entry) => entry.id === id);
 
   if (!technology) {
@@ -137,4 +137,4 @@ export function getTechnology(id: TechnologyId) {
   }
 
   return technology;
-}
+};
