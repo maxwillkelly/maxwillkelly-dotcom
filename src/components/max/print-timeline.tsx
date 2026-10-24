@@ -7,7 +7,7 @@ import {
   formatDurationinYearsAndMonths,
 } from "@/lib/date";
 import { getTechnology } from "@/lib/technologies";
-import type { Timeline } from "@/lib/timeline";
+import { groupTimelineByOrganisation, type Timeline } from "@/lib/timeline";
 
 const printDate = (
   entry: Omit<Timeline[number], "Content">,
@@ -33,12 +33,11 @@ const PrintTimelineItem = ({
   entry: Timeline[number];
   referenceDate: Date;
 }) => {
-  const { Content, organisation, position, type, location, chips } = entry;
+  const { Content, position, type, location, chips } = entry;
 
   return (
     <article className="mb-[4mm]">
       <header className="break-after-avoid break-inside-avoid">
-        <PrintSubheading>{organisation}</PrintSubheading>
         {position && (
           <PrintParagraph className="font-semibold">
             {position}
@@ -72,16 +71,17 @@ export const PrintTimeline = ({
 }) => (
   <section>
     <PrintSectionHeading>{title}</PrintSectionHeading>
-    {entries.map((entry) => {
-      const { organisation, position } = entry;
-
-      return (
-        <PrintTimelineItem
-          key={`${organisation}-${position}`}
-          entry={entry}
-          referenceDate={referenceDate}
-        />
-      );
-    })}
+    {groupTimelineByOrganisation(entries).map(([organisation, roles]) => (
+      <div key={organisation}>
+        <PrintSubheading>{organisation}</PrintSubheading>
+        {roles?.map((entry) => (
+          <PrintTimelineItem
+            key={`${entry.position}-${entry.start?.toISOString()}`}
+            entry={entry}
+            referenceDate={referenceDate}
+          />
+        ))}
+      </div>
+    ))}
   </section>
 );

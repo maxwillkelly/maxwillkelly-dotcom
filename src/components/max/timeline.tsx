@@ -5,7 +5,10 @@ import {
   formatDateRangeinYearsAndMonths,
   formatDurationinYearsAndMonths,
 } from "@/lib/date";
-import type { TimelineMetadata } from "@/lib/timeline";
+import {
+  groupTimelineByOrganisation,
+  type TimelineMetadata,
+} from "@/lib/timeline";
 
 type TimelineEntry = TimelineMetadata & { content: ReactNode };
 
@@ -50,22 +53,19 @@ const TimelineChips = ({ chips = [] }: Pick<TimelineEntry, "chips">) => {
 };
 
 const TimelineItem = ({ entry }: { entry: TimelineEntry }) => {
-  const { organisation, position, type, content, chips } = entry;
+  const { position, type, content, chips } = entry;
 
   return (
     <div className="flex flex-col gap-4 py-2">
       <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-        <h3 className="text-lg font-semibold text-foreground">
-          {organisation}
-        </h3>
+        {position && (
+          <h4 className="text-base font-semibold text-foreground">
+            {position}
+            {type && ` · ${type}`}
+          </h4>
+        )}
         <TimelineMetadata {...entry} />
       </div>
-      {position && (
-        <p className="text-base font-semibold text-foreground">
-          {position}
-          {type && ` · ${type}`}
-        </p>
-      )}
       <div>{content}</div>
       <TimelineChips chips={chips} />
     </div>
@@ -75,11 +75,18 @@ const TimelineItem = ({ entry }: { entry: TimelineEntry }) => {
 export const Timeline = ({ entries }: TimelineProps) => {
   return (
     <div className="flex flex-col gap-4">
-      {entries.map((entry) => (
-        <TimelineItem
-          key={`${entry.organisation}-${String(entry.position)}`}
-          entry={entry}
-        />
+      {groupTimelineByOrganisation(entries).map(([organisation, roles]) => (
+        <div key={organisation} className="flex flex-col gap-2">
+          <h3 className="text-lg font-semibold text-foreground">
+            {organisation}
+          </h3>
+          {roles?.map((entry) => (
+            <TimelineItem
+              key={`${entry.position}-${entry.start?.toISOString()}`}
+              entry={entry}
+            />
+          ))}
+        </div>
       ))}
     </div>
   );

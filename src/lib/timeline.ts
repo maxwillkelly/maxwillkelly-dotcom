@@ -87,3 +87,8 @@ export const loadTimeline = async (
 
   return entries.toSorted(sortLoadedTimelineEntries);
 };
+
+export const groupTimelineByOrganisation = <T extends TimelineMetadata>(
+  entries: T[],
+) =>
+  Object.entries(Object.groupBy(entries, ({ organisation }) => organisation));
