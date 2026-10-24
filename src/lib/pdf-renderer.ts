@@ -78,9 +78,12 @@ export const generatePdf = async (requestUrl: string) => {
 
 const preparePage = async (browser: Browser, url: URL) => {
   const page = await browser.newPage();
+
   page.setDefaultTimeout(10_000);
+
   await page.emulateMediaType("print");
   await page.setRequestInterception(true);
+
   // Only the deployment itself receives the protection secret. External assets
   // and analytics are unnecessary for this document and are not requested.
   page.on("request", (request) => {
@@ -101,6 +104,7 @@ const preparePage = async (browser: Browser, url: URL) => {
 
     void request.continue({ headers });
   });
+
   const response = await page.goto(url.href, {
     waitUntil: "load",
     timeout: 15_000,
@@ -136,6 +140,7 @@ const renderPage = async (browser: Browser, url: URL) => {
   try {
     const page = await preparePage(browser, url);
     stage = "assets";
+
     await waitForAssets(page);
     stage = "pdf-render";
 
