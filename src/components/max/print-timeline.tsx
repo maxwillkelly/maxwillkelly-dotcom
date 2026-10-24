@@ -23,14 +23,30 @@ const printDate = (entry: TimelinePosition, referenceDate: Date) => {
   return `${dateRange} · ${duration}`;
 };
 
-const PrintTimelineItem = ({
+const PrintTimelineMetadata = ({
   entry,
   referenceDate,
 }: {
   entry: TimelinePosition;
   referenceDate: Date;
+}) => (
+  <PrintParagraph className="text-[9pt] text-[#444]">
+    {[entry.location, printDate(entry, referenceDate)]
+      .filter(Boolean)
+      .join(" · ")}
+  </PrintParagraph>
+);
+
+const PrintTimelineItem = ({
+  entry,
+  referenceDate,
+  showMetadata,
+}: {
+  entry: TimelinePosition;
+  referenceDate: Date;
+  showMetadata: boolean;
 }) => {
-  const { Content, position, type, location } = entry;
+  const { Content, position, type } = entry;
 
   return (
     <article className="mb-[4mm]">
@@ -41,11 +57,9 @@ const PrintTimelineItem = ({
             {type && ` · ${type}`}
           </PrintParagraph>
         )}
-        <PrintParagraph className="text-[9pt] text-[#444]">
-          {[location, printDate(entry, referenceDate)]
-            .filter(Boolean)
-            .join(" · ")}
-        </PrintParagraph>
+        {showMetadata && (
+          <PrintTimelineMetadata entry={entry} referenceDate={referenceDate} />
+        )}
       </header>
       <Content components={components} />
     </article>
@@ -65,8 +79,14 @@ export const PrintTimeline = ({
     <PrintSectionHeading>{title}</PrintSectionHeading>
     {entries.map(({ id, organisation, chips, Content, positions }) => (
       <div key={id}>
-        <header className="break-after-avoid break-inside-avoid">
+        <header className="flex items-baseline justify-between gap-4 break-after-avoid break-inside-avoid">
           <PrintSubheading>{organisation}</PrintSubheading>
+          {positions.length === 1 && positions[0] && (
+            <PrintTimelineMetadata
+              entry={positions[0]}
+              referenceDate={referenceDate}
+            />
+          )}
         </header>
         <Content components={components} />
         {positions.map((entry) => (
@@ -74,6 +94,7 @@ export const PrintTimeline = ({
             key={entry.id}
             entry={entry}
             referenceDate={referenceDate}
+            showMetadata={positions.length !== 1}
           />
         ))}
         {chips.length > 0 && (

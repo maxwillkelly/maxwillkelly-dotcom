@@ -52,20 +52,31 @@ const TimelineChips = ({ chips = [] }: Pick<TimelineOrganisation, "chips">) => {
   );
 };
 
-const TimelineItem = ({ entry }: { entry: TimelineEntry }) => {
-  const { position, type, content } = entry;
+const TimelinePositionHeading = ({ position, type }: TimelineEntry) =>
+  position && (
+    <h4 className="text-base font-semibold text-foreground">
+      {position}
+      {type && ` · ${type}`}
+    </h4>
+  );
+
+const TimelineItem = ({
+  entry,
+  showMetadata,
+}: {
+  entry: TimelineEntry;
+  showMetadata: boolean;
+}) => {
+  const { position, content } = entry;
 
   return (
     <div className="flex flex-col gap-4 py-2">
-      <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-        {position && (
-          <h4 className="text-base font-semibold text-foreground">
-            {position}
-            {type && ` · ${type}`}
-          </h4>
-        )}
-        <TimelineMetadata {...entry} />
-      </div>
+      {(position || showMetadata) && (
+        <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+          <TimelinePositionHeading {...entry} />
+          {showMetadata && <TimelineMetadata {...entry} />}
+        </div>
+      )}
       <div>{content}</div>
     </div>
   );
@@ -76,12 +87,19 @@ export const Timeline = ({ entries }: TimelineProps) => {
     <div className="flex flex-col gap-4">
       {entries.map(({ id, organisation, chips, content, positions }) => (
         <div key={id} className="flex flex-col gap-2">
-          <h3 className="text-lg font-semibold text-foreground">
-            {organisation}
-          </h3>
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+            <h3 className="text-lg font-semibold text-foreground">
+              {organisation}
+            </h3>
+            {positions.length === 1 && <TimelineMetadata {...positions[0]} />}
+          </div>
           {content}
           {positions.map((entry) => (
-            <TimelineItem key={entry.id} entry={entry} />
+            <TimelineItem
+              key={entry.id}
+              entry={entry}
+              showMetadata={positions.length !== 1}
+            />
           ))}
           <TimelineChips chips={chips} />
         </div>
