@@ -96,7 +96,7 @@ const RootLayout = ({
         >
           <div
             id="container"
-            className="relative z-10 max-w-2xl mx-auto py-12 pb-24 sm:py-24 px-6 has-data-print-document:max-w-[210mm] has-data-print-document:p-[14mm] print:has-data-print-document:max-w-none print:has-data-print-document:m-0 print:has-data-print-document:p-0"
+            className="relative z-10 max-w-4xl mx-auto py-12 pb-24 sm:py-24 px-6 has-data-print-document:max-w-[210mm] has-data-print-document:p-[14mm] print:has-data-print-document:max-w-none print:has-data-print-document:m-0 print:has-data-print-document:p-0"
           >
             {children}
           </div>
