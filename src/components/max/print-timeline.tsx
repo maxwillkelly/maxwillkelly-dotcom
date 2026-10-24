@@ -13,50 +13,53 @@ const printDate = (
   entry: Omit<Timeline[number], "Content">,
   referenceDate: Date,
 ) => {
-  if (!entry.start) {
+  const { start, end } = entry;
+
+  if (!start) {
     return undefined;
   }
 
-  const dateRange = formatDateRangeinYearsAndMonths(entry.start, entry.end);
+  const dateRange = formatDateRangeinYearsAndMonths(start, end);
 
-  const duration = formatDurationinYearsAndMonths(
-    entry.start,
-    entry.end ?? referenceDate,
-  );
+  const duration = formatDurationinYearsAndMonths(start, end ?? referenceDate);
 
   return `${dateRange} · ${duration}`;
 };
 
 const PrintTimelineItem = ({
-  entry: { Content, ...entry },
+  entry,
   referenceDate,
 }: {
   entry: Timeline[number];
   referenceDate: Date;
-}) => (
-  <article className="mb-[4mm]">
-    <header className="break-after-avoid break-inside-avoid">
-      <PrintSubheading>{entry.organisation}</PrintSubheading>
-      {entry.position && (
-        <PrintParagraph className="font-semibold">
-          {entry.position}
-          {entry.type && ` · ${entry.type}`}
+}) => {
+  const { Content, organisation, position, type, location, chips } = entry;
+
+  return (
+    <article className="mb-[4mm]">
+      <header className="break-after-avoid break-inside-avoid">
+        <PrintSubheading>{organisation}</PrintSubheading>
+        {position && (
+          <PrintParagraph className="font-semibold">
+            {position}
+            {type && ` · ${type}`}
+          </PrintParagraph>
+        )}
+        <PrintParagraph className="text-[9pt] text-[#444]">
+          {[location, printDate(entry, referenceDate)]
+            .filter(Boolean)
+            .join(" · ")}
+        </PrintParagraph>
+      </header>
+      <Content components={components} />
+      {chips.length > 0 && (
+        <PrintParagraph className="break-before-avoid text-[9pt] text-[#444]">
+          {chips.map((id) => getTechnology(id).label).join(" · ")}
         </PrintParagraph>
       )}
-      <PrintParagraph className="text-[9pt] text-[#444]">
-        {[entry.location, printDate(entry, referenceDate)]
-          .filter(Boolean)
-          .join(" · ")}
-      </PrintParagraph>
-    </header>
-    <Content components={components} />
-    {entry.chips.length > 0 && (
-      <PrintParagraph className="break-before-avoid text-[9pt] text-[#444]">
-        {entry.chips.map((id) => getTechnology(id).label).join(" · ")}
-      </PrintParagraph>
-    )}
-  </article>
-);
+    </article>
+  );
+};
 
 export const PrintTimeline = ({
   entries,
@@ -69,12 +72,16 @@ export const PrintTimeline = ({
 }) => (
   <section>
     <PrintSectionHeading>{title}</PrintSectionHeading>
-    {entries.map((entry) => (
-      <PrintTimelineItem
-        key={`${entry.organisation}-${entry.position}`}
-        entry={entry}
-        referenceDate={referenceDate}
-      />
-    ))}
+    {entries.map((entry) => {
+      const { organisation, position } = entry;
+
+      return (
+        <PrintTimelineItem
+          key={`${organisation}-${position}`}
+          entry={entry}
+          referenceDate={referenceDate}
+        />
+      );
+    })}
   </section>
 );
