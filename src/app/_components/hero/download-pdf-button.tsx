@@ -8,7 +8,7 @@ import { useState } from "react";
 import { siteConfig } from "@/lib/site";
 
 async function generateDownload() {
-  const response = await fetch("/api/cv", {
+  const response = await fetch("/api/pdf", {
     cache: "no-store",
     signal: AbortSignal.timeout(65_000),
   });
@@ -17,14 +17,14 @@ async function generateDownload() {
     !response.ok ||
     !response.headers.get("content-type")?.startsWith("application/pdf")
   ) {
-    throw new Error("CV generation failed");
+    throw new Error("PDF generation failed");
   }
 
   const pdf = await response.blob();
 
   // Check the PDF header to reject non-PDF bodies
   if ((await pdf.slice(0, 5).text()) !== "%PDF-") {
-    throw new Error("CV response is missing the PDF header");
+    throw new Error("PDF response is missing the PDF header");
   }
 
   const url = URL.createObjectURL(pdf);
@@ -42,16 +42,16 @@ async function generateDownload() {
   setTimeout(() => URL.revokeObjectURL(url), 60_000);
 }
 
-export const DownloadCvButton = () => {
+export const DownloadPdfButton = () => {
   const [isPending, setPending] = useState(false);
 
-  const downloadCv = async () => {
+  const downloadPdf = async () => {
     setPending(true);
 
     try {
       await generateDownload();
     } catch (error) {
-      console.error("CV download failed", error);
+      console.error("PDF download failed", error);
     } finally {
       setPending(false);
     }
@@ -64,7 +64,7 @@ export const DownloadCvButton = () => {
       isPending={isPending}
       size="sm"
       variant="tertiary"
-      onPress={downloadCv}
+      onPress={downloadPdf}
     >
       <Ripple />
       {isPending ? <Spinner color="current" size="sm" /> : <DownloadCloud />}

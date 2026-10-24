@@ -5,10 +5,10 @@ const renderTimeout = 45_000;
 
 function printUrl(requestUrl: string) {
   if (process.env.VERCEL_URL) {
-    return new URL("/cv/print", `https://${process.env.VERCEL_URL}`);
+    return new URL("/print", `https://${process.env.VERCEL_URL}`);
   }
 
-  const url = new URL("http://localhost/cv/print");
+  const url = new URL("http://localhost/print");
 
   url.port = new URL(requestUrl).port;
 
@@ -21,7 +21,7 @@ async function closeBrowser(browser: Browser) {
   try {
     await browser.close();
   } catch {
-    console.error("CV generation failed", { stage: "browser-close" });
+    console.error("PDF generation failed", { stage: "browser-close" });
     browser.process()?.kill("SIGKILL");
   } finally {
     clearTimeout(kill);
@@ -57,7 +57,7 @@ export async function generatePdf(requestUrl: string) {
     browser = await launchBrowser();
   } catch (error) {
     // Log fixed labels only: third-party errors may contain credentials or URLs.
-    console.error("CV generation failed", { stage });
+    console.error("PDF generation failed", { stage });
 
     throw error;
   }
@@ -107,7 +107,7 @@ async function preparePage(browser: Browser, url: URL) {
   });
 
   if (!response?.ok() || new URL(page.url()).origin !== url.origin) {
-    throw new Error("CV print page unavailable");
+    throw new Error("Print page unavailable");
   }
 
   return page;
@@ -126,7 +126,7 @@ async function waitForAssets(page: Awaited<ReturnType<typeof preparePage>>) {
   );
 
   if (!assetsReady) {
-    throw new Error("CV assets failed to load");
+    throw new Error("PDF assets failed to load");
   }
 }
 
@@ -147,7 +147,7 @@ async function renderPage(browser: Browser, url: URL) {
       timeout: 15_000,
     });
   } catch (error) {
-    console.error("CV generation failed", { stage });
+    console.error("PDF generation failed", { stage });
 
     throw error;
   }

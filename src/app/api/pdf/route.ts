@@ -1,9 +1,9 @@
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 
-import { generatePdf } from "@/lib/cv-renderer";
 import { env } from "@/lib/env";
 import { getIpAddress } from "@/lib/headers";
+import { generatePdf } from "@/lib/pdf-renderer";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -21,7 +21,7 @@ const redis = new Redis({
 const ratelimit = new Ratelimit({
   redis,
   limiter: Ratelimit.slidingWindow(5, "1 m"),
-  prefix: "cv-download",
+  prefix: "pdf-download",
   timeout: 3_000,
 });
 
@@ -50,7 +50,7 @@ const rateLimitResponse = async () => {
   const limit = await getIpAddress()
     .then((ip) => ratelimit.limit(ip))
     .catch((error) => {
-      console.error("CV generation failed", { stage: "rate-limit" });
+      console.error("PDF generation failed", { stage: "rate-limit" });
 
       throw error;
     });
@@ -76,7 +76,7 @@ const renderPdf = async (requestUrl: string, cacheKey: string) => {
 
   const cached = useCache
     ? await redis.get<string>(cacheKey).catch(() => {
-        console.error("CV generation failed", { stage: "cache-read" });
+        console.error("PDF generation failed", { stage: "cache-read" });
       })
     : undefined;
 
@@ -108,7 +108,7 @@ const generateAndCachePdf = async (
         ex: env.PDF_CACHE_LIFETIME_SECONDS,
       })
       .catch(() => {
-        console.error("CV generation failed", { stage: "cache-write" });
+        console.error("PDF generation failed", { stage: "cache-write" });
       });
   }
 

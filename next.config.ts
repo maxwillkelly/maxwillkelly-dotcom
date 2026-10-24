@@ -9,8 +9,8 @@ const nextConfig: NextConfig = {
   serverExternalPackages: ["@sparticuz/chromium", "puppeteer"],
   outputFileTracingIncludes: {
     "/": ["./src/content/**/*"],
-    "/cv/print": ["./src/content/**/*"],
-    "/api/cv": ["./node_modules/@sparticuz/chromium/bin/**/*"],
+    "/print": ["./src/content/**/*"],
+    "/api/pdf": ["./node_modules/@sparticuz/chromium/bin/**/*"],
   },
 };
 

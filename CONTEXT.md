@@ -1,6 +1,6 @@
 # Personal Portfolio
 
-This context describes Max Kelly's personal portfolio site: a public, single-page profile for presenting experience, projects, values, education, downloadable CV, and contact options.
+This context describes Max Kelly's personal portfolio site: a public, single-page profile for presenting experience, projects, values, education, downloadable PDF, and contact options.
 
 ## Language
 
