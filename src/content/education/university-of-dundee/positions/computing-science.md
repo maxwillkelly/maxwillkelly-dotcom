@@ -1,5 +1,4 @@
 ---
-organisation: "University of Dundee"
 start: "2018-09-01"
 end: "2022-09-01"
 chips:

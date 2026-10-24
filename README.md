@@ -55,6 +55,14 @@ src/
     └── contact-message.tsx           # Zod schema for contact form
 ```
 
+Timeline content is organised as `src/content/<section>/<organisation>/index.md`
+for organisation details, with one Markdown file per position in its `positions/`
+folder. Organisation frontmatter contains `organisation` and an optional
+`location`; position frontmatter contains an optional `position`, employment
+`type`, `start`, `end` and technology `chips`. Each file's body supplies its
+content. Organisations and positions are discovered automatically and sorted by
+their most recent start dates, with undated entries last.
+
 ## Getting Started
 
 Requires Node.js and [pnpm](https://pnpm.io).

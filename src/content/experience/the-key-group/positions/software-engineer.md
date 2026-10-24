@@ -1,8 +1,6 @@
 ---
-organisation: "The Key Group"
 position: "Software Engineer"
 type: "Full-time"
-location: "Bristol"
 start: "2022-06-28"
 end: "2026-10-14"
 chips:

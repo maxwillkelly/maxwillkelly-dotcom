@@ -1,8 +1,6 @@
 ---
-organisation: "Udrafter"
 position: "Software Developer"
 type: "Part-time"
-location: "Remote"
 start: "2020-09-01"
 end: "2021-09-01"
 chips:

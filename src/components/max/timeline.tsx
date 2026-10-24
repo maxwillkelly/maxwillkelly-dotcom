@@ -5,26 +5,20 @@ import {
   formatDateRangeinYearsAndMonths,
   formatDurationinYearsAndMonths,
 } from "@/lib/date";
-import {
-  groupTimelineByOrganisation,
-  type TimelineMetadata,
-} from "@/lib/timeline";
+import type { TimelineOrganisation, TimelinePosition } from "@/lib/timeline";
 
-type TimelineEntry = TimelineMetadata & { content: ReactNode };
+type TimelineEntry = Omit<TimelinePosition, "Content"> & { content: ReactNode };
 
 type TimelineProps = {
-  entries: TimelineEntry[];
+  entries: (Omit<TimelineOrganisation, "Content" | "positions"> & {
+    content: ReactNode;
+    positions: TimelineEntry[];
+  })[];
 };
 
-const TimelineMetadata = ({ location, start, end }: TimelineEntry) => {
+const TimelineMetadata = ({ start, end }: TimelineEntry) => {
   return (
     <div className="text-base text-foreground sm:text-right">
-      {location && (
-        <span>
-          {location}
-          {start && " · "}
-        </span>
-      )}
       {start && (
         <span>
           {formatDateRangeinYearsAndMonths(start, end)}
@@ -75,16 +69,19 @@ const TimelineItem = ({ entry }: { entry: TimelineEntry }) => {
 export const Timeline = ({ entries }: TimelineProps) => {
   return (
     <div className="flex flex-col gap-4">
-      {groupTimelineByOrganisation(entries).map(([organisation, roles]) => (
-        <div key={organisation} className="flex flex-col gap-2">
-          <h3 className="text-lg font-semibold text-foreground">
-            {organisation}
-          </h3>
-          {roles?.map((entry) => (
-            <TimelineItem
-              key={`${entry.position}-${entry.start?.toISOString()}`}
-              entry={entry}
-            />
+      {entries.map(({ id, organisation, location, content, positions }) => (
+        <div key={id} className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+            <h3 className="text-lg font-semibold text-foreground">
+              {organisation}
+            </h3>
+            {location && (
+              <span className="text-base text-foreground">{location}</span>
+            )}
+          </div>
+          {content}
+          {positions.map((entry) => (
+            <TimelineItem key={entry.id} entry={entry} />
           ))}
         </div>
       ))}

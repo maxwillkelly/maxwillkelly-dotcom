@@ -11,11 +11,9 @@ import { technologies } from "./technologies";
 const textSchema = z.string().min(1);
 const dateSchema = z.iso.date().transform((value) => parseISO(value));
 
-const timelineMetadataSchema = z
+const positionMetadataSchema = z
   .object({
-    organisation: textSchema,
     position: textSchema.optional(),
-    location: textSchema.optional(),
     type: z
       .enum(["Full-time", "Part-time", "Contractor", "Freelancer"])
       .optional(),
@@ -28,13 +26,27 @@ const timelineMetadataSchema = z
     "End date requires a start date and cannot precede it",
   );
 
-export type TimelineMetadata = z.infer<typeof timelineMetadataSchema>;
+const organisationMetadataSchema = z.object({
+  organisation: textSchema,
+  location: textSchema.optional(),
+});
+
+export type TimelinePosition = z.infer<typeof positionMetadataSchema> & {
+  id: string;
+  Content: MDXContent;
+};
+
+export type TimelineOrganisation = z.infer<
+  typeof organisationMetadataSchema
+> & {
+  id: string;
+  Content: MDXContent;
+  positions: TimelinePosition[];
+};
 
 export type TimelineSection = "experience" | "education" | "projects";
 
-type LoadedTimelineEntry = TimelineMetadata & { Content: MDXContent };
-
-export type Timeline = LoadedTimelineEntry[];
+export type Timeline = TimelineOrganisation[];
 
 const compareStartDates = (left?: Date, right?: Date) => {
   if (!left) {
@@ -48,47 +60,74 @@ const compareStartDates = (left?: Date, right?: Date) => {
   return compareDesc(left, right);
 };
 
-const sortLoadedTimelineEntries = (
-  left: LoadedTimelineEntry,
-  right: LoadedTimelineEntry,
-) => {
-  return (
-    compareStartDates(left.start, right.start) ||
-    left.organisation.localeCompare(right.organisation, siteConfig.locale)
+const loadPositions = async (
+  section: TimelineSection,
+  organisation: string,
+): Promise<TimelinePosition[]> => {
+  const files = await readdir(
+    path.join(process.cwd(), "src/content", section, organisation, "positions"),
+    { withFileTypes: true },
+  );
+
+  const positions = await Promise.all(
+    files
+      .filter((file) => file.isFile())
+      .map(async ({ name }) => {
+        const { default: Content, frontmatter } = await import(
+          `@/content/${section}/${organisation}/positions/${name}`
+        );
+
+        return {
+          ...positionMetadataSchema.parse(frontmatter),
+          id: name,
+          Content,
+        };
+      }),
+  );
+
+  if (positions.length === 0) {
+    throw new Error(
+      `Timeline organisation ${section}/${organisation} requires a position`,
+    );
+  }
+
+  return positions.toSorted(
+    (left, right) =>
+      compareStartDates(left.start, right.start) ||
+      left.id.localeCompare(right.id, siteConfig.locale),
   );
 };
 
 export const loadTimeline = async (
   section: TimelineSection,
 ): Promise<Timeline> => {
-  const files = await readdir(
+  const folders = await readdir(
     path.join(process.cwd(), "src/content", section),
     { withFileTypes: true },
   );
 
-  const filenames = files
-    .filter((file) => file.isFile())
-    .map((file) => file.name);
+  const organisations = await Promise.all(
+    folders
+      .filter((folder) => folder.isDirectory())
+      .map(async ({ name }) => {
+        const [{ default: Content, frontmatter }, positions] =
+          await Promise.all([
+            import(`@/content/${section}/${name}/index.md`),
+            loadPositions(section, name),
+          ]);
 
-  const entries = await Promise.all(
-    filenames.map(async (filename): Promise<LoadedTimelineEntry> => {
-      const { default: Content, frontmatter } = await import(
-        `@/content/${section}/${filename}`
-      );
-
-      const entry = timelineMetadataSchema.parse(frontmatter);
-
-      return {
-        ...entry,
-        Content,
-      };
-    }),
+        return {
+          ...organisationMetadataSchema.parse(frontmatter),
+          id: name,
+          Content,
+          positions,
+        };
+      }),
   );
 
-  return entries.toSorted(sortLoadedTimelineEntries);
+  return organisations.toSorted(
+    (left, right) =>
+      compareStartDates(left.positions[0]?.start, right.positions[0]?.start) ||
+      left.organisation.localeCompare(right.organisation, siteConfig.locale),
+  );
 };
-
-export const groupTimelineByOrganisation = <T extends TimelineMetadata>(
-  entries: T[],
-) =>
-  Object.entries(Object.groupBy(entries, ({ organisation }) => organisation));

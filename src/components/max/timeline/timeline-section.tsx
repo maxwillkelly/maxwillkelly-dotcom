@@ -7,13 +7,17 @@ type Props = { section: Section; title: string };
 export const TimelineSection = async ({ section, title }: Props) => {
   const timeline = await loadTimeline(section);
 
-  const entries = timeline.map(({ Content, ...entry }) => ({
-    ...entry,
-    content: (
-      <div className="flex flex-col gap-4">
-        <Content />
-      </div>
-    ),
+  const entries = timeline.map(({ Content, positions, ...organisation }) => ({
+    ...organisation,
+    content: <Content />,
+    positions: positions.map(({ Content: PositionContent, ...position }) => ({
+      ...position,
+      content: (
+        <div className="flex flex-col gap-4">
+          <PositionContent />
+        </div>
+      ),
+    })),
   }));
 
   return (

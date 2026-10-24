@@ -7,12 +7,9 @@ import {
   formatDurationinYearsAndMonths,
 } from "@/lib/date";
 import { getTechnology } from "@/lib/technologies";
-import { groupTimelineByOrganisation, type Timeline } from "@/lib/timeline";
+import type { Timeline, TimelinePosition } from "@/lib/timeline";
 
-const printDate = (
-  entry: Omit<Timeline[number], "Content">,
-  referenceDate: Date,
-) => {
+const printDate = (entry: TimelinePosition, referenceDate: Date) => {
   const { start, end } = entry;
 
   if (!start) {
@@ -30,10 +27,10 @@ const PrintTimelineItem = ({
   entry,
   referenceDate,
 }: {
-  entry: Timeline[number];
+  entry: TimelinePosition;
   referenceDate: Date;
 }) => {
-  const { Content, position, type, location, chips } = entry;
+  const { Content, position, type, chips } = entry;
 
   return (
     <article className="mb-[4mm]">
@@ -45,9 +42,7 @@ const PrintTimelineItem = ({
           </PrintParagraph>
         )}
         <PrintParagraph className="text-[9pt] text-[#444]">
-          {[location, printDate(entry, referenceDate)]
-            .filter(Boolean)
-            .join(" · ")}
+          {printDate(entry, referenceDate)}
         </PrintParagraph>
       </header>
       <Content components={components} />
@@ -71,12 +66,20 @@ export const PrintTimeline = ({
 }) => (
   <section>
     <PrintSectionHeading>{title}</PrintSectionHeading>
-    {groupTimelineByOrganisation(entries).map(([organisation, roles]) => (
-      <div key={organisation}>
-        <PrintSubheading>{organisation}</PrintSubheading>
-        {roles?.map((entry) => (
+    {entries.map(({ id, organisation, location, Content, positions }) => (
+      <div key={id}>
+        <header className="break-after-avoid break-inside-avoid">
+          <PrintSubheading>{organisation}</PrintSubheading>
+          {location && (
+            <PrintParagraph className="text-[9pt] text-[#444]">
+              {location}
+            </PrintParagraph>
+          )}
+        </header>
+        <Content components={components} />
+        {positions.map((entry) => (
           <PrintTimelineItem
-            key={`${entry.position}-${entry.start?.toISOString()}`}
+            key={entry.id}
             entry={entry}
             referenceDate={referenceDate}
           />
