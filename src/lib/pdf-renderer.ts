@@ -8,11 +8,9 @@ const printUrl = (requestUrl: string) => {
     return new URL("/print", `https://${process.env.VERCEL_URL}`);
   }
 
-  const url = new URL("http://localhost/print");
+  const { port } = new URL(requestUrl);
 
-  url.port = new URL(requestUrl).port;
-
-  return url;
+  return new URL("/print", `http://localhost${port ? `:${port}` : ""}`);
 };
 
 const closeBrowser = async (browser: Browser) => {
@@ -46,21 +44,23 @@ const launchBrowser = async () => {
   });
 };
 
-export const generatePdf = async (requestUrl: string) => {
-  let stage = "print-url";
-  let url: URL;
-  let browser: Browser;
-
+const handleError = async <T>(
+  stage: string,
+  operation: () => T | Promise<T>,
+) => {
   try {
-    url = printUrl(requestUrl);
-    stage = "browser-launch";
-    browser = await launchBrowser();
+    return await operation();
   } catch (error) {
     // Log fixed labels only: third-party errors may contain credentials or URLs.
     console.error("PDF generation failed", { stage });
 
     throw error;
   }
+};
+
+export const generatePdf = async (requestUrl: string) => {
+  const url = await handleError("print-url", () => printUrl(requestUrl));
+  const browser = await handleError("browser-launch", launchBrowser);
 
   const deadline = setTimeout(
     () => browser.process()?.kill("SIGKILL"),
@@ -95,12 +95,15 @@ const preparePage = async (browser: Browser, url: URL) => {
       return;
     }
 
-    const headers = { ...request.headers() };
-
-    if (process.env.VERCEL_AUTOMATION_BYPASS_SECRET) {
-      headers["x-vercel-protection-bypass"] =
-        process.env.VERCEL_AUTOMATION_BYPASS_SECRET;
-    }
+    const headers = {
+      ...request.headers(),
+      ...(process.env.VERCEL_AUTOMATION_BYPASS_SECRET
+        ? {
+            "x-vercel-protection-bypass":
+              process.env.VERCEL_AUTOMATION_BYPASS_SECRET,
+          }
+        : {}),
+    };
 
     void request.continue({ headers });
   });
@@ -135,25 +138,17 @@ const waitForAssets = async (page: Awaited<ReturnType<typeof preparePage>>) => {
 };
 
 const renderPage = async (browser: Browser, url: URL) => {
-  let stage = "print-page";
+  const page = await handleError("print-page", () => preparePage(browser, url));
 
-  try {
-    const page = await preparePage(browser, url);
-    stage = "assets";
+  await handleError("assets", () => waitForAssets(page));
 
-    await waitForAssets(page);
-    stage = "pdf-render";
-
-    return await page.pdf({
+  return handleError("pdf-render", () =>
+    page.pdf({
       format: "A4",
       preferCSSPageSize: true,
       printBackground: true,
       tagged: true,
       timeout: 15_000,
-    });
-  } catch (error) {
-    console.error("PDF generation failed", { stage });
-
-    throw error;
-  }
+    }),
+  );
 };
