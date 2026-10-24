@@ -1,10 +1,10 @@
 import chromium from "@sparticuz/chromium";
-import puppeteer, { type Browser } from "puppeteer";
+import puppeteer, { type Browser, type Page } from "puppeteer";
 
 import { env } from "./env";
 
 export const generatePdf = async (requestUrl: string) => {
-  const url = await handleError("print-url", () => printUrl(requestUrl));
+  const url = printUrl(requestUrl);
   const browser = await handleError("browser-launch", launchBrowser);
 
   const deadline = setTimeout(
@@ -142,19 +142,20 @@ const preparePage = async (browser: Browser, url: URL) => {
   return page;
 };
 
-const waitForAssets = async (page: Awaited<ReturnType<typeof preparePage>>) => {
+const waitForAssets = async (page: Page) => {
   await page.waitForFunction(
     () =>
       document.fonts.status === "loaded" &&
       [...document.images].every((image) => image.complete),
   );
-  const assetsReady = await page.evaluate(
+
+  const isAssetsReady = await page.evaluate(
     () =>
       [...document.images].every((image) => image.naturalWidth > 0) &&
       [...document.fonts].every((font) => font.status !== "error"),
   );
 
-  if (!assetsReady) {
+  if (!isAssetsReady) {
     throw new Error("PDF assets failed to load");
   }
 };
