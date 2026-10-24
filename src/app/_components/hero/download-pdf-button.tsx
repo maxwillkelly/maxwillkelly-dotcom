@@ -5,7 +5,7 @@ import { DownloadCloud } from "lucide-react";
 import { Ripple } from "m3-ripple";
 import { useState } from "react";
 
-import { siteConfig } from "@/lib/site";
+import { env } from "@/lib/env";
 
 const generateDownload = async () => {
   const response = await fetch("/api/pdf", {
@@ -31,7 +31,7 @@ const generateDownload = async () => {
   const link = document.createElement("a");
 
   link.href = url;
-  link.download = `${siteConfig.name} - CV.pdf`;
+  link.download = env.NEXT_PUBLIC_PDF_FILENAME;
 
   document.body.append(link);
 

@@ -155,7 +155,7 @@ const generateResponse = async (request: Request) => {
     headers: {
       ...headers,
       "Content-Type": "application/pdf",
-      "Content-Disposition": `attachment; filename="${env.PDF_FILENAME}"`,
+      "Content-Disposition": `attachment; filename="${env.NEXT_PUBLIC_PDF_FILENAME}"`,
     },
   });
 };

@@ -5,10 +5,6 @@ import { upstashDurationSchema } from "./schema";
 
 export const env = createEnv({
   server: {
-    PDF_FILENAME: z
-      .string()
-      .regex(/^[a-zA-Z0-9][a-zA-Z0-9 ._-]*\.pdf$/i)
-      .default("Max Kelly - CV.pdf"),
     PDF_CACHE_LIFETIME_SECONDS: z.coerce
       .number()
       .int()
@@ -31,10 +27,17 @@ export const env = createEnv({
     UPSTASH_REDIS_REST_URL: z.url().min(1),
     UPSTASH_REDIS_REST_TOKEN: z.string().min(1),
   },
+  client: {
+    NEXT_PUBLIC_PDF_FILENAME: z
+      .string()
+      .regex(/^[a-zA-Z0-9][a-zA-Z0-9 ._-]*\.pdf$/i)
+      .default("Max Kelly - CV.pdf"),
+  },
   shared: {
     NODE_ENV: z.enum(["development", "test", "production"]),
   },
   experimental__runtimeEnv: {
+    NEXT_PUBLIC_PDF_FILENAME: process.env.NEXT_PUBLIC_PDF_FILENAME,
     NODE_ENV: process.env.NODE_ENV,
   },
 });
