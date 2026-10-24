@@ -17,7 +17,14 @@ const printDate = (
     return undefined;
   }
 
-  return `${formatDateRangeinYearsAndMonths(entry.start, entry.end)} · ${formatDurationinYearsAndMonths(entry.start, entry.end ?? referenceDate)}`;
+  const dateRange = formatDateRangeinYearsAndMonths(entry.start, entry.end);
+
+  const duration = formatDurationinYearsAndMonths(
+    entry.start,
+    entry.end ?? referenceDate,
+  );
+
+  return `${dateRange} · ${duration}`;
 };
 
 const PrintTimelineItem = ({
