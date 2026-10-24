@@ -166,7 +166,7 @@ export const GET = async (request: Request) => {
   } catch {
     return unavailableResponse(
       "Could not generate the CV. Please retry shortly.",
-      503,
+      500,
     );
   }
 };
