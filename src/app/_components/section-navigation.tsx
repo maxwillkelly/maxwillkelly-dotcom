@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
-// Peak scale: 1 means no enlargement; 1.35 means 35% larger.
-const MAGNIFICATION = "[--magnification:1.35]";
+// Peak scale: 1 means no enlargement; 1.2 means 20% larger.
+const MAGNIFICATION = "[--magnification:1.2]";
 
 const sections = [
   { id: "hero", label: "Introduction" },
