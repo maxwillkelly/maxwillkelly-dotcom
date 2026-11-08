@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import styles from "./section-navigation.module.css";
+
 const sections = [
   { id: "hero", label: "Introduction" },
   { id: "about", label: "About" },
@@ -73,21 +75,23 @@ export const SectionNavigation = () => {
   return (
     <nav
       aria-label="Page sections"
-      className="fixed top-1/2 left-[calc((100vw-48rem)/2-12rem)] z-20 hidden max-h-[calc(100dvh-3rem)] w-40 -translate-y-1/2 overflow-y-auto xl:block print:hidden"
+      className="fixed top-1/2 left-[calc((100vw-48rem)/2-12rem)] z-20 hidden max-h-[calc(100dvh-3rem)] w-48 -translate-y-1/2 overflow-y-auto px-1 py-2 xl:block print:hidden"
     >
       <ol>
         {sections.map(({ id, label }) => (
-          <li key={id}>
+          <li key={id} className={styles.item}>
             <a
               href={`#${id}`}
               aria-current={id === activeSectionId ? "location" : undefined}
-              className="group flex min-h-11 items-center gap-4 rounded-sm px-1 text-sm text-muted transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus aria-[current=location]:font-semibold aria-[current=location]:text-accent motion-reduce:transition-none"
+              className="group flex min-h-11 items-center rounded-sm px-1 text-sm text-muted transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus aria-[current=location]:font-semibold aria-[current=location]:text-accent motion-reduce:transition-none"
             >
-              <span
-                aria-hidden="true"
-                className="h-px w-6 shrink-0 rounded-full bg-muted transition-colors group-hover:bg-foreground group-aria-[current=location]:bg-accent motion-reduce:transition-none"
-              />
-              {label}
+              <span className={styles.content}>
+                <span
+                  aria-hidden="true"
+                  className="h-px w-6 shrink-0 rounded-full bg-muted transition-colors group-hover:bg-foreground group-aria-[current=location]:bg-accent motion-reduce:transition-none"
+                />
+                {label}
+              </span>
             </a>
           </li>
         ))}
