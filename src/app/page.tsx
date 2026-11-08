@@ -15,7 +15,7 @@ const HomePage = async () => {
   await connection();
 
   return (
-    <main className="flex flex-col space-y-12">
+    <main className="flex flex-col space-y-12 [&_section]:scroll-mt-24">
       <script
         type="application/ld+json"
         // oxlint-disable-next-line react/no-danger -- Structured data must be emitted as JSON-LD.

@@ -7,6 +7,8 @@ import { Figtree } from "next/font/google";
 import { siteConfig } from "@/lib/site";
 import { absoluteUrl, cn } from "@/lib/utils";
 
+import { SectionNavigation } from "./_components/section-navigation";
+
 import "./globals.css";
 
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree" });
@@ -90,7 +92,8 @@ const RootLayout = ({
           />
         </div> */}
         <ScrollShadow
-          className="flex-1 has-data-print-document:h-auto has-data-print-document:overflow-visible has-data-print-document:mask-none has-data-print-document:block"
+          id="portfolio-scroll"
+          className="flex-1 motion-safe:scroll-smooth has-data-print-document:h-auto has-data-print-document:overflow-visible has-data-print-document:mask-none has-data-print-document:block"
           hideScrollBar
           size={60}
         >
@@ -101,6 +104,7 @@ const RootLayout = ({
             {children}
           </div>
         </ScrollShadow>
+        <SectionNavigation />
         <Analytics />
         <SpeedInsights />
       </body>
