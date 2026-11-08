@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import styles from "./section-navigation.module.css";
+import { cn } from "@/lib/utils";
 
 const sections = [
   { id: "hero", label: "Introduction" },
@@ -79,13 +79,22 @@ export const SectionNavigation = () => {
     >
       <ol>
         {sections.map(({ id, label }) => (
-          <li key={id} className={styles.item}>
+          <li
+            key={id}
+            className={cn(
+              "motion-safe:[&:has(>a:is(:hover,:focus-visible))>a>span]:[transform:translateX(18px)_scale(1.35)]",
+              "motion-safe:[&:has(+li>a:is(:hover,:focus-visible))>a>span]:[transform:translateX(9px)_scale(1.16)]",
+              "motion-safe:[&:has(>a:is(:hover,:focus-visible))+li>a>span]:[transform:translateX(9px)_scale(1.16)]",
+              "motion-safe:[&:has(+li+li>a:is(:hover,:focus-visible))>a>span]:[transform:translateX(3px)_scale(1.06)]",
+              "motion-safe:[&:has(>a:is(:hover,:focus-visible))+li+li>a>span]:[transform:translateX(3px)_scale(1.06)]",
+            )}
+          >
             <a
               href={`#${id}`}
               aria-current={id === activeSectionId ? "location" : undefined}
               className="group flex min-h-11 items-center rounded-sm px-1 text-sm text-muted transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus aria-[current=location]:font-semibold aria-[current=location]:text-accent motion-reduce:transition-none"
             >
-              <span className={styles.content}>
+              <span className="inline-flex origin-left items-center gap-4 motion-safe:transition-transform motion-safe:duration-240 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)]">
                 <span
                   aria-hidden="true"
                   className="h-[0.5px] w-10 shrink-0 rounded-full bg-muted transition-colors group-hover:bg-foreground group-aria-[current=location]:bg-accent motion-reduce:transition-none"
