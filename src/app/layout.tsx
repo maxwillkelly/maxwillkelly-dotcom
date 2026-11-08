@@ -90,7 +90,8 @@ const RootLayout = ({
           />
         </div> */}
         <ScrollShadow
-          className="flex-1 has-data-print-document:h-auto has-data-print-document:overflow-visible has-data-print-document:mask-none has-data-print-document:block"
+          id="portfolio-scroll"
+          className="flex-1 motion-safe:scroll-smooth has-data-print-document:h-auto has-data-print-document:overflow-visible has-data-print-document:mask-none has-data-print-document:block"
           hideScrollBar
           size={60}
         >

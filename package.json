@@ -17,6 +17,7 @@
     "@heroui/react": "^3.2.6",
     "@heroui/styles": "^3.2.6",
     "@hookform/resolvers": "^5.9.1",
+    "@makotot/ghostui": "^2.0.0",
     "@sparticuz/chromium": "153.0.0",
     "@t3-oss/env-nextjs": "^0.13.11",
     "@tailwindcss/postcss": "^4.3.3",
