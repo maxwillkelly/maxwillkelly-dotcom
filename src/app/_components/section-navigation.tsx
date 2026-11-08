@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
+// Peak scale: 1 means no enlargement; 1.35 means 35% larger.
+const MAGNIFICATION = "[--magnification:1.35]";
+
 const sections = [
   { id: "hero", label: "Introduction" },
   { id: "about", label: "About" },
@@ -75,18 +78,23 @@ export const SectionNavigation = () => {
   return (
     <nav
       aria-label="Page sections"
-      className="fixed top-1/2 left-4 z-20 hidden max-h-[calc(100dvh-3rem)] w-56 -translate-y-1/2 overflow-y-auto px-1 py-2 xl:block print:hidden"
+      className={cn(
+        MAGNIFICATION,
+        "[--nearby-magnification:calc(1_+_(var(--magnification)_-_1)*16/35)]",
+        "[--distant-magnification:calc(1_+_(var(--magnification)_-_1)*6/35)]",
+        "fixed top-1/2 left-4 z-20 hidden max-h-[calc(100dvh-3rem)] w-56 -translate-y-1/2 overflow-y-auto px-1 py-2 xl:block print:hidden",
+      )}
     >
       <ol>
         {sections.map(({ id, label }) => (
           <li
             key={id}
             className={cn(
-              "motion-safe:[&:has(>a:is(:hover,:focus-visible))>a>span]:[transform:translateX(18px)_scale(1.35)]",
-              "motion-safe:[&:has(+li>a:is(:hover,:focus-visible))>a>span]:[transform:translateX(9px)_scale(1.16)]",
-              "motion-safe:[&:has(>a:is(:hover,:focus-visible))+li>a>span]:[transform:translateX(9px)_scale(1.16)]",
-              "motion-safe:[&:has(+li+li>a:is(:hover,:focus-visible))>a>span]:[transform:translateX(3px)_scale(1.06)]",
-              "motion-safe:[&:has(>a:is(:hover,:focus-visible))+li+li>a>span]:[transform:translateX(3px)_scale(1.06)]",
+              "motion-safe:[&:has(>a:is(:hover,:focus-visible))>a>span]:[transform:translateX(18px)_scale(var(--magnification))]",
+              "motion-safe:[&:has(+li>a:is(:hover,:focus-visible))>a>span]:[transform:translateX(9px)_scale(var(--nearby-magnification))]",
+              "motion-safe:[&:has(>a:is(:hover,:focus-visible))+li>a>span]:[transform:translateX(9px)_scale(var(--nearby-magnification))]",
+              "motion-safe:[&:has(+li+li>a:is(:hover,:focus-visible))>a>span]:[transform:translateX(3px)_scale(var(--distant-magnification))]",
+              "motion-safe:[&:has(>a:is(:hover,:focus-visible))+li+li>a>span]:[transform:translateX(3px)_scale(var(--distant-magnification))]",
             )}
           >
             <a
