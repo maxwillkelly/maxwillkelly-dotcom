@@ -179,9 +179,6 @@ importers:
       '@hookform/resolvers':
         specifier: ^5.9.1
         version: 5.9.1(ajv@8.20.0)(react-hook-form@7.90.0(@types/react@19.3.0)(react@19.3.0))(zod@4.6.6)
-      '@makotot/ghostui':
-        specifier: ^2.0.0
-        version: 2.0.0(react@19.3.0)
       '@sparticuz/chromium':
         specifier: 153.0.0
         version: 153.0.0
@@ -919,12 +916,6 @@ packages:
 
   '@keyv/serialize@1.1.1':
     resolution: {integrity: sha512-dXn3FZhPv0US+7dtJsIi2R+c7qWYiReoEh5zUntWCf4oSpMNib8FDhSoed6m3QyZdx5hK7iLFkYk3rNxwt8vTA==}
-
-  '@makotot/ghostui@2.0.0':
-    resolution: {integrity: sha512-LD6OeMv+yGjpYZNjh34yDTCIE1NegqOtJq5gm4wX6op3QL7K5psTVzMjkWzseBoYj0XOD4g+UJVIZTprfoOPGg==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      react: '>=16'
 
   '@mdx-js/loader@3.1.1':
     resolution: {integrity: sha512-0TTacJyZ9mDmY+VefuthVshaNIyCGZHJG2fMnGaDttCt8HmjUF7SizlHJpaCDoGnN635nK1wpzfpx/Xx5S4WnQ==}
@@ -3810,10 +3801,6 @@ snapshots:
       keyv: 5.6.0
 
   '@keyv/serialize@1.1.1': {}
-
-  '@makotot/ghostui@2.0.0(react@19.3.0)':
-    dependencies:
-      react: 19.3.0
 
   '@mdx-js/loader@3.1.1':
     dependencies:

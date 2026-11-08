@@ -1,7 +1,6 @@
 "use client";
 
-import { Scrollspy } from "@makotot/ghostui";
-import { type RefObject, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const sections = [
   { id: "hero", label: "Introduction" },
@@ -14,18 +13,61 @@ const sections = [
 ];
 
 export const SectionNavigation = () => {
-  const [sectionRefs, setSectionRefs] = useState<RefObject<Element>[]>([]);
+  const [activeSectionId, setActiveSectionId] = useState("hero");
 
   useEffect(() => {
-    // The server-rendered section elements are only available after mounting.
-    // oxlint-disable-next-line react/set-state-in-effect -- Synchronise Scrollspy with the existing DOM sections.
-    setSectionRefs(
-      sections.flatMap(({ id }) => {
-        const element = document.getElementById(id);
+    const root = document.getElementById("portfolio-scroll");
 
-        return element ? [{ current: element }] : [];
-      }),
-    );
+    if (!root) {
+      return;
+    }
+
+    const elements = sections.flatMap(({ id }) => {
+      const element = document.getElementById(id);
+
+      return element ? [element] : [];
+    });
+    let frame: number | null = null;
+
+    const updateActiveSection = () => {
+      frame = null;
+      // Read just below the 6rem anchor offset, allowing for entrance motion.
+      const readingLine = root.getBoundingClientRect().top + 120;
+      const currentSection = elements.findLast(
+        (element) => element.getBoundingClientRect().top <= readingLine,
+      );
+      const isAtBottom =
+        root.scrollTop + root.clientHeight >= root.scrollHeight - 1;
+
+      setActiveSectionId(isAtBottom ? "contact" : currentSection?.id || "hero");
+    };
+
+    const scheduleUpdate = () => {
+      if (frame !== null) {
+        return;
+      }
+
+      frame = requestAnimationFrame(updateActiveSection);
+    };
+
+    scheduleUpdate();
+    root.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+
+    // Recheck after fonts, content or the scroll container change size.
+    const resizeObserver = new ResizeObserver(scheduleUpdate);
+    resizeObserver.observe(root);
+    elements.forEach((element) => resizeObserver.observe(element));
+
+    return () => {
+      root.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      resizeObserver.disconnect();
+
+      if (frame !== null) {
+        cancelAnimationFrame(frame);
+      }
+    };
   }, []);
 
   return (
@@ -36,35 +78,23 @@ export const SectionNavigation = () => {
       <p className="mb-4 pl-4 text-xs font-medium tracking-widest text-muted uppercase">
         On this page
       </p>
-      <Scrollspy
-        sectionRefs={sectionRefs}
-        rootSelector="#portfolio-scroll"
-        offset={-96}
-      >
-        {({ currentElementIndexInViewport }) => (
-          <ol>
-            {sections.map(({ id, label }, index) => (
-              <li key={id}>
-                <a
-                  href={`#${id}`}
-                  aria-current={
-                    index === Math.max(0, currentElementIndexInViewport)
-                      ? "location"
-                      : undefined
-                  }
-                  className="group flex min-h-11 items-center gap-4 rounded-sm px-1 text-sm text-muted transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus aria-[current=location]:font-semibold aria-[current=location]:text-accent motion-reduce:transition-none"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="h-0.5 w-6 shrink-0 rounded-full bg-border transition-colors group-hover:bg-muted group-aria-[current=location]:bg-accent motion-reduce:transition-none"
-                  />
-                  {label}
-                </a>
-              </li>
-            ))}
-          </ol>
-        )}
-      </Scrollspy>
+      <ol>
+        {sections.map(({ id, label }) => (
+          <li key={id}>
+            <a
+              href={`#${id}`}
+              aria-current={id === activeSectionId ? "location" : undefined}
+              className="group flex min-h-11 items-center gap-4 rounded-sm px-1 text-sm text-muted transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus aria-[current=location]:font-semibold aria-[current=location]:text-accent motion-reduce:transition-none"
+            >
+              <span
+                aria-hidden="true"
+                className="h-0.5 w-6 shrink-0 rounded-full bg-border transition-colors group-hover:bg-muted group-aria-[current=location]:bg-accent motion-reduce:transition-none"
+              />
+              {label}
+            </a>
+          </li>
+        ))}
+      </ol>
     </nav>
   );
 };
