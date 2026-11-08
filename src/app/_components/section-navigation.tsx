@@ -85,7 +85,7 @@ export const SectionNavigation = () => {
             >
               <span
                 aria-hidden="true"
-                className="h-0.5 w-6 shrink-0 rounded-full bg-border transition-colors group-hover:bg-muted group-aria-[current=location]:bg-accent motion-reduce:transition-none"
+                className="h-px w-6 shrink-0 rounded-full bg-muted transition-colors group-hover:bg-foreground group-aria-[current=location]:bg-accent motion-reduce:transition-none"
               />
               {label}
             </a>
