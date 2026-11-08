@@ -7,6 +7,8 @@ import { Figtree } from "next/font/google";
 import { siteConfig } from "@/lib/site";
 import { absoluteUrl, cn } from "@/lib/utils";
 
+import { SectionNavigation } from "./_components/section-navigation";
+
 import "./globals.css";
 
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree" });
@@ -102,6 +104,7 @@ const RootLayout = ({
             {children}
           </div>
         </ScrollShadow>
+        <SectionNavigation />
         <Analytics />
         <SpeedInsights />
       </body>

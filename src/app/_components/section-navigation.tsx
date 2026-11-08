@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils";
@@ -18,24 +19,29 @@ const sections = [
 ];
 
 export const SectionNavigation = () => {
+  const pathname = usePathname();
   const [activeSectionId, setActiveSectionId] = useState("hero");
 
   useEffect(() => {
+    if (pathname !== "/") {
+      return;
+    }
+
     const root = document.getElementById("portfolio-scroll");
 
     if (!root) {
       return;
     }
 
-    const elements = sections.flatMap(({ id }) => {
-      const element = document.getElementById(id);
-
-      return element ? [element] : [];
-    });
     let frame: number | null = null;
 
     const updateActiveSection = () => {
       frame = null;
+      const elements = sections.flatMap(({ id }) => {
+        const element = document.getElementById(id);
+
+        return element ? [element] : [];
+      });
       // Read just below the 6rem anchor offset, allowing for entrance motion.
       const readingLine = root.getBoundingClientRect().top + 120;
       const currentSection = elements.findLast(
@@ -62,7 +68,11 @@ export const SectionNavigation = () => {
     // Recheck after fonts, content or the scroll container change size.
     const resizeObserver = new ResizeObserver(scheduleUpdate);
     resizeObserver.observe(root);
-    elements.forEach((element) => resizeObserver.observe(element));
+    const content = document.getElementById("container");
+
+    if (content) {
+      resizeObserver.observe(content);
+    }
 
     return () => {
       root.removeEventListener("scroll", scheduleUpdate);
@@ -73,7 +83,11 @@ export const SectionNavigation = () => {
         cancelAnimationFrame(frame);
       }
     };
-  }, []);
+  }, [pathname]);
+
+  if (pathname !== "/") {
+    return null;
+  }
 
   return (
     <nav
