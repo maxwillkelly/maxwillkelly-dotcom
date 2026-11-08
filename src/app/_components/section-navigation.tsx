@@ -75,9 +75,6 @@ export const SectionNavigation = () => {
       aria-label="Page sections"
       className="fixed top-1/2 left-[calc((100vw-48rem)/2-12rem)] z-20 hidden max-h-[calc(100dvh-3rem)] w-40 -translate-y-1/2 overflow-y-auto xl:block print:hidden"
     >
-      <p className="mb-4 pl-4 text-xs font-medium tracking-widest text-muted uppercase">
-        On this page
-      </p>
       <ol>
         {sections.map(({ id, label }) => (
           <li key={id}>
